@@ -1,0 +1,28 @@
+---
+- name: "create directory for container"
+  file: path=/containers/{{ docker_container_name }} state=directory
+- name: "create directory for conf"
+  file: path=/containers/{{ docker_container_name }}/sites-enabled state=directory
+- name: "copy nginx config"
+  template:
+    src: nginx.conf.j2
+    dest: /containers/{{ docker_container_name }}/sites-enabled/nginx.conf # TODO extract docker_container_name var
+  register: nginx_config
+- name: "run nginx"
+  docker:
+    state: reloaded
+    name: "{{ docker_container_name }}"
+    image: dockerfile/nginx
+    volumes:
+        - /containers/{{ docker_container_name }}/sites-enabled:/etc/nginx/sites-enabled
+        - /containers/{{ docker_container_name }}/certs:/etc/nginx/certs
+        - /containers/{{ docker_container_name }}/logs:/var/log/nginx
+    net: host
+    command: nginx
+    restart_policy: always
+- name: "restart nginx for config change"
+  docker:
+    state: restarted
+    name: "{{ docker_container_name }}"
+    image: dockerfile/nginx
+  when: nginx_config.changed

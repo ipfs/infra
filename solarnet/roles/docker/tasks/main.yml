@@ -1,0 +1,11 @@
+---
+- name: "copy pip install file"
+  copy: src=get-pip.py dest=/tmp/get-pip.py
+- name: "install pip"
+  shell: "python /tmp/get-pip.py"
+- name: "install docker-py"
+  pip: name=docker-py
+- name: "install fig"
+  pip: name=fig
+- name: "create directory for containers"
+  file: path=/containers state=directory

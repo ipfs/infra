@@ -1,0 +1,12 @@
+---
+- hosts: solarnet
+  vars:
+    gateway_group: all
+    fqdn: .i.ipfs.io
+  pre_tasks:
+  - include_vars: secrets.yml
+  roles:
+    - common
+    - cjdns
+    - ipfs
+    - ipfs_gateway

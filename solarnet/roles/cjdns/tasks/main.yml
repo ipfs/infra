@@ -1,0 +1,45 @@
+---
+- name: check current cjdns ref
+  shell: "cat /opt/cjdns.ref | grep {{ cjdns_ref }}"
+  ignore_errors: true
+  register: cjdns_ref_present
+
+- name: clone cjdns.git
+  git:
+    repo: https://github.com/hyperboria/cjdns.git
+    dest: /opt/cjdns
+    version: "{{ cjdns_ref }}"
+
+- name: build cjdns
+  command: ./do chdir=/opt/cjdns
+  when: "cjdns_ref_present.rc != 0"
+
+- name: install cjdroute
+  copy:
+    src: /opt/cjdns/cjdroute
+    dest: /usr/bin/cjdroute
+    mode: 0755
+  when: "cjdns_ref_present.rc != 0"
+
+- name: install cjdroute.conf
+  template:
+    src: cjdroute.conf.j2
+    dest: /etc/cjdroute.conf
+    mode: 0400
+  register: cjdroute_conf
+
+- name: install upstart script
+  copy:
+    src: /opt/cjdns/contrib/upstart/cjdns.conf
+    dest: /etc/init/cjdns.conf
+    mode: 0644
+
+- name: restart cjdroute
+  service:
+    name: cjdns
+    state: restarted
+  when: "cjdns_ref_present.rc != 0 or cjdroute_conf.changed"
+
+- name: record new cjdns ref
+  shell: "echo {{ cjdns_ref }} > /opt/cjdns.ref"
+  when: "cjdns_ref_present.rc != 0"
