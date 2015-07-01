@@ -1,0 +1,7 @@
+---
+cjdns_ref: 3d2ce14e7c45cb50969853c9bfd842a33720c922
+cjdns_admin_address: 127.0.0.1
+cjdns_admin_port: 11234
+cjdns_admin_password: thepassword
+cjdns_tun_interface: tun0
+cjdns_udp_interfaces: []

@@ -1,0 +1,7 @@
+---
+- command: apt-get install -y mosh vim htop screen bridge-utils build-essential autoconf libtool bison flex nodejs
+- file:
+    src: /usr/bin/nodejs
+    path: /usr/bin/node
+    state: link
+    mode: 755

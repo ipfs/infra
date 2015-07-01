@@ -1,0 +1,13 @@
+[solarnet]
+pluto       ansible_ssh_host=104.236.179.241
+neptune     ansible_ssh_host=104.236.176.52
+uranus      ansible_ssh_host=162.243.248.213
+saturn      ansible_ssh_host=128.199.219.111
+jupiter     ansible_ssh_host=104.236.151.122
+venus       ansible_ssh_host=104.236.76.40
+earth       ansible_ssh_host=178.62.158.247
+mercury     ansible_ssh_host=178.62.61.185
+
+; managed by whyrusleeping
+[whyrunet]
+mars        ansible_ssh_host=104.131.131.82

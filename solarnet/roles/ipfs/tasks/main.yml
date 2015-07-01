@@ -1,0 +1,53 @@
+---
+# build the docker image, if needed
+- shell: "docker images -a | grep {{ ipfs_ref }}"
+  ignore_errors: true
+  register: ipfs_image_present
+- file:
+    path: /ipfs_build
+    state: directory
+  when: "ipfs_image_present.rc != 0"
+- copy:
+    src: Dockerfile
+    dest: /ipfs_build/Dockerfile
+  when: "ipfs_image_present.rc != 0"
+- git:
+    repo: https://github.com/ipfs/go-ipfs.git
+    dest: /ipfs_build/go-ipfs
+    version: "{{ ipfs_ref }}"
+  when: "ipfs_image_present.rc != 0"
+- shell: "docker build -t ipfs:{{ ipfs_ref }} /ipfs_build"
+  when: "ipfs_image_present.rc != 0"
+
+# assert ipfs container runs and is up-to-date
+- docker:
+    name: ipfs
+    image: "ipfs:{{ ipfs_ref }}"
+    state: reloaded
+    command: ipfs daemon
+    restart_policy: always
+    ports:
+    - 0.0.0.0:8080:8080
+    - 0.0.0.0:4001:4001
+    - 127.0.0.1:5001:5001
+    volumes:
+    - /ipfs/ipfs_master:/ipfs
+    env:
+      IPFS_PATH: /ipfs/repo
+      IPFS_LOGGING: debug
+
+- command: docker exec ipfs ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
+
+# restart the ipfs container every 30 minutes, with a 25 % chance
+- copy:
+    src: files/maybe-restart.sh
+    dest: /ipfs/maybe-restart.sh
+    mode: 755
+- cron:
+    job: /ipfs/maybe-restart.sh 25 docker restart ipfs
+    minute: 55,25
+    hour: "*"
+    state: present
+    name: maybe-restart
+    cron_file: ipfs-maybe-restart
+    user: root

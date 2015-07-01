@@ -1,0 +1,36 @@
+upstream gateway {
+    server {{ inventory_hostname }}{{ fqdn }}:8080;
+
+{% for host in groups[gateway_group] %}
+{% if host != inventory_hostname %}
+    server {{ host }}{{ fqdn }}:8080 backup;
+{% endif %}
+{% endfor %}
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    location /debug {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_whitelist %}
+        allow {{ addr }};
+{% endfor %}
+        allow 127.0.0.1;
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:5001;
+        proxy_set_header Host $host;
+    }
+
+    location / {
+        proxy_pass http://gateway;
+        proxy_set_header Host $host;
+    }
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+}
