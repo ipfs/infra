@@ -10,3 +10,9 @@
     - cjdns
     - ipfs
     - ipfs_gateway
+
+- hosts: pluto
+  pre_tasks:
+  - include_vars: secrets.yml
+  roles:
+  - prometheus
