@@ -26,6 +26,11 @@ server {
         proxy_set_header Host $host;
     }
 
+    location /prometheus {
+        proxy_pass http://127.0.0.1:9090;
+        proxy_set_header Host $host;
+    }
+
     location / {
         proxy_pass http://gateway;
         proxy_set_header Host $host;
