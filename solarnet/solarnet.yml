@@ -1,5 +1,5 @@
 ---
-- hosts: solarnet
+- hosts: all
   vars:
     gateway_group: all
     fqdn: .i.ipfs.io
