@@ -11,6 +11,7 @@ upstream gateway {
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80 default_server;
 
     location / {
         proxy_pass http://gateway;
