@@ -42,5 +42,6 @@
 # apply config update
 - docker:
     name: prometheus
+    image: "prometheus:{{ prometheus_ref }}"
     state: restarted
   when: "prometheus_yml.changed"
