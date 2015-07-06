@@ -1,35 +1,16 @@
 upstream gateway {
-    server {{ inventory_hostname }}{{ fqdn }}:8080;
+    server [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8080;
 
 {% for host in groups[gateway_group] %}
 {% if host != inventory_hostname %}
-    server {{ host }}{{ fqdn }}:8080 backup;
+    server [{{ cjdns_identities[host].ipv6 }}]:8080 backup;
 {% endif %}
 {% endfor %}
 }
 
 server {
-    listen 80;
-    listen [::]:80;
-
-    location /debug {
-{% for hostname in cjdns_identities.keys() %}
-        allow {{ cjdns_identities[hostname].ipv6 }};
-{% endfor %}
-{% for addr in metrics_whitelist %}
-        allow {{ addr }};
-{% endfor %}
-        allow 127.0.0.1;
-        allow ::1;
-        deny all;
-        proxy_pass http://127.0.0.1:5001;
-        proxy_set_header Host $host;
-    }
-
-    location /prometheus {
-        proxy_pass http://127.0.0.1:9090;
-        proxy_set_header Host $host;
-    }
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
     location / {
         proxy_pass http://gateway;
@@ -38,4 +19,59 @@ server {
 
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
+}
+
+# api
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:5001;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_whitelist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:5001;
+        proxy_set_header Host $host;
+    }
+}
+
+# gateway
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8080;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_whitelist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+    }
+}
+
+# promdash
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80;
+    server_name metrics.ipfs.io;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_whitelist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:9090;
+        proxy_set_header Host $host;
+    }
 }

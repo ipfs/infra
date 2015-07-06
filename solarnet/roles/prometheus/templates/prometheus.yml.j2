@@ -23,5 +23,5 @@ scrape_configs:
     target_groups:
       - targets:
 {% for hostname in cjdns_identities.keys() %}
-        - '[{{ cjdns_identities[hostname].ipv6 }}]:80'
+        - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
 {% endfor %}
