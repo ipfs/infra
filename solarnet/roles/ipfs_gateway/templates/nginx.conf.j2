@@ -67,7 +67,7 @@ server {
 # promdash
 server {
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80;
-    server_name metrics.ipfs.io;
+    server_name metrics.i.ipfs.io;
 
     location / {
 {% for hostname in cjdns_identities.keys() %}
