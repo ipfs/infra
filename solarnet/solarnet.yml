@@ -14,4 +14,4 @@
   pre_tasks:
   - include_vars: secrets.yml
   roles:
-  - prometheus
+  - metrics
