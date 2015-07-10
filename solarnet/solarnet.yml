@@ -6,6 +6,7 @@
   - include_vars: secrets.yml
   roles:
     - common
+    - docker
     - cjdns
     - ipfs
     - ipfs_gateway
