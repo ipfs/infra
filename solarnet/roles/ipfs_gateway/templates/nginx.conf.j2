@@ -65,25 +65,3 @@ server {
     access_log /var/log/nginx/gateway.access.log;
     error_log /var/log/nginx/gateway.error.log;
 }
-
-# promdash
-server {
-    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80;
-    server_name metrics.i.ipfs.io;
-
-    location / {
-{% for hostname in cjdns_identities.keys() %}
-        allow {{ cjdns_identities[hostname].ipv6 }};
-{% endfor %}
-{% for addr in metrics_whitelist %}
-        allow {{ addr }};
-{% endfor %}
-        allow ::1;
-        deny all;
-        proxy_pass http://127.0.0.1:9090;
-        proxy_set_header Host $host;
-    }
-
-    access_log /var/log/nginx/metrics.access.log;
-    error_log /var/log/nginx/metrics.error.log;
-}

@@ -45,3 +45,13 @@
     image: "prometheus:{{ prometheus_ref }}"
     state: restarted
   when: "prometheus_yml.changed"
+
+# nginx vhost
+- file: path=/containers/ipfs_gateway_proxy state=directory
+- file: path=/containers/ipfs_gateway_proxy/sites-enabled state=directory
+- template:
+    src: metrics.conf.j2
+    dest: /containers/ipfs_gateway_proxy/sites-enabled/metrics.conf
+  register: nginx_metrics_conf
+- command: docker exec ipfs_gateway_proxy /etc/init.d/nginx reload
+  when: nginx_metrics_conf.changed
