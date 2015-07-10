@@ -1,3 +1,5 @@
+server_names_hash_bucket_size 64;
+
 upstream gateway {
     server [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8080;
 
