@@ -6,13 +6,20 @@
   with_items:
   - /opt/prometheus/config
   - /opt/prometheus/data
+  - /opt/grafana/config
+  - /opt/grafana/data
 - template:
     src: prometheus.yml.j2
     dest: /opt/prometheus/config/prometheus.yml
     mode: 0400
   register: prometheus_yml
+- template:
+    src: grafana.ini.j2
+    dest: /opt/grafana/config/grafana.ini
+    mode: 0400
+  register: grafana_ini
 
-# build the docker image, if needed
+# build the prometheus docker image, if needed
 - shell: "cat /opt/prometheus.ref | grep {{ prometheus_ref }}"
   ignore_errors: true
   register: prometheus_ref_present
@@ -27,8 +34,10 @@
   when: "prometheus_ref_present.rc != 0"
 - shell: "docker build -t prometheus:{{ prometheus_ref }} /opt/prometheus"
   when: "prometheus_ref_present.rc != 0"
+- shell: "echo {{ prometheus_ref }} > /opt/prometheus.ref"
+  when: "prometheus_ref_present.rc != 0"
 
-# assert container runs and is up-to-date
+# assert containers run and are up-to-date
 - docker:
     name: prometheus
     image: "prometheus:{{ prometheus_ref }}"
@@ -38,13 +47,28 @@
     volumes:
     - /opt/prometheus/config:/etc/prometheus
     - /opt/prometheus/data:/prometheus
+- docker:
+    name: grafana
+    image: "luzifer/grafana-prometheus:{{ grafana_ref }}"
+    state: reloaded
+    restart_policy: always
+    ports:
+    - 127.0.0.1:3000:3000
+    volumes:
+    - /opt/grafana/config:/etc/grafana
+    - /opt/grafana/data:/var/lib/grafana
 
-# apply config update
+# apply config updates
 - docker:
     name: prometheus
     image: "prometheus:{{ prometheus_ref }}"
     state: restarted
   when: "prometheus_yml.changed"
+- docker:
+    name: grafana
+    image: "luzifer/grafana-prometheus:{{ grafana_ref }}"
+    state: restarted
+  when: "grafana_ini.changed"
 
 # nginx vhost
 - file: path=/containers/ipfs_gateway_proxy state=directory
