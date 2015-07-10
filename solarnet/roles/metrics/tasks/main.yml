@@ -13,20 +13,20 @@
   register: prometheus_yml
 
 # build the docker image, if needed
-- shell: "docker images -a | grep {{ prometheus_ref }}"
+- shell: "cat /opt/prometheus.ref | grep {{ prometheus_ref }}"
   ignore_errors: true
-  register: prometheus_image_present
+  register: prometheus_ref_present
 - git:
     repo: https://github.com/prometheus/prometheus.git
     dest: /opt/prometheus/src
     version: "{{ prometheus_ref }}"
-  when: "prometheus_image_present.rc != 0"
+  when: "prometheus_ref_present.rc != 0"
 - copy:
     src: Dockerfile
     dest: /opt/prometheus/Dockerfile
-  when: "prometheus_image_present.rc != 0"
+  when: "prometheus_ref_present.rc != 0"
 - shell: "docker build -t prometheus:{{ prometheus_ref }} /opt/prometheus"
-  when: "prometheus_image_present.rc != 0"
+  when: "prometheus_ref_present.rc != 0"
 
 # assert container runs and is up-to-date
 - docker:
