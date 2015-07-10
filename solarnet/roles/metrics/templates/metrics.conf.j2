@@ -2,7 +2,7 @@ server {
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80;
     server_name metrics.i.ipfs.io;
 
-    location / {
+    location /prometheus {
 {% for hostname in cjdns_identities.keys() %}
         allow {{ cjdns_identities[hostname].ipv6 }};
 {% endfor %}
