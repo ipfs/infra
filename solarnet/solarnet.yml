@@ -15,4 +15,5 @@
   pre_tasks:
   - include_vars: secrets.yml
   roles:
+  - node_exporter
   - metrics
