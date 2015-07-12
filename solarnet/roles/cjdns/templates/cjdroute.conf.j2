@@ -21,6 +21,11 @@
 {% endfor %}
         ]
     },
+    "authorizedPasswords": [
+{% for password in cjdns_authorized_passwords %}
+        { "password": "{{ password }}" },
+{% endfor %}
+    ],
     "router": {
         "interface": {
             "type": "TUNInterface",
