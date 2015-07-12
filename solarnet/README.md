@@ -1,38 +1,60 @@
-# solarnet
+# solarnet: gateway and bootstrap nodes
 
-This network runs the IPFS bootstrap + gateway nodes. There are 9 machines, all on Digital Ocean in various different data centers across the world. See the `hosts` file.
+- [Overview](#overview)
+- [Getting Started](#getting-started)
+- [Common Tasks](#common-tasks)
+- [Troubleshooting](#troubleshooting)
+- [Monitoring](#monitoring)
 
-## Node Setup
 
-Each solarnet computer runs one ipfs process. it handles both bootstrap and http://gateway.ipfs.io.
+This repository contains Ansible playbooks which maintain
+http://gateway.ipfs.io and the default IPFS bootstrap nodes.
 
-They have:
+Solarnet currently consists of 9 hosts.
+all on DigitalOcean in various different data centers across the world.
+See the `hosts` file.
 
-- docker - runs things in a uniform, clean environment.
-- nginx - which proxies over to gateway.
-- ipfs daemon - which runs the gateway.
+## Overview
+
+Each host gets provisioned with the following:
+
+- nginx
+- IPFS daemon
+- cjdns
+- Docker
+- SSH authorized_keys
+
+Grafana and Prometheus run on one host.
 
 ### nginx
 
-nginx absorbs all the outside requests coming to the gateways. This allows us to:
-- deal with HTTP traffic better (nginx is a beast!)
-- not have to worry about a number of attacks on HTTP servers
-- use proxy-pass to an ipfs gateway
-- route traffic to other gateways if local gateway ipfs program crashes
+The frontend HTTP server for both the Internet and Hyperboria.
+Serves http://gateway.ipfs.io and http://h.gateway.ipfs.io.
 
-### ipfs daemon
+To whitelisted cjdns nodes, it also serves http://metrics.i.ipfs.io,
+as well as host metrics and the IPFS API,
+so that Prometheus can scrape them.
 
-Gets its repo mounted as a volume, and exposes the ports 4001 (swarm), 5001 (API), and 8080 (gateway) to the host.
+### IPFS daemon
+
+Exposes its swarm interface (port 4001) to the Internet,
+so that other nodes can peer with and bootstrap from it.
+Exposes API (port 5001) and gateway (port 8080) to nginx.
+
+### cjdns
+
+The Solarnet nodes are peered into the Hyperboria network,
+which operates on an encrypted peer-to-peer routing protocol called cjdns.
 
 ## Getting Started
 
-### ansible
+Requirements:
 
-This repository uses ansible for _almost_ everything.  ansible is fairly nice, but can also be annoying. it comes well recommended by others, though none of us are experts with it. (@jbenet would prefer to eiter use shell scripts or ansible, but probably not other tools _more_ complicated than ansible (e.g. chef / puppet), [@lgierth agrees](https://github.com/lgierth/provsn)).
+- virtualenv
+- pip
 
 ```sh
-# implicit dependencies: virtualenv pip
-# install stuff in requirements.txt
+# install ansible and other dependencies
 $ make deps
 
 # activate the virtualenv
@@ -40,52 +62,60 @@ $ . venv/bin/activate
 
 # see if it works
 (venv)$ which ansible
-(venv)$ ansible solarnet -a 'docker ps'
+(venv)$ ansible all -a 'whoami'
 ```
 
-## Deploying
+## Common Tasks
 
-Please commit the changed `roles/ipfs/vars/main.yml` when deploying an update!
+### Deploy any changes
 
 ```sh
-# update the ipfs role's commit reference
-$ make ipfs_ref
+# to all hosts
+(venv)$ ansible-playbook solarnet.yml
 
-# deploy to all solarnet hosts
-(venv)$ ansible-playbook -l solarnet solarnet.yml
-
-# deploy one host at a time
-(venv)$ ansible-playbook -f 1 -l solarnet solarnet.yml
-
-# deploy only pluto.i.ipfs.io
+# to one host
 (venv)$ ansible-playbook -l pluto solarnet.yml
 ```
 
-or simply:
+### Update IPFS and/or cjdns
 
 ```sh
-$ make cake
+(venv)$ make ipfs_ref
+(venv)$ make cjdns_ref
+(venv)$ ansible-playbook solarnet.yml
 ```
 
-### Restarting
+### Reclaim Disk Space
 
 ```sh
-(venv)$ ansible solarnet -a 'docker restart ipfs'
+(venv)$ ./cleanup.sh
+```
+
+### Docker Container Status
+
+```sh
+(venv)$ ansible all -a 'docker ps'
+```
+
+### Restart IPFS
+
+```sh
+(venv)$ ansible all -f 1 -a 'docker restart ipfs'
 ```
 
 ## Troubleshooting
 
 ### disk space
 
-A couple of things fill up the disk. These should be fixed, or the cleanup
-one-liners be automated.
+A couple of things fill up the disk.
+These should be fixed, or the cleanup one-liners be automated.
 
 ```sh
 # docker's container output logs. restart container so it reopns the logs.
-(venv)$ ansible solarnet -f 1 -m shell -a 'rm -v /var/lib/docker/containers/*/*-json.log ; docker restart ipfs_master'
+(venv)$ ansible -f 1 -m shell -a 'rm -v /var/lib/docker/containers/*/*-json.log ; docker restart ipfs'
 
 # old docker containers and images
-(venv)$ ansible solarnet -m shell -a 'docker rm $(docker ps -f "status=exited" -aq) ; docker rmi $(docker images -f "dangling=true" -aq)'
+(venv)$ ansible -m shell -a 'docker rm $(docker ps -f "status=exited" -aq) ; docker rmi $(docker images -f "dangling=true" -aq)'
 
 # all of the above
 (venv)$ ./cleanup.sh
@@ -93,4 +123,82 @@ one-liners be automated.
 
 ### unsupported parameter for module: restart_policy
 
-You're probably using the system version of Ansible, and it is outdated (< 1.9). Make sure to follow the Ansible setup steps above, and load the virtualenv. This will load a working version of Ansible.
+You're probably using the system version of Ansible, and it is outdated (< 1.9).
+Make sure to follow the Ansible setup steps above, and load the virtualenv.
+This will load a working version of Ansible.
+
+## Monitoring
+
+We use Prometheus to scrape and store timeseries
+from IPFS and the hosts themselves.
+Grafana provides the dashboard UI.
+
+Both are available at http://metrics.i.ipfs.io
+http://metrics.i.ipfs.io/prometheus, respectively.
+
+- You need to be peered into the Hyperboria cjdns network
+  in order to reach the address that this domain name points to.
+- Your cjdns address needs to be whitelisted.
+
+### Cjdns
+
+In addition to serving http://h.gateway.ipfs.io,
+we use cjdns for a very simple VPN based on an IP address whitelist.
+
+```sh
+$ git clone https://github.com/hyperboria/cjdns.git
+$ cd cjdns/
+$ ./do
+$ ./cjdroute --genconf > cjdroute.conf
+$ ./cjdroute < cjdroute.conf
+$ killall cjdroute
+
+# or, on osx
+$ brew install cjdns
+
+# or, on ubuntu, repo = precise|trusty|utopic|vivid
+$ echo "deb http://ubuntu.repo.cjdns.ca/ <repo> main" > /etc/apt/sources.list.d/cjdns.list
+$ apt-get update && apt-get install cjdns
+```
+
+This creates a `tunX` network interface,
+which grabs all `fc00::/8` traffic and hands it to cjdns.
+
+Scripts for various init systems are provided in `contrib/`.
+
+### Peering
+
+Cjdns nodes peer automatically on local networks,
+but on WANs like the internet, peering requires credentials.
+You can peer with the Solarnet cjdns nodes
+by using one of the `cjdns_authorized_passwords` in `secrets.yml`.
+
+Note that peering with any other node in the Hyperboria network is sufficient, too.
+
+You can check the status of your peerings:
+
+```sh
+$ watch tools/peerStats
+```
+
+Or check connectivity to solarnet:
+
+```sh
+$ ping6 h.gateway.ipfs.io
+```
+
+### Authentication
+
+Since IP packets in cjdns are authenticated and encrypted,
+we can use the HTTP client's IP address for authentication,
+instead of Basic Auth or another login mechanism.
+
+Restricted HTTP services listen only on the cjdns IPv6 address,
+and allow access only to the following clients:
+
+- localhost
+- All `cjdns_identities` nodes in `secrets.yml`
+- All `metrics_whitelist` nodes in `secrets.yml`
+
+For access to Grafana and Prometheus,
+add your cjdns address to `metrics_whitelist`.

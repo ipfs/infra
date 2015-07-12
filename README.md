@@ -1,16 +1,12 @@
 # infrastructure
 
-Repo to track code + issues relating to IPFS infrastructure for users + devs.
-This includes:
+This repository contains the technical infrastructure of the IPFS community.
 
-Computing:
-- Gateway nodes
-- Bootstrap nodes
-- CI servers (jenkins, travis, etc)
+- Gateway (http://gateway.ipfs.io) and bootstrap nodes, in `solarnet/`
+- Seeding of $important objects, in `seeding/`
 
-Communications:
-- Github repos
-- IRC Channel
-- Mailing Lists
+Infrastructure that isn't contained yet:
 
-All of these may have their own repo eventually, but for now, here.
+- Pinbot
+- Web UI pinning / deployment
+- Sprintbot
