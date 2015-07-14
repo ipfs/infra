@@ -23,7 +23,7 @@
     },
     "authorizedPasswords": [
 {% for password in cjdns_authorized_passwords %}
-        { "password": "{{ password }}" },
+        { "password": "{{ password.password }}" },
 {% endfor %}
     ],
     "router": {
