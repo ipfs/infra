@@ -9,16 +9,14 @@
     repo: https://github.com/hyperboria/cjdns.git
     dest: /opt/cjdns
     version: "{{ cjdns_ref }}"
+    force: yes
 
 - name: build cjdns
-  command: ./do chdir=/opt/cjdns
+  shell: "./clean && ./do chdir=/opt/cjdns"
   when: "cjdns_ref_present.rc != 0"
 
 - name: install cjdroute
-  copy:
-    src: /opt/cjdns/cjdroute
-    dest: /usr/bin/cjdroute
-    mode: 0755
+  command: cp /opt/cjdns/cjdroute /usr/bin/
   when: "cjdns_ref_present.rc != 0"
 
 - name: install cjdroute.conf
@@ -29,16 +27,18 @@
   register: cjdroute_conf
 
 - name: install upstart script
-  copy:
-    src: /opt/cjdns/contrib/upstart/cjdns.conf
+  template:
+    src: cjdns.conf
     dest: /etc/init/cjdns.conf
     mode: 0644
+  register: cjdns_conf
 
 - name: restart cjdroute
   service:
     name: cjdns
     state: restarted
-  when: "cjdns_ref_present.rc != 0 or cjdroute_conf.changed"
+    enabled: yes
+  when: "cjdns_ref_present.rc != 0 or cjdroute_conf.changed or cjdns_conf.changed"
 
 - name: record new cjdns ref
   shell: "echo {{ cjdns_ref }} > /opt/cjdns.ref"

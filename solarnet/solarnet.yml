@@ -6,6 +6,7 @@
   - include_vars: secrets.yml
   roles:
     - common
+    - docker
     - cjdns
     - ipfs
     - ipfs_gateway
@@ -14,4 +15,5 @@
   pre_tasks:
   - include_vars: secrets.yml
   roles:
-  - prometheus
+  - node_exporter
+  - metrics

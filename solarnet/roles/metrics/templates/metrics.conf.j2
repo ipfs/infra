@@ -1,0 +1,28 @@
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80;
+    server_name metrics.i.ipfs.io;
+
+{% for hostname in cjdns_identities.keys() %}
+    allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_whitelist %}
+    allow {{ addr }};
+{% endfor %}
+    allow ::1;
+    deny all;
+
+    # prometheus
+    location /prometheus {
+        proxy_pass http://127.0.0.1:9090;
+        proxy_set_header Host $host;
+    }
+
+    # grafana
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+    }
+
+    access_log /var/log/nginx/metrics.access.log;
+    error_log /var/log/nginx/metrics.error.log;
+}

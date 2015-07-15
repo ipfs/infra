@@ -1,0 +1,9 @@
+description  "prometheus node_exporter"
+
+start on starting rc RUNLEVEL=[2345]
+stop on starting rc RUNLEVEL=[016]
+
+respawn
+respawn limit unlimited
+
+exec /usr/bin/node_exporter --web.listen-address="127.0.0.1:9100"
