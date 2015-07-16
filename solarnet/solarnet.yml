@@ -10,10 +10,10 @@
     - cjdns
     - ipfs
     - ipfs_gateway
+    - node_exporter
 
 - hosts: pluto
   pre_tasks:
   - include_vars: secrets.yml
   roles:
-  - node_exporter
   - metrics
