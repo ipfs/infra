@@ -16,7 +16,7 @@ ipfs_ref:
 	rm roles/ipfs/vars/main.yml.bak
 
 CJDNS_REPO = https://github.com/hyperboria/cjdns.git
-cjdns_ref : cjdns_REF = $(shell git ls-remote -q $(CJDNS_REPO) master | awk "{print \$$1}")
+cjdns_ref : CJDNS_REF = $(shell git ls-remote -q $(CJDNS_REPO) master | awk "{print \$$1}")
 cjdns_ref:
-	sed -i'.bak' "s/cjdns_ref:.*/cjdns_ref: $(cjdns_REF)/" roles/cjdns/vars/main.yml
+	sed -i'.bak' "s/cjdns_ref:.*/cjdns_ref: $(CJDNS_REF)/" roles/cjdns/vars/main.yml
 	rm roles/cjdns/vars/main.yml.bak
