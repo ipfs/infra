@@ -17,3 +17,13 @@
   - include_vars: secrets.yml
   roles:
   - metrics
+
+- hosts:
+    - pluto
+    - neptune
+  vars:
+    gateway_group: all
+  pre_tasks:
+    - include_vars: secrets.yml
+  roles:
+    - pinbot
