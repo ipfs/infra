@@ -1,0 +1,44 @@
+---
+- file:
+    path: /opt/pinbot/config
+    state: directory
+- template:
+    src: hosts.j2
+    dest: /opt/pinbot/config/hosts
+    mode: 0644
+  register: pinbot_config
+
+- shell: "cat /opt/pinbot.ref | grep {{ pinbot_ref }}"
+  ignore_errors: true
+  register: pinbot_ref_present
+- git:
+    repo: https://github.com/whyrusleeping/pinbot.git
+    dest: /opt/pinbot/src
+    version: "{{ pinbot_ref }}"
+    force: yes
+  when: "pinbot_ref_present.rc != 0"
+- copy:
+    src: Dockerfile
+    dest: /opt/pinbot/src/Dockerfile
+  when: "pinbot_ref_present.rc != 0"
+- shell: "docker build -t pinbot:{{ pinbot_ref }} /opt/pinbot/src"
+  when: "pinbot_ref_present.rc != 0"
+- name: record new pinbot ref
+  shell: "echo {{ pinbot_ref }} > /opt/pinbot.ref"
+  when: "pinbot_ref_present.rc != 0"
+
+- docker:
+    name: pinbot
+    image: "pinbot:{{ pinbot_ref }}"
+    command: --name=pinbot
+    state: reloaded
+    restart_policy: always
+    net: host
+    volumes:
+      - /opt/pinbot/config:/pinbot
+
+- docker:
+    name: pinbot
+    image: "pinbot:{{ pinbot_ref }}"
+    state: restarted
+  when: pinbot_config.changed

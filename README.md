@@ -4,11 +4,11 @@ This repository contains the technical infrastructure of the IPFS community.
 
 - Gateway (http://gateway.ipfs.io) and bootstrap nodes, in `solarnet/`
 - Monitoring, also in `solarnet/`
+- Pinbot, in `solarnet/roles`
 - Seeding of $important objects, in `seeding/`
 
 Infrastructure that isn't contained yet:
 
-- Pinbot
 - Web UI pinning / deployment
 - Sprintbot
 

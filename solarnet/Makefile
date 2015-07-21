@@ -20,3 +20,9 @@ cjdns_ref : CJDNS_REF = $(shell git ls-remote -q $(CJDNS_REPO) master | awk "{pr
 cjdns_ref:
 	sed -i'.bak' "s/cjdns_ref:.*/cjdns_ref: $(CJDNS_REF)/" roles/cjdns/vars/main.yml
 	rm roles/cjdns/vars/main.yml.bak
+
+PINBOT_REPO = https://github.com/whyrusleeping/pinbot.git
+pinbot_ref : PINBOT_REF = $(shell git ls-remote -q $(PINBOT_REPO) master | awk "{print \$$1}")
+pinbot_ref:
+	sed -i'.bak' "s/pinbot_ref:.*/pinbot_ref: $(PINBOT_REF)/" roles/pinbot/vars/main.yml
+	rm roles/pinbot/vars/main.yml.bak
