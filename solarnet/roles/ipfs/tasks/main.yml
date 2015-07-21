@@ -36,7 +36,21 @@
       IPFS_PATH: /ipfs/repo
       IPFS_LOGGING: debug
 
+# generate ipfs repo
+- command: "docker exec ipfs:{{ ipfs_ref }} sh -c 'IPFS_PATH=/ipfs/repo ipfs init'"
+  args:
+    creates: /ipfs/ipfs_master/repo
+  register: ipfs_init
 - command: docker exec ipfs ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
+  when: ipfs_init.changed
+- command: docker exec ipfs ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+  when: ipfs_init.changed
+- docker:
+    name: ipfs
+    image: "ipfs:{{ ipfs_ref }}"
+    state: restarted
+  when: ipfs_init.changed
+
 
 # restart the ipfs container every 30 minutes, with a 25 % chance
 - copy:

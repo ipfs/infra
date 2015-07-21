@@ -16,7 +16,7 @@
   when: "cjdns_ref_present.rc != 0"
 
 - name: install cjdroute
-  shell: "mv /usr/bin/cjdroute /usr/bin/cjdroute.old && cp /opt/cjdns/cjdroute /usr/bin/"
+  shell: "mv /usr/bin/cjdroute /usr/bin/cjdroute.old ; cp /opt/cjdns/cjdroute /usr/bin/"
   when: "cjdns_ref_present.rc != 0"
 
 - name: install cjdroute.conf

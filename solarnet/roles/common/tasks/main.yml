@@ -1,7 +1,8 @@
 ---
 - authorized_key: 'user=root key="{{ item }}"'
   with_items: "{{ authorized_keys }}"
-- command: apt-get install -y mosh vim htop screen bridge-utils build-essential autoconf libtool bison flex nodejs mercurial
+- hostname: "name={{ inventory_hostname }}"
+- command: apt-get install -y mosh vim htop screen bridge-utils build-essential autoconf libtool bison flex nodejs mercurial git
 - file:
     src: /usr/bin/nodejs
     path: /usr/bin/node
