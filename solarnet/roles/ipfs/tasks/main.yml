@@ -41,15 +41,17 @@
   args:
     creates: /ipfs/ipfs_master/repo
   register: ipfs_init
-- command: docker exec ipfs ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
-  when: ipfs_init.changed
-- command: docker exec ipfs ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
-  when: ipfs_init.changed
+- name: install ipfs config
+  template:
+    src: config.j2
+    dest: /ipfs/ipfs_master/repo/config
+    mode: 0400
+  register: ipfs_config
 - docker:
     name: ipfs
     image: "ipfs:{{ ipfs_ref }}"
     state: restarted
-  when: ipfs_init.changed
+  when: ipfs_init.changed or ipfs_config.changed
 
 
 # restart the ipfs container every 30 minutes, with a 25 % chance
