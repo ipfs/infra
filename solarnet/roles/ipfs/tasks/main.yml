@@ -19,6 +19,17 @@
 - shell: "docker build -t ipfs:{{ ipfs_ref }} /ipfs_build"
   when: "ipfs_image_present.rc != 0"
 
+# generate ipfs repo
+- command: "docker run -i -v /ipfs/ipfs_master:/ipfs ipfs:{{ ipfs_ref }} sh -c 'IPFS_PATH=/ipfs/repo ipfs init'"
+  args:
+    creates: /ipfs/ipfs_master/repo
+- name: install ipfs config
+  template:
+    src: config.j2
+    dest: /ipfs/ipfs_master/repo/config
+    mode: 0400
+  register: ipfs_config
+
 # assert ipfs container runs and is up-to-date
 # XXX: with docker-py 1.3.1 this tries (and fails) to pull ipfs
 #      if no ipfs image was present before the previous task.
@@ -38,23 +49,11 @@
     env:
       IPFS_PATH: /ipfs/repo
       IPFS_LOGGING: debug
-
-# generate ipfs repo
-- command: "docker exec ipfs:{{ ipfs_ref }} sh -c 'IPFS_PATH=/ipfs/repo ipfs init'"
-  args:
-    creates: /ipfs/ipfs_master/repo
-  register: ipfs_init
-- name: install ipfs config
-  template:
-    src: config.j2
-    dest: /ipfs/ipfs_master/repo/config
-    mode: 0400
-  register: ipfs_config
 - docker:
     name: ipfs
     image: "ipfs:{{ ipfs_ref }}"
     state: restarted
-  when: ipfs_init.changed or ipfs_config.changed
+  when: ipfs_config.changed
 
 
 # restart the ipfs container every 30 minutes, with a 25 % chance
