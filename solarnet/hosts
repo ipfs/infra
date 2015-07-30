@@ -1,3 +1,4 @@
+[gateway]
 pluto       ansible_ssh_host=104.236.179.241
 neptune     ansible_ssh_host=104.236.176.52
 uranus      ansible_ssh_host=162.243.248.213

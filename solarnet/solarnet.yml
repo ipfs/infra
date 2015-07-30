@@ -11,7 +11,7 @@
 
 - hosts: gateway
   vars:
-    gateway_group: all
+    gateway_group: gateway
   pre_tasks:
     - include_vars: secrets.yml
   handlers:
@@ -32,7 +32,7 @@
     - pluto
     - neptune
   vars:
-    gateway_group: all
+    gateway_group: gateway
   pre_tasks:
     - include_vars: secrets.yml
   roles:

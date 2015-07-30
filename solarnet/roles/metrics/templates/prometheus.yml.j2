@@ -12,7 +12,7 @@ scrape_configs:
     metrics_path: '/debug/metrics/prometheus'
     target_groups:
       - targets:
-{% for hostname in cjdns_identities.keys() %}
+{% for hostname in groups[gateway_group] %}
         - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
 {% endfor %}
 
