@@ -1,4 +1,11 @@
 ---
+# XXX: migration
+- name: stop old container
+  docker:
+    name: ipfs_gateway_proxy
+    image: "nginx:{{ nginx_version }}"
+    state: stopped
+
 - name: create config directory
   file: path=/opt/nginx/conf.d state=directory
 - name: install config
