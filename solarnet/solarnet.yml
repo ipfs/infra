@@ -20,20 +20,13 @@
     - ipfs
     - ipfs_gateway
 
-- hosts: pluto
-  pre_tasks:
-  - include_vars: secrets.yml
-  handlers:
-  - include: roles/nginx/handlers/main.yml
-  roles:
-  - metrics
-
-- hosts:
-    - pluto
-    - neptune
+- hosts: scruffy
   vars:
     gateway_group: gateway
   pre_tasks:
     - include_vars: secrets.yml
+  handlers:
+    - include: roles/nginx/handlers/main.yml
   roles:
+    - metrics
     - pinbot
