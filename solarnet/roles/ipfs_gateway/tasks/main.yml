@@ -1,30 +1,7 @@
 ---
-- name: "create directory for container"
-  file: path=/containers/{{ docker_container_name }} state=directory
-# XXX: migration from dockerfile/nginx to nginx image
-- name: migrate conf directory
-  shell: "[ -d sites-enabled ]] && mv sites-enabled conf.d"
-  args:
-    chdir: "/containers/{{ docker_container_name }}"
-  ignore_errors: true
-- name: "create directory for conf"
-  file: path=/containers/{{ docker_container_name }}/conf.d state=directory
-- name: "copy nginx config"
+- name: install nginx config
   template:
-    src: nginx.conf.j2
-    dest: /containers/{{ docker_container_name }}/conf.d/nginx.conf # TODO extract docker_container_name var
-  register: nginx_config
-- name: "run nginx"
-  docker:
-    state: reloaded
-    name: "{{ docker_container_name }}"
-    image: nginx:1.9.3
-    volumes:
-        - /containers/{{ docker_container_name }}/conf.d:/etc/nginx/conf.d
-        - /containers/{{ docker_container_name }}/certs:/etc/nginx/certs
-        - /containers/{{ docker_container_name }}/logs:/var/log/nginx
-    net: host
-    restart_policy: always
-- name: "reload nginx for config change"
-  command: docker exec ipfs_gateway_proxy /etc/init.d/nginx reload
-  when: nginx_config.changed
+    src: nginx_ipfs_gateway.conf.j2
+    dest: /opt/nginx/conf.d/ipfs_gateway.conf
+  notify:
+    - reload nginx

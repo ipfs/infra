@@ -37,11 +37,8 @@
   shell: "echo {{ node_exporter_ref }} > /opt/node_exporter.ref"
   when: "node_exporter_ref_present.rc != 0"
 
-- file: path=/containers/ipfs_gateway_proxy state=directory
-- file: path=/containers/ipfs_gateway_proxy/conf.d state=directory
+- file: path=/opt/nginx/conf.d state=directory
 - template:
     src: nginx_node_exporter.conf.j2
-    dest: /containers/ipfs_gateway_proxy/conf.d/node_exporter.conf
-  register: nginx_node_exporter
-- command: docker exec ipfs_gateway_proxy /etc/init.d/nginx reload
-  when: nginx_node_exporter.changed
+    dest: /opt/nginx/conf.d/node_exporter.conf
+  notify: reload nginx

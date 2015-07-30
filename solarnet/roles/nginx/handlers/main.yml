@@ -1,0 +1,3 @@
+---
+- name: reload nginx
+  command: docker exec nginx /etc/init.d/nginx reload
