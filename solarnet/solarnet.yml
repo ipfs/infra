@@ -20,7 +20,7 @@
     - ipfs
     - ipfs_gateway
 
-- hosts: scruffy
+- hosts: metrics
   vars:
     gateway_group: gateway
   pre_tasks:
@@ -29,4 +29,13 @@
     - include: roles/nginx/handlers/main.yml
   roles:
     - metrics
+
+- hosts: util
+  vars:
+    gateway_group: gateway
+  pre_tasks:
+    - include_vars: secrets.yml
+  handlers:
+    - include: roles/nginx/handlers/main.yml
+  roles:
     - pinbot
