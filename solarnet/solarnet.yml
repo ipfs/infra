@@ -1,29 +1,32 @@
 ---
 - hosts: all
-  vars:
-    gateway_group: all
   pre_tasks:
   - include_vars: secrets.yml
   roles:
     - common
     - docker
     - cjdns
-    - ipfs
-    - ipfs_gateway
+    - nginx
     - node_exporter
 
-- hosts: pluto
-  pre_tasks:
-  - include_vars: secrets.yml
-  roles:
-  - metrics
-
-- hosts:
-    - pluto
-    - neptune
+- hosts: gateway
   vars:
-    gateway_group: all
+    gateway_group: gateway
   pre_tasks:
     - include_vars: secrets.yml
+  handlers:
+    - include: roles/nginx/handlers/main.yml
   roles:
+    - ipfs
+    - ipfs_gateway
+
+- hosts: scruffy
+  vars:
+    gateway_group: gateway
+  pre_tasks:
+    - include_vars: secrets.yml
+  handlers:
+    - include: roles/nginx/handlers/main.yml
+  roles:
+    - metrics
     - pinbot

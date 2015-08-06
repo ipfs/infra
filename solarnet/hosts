@@ -1,3 +1,4 @@
+[gateway]
 pluto       ansible_ssh_host=104.236.179.241
 neptune     ansible_ssh_host=104.236.176.52
 uranus      ansible_ssh_host=162.243.248.213
@@ -9,3 +10,9 @@ mercury     ansible_ssh_host=178.62.61.185
 
 ; managed by whyrusleeping
 ; mars        ansible_ssh_host=104.131.131.82
+
+[util]
+scruffy     ansible_ssh_host=104.131.3.162
+
+; TODO: backup for scruffy
+; willie      ansible_ssh_host=todo

@@ -55,6 +55,13 @@
     state: restarted
   when: ipfs_config.changed
 
+# nginx vhost for :5001 and :8080 (api/gateway)
+- file: path=/opt/nginx/conf.d state=directory
+- template:
+    src: nginx_ipfs.conf.j2
+    dest: /opt/nginx/conf.d/ipfs.conf
+  notify: reload nginx
+
 
 # restart the ipfs container every 30 minutes, with a 25 % chance
 - copy:
