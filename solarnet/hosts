@@ -11,8 +11,8 @@ mercury     ansible_ssh_host=178.62.61.185
 ; managed by whyrusleeping
 ; mars        ansible_ssh_host=104.131.131.82
 
-[util]
+[metrics]
 scruffy     ansible_ssh_host=104.131.3.162
 
-; TODO: backup for scruffy
-; willie      ansible_ssh_host=todo
+[util]
+willie      ansible_ssh_host=46.101.230.158
