@@ -2,6 +2,7 @@
 
 - [Overview](#overview)
 - [Getting Started](#getting-started)
+- [Secrets](#secrets)
 - [Common Tasks](#common-tasks)
 - [Troubleshooting](#troubleshooting)
 - [Monitoring](#monitoring)
@@ -63,6 +64,32 @@ $ . venv/bin/activate
 # see if it works
 (venv)$ which ansible
 (venv)$ ansible all -a 'whoami'
+```
+
+## Secrets
+
+IPFS and cjdns private keys, SSL certificates, and cjdns peering credentials,
+are tracked by Git in a secret repository, in encrypted form.
+We need to decrypt them for usage, and encrypt them for committing changes.
+
+```sh
+# initialize and decrypt
+$ git clone https://example.net/secrets.git secrets/
+$ echo "the-key" > ../solarnet.key
+$ ./secrets.sh -d
+
+# make changes and encrypt
+$ vim secrets_plaintext/secrets.yml
+$ ./secrets.sh -e
+$ cd secrets/
+$ git add secrets.yml
+$ git commit -m 'Add some password or so'
+```
+
+You can also pipe the key instead of writing it to a file:
+
+```sh
+$ echo "the-key" | ./secrets.sh -d
 ```
 
 ## Common Tasks
