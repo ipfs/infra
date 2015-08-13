@@ -1,7 +1,7 @@
 ---
 - hosts: all
   pre_tasks:
-  - include_vars: secrets.yml
+    - include_vars: secrets_plaintext/secrets.yml
   roles:
     - common
     - docker
@@ -13,7 +13,7 @@
   vars:
     gateway_group: gateway
   pre_tasks:
-    - include_vars: secrets.yml
+    - include_vars: secrets_plaintext/secrets.yml
   handlers:
     - include: roles/nginx/handlers/main.yml
   roles:
@@ -24,7 +24,7 @@
   vars:
     gateway_group: gateway
   pre_tasks:
-    - include_vars: secrets.yml
+    - include_vars: secrets_plaintext/secrets.yml
   handlers:
     - include: roles/nginx/handlers/main.yml
   roles:
@@ -34,7 +34,7 @@
   vars:
     gateway_group: gateway
   pre_tasks:
-    - include_vars: secrets.yml
+    - include_vars: secrets_plaintext/secrets.yml
   handlers:
     - include: roles/nginx/handlers/main.yml
   roles:
