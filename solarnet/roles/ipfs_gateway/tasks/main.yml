@@ -1,4 +1,21 @@
 ---
+- name: server_key
+  copy:
+    dest: /opt/nginx/certs/ipfs.io.key
+    content: "{{ lookup('file', 'secrets_plaintext/ipfs.io.key') }}"
+- name: server_cert
+  copy:
+    dest: /opt/nginx/certs/ipfs.io.crt
+    content: "{{ lookup('file', 'secrets_plaintext/ipfs.io.crt') }}"
+# XXX disabled while cert is self-signed
+# - name: ca_cart
+#   copy:
+#     dest: /opt/nginx/certs/ca.crt
+#     content: "{{ lookup('file', 'secrets_plaintext/ca.crt') }}"
+- name: dhparam
+  copy:
+    dest: /opt/nginx/certs/dhparam.pem
+    content: "{{ lookup('file', 'secrets_plaintext/dhparam.pem') }}"
 - name: install nginx config
   template:
     src: nginx_ipfs_gateway.conf.j2
