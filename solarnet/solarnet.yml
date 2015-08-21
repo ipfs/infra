@@ -20,6 +20,12 @@
     - ipfs
     - ipfs_gateway
 
+- hosts: storage
+  handlers:
+    - include: roles/nginx/handlers/main.yml
+  roles:
+    - ipfs
+
 - hosts: metrics
   vars:
     gateway_group: gateway
