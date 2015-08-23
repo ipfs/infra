@@ -12,10 +12,10 @@ mercury     ansible_ssh_host=178.62.61.185
 ; mars        ansible_ssh_host=104.131.131.82
 
 [metrics]
-scruffy     ansible_ssh_host=104.131.3.162
+phobos      ansible_ssh_host=104.131.3.162
 
 [util]
-willie      ansible_ssh_host=46.101.230.158
+deimos      ansible_ssh_host=46.101.230.158
 
 [storage]
 pollux      ansible_ssh_host=5.9.59.34
