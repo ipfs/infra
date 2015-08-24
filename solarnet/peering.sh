@@ -27,7 +27,7 @@ function parse_yaml {
 }
 
 eval $(parse_yaml roles/cjdns/vars/main.yml)
-eval $(parse_yaml secrets.yml)
+eval $(parse_yaml secrets_plaintext/secrets.yml)
 
 hosts=$(ansible all --list-hosts)
 port=$(echo $cjdns_udp_interfaces_bind | cut -d':' -f2)
