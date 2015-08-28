@@ -76,9 +76,15 @@ server {
 
     resolver 8.8.8.8 8.8.4.4;
 
+    set $hosturi $host$uri;
+    set $proxyhost "";
+    if ($hosturi !~ "^ipfs\.io/(ipfs|ipns|api)(/|$)") {
+        set $proxyhost $host;
+    }
+
     location / {
         proxy_pass http://gateway;
-        proxy_set_header Host $host;
+        proxy_set_header Host $proxyhost;
     }
 
     access_log /var/log/nginx/default.access.log;
