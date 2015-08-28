@@ -18,22 +18,33 @@ server {
     #
     # PLEASE keep this config and documentation up-to-date!
     #
-    # Last updated: 2015-08-14
+    # Last updated: 2015-08-28
     #
     # Changes:
-    # - disable ssl_stapling while the certificate is self-signed
     # - use Google's DNS resolvers
     #
-    # Also see: https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
+    # Steps to reproduce the cert and key:
     #
-    # Key & certificate command:
-    #   openssl req \
-    #     -newkey rsa:2048 -nodes -keyout secrets_plaintext/ipfs.io.key \
-    #     -x509 -days 365 -out secrets_plaintext/ipfs.io.crt
+    # 1. Generate key & certificate
+    #   openssl req -newkey rsa:4096 -nodes -keyout secrets_plaintext/ipfs.io.key -x509 -days 365 -out secrets_plaintext/ipfs.io.crt
     #
-    # dhparam command:
+    # 2. Generate dhparam:
     #   openssl dhparam -out secrets_plaintext/dhparam.pem 2048
     #
+    # 3. Generate CSR for StartSSL
+    #   openssl x509 -in secrets_plaintext/ipfs.io.crt -signkey secrets_plaintext/ipfs.io.key -x509toreq -out secrets_plaintext/ipfs.io.csr
+    #
+    # 4. Obtain StartSSL Root and Class 1 certs
+    #   wget https://www.startssl.com/certs/ca.pem
+    #   wget https://www.startssl.com/certs/sub.class1.server.ca.pem
+    #
+    # 5. Build trustchains
+    #   cat sub.class1.server.ca.pem >> secrets_plaintext/ipfs.io.crt
+    #   cat ca.pem                   >> secrets_plaintext/ipfs.io.crt
+    #   cat sub.class1.server.ca.pem >> secrets_plaintext/ipfs.io.trustchain.crt
+    #   cat ca.pem                   >> secrets_plaintext/ipfs.io.trustchain.crt
+    #
+    # Also see: https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
 
     listen 443 default_server ssl;
     listen [::]:443 default_server ssl;
@@ -57,11 +68,11 @@ server {
 
     # OCSP Stapling ---
     # fetch OCSP records from URL in ssl_certificate and cache them
-    # ssl_stapling on;
-    # ssl_stapling_verify on;
+    ssl_stapling on;
+    ssl_stapling_verify on;
 
     ## verify chain of trust of OCSP response using Root CA and Intermediate certs
-    # ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;
+    ssl_trusted_certificate /etc/nginx/certs/ipfs.io.trustchain.crt;
 
     resolver 8.8.8.8 8.8.4.4;
 
