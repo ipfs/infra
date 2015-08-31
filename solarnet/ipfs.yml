@@ -1,0 +1,9 @@
+---
+- hosts: gateway
+  serial: "25%"
+  vars:
+    gateway_group: gateway
+  pre_tasks:
+    - include_vars: secrets_plaintext/secrets.yml
+  roles:
+    - ipfs
