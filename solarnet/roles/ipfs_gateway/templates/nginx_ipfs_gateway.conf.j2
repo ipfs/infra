@@ -85,6 +85,7 @@ server {
     location / {
         proxy_pass http://gateway;
         proxy_set_header Host $proxyhost;
+        proxy_read_timeout 1800s;
     }
 
     access_log /var/log/nginx/default.access.log;
