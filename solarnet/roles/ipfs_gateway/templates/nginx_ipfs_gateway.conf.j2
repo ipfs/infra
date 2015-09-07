@@ -78,7 +78,7 @@ server {
 
     set $hosturi $host$uri;
     set $proxyhost "";
-    if ($hosturi !~ "^ipfs\.io/(ipfs|ipns|api)(/|$)") {
+    if ($hosturi !~ "^(h\.)?ipfs\.io/(ipfs|ipns|api)(/|$)") {
         set $proxyhost $host;
     }
 
