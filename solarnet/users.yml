@@ -1,0 +1,18 @@
+---
+- hosts: storage
+  pre_tasks:
+    - include_vars: secrets_plaintext/secrets.yml
+  tasks:
+    - user:
+        name: "{{ item.name }}"
+        uid: "{{ item.uid }}"
+        home: "{{ item.home }}"
+        group: users
+        state: present
+      with_items: "{{ users }}"
+    - authorized_key:
+        user: "{{ item.name }}"
+        key: "{{ item.key }}"
+        state: present
+        exclusive: yes
+      with_items: "{{ users }}"
