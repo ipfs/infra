@@ -1,14 +1,11 @@
 ---
 global:
   scrape_interval:     15s
+  scrape_timeout:      10s
   evaluation_interval: 15s
-  labels:
-    monitor: '{{ ansible_hostname }}'
 
 scrape_configs:
   - job_name: 'gateway'
-    scrape_interval: 5s
-    scrape_timeout: 10s
     metrics_path: '/debug/metrics/prometheus'
     target_groups:
       - targets:
