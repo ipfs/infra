@@ -23,7 +23,7 @@
 # XXX migration
 - lineinfile:
     dest: /etc/default/docker
-    line: 'DOCKER_OPTS=--log-driver=none'
+    line: 'DOCKER_OPTS="--log-driver=none"'
     state: absent
   notify:
     - restart docker
