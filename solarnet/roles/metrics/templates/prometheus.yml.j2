@@ -6,22 +6,28 @@ global:
     monitor: '{{ ansible_hostname }}'
 
 scrape_configs:
-  - job_name: 'ipfs'
+  - job_name: 'gateway'
     scrape_interval: 5s
     scrape_timeout: 10s
     metrics_path: '/debug/metrics/prometheus'
     target_groups:
       - targets:
-{% for hostname in groups[gateway_group] %}
+{% for hostname in gateway_targets %}
         - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
 {% endfor %}
 
-  - job_name: 'node'
-    scrape_interval: 5s
-    scrape_timeout: 10s
+  - job_name: 'storage'
+    metrics_path: '/debug/metrics/prometheus'
+    target_groups:
+      - targets:
+{% for hostname in storage_targets %}
+        - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
+{% endfor %}
+
+  - job_name: 'host'
     metrics_path: '/metrics'
     target_groups:
       - targets:
-{% for hostname in cjdns_identities.keys() %}
+{% for hostname in node_targets %}
         - '[{{ cjdns_identities[hostname].ipv6 }}]:9100'
 {% endfor %}
