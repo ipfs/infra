@@ -6,4 +6,4 @@ stop on starting rc RUNLEVEL=[016]
 respawn
 respawn limit unlimited
 
-exec /usr/bin/node_exporter --web.listen-address="127.0.0.1:9100"
+exec /usr/bin/node_exporter --web.listen-address="127.0.0.1:9100" -collectors.enabled=filesystem,netdev
