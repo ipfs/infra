@@ -35,3 +35,9 @@
     state: present
   notify:
     - restart docker
+
+- name: docker service
+  service:
+    name: docker
+    enabled: yes
+    state: started
