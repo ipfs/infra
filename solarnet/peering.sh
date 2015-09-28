@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
-# Builds a cjdroute.conf snippet for peering with all nodes in secrets.yml
-#
-# Usage:
-#   ./peering.sh
+function usage {
+  echo "Builds a cjdroute.conf snippet for peering with the specified ansible hosts, using the specified password"
+  echo
+  echo "Usage:"
+  echo "  ./peering.sh <pattern> <password-name>"
+  echo "  ./peering.sh all solarnet"
+  echo "  ./peering.sh gateway alexandria"
+  echo "  ./peering.sh pluto:earth protocol"
+}
+
+[ -z "$1" ] && usage && exit 1
+[ -z "$2" ] && usage && exit 1
 
 # Primitive YAML parser for Bash, https://stackoverflow.com/a/21189044/2068670
 # By Stefan Farestam, updated for basic YAML array support
@@ -29,15 +37,19 @@ function parse_yaml {
 eval $(parse_yaml roles/cjdns/vars/main.yml)
 eval $(parse_yaml secrets_plaintext/secrets.yml)
 
-hosts=$(ansible all --list-hosts)
+hosts=$(ansible $1 --list-hosts)
 port=$(echo $cjdns_udp_interfaces_bind | cut -d':' -f2)
-password=$cjdns_authorized_passwords_password
+
+eval "password=\$cjdns_authorized_passwords""_$2"
+[ -z "$password" ] && echo "unknown password: $2" && exit 1
 
 for host in $hosts; do
   eval "pubkey=\$cjdns_identities_$host""_public_key"
+  ipAddr=$(ansible $host -m debug -a 'var=ansible_ssh_host' -o | cut -d'>' -f 3 | jq -r '.var.ansible_ssh_host')
 
-  [ -z $pubkey ] || cat << JSON
-    "$host.i.ipfs.io:$port": {
+  [ -z "$pubkey" ] || cat << JSON
+    "$ipAddr:$port": {
+        "peerName": "$host.i.ipfs.io",
         "publicKey": "$pubkey",
         "password": "$password"
     },

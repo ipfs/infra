@@ -13,7 +13,8 @@
 {% for peer in interface.peers %}
                 "{{ peer.connect_to }}": {
                     "publicKey": "{{ peer.public_key }}",
-                    "password": "{{ peer.password }}"
+                    "password": "{{ peer.password }}",
+                    "peerName": "{{ peer.peer_name }}"
                 },
 {% endfor %}
             }
@@ -22,8 +23,11 @@
         ]
     },
     "authorizedPasswords": [
-{% for password in cjdns_authorized_passwords %}
-        { "password": "{{ password.password }}" },
+{% for user in cjdns_authorized_passwords.keys() %}
+        {
+            "user": "{{ user }}",
+            "password": "{{ cjdns_authorized_passwords[user] }}"
+        },
 {% endfor %}
     ],
     "router": {
