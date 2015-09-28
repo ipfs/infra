@@ -35,9 +35,11 @@ password=$cjdns_authorized_passwords_password
 
 for host in $hosts; do
   eval "pubkey=\$cjdns_identities_$host""_public_key"
+  ipAddr=$(ansible $host -m debug -a 'var=ansible_ssh_host' -o | cut -d'>' -f 3 | jq -r '.var.ansible_ssh_host')
 
-  [ -z $pubkey ] || cat << JSON
-    "$host.i.ipfs.io:$port": {
+  [ -z "$pubkey" ] || cat << JSON
+    "$ipAddr:$port": {
+        "peerName": "$host.i.ipfs.io",
         "publicKey": "$pubkey",
         "password": "$password"
     },

@@ -13,7 +13,8 @@
 {% for peer in interface.peers %}
                 "{{ peer.connect_to }}": {
                     "publicKey": "{{ peer.public_key }}",
-                    "password": "{{ peer.password }}"
+                    "password": "{{ peer.password }}",
+                    "peerName": "{{ peer.peer_name }}"
                 },
 {% endfor %}
             }
