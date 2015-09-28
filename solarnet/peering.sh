@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
 function usage {
-  echo "Builds a cjdroute.conf snippet for peering with the specified ansible hosts"
+  echo "Builds a cjdroute.conf snippet for peering with the specified ansible hosts, using the specified password"
   echo
   echo "Usage:"
-  echo "  ./peering.sh <pattern>"
-  echo "  ./peering.sh all"
-  echo "  ./peering.sh gateway"
-  echo "  ./peering.sh pluto:earth"
+  echo "  ./peering.sh <pattern> <password-name>"
+  echo "  ./peering.sh all solarnet"
+  echo "  ./peering.sh gateway alexandria"
+  echo "  ./peering.sh pluto:earth protocol"
 }
 
 [ -z "$1" ] && usage && exit 1
+[ -z "$2" ] && usage && exit 1
 
 # Primitive YAML parser for Bash, https://stackoverflow.com/a/21189044/2068670
 # By Stefan Farestam, updated for basic YAML array support
@@ -38,7 +39,9 @@ eval $(parse_yaml secrets_plaintext/secrets.yml)
 
 hosts=$(ansible $1 --list-hosts)
 port=$(echo $cjdns_udp_interfaces_bind | cut -d':' -f2)
-password="$cjdns_authorized_passwords_password"
+
+eval "password=\$cjdns_authorized_passwords""_$2"
+[ -z "$password" ] && echo "unknown password: $2" && exit 1
 
 for host in $hosts; do
   eval "pubkey=\$cjdns_identities_$host""_public_key"
