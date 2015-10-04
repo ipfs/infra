@@ -20,14 +20,6 @@
 - name: "create directory for containers"
   file: path=/containers state=directory
 
-# XXX migration
-- lineinfile:
-    dest: /etc/default/docker
-    line: 'DOCKER_OPTS="--log-driver=none"'
-    state: absent
-  notify:
-    - restart docker
-
 - name: disable container logs
   lineinfile:
     dest: /etc/default/docker
