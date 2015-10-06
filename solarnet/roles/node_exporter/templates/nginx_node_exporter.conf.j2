@@ -5,7 +5,7 @@ server {
 {% for hostname in cjdns_identities.keys() %}
         allow {{ cjdns_identities[hostname].ipv6 }};
 {% endfor %}
-{% for addr in metrics_whitelist %}
+{% for addr in metrics_allowlist %}
         allow {{ addr }};
 {% endfor %}
         allow ::1;

@@ -180,12 +180,12 @@ and http://metrics.i.ipfs.io/prometheus, respectively.
 
 - You need to be peered into the Hyperboria cjdns network
   in order to reach the address that this domain name points to.
-- Your cjdns address needs to be whitelisted.
+- Your cjdns address needs to be allowlisted.
 
 ### Cjdns
 
 In addition to serving http://h.ipfs.io,
-we use cjdns for a very simple VPN based on an IP address whitelist.
+we use cjdns for a very simple VPN based on an IP address allowlist.
 
 ```sh
 $ git clone https://github.com/hyperboria/cjdns.git
@@ -241,7 +241,7 @@ and allow access only to the following clients:
 
 - localhost
 - All `cjdns_identities` nodes in `secrets.yml`
-- All `metrics_whitelist` nodes in `secrets.yml`
+- All `metrics_allowlist` nodes in `secrets.yml`
 
 For access to Grafana and Prometheus,
-add your cjdns IPv6 address to `metrics_whitelist`.
+add your cjdns IPv6 address to `metrics_allowlist`.
