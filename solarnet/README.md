@@ -177,10 +177,15 @@ Grafana provides the dashboard UI.
 
 Both are available at http://metrics.i.ipfs.io
 and http://metrics.i.ipfs.io/prometheus, respectively.
+There are two ways of access:
 
-- You need to be peered into the Hyperboria cjdns network
-  in order to reach the address that this domain name points to.
-- Your cjdns address needs to be allowlisted.
+- cjdns
+  - You need to be peered into the Hyperboria cjdns network
+    in order to reach the address that this domain name points to.
+  - Your cjdns address needs to be allowlisted.
+- SSH port-forwarding
+  - `ssh -L 8080:metrics.i.ipfs.io:80 root@<any-solarnet-host>.i.ipfs.io`
+  - http://localhost:8080
 
 ### Cjdns
 
