@@ -122,6 +122,8 @@ Note that `./secrets.sh -e` rewrites all files, regardless of whether they actua
 
 ### GC / Reclaim Disk Space
 
+There's disk space telemetry: http://metrics.i.ipfs.io/dashboard/db/meta
+
 ```sh
 # runs on all gateway hosts in parallel
 (venv)$ ansible gateway -a 'docker exec -i ipfs ipfs repo gc'
