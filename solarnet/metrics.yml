@@ -12,6 +12,7 @@
     node_targets: "{{ cjdns_identities.keys() }}"
     gateway_targets: "{{ groups.gateway }}"
     storage_targets: "{{ groups.storage }}"
+    metrics_targets: "{{ metrics.storage }}"
   pre_tasks:
     - include_vars: secrets_plaintext/secrets.yml
   handlers:
