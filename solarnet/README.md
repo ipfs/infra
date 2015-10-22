@@ -106,7 +106,7 @@ Note that `./secrets.sh -e` rewrites all files, regardless of whether they actua
 (venv)$ ansible-playbook -l storage ipfs.yml
 ```
 
-### Update IPFS or cjdns
+### Update IPFS or cjdns (or pinbot)
 
 ```sh
 (venv)$ make ipfs_ref
@@ -118,6 +118,18 @@ Note that `./secrets.sh -e` rewrites all files, regardless of whether they actua
 (venv)$ ansible-playbook cjdns.yml
 (venv)$ git add roles/cjdns/vars/main.yml
 (venv)$ git commit -m 'cjdns: update to latest master'
+```
+
+### Rebuilding the same version
+
+In order to know whether we need to rebuild on deploy,
+we need to know the git revision currently running.
+We keep this state in `/opt/<service>.ref`.
+Remove this file, and it'll rebuild regardless.
+
+```sh
+(venv)$ ansible deimos -a 'rm /opt/pinbot.ref'
+(venv)$ ansible-playbook pinbot.yml
 ```
 
 ### GC / Reclaim Disk Space
