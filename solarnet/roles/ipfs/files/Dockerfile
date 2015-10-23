@@ -1,5 +1,5 @@
-FROM golang:1.4
-MAINTAINER Brian Tiger Chow <btc@perfmode.com>
+FROM golang:1.5.1
+MAINTAINER Lars Gierth <larsg@systemli.org>
 
 # This IPFS repo should be copied into ./go-ipfs
 ADD go-ipfs /go/src/github.com/ipfs/go-ipfs
