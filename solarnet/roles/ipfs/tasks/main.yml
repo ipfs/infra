@@ -1,23 +1,22 @@
 ---
 # build the docker image, if needed
-- shell: "docker images -a | grep {{ ipfs_ref }}"
+- shell: "cat /opt/ipfs.ref | grep {{ ipfs_ref }}"
   ignore_errors: true
-  register: ipfs_image_present
-- file:
-    path: /ipfs_build
-    state: directory
-  when: "ipfs_image_present.rc != 0"
-- copy:
-    src: Dockerfile
-    dest: /ipfs_build/Dockerfile
-  when: "ipfs_image_present.rc != 0"
+  register: ipfs_ref_present
 - git:
     repo: https://github.com/ipfs/go-ipfs.git
-    dest: /ipfs_build/go-ipfs
+    dest: /opt/ipfs/src
     version: "{{ ipfs_ref }}"
-  when: "ipfs_image_present.rc != 0"
-- shell: "docker build -t ipfs:{{ ipfs_ref }} /ipfs_build"
-  when: "ipfs_image_present.rc != 0"
+    force: yes
+  when: "ipfs_ref_present.rc != 0"
+- copy:
+    src: Dockerfile
+    dest: /opt/ipfs/src/Dockerfile
+  when: "ipfs_ref_present.rc != 0"
+- shell: "docker build -t ipfs:{{ ipfs_ref }} /opt/ipfs/src"
+  when: "ipfs_ref_present.rc != 0"
+- shell: "echo {{ ipfs_ref }} > /opt/ipfs.ref"
+  when: "ipfs_ref_present.rc != 0"
 
 # generate ipfs repo
 - command: "docker run -i -v /ipfs/ipfs_master:/ipfs ipfs:{{ ipfs_ref }} sh -c 'IPFS_PATH=/ipfs/repo ipfs init'"
