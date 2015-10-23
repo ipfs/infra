@@ -1,5 +1,5 @@
 upstream gateway {
-    server 127.0.0.1:8080;
+    server 127.0.0.1:8080 fail_timeout=0;
 
 {% for host in groups[gateway_group] %}
 {% if host != inventory_hostname %}
