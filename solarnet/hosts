@@ -20,3 +20,4 @@ deimos      ansible_ssh_host=46.101.230.158
 [storage]
 pollux      ansible_ssh_host=5.9.59.34
 sirius      ansible_ssh_host=199.229.254.55
+castor      ansible_ssh_host=37.59.33.238
