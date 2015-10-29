@@ -11,7 +11,7 @@
     version: "{{ node_exporter_ref }}"
 
 - name: build node_exporter
-  shell: "make && make test chdir=/opt/node_exporter"
+  shell: "rm -rf .build && make && make test chdir=/opt/node_exporter"
   when: "node_exporter_ref_present.rc != 0"
 
 - name: install node_exporter
