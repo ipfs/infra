@@ -3,9 +3,9 @@
 hosts="$1"
 [ -z "$hosts" ] && hosts="all"
 
-ansible-playbook -l "$hosts" common.yml
-ansible-playbook -l "$hosts" cjdns.yml
-ansible-playbook -l "$hosts" ipfs.yml
-ansible-playbook -l "$hosts" gateway.yml
-ansible-playbook -l "$hosts" metrics.yml
-ansible-playbook -l "$hosts" pinbot.yml
+ansible-playbook -l "$hosts" common.yml  || exit 1
+ansible-playbook -l "$hosts" cjdns.yml   || exit 1
+ansible-playbook -l "$hosts" ipfs.yml    || exit 1
+ansible-playbook -l "$hosts" gateway.yml || exit 1
+ansible-playbook -l "$hosts" metrics.yml || exit 1
+ansible-playbook -l "$hosts" pinbot.yml  || exit 1
