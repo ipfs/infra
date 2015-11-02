@@ -1,5 +1,7 @@
 ---
-- hosts: gateway
+- hosts:
+    - gateway
+    - storage
   serial: "25%"
   vars:
     gateway_group: gateway

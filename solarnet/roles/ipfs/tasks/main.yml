@@ -75,3 +75,12 @@
     name: maybe-restart
     cron_file: ipfs-maybe-restart
     user: root
+  when: "inventory_hostname in gateway_group"
+# XXX migration
+- cron:
+    job: /ipfs/maybe-restart.sh 25 docker restart ipfs
+    state: absent
+    name: maybe-restart
+    cron_file: ipfs-maybe-restart
+    user: root
+  when: "inventory_hostname not in gateway_group"
