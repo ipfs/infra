@@ -72,7 +72,7 @@ You can base your own secret repository off `secrets.yml.example`.
 ```sh
 # initialize and decrypt
 $ git clone https://github.com/protocol/infrastructure-secrets.git secrets/
-$ echo "the-key" > ../solarnet.key
+$ echo "the-key" > $HOME/.protocol/solarnet.key
 $ ./secrets.sh -d
 
 # make changes and encrypt

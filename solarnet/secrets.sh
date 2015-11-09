@@ -1,6 +1,6 @@
 #!/bin/sh
 
-keyfile="../solarnet.key"
+keyfile="$HOME/.protocol/solarnet.key"
 if [ -f $keyfile ] ; then
   echo "Reading key from $keyfile"
   key=$(cat $keyfile)
