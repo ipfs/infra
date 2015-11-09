@@ -76,15 +76,22 @@ server {
 
     resolver 8.8.8.8 8.8.4.4;
 
-    set $hosturi $host$uri;
-    set $proxyhost "";
-    if ($hosturi !~ "^(h\.)?ipfs\.io/(ipfs|ipns|api)(/|$)") {
-        set $proxyhost $host;
+    location /refs/ {
+        rewrite "^/refs(/.*)$" $1 break;
+        proxy_set_header Host refs.ipfs.io;
+        proxy_pass http://gateway;
+        proxy_read_timeout 1800s;
+    }
+
+    location ~ "^/(ipfs|ipns|api)(/|$)" {
+        proxy_set_header Host "";
+        proxy_pass http://gateway;
+        proxy_read_timeout 1800s;
     }
 
     location / {
+        proxy_set_header Host $host;
         proxy_pass http://gateway;
-        proxy_set_header Host $proxyhost;
         proxy_read_timeout 1800s;
     }
 
