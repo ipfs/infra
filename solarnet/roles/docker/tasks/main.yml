@@ -15,7 +15,7 @@
 - name: "install pip"
   shell: "python /tmp/get-pip.py"
 - name: "install docker-py"
-  pip: name=docker-py version=0.5.3
+  pip: name=docker-py version=1.5.0
 
 - name: "create directory for containers"
   file: path=/containers state=directory
@@ -27,6 +27,10 @@
     state: present
   notify:
     - restart docker
+
+- apt:
+    name: lxc-docker
+    state: latest
 
 - name: docker service
   service:

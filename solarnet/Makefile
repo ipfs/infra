@@ -1,7 +1,7 @@
 venv/bin/activate:
 	test -d venv || virtualenv venv
 
-venv/bin/ansible: venv/bin/activate
+venv/bin/ansible: requirements.txt venv/bin/activate
 	. venv/bin/activate && pip install -r requirements.txt
 
 deps: venv/bin/ansible
