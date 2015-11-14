@@ -1,5 +1,5 @@
 [gateway]
-pluto       ansible_ssh_host=104.236.179.241
+pluto       ansible_ssh_host=104.236.179.241 ipfs_ref=1bbc472166f00445e5e3a4f9b16fe73db5c04ddd
 neptune     ansible_ssh_host=104.236.176.52
 uranus      ansible_ssh_host=162.243.248.213
 saturn      ansible_ssh_host=128.199.219.111
@@ -20,4 +20,4 @@ deimos      ansible_ssh_host=46.101.230.158
 [storage]
 pollux      ansible_ssh_host=5.9.59.34
 sirius      ansible_ssh_host=199.229.254.55
-castor      ansible_ssh_host=37.59.33.238
+castor      ansible_ssh_host=37.59.33.238 ipfs_ref=1bbc472166f00445e5e3a4f9b16fe73db5c04ddd
