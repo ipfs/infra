@@ -79,18 +79,21 @@ server {
     location /refs/ {
         rewrite "^/refs(/.*)$" $1 break;
         proxy_set_header Host refs.ipfs.io;
+        proxy_set_header X-Ipfs-Gateway-Prefix /refs;
         proxy_pass http://gateway;
         proxy_read_timeout 1800s;
     }
 
     location ~ "^/(ipfs|ipns|api)(/|$)" {
         proxy_set_header Host "";
+        proxy_set_header X-Ipfs-Gateway-Prefix "";
         proxy_pass http://gateway;
         proxy_read_timeout 1800s;
     }
 
     location / {
         proxy_set_header Host $host;
+        proxy_set_header X-Ipfs-Gateway-Prefix "";
         proxy_pass http://gateway;
         proxy_read_timeout 1800s;
     }
