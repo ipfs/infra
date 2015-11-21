@@ -2,7 +2,7 @@
 - authorized_key: 'user=root key="{{ item }}"'
   with_items: "{{ authorized_keys }}"
 - hostname: "name={{ inventory_hostname }}"
-- shell: "apt-get update && apt-get install -y mosh vim htop screen bridge-utils build-essential autoconf libtool bison flex nodejs mercurial git sysstat iftop tmux unzip jq"
+- shell: "apt-get update && apt-get install -y mosh vim htop screen bridge-utils build-essential autoconf libtool bison flex nodejs npm mercurial git sysstat iftop tmux unzip jq"
 - file:
     src: /usr/bin/nodejs
     path: /usr/bin/node
