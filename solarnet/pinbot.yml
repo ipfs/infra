@@ -1,7 +1,8 @@
 ---
 - hosts: util
   vars:
-    gateway_group: gateway
+    pinbot_targets: "{{ groups.gateway }}"
+    pinbot_exclude: "{{ groups.dev040 }}"
   pre_tasks:
     - include_vars: secrets_plaintext/secrets.yml
   handlers:
