@@ -1,3 +1,5 @@
-{% for host in groups[gateway_group] %}
+{% for host in pinbot_targets %}
+{% if host not in pinbot_exclude %}
 [{{ cjdns_identities[host].ipv6 }}]:5001
+{% endif %}
 {% endfor %}
