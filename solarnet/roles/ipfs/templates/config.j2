@@ -4,9 +4,12 @@
     "PrivKey": "{{ ipfs_identities[inventory_hostname].private_key }}"
   },
   "Datastore": {
-    "Type": "leveldb",
+    "GCPeriod": "20m",
+    "NoSync": true,
     "Path": "/ipfs/repo/datastore",
-    "NoSync": true
+    "StorageGCWatermark": 90,
+    "StorageMax": "{{ ipfs_storage_space }}",
+    "Type": "leveldb",
   },
   "Addresses": {
     "Swarm": [

@@ -35,7 +35,7 @@
     name: ipfs
     image: "ipfs:{{ ipfs_ref }}"
     state: reloaded
-    command: ipfs daemon
+    command: ipfs daemon --enable-gc
     restart_policy: always
     ports:
     - 0.0.0.0:4001:4001
