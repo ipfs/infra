@@ -25,6 +25,7 @@ ENTRYPOINT [ "/bin/prometheus" ]
 CMD        [ "-config.file=/etc/prometheus/prometheus.yml", \
              "-storage.local.path=/prometheus", \
              "-storage.local.memory-chunks=512288", \
+             "-storage.local.retention=8760h0m0s", \
              "-web.path-prefix=/prometheus", \
              "-web.console.libraries=/etc/prometheus/console_libraries", \
              "-web.console.templates=/etc/prometheus/consoles" ]
