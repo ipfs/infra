@@ -20,10 +20,11 @@
 - name: "create directory for containers"
   file: path=/containers state=directory
 
-- name: disable container logs
+- name: container log rotation
   lineinfile:
     dest: /etc/default/docker
-    line: 'DOCKER_OPTS="$DOCKER_OPTS --log-driver=none"'
+    regexp: ^DOCKER_OPTS=
+    line: 'DOCKER_OPTS="$DOCKER_OPTS --log-driver=json-file --log-opt max-size=100m --log-opt max-file=2"'
     state: present
   notify:
     - restart docker
