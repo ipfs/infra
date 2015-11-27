@@ -20,10 +20,25 @@
 - name: "create directory for containers"
   file: path=/containers state=directory
 
-- name: disable container logs
+- name: MIGRATION remove bogus config line
+  lineinfile:
+    dest: /etc/default/docker
+    line: DOCKER_OPTS=--log-driver=none
+    state: absent
+  notify:
+    - restart docker
+- name: MIGRATION remove bogus config line no. 2
   lineinfile:
     dest: /etc/default/docker
     line: 'DOCKER_OPTS="$DOCKER_OPTS --log-driver=none"'
+    state: absent
+  notify:
+    - restart docker
+- name: container log rotation
+  lineinfile:
+    dest: /etc/default/docker
+    regexp: ^DOCKER_OPTS=
+    line: 'DOCKER_OPTS="$DOCKER_OPTS --log-driver=json-file --log-opt max-size=100m --log-opt max-file=2"'
     state: present
   notify:
     - restart docker
