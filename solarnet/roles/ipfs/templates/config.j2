@@ -1,14 +1,12 @@
 {
-  "DataStore": {
-    "NoSync": true
-  },
   "Identity": {
     "PeerID": "{{ ipfs_identities[inventory_hostname].peer_id }}",
     "PrivKey": "{{ ipfs_identities[inventory_hostname].private_key }}"
   },
   "Datastore": {
     "Type": "leveldb",
-    "Path": "/ipfs/repo/datastore"
+    "Path": "/ipfs/repo/datastore",
+    "NoSync": true
   },
   "Addresses": {
     "Swarm": [
