@@ -28,7 +28,8 @@
     dest: /ipfs/ipfs_master/repo/config
     mode: 0400
   register: ipfs_config
-
+- name: validate ipfs config
+  shell: "cat /ipfs/ipfs_master/repo/config | jq '.' > /dev/null"
 # assert ipfs container runs and is up-to-date
 # XXX: this restarts the container on every run, somehow...
 - docker:
