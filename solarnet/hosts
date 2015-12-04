@@ -18,9 +18,9 @@ phobos      ansible_ssh_host=104.131.3.162
 deimos      ansible_ssh_host=46.101.230.158
 
 [storage]
-pollux      ansible_ssh_host=5.9.59.34 ipfs_storage_space=2600G ipfs_ref=b4ab6845ac6cb7e3a107d5fbf6d2a1568deb01b4
+pollux      ansible_ssh_host=5.9.59.34 ipfs_storage_space=2600G ipfs_ref=a49e020ce974b491d33b662a0775fdd44321b451
 sirius      ansible_ssh_host=199.229.254.55 ipfs_storage_space=970G
-castor      ansible_ssh_host=37.59.33.238 ipfs_storage_space=6900G ipfs_ref=51a0a362ea7f9d82589e0aabdd8153066a542393
+castor      ansible_ssh_host=37.59.33.238 ipfs_storage_space=6900G ipfs_ref=a49e020ce974b491d33b662a0775fdd44321b451
 
 [dev040]
 pluto
