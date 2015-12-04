@@ -4,7 +4,7 @@ neptune     ansible_ssh_host=104.236.176.52 ipfs_storage_space=30G
 uranus      ansible_ssh_host=162.243.248.213 ipfs_storage_space=50G
 saturn      ansible_ssh_host=128.199.219.111 ipfs_storage_space=70G
 jupiter     ansible_ssh_host=104.236.151.122 ipfs_storage_space=70G
-venus       ansible_ssh_host=104.236.76.40 ipfs_storage_space=30G ipfs_ref=4a1043b207c837b071df400682b1df2cfb2be91e
+venus       ansible_ssh_host=104.236.76.40 ipfs_storage_space=30G
 earth       ansible_ssh_host=178.62.158.247 ipfs_storage_space=30G
 mercury     ansible_ssh_host=178.62.61.185 ipfs_storage_space=30G
 
