@@ -11,4 +11,5 @@ RUN rm -rf /go/src/github.com
 
 EXPOSE 8080 4001 5001
 
+WORKDIR /ipfs
 CMD ["ipfs daemon"]

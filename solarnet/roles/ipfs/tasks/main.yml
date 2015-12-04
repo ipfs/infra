@@ -47,6 +47,7 @@
     env:
       IPFS_PATH: /ipfs/repo
       IPFS_LOGGING: debug
+      IPFS_PROF: true
 - docker:
     name: ipfs
     image: "ipfs:{{ ipfs_ref }}"
