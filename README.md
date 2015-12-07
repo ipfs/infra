@@ -6,6 +6,7 @@ This repository contains the technical infrastructure of the IPFS community.
 - Monitoring, also in `solarnet/`
 - Pinbot, in `solarnet/roles`
 - Seeding of $important objects, in `seeding/`
+- Astralboot for automated system deploy in astralboot/
 
 Infrastructure that isn't contained yet:
 
