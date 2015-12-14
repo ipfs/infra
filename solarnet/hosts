@@ -1,5 +1,5 @@
 [gateway]
-pluto       ansible_ssh_host=104.236.179.241 ipfs_storage_space=30G ipfs_ref=b4ab6845ac6cb7e3a107d5fbf6d2a1568deb01b4
+pluto       ansible_ssh_host=104.236.179.241 ipfs_storage_space=30G ipfs_ref=2df7a082051c07bf6a0ba889acf92dd383d857ac
 neptune     ansible_ssh_host=104.236.176.52 ipfs_storage_space=30G
 uranus      ansible_ssh_host=162.243.248.213 ipfs_storage_space=50G
 saturn      ansible_ssh_host=128.199.219.111 ipfs_storage_space=70G
@@ -18,11 +18,15 @@ phobos      ansible_ssh_host=104.131.3.162
 deimos      ansible_ssh_host=46.101.230.158
 
 [storage]
-pollux      ansible_ssh_host=5.9.59.34 ipfs_storage_space=2600G ipfs_ref=a49e020ce974b491d33b662a0775fdd44321b451
+pollux      ansible_ssh_host=5.9.59.34 ipfs_storage_space=2600G ipfs_ref=2df7a082051c07bf6a0ba889acf92dd383d857ac
 sirius      ansible_ssh_host=199.229.254.55 ipfs_storage_space=970G
-castor      ansible_ssh_host=37.59.33.238 ipfs_storage_space=6900G ipfs_ref=a49e020ce974b491d33b662a0775fdd44321b451
+castor      ansible_ssh_host=37.59.33.238 ipfs_storage_space=6900G ipfs_ref=2df7a082051c07bf6a0ba889acf92dd383d857ac
+biham       ansible_ssh_host=188.40.114.11 ipfs_storage_space=16600G ipfs_ref=2df7a082051c07bf6a0ba889acf92dd383d857ac
+nihal       ansible_ssh_host=188.40.116.66 ipfs_storage_space=16600G ipfs_ref=2df7a082051c07bf6a0ba889acf92dd383d857ac
 
 [dev040]
 pluto
 castor
 pollux
+biham
+nihal

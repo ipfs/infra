@@ -4,10 +4,18 @@
     "PrivKey": "{{ ipfs_identities[inventory_hostname].private_key }}"
   },
   "Datastore": {
+{% if inventory_hostname in groups[gateway_group] %}
     "GCPeriod": "20m",
+{% else %}
+    "GCPeriod": "0",
+{% endif %}
     "NoSync": true,
     "Path": "/ipfs/repo/datastore",
+{% if inventory_hostname in groups[gateway_group] %}
     "StorageGCWatermark": 90,
+{% else %}
+    "StorageGCWatermark": 101,
+{% endif %}
     "StorageMax": "{{ ipfs_storage_space }}",
     "Type": "leveldb"
   },
