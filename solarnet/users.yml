@@ -1,5 +1,5 @@
 ---
-- hosts: storage
+- hosts: storage:!sirius
   pre_tasks:
     - include_vars: secrets_plaintext/secrets.yml
   tasks:
@@ -15,4 +15,15 @@
         key: "{{ item.key }}"
         state: present
         exclusive: yes
+      with_items: "{{ users }}"
+
+# XXX migration: disable logins in order to deprecate sirius
+- hosts: sirius
+  pre_tasks:
+    - include_vars: secrets_plaintext/secrets.yml
+  tasks:
+    - authorized_key:
+        user: "{{ item.name }}"
+        key: "{{ item.key }}"
+        state: absent
       with_items: "{{ users }}"
