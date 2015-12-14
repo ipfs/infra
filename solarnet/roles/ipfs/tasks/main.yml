@@ -9,6 +9,11 @@
     version: "{{ ipfs_ref }}"
     force: yes
   when: "ipfs_ref_present.rc != 0"
+- lineinfile:
+    dest: /opt/ipfs/src/.dockerignore
+    line: .git
+    state: absent
+  when: "ipfs_ref_present.rc != 0"
 - copy:
     src: Dockerfile
     dest: /opt/ipfs/src/Dockerfile

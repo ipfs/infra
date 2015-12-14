@@ -4,7 +4,7 @@ MAINTAINER Lars Gierth <larsg@systemli.org>
 # This IPFS repo should be copied into ./go-ipfs
 ADD . /go/src/github.com/ipfs/go-ipfs
 
-RUN cd /go/src/github.com/ipfs/go-ipfs/cmd/ipfs && go install
+RUN cd /go/src/github.com/ipfs/go-ipfs && make install
 
 # clean up the image to keep it small
 RUN rm -rf /go/src/github.com
