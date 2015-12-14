@@ -76,14 +76,6 @@ server {
 
     resolver 8.8.8.8 8.8.4.4;
 
-    location /blog/ {
-        rewrite "^/blog(/.*)$" $1 break;
-        proxy_set_header Host blog.ipfs.io;
-        proxy_set_header X-Ipfs-Gateway-Prefix /blog;
-        proxy_pass http://gateway;
-        proxy_read_timeout 1800s;
-    }
-
     location /refs/ {
         rewrite "^/refs(/.*)$" $1 break;
         proxy_set_header Host refs.ipfs.io;
