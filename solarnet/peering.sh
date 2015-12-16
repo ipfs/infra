@@ -5,9 +5,9 @@ function usage {
   echo
   echo "Usage:"
   echo "  ./peering.sh <pattern> <password-name>"
-  echo "  ./peering.sh all solarnet"
   echo "  ./peering.sh gateway alexandria"
-  echo "  ./peering.sh pluto:earth protocol"
+  echo "  ./peering.sh pluto:earth protocollabs"
+  echo "  ./peering.sh all foobar"
 }
 
 [ -z "$1" ] && usage && exit 1
@@ -34,7 +34,7 @@ function parse_yaml {
    }'
 }
 
-eval $(parse_yaml roles/cjdns/vars/main.yml)
+eval $(parse_yaml roles/cjdns/defaults/main.yml)
 eval $(parse_yaml secrets_plaintext/secrets.yml)
 
 hosts=$(ansible $1 --list-hosts)
