@@ -16,13 +16,3 @@
         state: present
         exclusive: yes
       with_items: "{{ users }}"
-# XXX migration: disable logins in order to deprecate castor
-- hosts: castor
-  pre_tasks:
-    - include_vars: secrets_plaintext/secrets.yml
-  tasks:
-    - authorized_key:
-        user: "{{ item.name }}"
-        key: "{{ item.key }}"
-        state: absent
-      with_items: "{{ users }}"
