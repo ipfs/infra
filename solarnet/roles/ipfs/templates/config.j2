@@ -21,6 +21,9 @@
   },
   "Addresses": {
     "Swarm": [
+{% if inventory_hostname in groups.dev040 %}
+      "/ip4/0.0.0.0/udp/4002/utp",
+{% endif %}
       "/ip4/0.0.0.0/tcp/4001"
     ],
     "API": "/ip4/0.0.0.0/tcp/5001",
