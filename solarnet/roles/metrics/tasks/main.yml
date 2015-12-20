@@ -19,28 +19,11 @@
     mode: 0400
   register: grafana_ini
 
-# build the prometheus docker image, if needed
-- shell: "cat /opt/prometheus.ref | grep {{ prometheus_ref }}"
-  ignore_errors: true
-  register: prometheus_ref_present
-- git:
-    repo: https://github.com/prometheus/prometheus.git
-    dest: /opt/prometheus/src
-    version: "{{ prometheus_ref }}"
-  when: "prometheus_ref_present.rc != 0"
-- copy:
-    src: Dockerfile
-    dest: /opt/prometheus/Dockerfile
-  when: "prometheus_ref_present.rc != 0"
-- shell: "docker build -t prometheus:{{ prometheus_ref }} /opt/prometheus"
-  when: "prometheus_ref_present.rc != 0"
-- shell: "echo {{ prometheus_ref }} > /opt/prometheus.ref"
-  when: "prometheus_ref_present.rc != 0"
-
 # assert containers run and are up-to-date
 - docker:
     name: prometheus
-    image: "prometheus:{{ prometheus_ref }}"
+    image: "prom/prometheus:{{ prometheus_ref }}"
+    command: "-config.file=/etc/prometheus/prometheus.yml -storage.local.path=/prometheus -storage.local.memory-chunks=512288 -storage.local.retention=8760h0m0s -web.external-url=/prometheus -web.console.libraries=/etc/prometheus/console_libraries -web.console.templates=/etc/prometheus/consoles"
     state: reloaded
     restart_policy: always
     net: host
@@ -49,7 +32,7 @@
     - /opt/prometheus/data:/prometheus
 - docker:
     name: grafana
-    image: "luzifer/grafana-prometheus:{{ grafana_ref }}"
+    image: "luzifer/grafana:{{ grafana_ref }}"
     state: reloaded
     restart_policy: always
     ports:
@@ -61,12 +44,12 @@
 # apply config updates
 - docker:
     name: prometheus
-    image: "prometheus:{{ prometheus_ref }}"
+    image: "prom/prometheus:{{ prometheus_ref }}"
     state: restarted
   when: "prometheus_yml.changed"
 - docker:
     name: grafana
-    image: "luzifer/grafana-prometheus:{{ grafana_ref }}"
+    image: "luzifer/grafana:{{ grafana_ref }}"
     state: restarted
   when: "grafana_ini.changed"
 
