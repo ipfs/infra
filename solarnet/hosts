@@ -29,7 +29,6 @@ hiiaka      ansible_ssh_host=fc34:a1be:f784:e564:fe9a:1f9b:7e40:9ca ipfs_storage
 
 [dev040]
 pluto
-castor
 pollux
 biham
 nihal
