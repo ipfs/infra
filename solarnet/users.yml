@@ -1,5 +1,5 @@
 ---
-- hosts: storage:!sirius:!castor
+- hosts: storage:!sirius
   pre_tasks:
     - include_vars: secrets_plaintext/secrets.yml
   tasks:
