@@ -14,3 +14,6 @@ VOLUME     [ "/pinbot" ]
 WORKDIR    /pinbot
 ENTRYPOINT [ "/bin/pinbot" ]
 CMD        [  ]
+
+# XXX pending this fix: https://github.com/ansible/ansible-modules-core/pull/2258
+EXPOSE 12345
