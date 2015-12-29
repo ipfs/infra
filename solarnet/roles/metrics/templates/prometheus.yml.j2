@@ -25,6 +25,16 @@ scrape_configs:
           host: '{{ hostname }}'
 {% endfor %}
 
+  - job_name: 'edge'
+    metrics_path: '/debug/metrics/prometheus'
+    target_groups:
+{% for hostname in edge_targets %}
+      - targets:
+          - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
+        labels:
+          host: '{{ hostname }}'
+{% endfor %}
+
   - job_name: 'host'
     metrics_path: '/metrics'
     target_groups:
