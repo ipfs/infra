@@ -23,13 +23,8 @@ sirius      ansible_ssh_host=199.229.254.55 ipfs_storage_space=970G
 biham       ansible_ssh_host=188.40.114.11 ipfs_storage_space=16600G ipfs_ref=5bf3a590111c8afcb478bd678e93c5f6451bb600
 nihal       ansible_ssh_host=188.40.116.66 ipfs_storage_space=16600G ipfs_ref=2df7a082051c07bf6a0ba889acf92dd383d857ac
 
-[edge]
-namaka      ansible_ssh_host=fc86:e60a:a9f2:92b0:14bb:cf0b:6ac7:6bc4 ipfs_storage_space=40G ipfs_ref=5bf3a590111c8afcb478bd678e93c5f6451bb600
-hiiaka      ansible_ssh_host=fc34:a1be:f784:e564:fe9a:1f9b:7e40:9ca ipfs_storage_space=40G
-
 [dev040]
 pluto
 pollux
 biham
 nihal
-namaka

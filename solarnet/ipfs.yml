@@ -2,7 +2,6 @@
 - hosts:
     - gateway
     - storage
-    - edge
   serial: "25%"
   vars:
     gateway_group: gateway
