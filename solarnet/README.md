@@ -120,6 +120,14 @@ Note that `./secrets.sh -e` rewrites all files, regardless of whether they actua
 (venv)$ git commit -m 'cjdns: update to latest master'
 ```
 
+### Deploy specific revision of IPFS or cjdns to specific host
+
+```sh
+# set ipfs_ref=<commit-hash> for e.g. biham
+(venv)$ vim hosts
+(venv)$ ansible-playbook -l biham ipfs.yml
+```
+
 ### Rebuilding the same version
 
 In order to know whether we need to rebuild on deploy,
