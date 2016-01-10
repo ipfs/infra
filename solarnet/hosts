@@ -1,7 +1,7 @@
 [gateway]
 pluto       ansible_ssh_host=104.236.179.241 ipfs_storage_space=30G ipfs_ref=5bf3a590111c8afcb478bd678e93c5f6451bb600
-neptune     ansible_ssh_host=104.236.176.52 ipfs_storage_space=30G
-uranus      ansible_ssh_host=162.243.248.213 ipfs_storage_space=50G
+neptune     ansible_ssh_host=104.236.176.52 ipfs_storage_space=30G ipfs_ref=5bf3a590111c8afcb478bd678e93c5f6451bb600
+uranus      ansible_ssh_host=162.243.248.213 ipfs_storage_space=50G ipfs_ref=5bf3a590111c8afcb478bd678e93c5f6451bb600
 saturn      ansible_ssh_host=128.199.219.111 ipfs_storage_space=70G
 jupiter     ansible_ssh_host=104.236.151.122 ipfs_storage_space=70G
 venus       ansible_ssh_host=104.236.76.40 ipfs_storage_space=30G
@@ -25,6 +25,8 @@ nihal       ansible_ssh_host=188.40.116.66 ipfs_storage_space=16600G ipfs_ref=2d
 
 [dev040]
 pluto
+neptune
+uranus
 pollux
 biham
 nihal
