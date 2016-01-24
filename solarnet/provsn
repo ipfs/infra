@@ -3,13 +3,13 @@
 set -e
 
 provsn_template() {
-  src="$1"
-  dest="$2"
+  local src="$1"
+  local dest="$2"
 
   # escape double-quotes so they won't interfere with rendering
-  tpl="$(cat $src | sed -e 's/"/\\"/g')"
+  local tpl="$(cat $src | sed -e 's/"/\\"/g')"
   # render the template by printing it out, let shell take care of variables
-  out="$(eval "printf %s\\\n \"$tpl\"")"
+  local out="$(eval "printf %s\\\n \"$tpl\"")"
 
   [ -z "$out" ] \
     && echo "error: unknown template: $src" 1>&2 \
@@ -17,7 +17,7 @@ provsn_template() {
 
   # detect and raise unknown var errors
   for line in "$out"; do
-    regexp='ERR_UNKNOWN_VAR_([0-9a-z_]+)'
+    local regexp='ERR_UNKNOWN_VAR_([0-9a-z_]+)'
     [[ "$line" =~ $regexp ]] \
       && echo "error: unknown var: ${BASH_REMATCH[1]} (in $src)" 1>&2 \
       && exit 1
@@ -27,26 +27,26 @@ provsn_template() {
 }
 
 var() {
-  key="$1"
+  local key="$1"
   [ "$2" ] && key="$1_$2"
-  prefixes="all_ $host""_"
+  local prefixes="all_ $host""_"
 
   # default to an error message, in case none of the prefixes yields a value
   for p in $prefixes; do
     # try printing the variable with that prefix
-    try=$(eval 'printf %s\\n "${'$p$key'[@]}"')
+    local try=$(eval 'printf %s\\n "${'$p$key'[@]}"')
     # if it yielded something, save that as the result
-    [ -z "$try" ] || value=${try[@]}
+    [ -z "$try" ] || local value=${try[@]}
   done
 
-  declare -p value 2>&1 >/dev/null || value="ERR_UNKNOWN_VAR_$key"
+  declare -p value 2>/dev/null >/dev/null || local value="ERR_UNKNOWN_VAR_$key"
 
   printf %s\\n "${value[@]}"
 }
 
 lookup() {
-  key=$1
-  value=$(var "$key")
+  local key=$1
+  local value=$(var "$key")
 
   [ "$value" == "ERR_UNKNOWN_VAR_$key" ] \
     && echo "error: unknown var: $key (in $unit)" 1>&2 \
@@ -56,7 +56,7 @@ lookup() {
 }
 
 find_units() {
-  for u in `find ./*/ -name env.sh | xargs realpath | xargs dirname`; do
+  for u in `find ./*/ -name env.sh | xargs readlink -f | xargs dirname`; do
     u="$u/"
     u="${u#$(pwd)/}"
     u="${u%/}"
@@ -66,7 +66,7 @@ find_units() {
 }
 
 resolve_pattern() {
-  hosts=${provsn_hosts[@]}
+  local hosts=${provsn_hosts[@]}
   [ ! -z "$1" ] && [ "$1" != "all" ] && hosts=($1)
   printf %s\\n "${hosts[@]}"
 }
@@ -76,19 +76,19 @@ provsn_usage() {
 }
 
 provsn_upload() {
-  hosts=($1)
+  local hosts=($1)
 
   for host in ${hosts[@]}; do
     echo "$host: upload"
     ssh $(lookup ssh_options) $(lookup ssh) "rm -rf /opt/provsn"
     scp -qr $(lookup ssh_options) "$provsn_root/.build/$host" "$(lookup ssh):/opt/provsn"
   done
-  echo "$host: upload success"
+  echo "upload success"
 }
 
 provsn_exec() {
-  hosts=($1)
-  cmd="$2"
+  local hosts=($1)
+  local cmd="$2"
 
   for host in ${hosts[@]}; do
     echo "$host: exec $cmd"
@@ -98,7 +98,7 @@ provsn_exec() {
 }
 
 provsn_build() {
-  hosts=($1)
+  local hosts=($1)
 
   rm -rf .build/
   mkdir .build/
@@ -110,14 +110,14 @@ provsn_build() {
     cp -a "$0" env.sh "$provsn_root/.build/$host/"
     echo "$host" > "$provsn_root/.build/$host/host"
 
-    omit_units=($(lookup omit_build))
+    local omit_units=($(lookup omit_build))
     for unit in $(lookup units); do
-      omit=$(printf %s\\n "${omit_units[@]}" | grep -xF $unit || true)
+      local omit=$(printf %s\\n "${omit_units[@]}" | grep -xF $unit || true)
       if [ ! -z "$omit" ]; then
         echo "$host: omit $unit"
       else
         echo "$host: build $unit"
-        parent_dir="$provsn_root/.build/$host/$(dirname $unit)"
+        local parent_dir="$provsn_root/.build/$host/$(dirname $unit)"
         [ ! -d "$parent_dir" ] && mkdir -p $parent_dir
         [ -d "$provsn_root/$unit" ] && cp -a "$provsn_root/$unit" "$provsn_root/.build/$host/$unit"
       fi
@@ -129,8 +129,8 @@ provsn_build() {
 }
 
 provsn_run() {
-  host=$(cat "$provsn_root/host")
-  script="$1"
+  local host=$(cat "$provsn_root/host")
+  local script="$1"
 
   for unit in $(lookup units); do
     if [ -x "$provsn_root/$unit/$script" ]; then
@@ -142,9 +142,12 @@ provsn_run() {
 
 provsn_root=`pwd`
 
+# printf %s\\n "$(find_units)"
+# exit 1
 
 . env.sh
 for unit in $(find_units); do . "$unit/env.sh"; done
+all_units=()
 
 case $1 in
 build)
