@@ -32,7 +32,6 @@ var() {
   prefixes="all_ $host""_"
 
   # default to an error message, in case none of the prefixes yields a value
-  value="ERR_UNKNOWN_VAR_$key"
   for p in $prefixes; do
     # try printing the variable with that prefix
     try=$(eval 'printf %s\\n "${'$p$key'[@]}"')
@@ -40,12 +39,14 @@ var() {
     [ -z "$try" ] || value=${try[@]}
   done
 
+  declare -p value 2>&1 >/dev/null || value="ERR_UNKNOWN_VAR_$key"
+
   printf %s\\n "${value[@]}"
 }
 
 lookup() {
   key=$1
-  value=($(var "$key"))
+  value=$(var "$key")
 
   [ "$value" == "ERR_UNKNOWN_VAR_$key" ] \
     && echo "error: unknown var: $key (in $unit)" 1>&2 \
