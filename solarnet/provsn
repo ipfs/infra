@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+
+set -e
+
+provsn_template() {
+  src="$1"
+  dest="$2"
+
+  # escape double-quotes so they won't interfere with rendering
+  tpl="$(cat $src | sed -e 's/"/\\"/g')"
+  # render the template by printing it out, let shell take care of variables
+  out="$(eval "printf %s\\\n \"$tpl\"")"
+
+  [ -z "$out" ] \
+    && echo "error: unknown template: $src" 1>&2 \
+    && exit 1
+
+  # detect and raise unknown var errors
+  for line in "$out"; do
+    regexp='ERR_UNKNOWN_VAR_([0-9a-z_]+)'
+    [[ "$line" =~ $regexp ]] \
+      && echo "error: unknown var: ${BASH_REMATCH[1]} (in $src)" 1>&2 \
+      && exit 1
+  done
+
+  printf %s\\n "$out" > "$dest"
+}
+
+var() {
+  key="$1"
+  [ "$2" ] && key="$1_$2"
+  prefixes="all_ $host""_"
+
+  # default to an error message, in case none of the prefixes yields a value
+  value="ERR_UNKNOWN_VAR_$key"
+  for p in $prefixes; do
+    # try printing the variable with that prefix
+    try=$(eval 'printf %s\\n "${'$p$key'[@]}"')
+    # if it yielded something, save that as the result
+    [ -z "$try" ] || value=${try[@]}
+  done
+
+  printf %s\\n "${value[@]}"
+}
+
+lookup() {
+  key=$1
+  value=($(var "$key"))
+
+  [ "$value" == "ERR_UNKNOWN_VAR_$key" ] \
+    && echo "error: unknown var: $key (in $unit)" 1>&2 \
+    && exit 1
+
+  printf %s\\n "${value[@]}"
+}
+
+find_units() {
+  for u in `find ./*/ -name env.sh | xargs realpath | xargs dirname`; do
+    u="$u/"
+    u="${u#$(pwd)/}"
+    u="${u%/}"
+    [ -z "$u" ] && u="."
+    echo "$u"
+  done | LC_ALL=C sort
+}
+
+resolve_pattern() {
+  hosts=${provsn_hosts[@]}
+  [ ! -z "$1" ] && [ "$1" != "all" ] && hosts=($1)
+  printf %s\\n "${hosts[@]}"
+}
+
+provsn_usage() {
+  echo "specify a command: provsn build|upload|install|exec|run|units"
+}
+
+provsn_upload() {
+  hosts=($1)
+
+  for host in ${hosts[@]}; do
+    echo "$host: upload"
+    ssh $(lookup ssh_options) $(lookup ssh) "rm -rf /opt/provsn"
+    scp -qr $(lookup ssh_options) "$provsn_root/.build/$host" "$(lookup ssh):/opt/provsn"
+  done
+  echo "$host: upload success"
+}
+
+provsn_exec() {
+  hosts=($1)
+  cmd="$2"
+
+  for host in ${hosts[@]}; do
+    echo "$host: exec $cmd"
+    ssh $(lookup ssh_options) $(lookup ssh) "cd /opt/provsn && $cmd"
+  done
+  echo "$host: exec success"
+}
+
+provsn_build() {
+  hosts=($1)
+
+  rm -rf .build/
+  mkdir .build/
+
+  for host in ${hosts[@]}; do
+    echo "$host: build"
+
+    mkdir "$provsn_root/.build/$host"
+    cp -a "$0" env.sh "$provsn_root/.build/$host/"
+    echo "$host" > "$provsn_root/.build/$host/host"
+
+    omit_units=($(lookup omit_build))
+    for unit in $(lookup units); do
+      omit=$(printf %s\\n "${omit_units[@]}" | grep -xF $unit || true)
+      if [ ! -z "$omit" ]; then
+        echo "$host: omit $unit"
+      else
+        echo "$host: build $unit"
+        parent_dir="$provsn_root/.build/$host/$(dirname $unit)"
+        [ ! -d "$parent_dir" ] && mkdir -p $parent_dir
+        [ -d "$provsn_root/$unit" ] && cp -a "$provsn_root/$unit" "$provsn_root/.build/$host/$unit"
+      fi
+    done
+
+    provsn_root="$provsn_root/.build/$host" provsn_run build.sh
+    echo "$host: build success"
+  done
+}
+
+provsn_run() {
+  host=$(cat "$provsn_root/host")
+  script="$1"
+
+  for unit in $(lookup units); do
+    if [ -x "$provsn_root/$unit/$script" ]; then
+      echo "$host: $unit $script"
+      (cd "$provsn_root/$unit" && . "$script")
+    fi
+  done
+}
+
+provsn_root=`pwd`
+
+
+. env.sh
+for unit in $(find_units); do . "$unit/env.sh"; done
+
+case $1 in
+build)
+  # creates host's build dir
+  # copies provsn and env.sh files to build dirs
+  # put the host name somewhere in the build dirs
+  # builddir/provsn run build.sh
+  provsn_build "$(resolve_pattern "$2")"
+  ;;
+upload)
+  # uploads each host's build dir
+  provsn_upload "$(resolve_pattern "$2")"
+  ;;
+install)
+  # execs provsn run install.sh
+  provsn_exec "$(resolve_pattern "$2")" "./provsn run install.sh"
+  ;;
+run)
+  # runs the script
+  # requires host name in builddir
+  provsn_run "$2"
+  ;;
+exec)
+  # executes command in build dir on each host
+  provsn_exec "$(resolve_pattern "$2")" "$3"
+  ;;
+units)
+  printf %s\\n "$(find_units)"
+  ;;
+"")
+  provsn_usage
+  ;;
+*)
+  { echo "Unknown command: $1";
+    echo;
+    provsn_usage; } 1>&2
+  ;;
+esac
