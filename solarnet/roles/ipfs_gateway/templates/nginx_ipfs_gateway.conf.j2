@@ -84,6 +84,14 @@ server {
         proxy_read_timeout 1800s;
     }
 
+    error_page 451 /_errors/451.html;
+    location /_errors {
+        root /usr/share/nginx/html;
+    }
+    location ~ "^/ipns/Qmbk5dja9CqyrmymV6EdQLzvNo9zCkGyGQKYrL5ya5oHwu" {
+        return 451;
+    }
+
     location ~ "^/(ipfs|ipns|api)(/|$)" {
         proxy_set_header Host "";
         proxy_set_header X-Ipfs-Gateway-Prefix "";
