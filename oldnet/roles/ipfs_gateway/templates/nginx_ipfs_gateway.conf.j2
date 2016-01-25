@@ -1,11 +1,20 @@
-upstream gateway {
-    server 127.0.0.1:8080 fail_timeout=0;
+upstream multireq {
+    server 127.0.0.1:8040;
+    server 127.0.0.1:8080 backup;
+}
 
-{% for host in groups[gateway_group] %}
-{% if host != inventory_hostname %}
-    server [{{ cjdns_identities[host].ipv6 }}]:8080 backup;
-{% endif %}
-{% endfor %}
+upstream v04x {
+    server 127.0.0.1:8080;
+}
+
+upstream v03x {
+    server 127.0.0.1:18080;
+}
+
+map $http_host $pool {
+    default "multireq";
+    v04x.ipfs.io "v04x";
+    v03x.ipfs.io "v03x";
 }
 
 server {
@@ -80,7 +89,7 @@ server {
         rewrite "^/refs(/.*)$" $1 break;
         proxy_set_header Host refs.ipfs.io;
         proxy_set_header X-Ipfs-Gateway-Prefix /refs;
-        proxy_pass http://gateway;
+        proxy_pass http://$pool;
         proxy_read_timeout 1800s;
     }
 
@@ -95,14 +104,14 @@ server {
     location ~ "^/(ipfs|ipns|api)(/|$)" {
         proxy_set_header Host "";
         proxy_set_header X-Ipfs-Gateway-Prefix "";
-        proxy_pass http://gateway;
+        proxy_pass http://$pool;
         proxy_read_timeout 1800s;
     }
 
     location / {
         proxy_set_header Host $host;
         proxy_set_header X-Ipfs-Gateway-Prefix "";
-        proxy_pass http://gateway;
+        proxy_pass http://$pool;
         proxy_read_timeout 1800s;
     }
 
