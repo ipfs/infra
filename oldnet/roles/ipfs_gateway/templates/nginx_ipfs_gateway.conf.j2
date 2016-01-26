@@ -1,7 +1,6 @@
 upstream multireq {
-    # server 127.0.0.1:8040;
-    # server 127.0.0.1:8080 backup;
-    server 127.0.0.1:8080;
+    server 127.0.0.1:8040;
+    server 127.0.0.1:8080 backup;
 }
 
 upstream v04x {
