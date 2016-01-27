@@ -96,6 +96,7 @@ server {
         proxy_set_header Host "";
         proxy_set_header X-Ipfs-Gateway-Prefix "";
         proxy_pass http://gateway;
+        proxy_redirect default;
         proxy_read_timeout 1800s;
     }
 
