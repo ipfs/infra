@@ -10,6 +10,7 @@
     dest: /opt/cjdns
     version: "{{ cjdns_ref }}"
     force: yes
+  when: "cjdns_ref_present.rc != 0"
 
 - name: build cjdns
   shell: "./clean && ./do chdir=/opt/cjdns"

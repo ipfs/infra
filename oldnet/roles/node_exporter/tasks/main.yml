@@ -9,6 +9,7 @@
     repo: https://github.com/prometheus/node_exporter.git
     dest: /opt/node_exporter
     version: "{{ node_exporter_ref }}"
+  when: "node_exporter_ref_present.rc != 0"
 
 - name: build node_exporter
   shell: "rm -rf .build && make && make test chdir=/opt/node_exporter"
