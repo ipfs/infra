@@ -45,7 +45,7 @@ ipfs_install() {
   if [ "rebuild$rebuild" == "rebuild1" ]; then
     echo "$host: $name rebuilding"
     mkdir -p src/
-    git clone -q https://github.com/ipfs/go-ipfs "src/$name"
+    git clone -q $(lookup $name'_git') "src/$name"
     git --work-tree="src/$name" --git-dir="src/$name/.git" reset -q --hard "$ref"
     cp Dockerfile "src/$name"
     rm "src/$name/.dockerignore"
