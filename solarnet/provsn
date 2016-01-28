@@ -49,7 +49,7 @@ lookup() {
   local value=$(var "$key")
 
   [ "$value" == "ERR_UNKNOWN_VAR_$key" ] \
-    && echo "error: unknown var: $key (in $unit)" 1>&2 \
+    && echo "error: unknown var: $key (in unit=$unit)" 1>&2 \
     && exit 1
 
   printf %s\\n "${value[@]}"
@@ -84,6 +84,7 @@ provsn_upload() {
     scp -qr $(lookup ssh_options) "$provsn_root/.build/$host" "$(lookup ssh):/opt/provsn"
   done
   echo "upload success"
+  host=
 }
 
 provsn_exec() {
@@ -94,7 +95,8 @@ provsn_exec() {
     echo "$host: exec $cmd"
     ssh $(lookup ssh_options) $(lookup ssh) "cd /opt/provsn && $cmd"
   done
-  echo "$host: exec success"
+  echo "exec success"
+  host=
 }
 
 provsn_build() {
@@ -122,10 +124,12 @@ provsn_build() {
         [ -d "$provsn_root/$unit" ] && cp -a "$provsn_root/$unit" "$provsn_root/.build/$host/$unit"
       fi
     done
+    unit=
 
     provsn_root="$provsn_root/.build/$host" provsn_run build.sh
     echo "$host: build success"
   done
+  host=
 }
 
 provsn_run() {
@@ -138,6 +142,7 @@ provsn_run() {
       (cd "$provsn_root/$unit" && . "$script")
     fi
   done
+  unit=
 }
 
 provsn_root=`pwd`
@@ -147,7 +152,7 @@ provsn_root=`pwd`
 
 . env.sh
 for unit in $(find_units); do . "$unit/env.sh"; done
-all_units=()
+unit=
 
 case $1 in
 build)
