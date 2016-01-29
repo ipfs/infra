@@ -90,6 +90,7 @@ server {
         proxy_set_header Host refs.ipfs.io;
         proxy_set_header X-Ipfs-Gateway-Prefix /refs;
         proxy_pass http://$pool;
+        proxy_pass_header Server;
         proxy_read_timeout 1800s;
     }
 
@@ -105,6 +106,7 @@ server {
         proxy_set_header Host "";
         proxy_set_header X-Ipfs-Gateway-Prefix "";
         proxy_pass http://$pool;
+        proxy_pass_header Server;
         proxy_read_timeout 1800s;
     }
 
@@ -112,6 +114,7 @@ server {
         proxy_set_header Host $host;
         proxy_set_header X-Ipfs-Gateway-Prefix "";
         proxy_pass http://$pool;
+        proxy_pass_header Server;
         proxy_read_timeout 1800s;
     }
 
