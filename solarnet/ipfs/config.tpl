@@ -13,11 +13,13 @@
   },
   "Addresses": {
     "Swarm": [
-      "/ip4/0.0.0.0/udp/4002/utp",
-      "/ip4/0.0.0.0/tcp/4001"
+      "/ip4/0.0.0.0/tcp/$(var $name'_swarm_tcp')",
+      "/ip4/0.0.0.0/udp/$(var $name'_swarm_utp')/utp",
+      "/ip6/::/tcp/$(var $name'_swarm_tcp')",
+      "/ip6/::/udp/$(var $name'_swarm_utp')/utp"
     ],
-    "API": "/ip4/0.0.0.0/tcp/5001",
-    "Gateway": "/ip4/0.0.0.0/tcp/8080"
+    "API": "/ip4/127.0.0.1/tcp/$(var $name'_api')",
+    "Gateway": "/ip4/127.0.0.1/tcp/$(var $name'_gateway')"
   },
   "Mounts": {
     "IPFS": "/ipfs",

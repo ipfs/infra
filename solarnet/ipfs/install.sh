@@ -37,7 +37,7 @@ ipfs_install() {
     restart=1
   fi
 
-  if [ ! -z "$(git diff "$target/config" "out/config" || echo "new")" ]; then
+  if [ ! -z "$(git diff "$target/config" "out/$name.config" || echo "new")" ]; then
     echo "$host: $name config changed"
     restart=1
   fi
@@ -60,7 +60,7 @@ ipfs_install() {
     restart=1
   fi
 
-  cp "out/config" "$repo/config"
+  cp "out/$name.config" "$repo/config"
 
   if [ "restart$restart" == "restart1" ]; then
     echo "$host: $name restarting"
@@ -76,7 +76,7 @@ ipfs_install() {
 
   # we only install these so we can get a diff and rebuild/restart if needed
   mkdir -p "$target"
-  cp -a "out/config" "$target/config"
+  cp -a "out/$name.config" "$target/config"
   cp -a "out/$name.opts" "$target/docker.opts"
   cp -a "Dockerfile" "$target/Dockerfile"
 }
