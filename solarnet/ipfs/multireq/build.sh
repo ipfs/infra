@@ -7,6 +7,9 @@ cat > docker.opts <<-EOF
 --name multireq
 --restart always
 --net host
+--log-driver=json-file
+--log-opt max-size=100m
+--log-opt max-file=2
 multireq:$(lookup multireq_ref)
 127.0.0.1:8040
 http://127.0.0.1:$(lookup ipfs_gateway)

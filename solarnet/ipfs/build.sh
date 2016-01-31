@@ -9,6 +9,9 @@ cat > out/ipfs.opts <<-EOF
 --name ipfs
 --restart always
 --net host
+--log-driver=json-file
+--log-opt max-size=100m
+--log-opt max-file=2
 -v $(lookup ipfs_repo):/ipfs
 ipfs:$(lookup ipfs_ref | head -c 7)
 EOF
@@ -18,6 +21,9 @@ cat > out/ipfs_v03x.opts <<-EOF
 --name ipfs_v03x
 --restart always
 --net host
+--log-driver=json-file
+--log-opt max-size=100m
+--log-opt max-file=2
 -v $(lookup ipfs_v03x_repo):/ipfs
 ipfs_v03x:$(lookup ipfs_v03x_ref | head -c 7)
 EOF
