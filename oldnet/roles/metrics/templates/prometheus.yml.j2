@@ -13,6 +13,12 @@ scrape_configs:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
         labels:
           host: '{{ hostname }}'
+          network: v04x
+      - targets:
+          - '[{{ cjdns_identities[hostname].ipv6 }}]:15001'
+        labels:
+          host: '{{ hostname }}'
+          network: v03x
 {% endfor %}
 
   - job_name: 'storage'
@@ -23,6 +29,7 @@ scrape_configs:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
         labels:
           host: '{{ hostname }}'
+          network: v04x
 {% endfor %}
 
   - job_name: 'host'
