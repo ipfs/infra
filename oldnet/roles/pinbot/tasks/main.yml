@@ -2,17 +2,31 @@
 - file:
     path: /opt/pinbot/config
     state: directory
+- file:
+    path: /opt/pinbot/config/pins.log
+    state: touch
 - template:
     src: hosts.j2
     dest: /opt/pinbot/config/hosts
     mode: 0644
   register: pinbot_config
+- file:
+    path: /opt/pinbot_v03x/config
+    state: directory
+- file:
+    path: /opt/pinbot_v03x/config/pins.log
+    state: touch
+- template:
+    src: hosts_v03x.j2
+    dest: /opt/pinbot_v03x/config/hosts
+    mode: 0644
+  register: pinbot_v03x_config
 
 - shell: "cat /opt/pinbot.ref | grep {{ pinbot_ref }}"
   ignore_errors: true
   register: pinbot_ref_present
 - git:
-    repo: https://github.com/whyrusleeping/pinbot.git
+    repo: "{{ pinbot_git }}"
     dest: /opt/pinbot/src
     version: "{{ pinbot_ref }}"
     force: yes
@@ -30,15 +44,29 @@
 - docker:
     name: pinbot
     image: "pinbot:{{ pinbot_ref }}"
-    command: --name=pinbot
+    command: '--name=pinbot --channel=#ipfs --prefix="!"'
     state: reloaded
     restart_policy: always
     net: host
     volumes:
       - /opt/pinbot/config:/pinbot
+- docker:
+    name: pinbot_v03x
+    image: "pinbot:{{ pinbot_ref }}"
+    command: '--name=pinbot-v03x --channel=#ipfs --prefix="pinbot-v03x: "'
+    state: reloaded
+    restart_policy: always
+    net: host
+    volumes:
+      - /opt/pinbot_v03x/config:/pinbot
 
 - docker:
     name: pinbot
     image: "pinbot:{{ pinbot_ref }}"
     state: restarted
   when: pinbot_config.changed
+- docker:
+    name: pinbot
+    image: "pinbot:{{ pinbot_ref }}"
+    state: restarted
+  when: pinbot_v03x_config.changed

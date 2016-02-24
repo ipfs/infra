@@ -21,11 +21,3 @@ deimos      ansible_ssh_host=46.101.230.158
 pollux      ansible_ssh_host=5.9.59.34 ipfs_storage_space=2600G ipfs_ref=89a6f01be017b4da63492a1a1f76d4607e49c931
 biham       ansible_ssh_host=188.40.114.11 ipfs_storage_space=16600G ipfs_ref=89a6f01be017b4da63492a1a1f76d4607e49c931
 nihal       ansible_ssh_host=188.40.116.66 ipfs_storage_space=16600G ipfs_ref=89a6f01be017b4da63492a1a1f76d4607e49c931
-
-[dev040]
-pluto
-neptune
-uranus
-pollux
-biham
-nihal
