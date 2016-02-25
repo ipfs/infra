@@ -155,6 +155,11 @@ for unit in $(find_units); do . "$unit/env.sh"; done
 unit=
 
 case $1 in
+deploy)
+  provsn_build "$(resolve_pattern "$2")"
+  provsn_upload "$(resolve_pattern "$2")"
+  provsn_exec "$(resolve_pattern "$2")" "./provsn run install.sh"
+  ;;
 build)
   # creates host's build dir
   # copies provsn and env.sh files to build dirs
