@@ -12,6 +12,7 @@ cat > docker.opts <<-EOF
 --log-opt max-file=2
 multireq:$(lookup multireq_ref)
 127.0.0.1:8040
+127.0.0.1:8041
 http://127.0.0.1:$(lookup ipfs_gateway)
 http://127.0.0.1:$(lookup ipfs_v03x_gateway)
 EOF
