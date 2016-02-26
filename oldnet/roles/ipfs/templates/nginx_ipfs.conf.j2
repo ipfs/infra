@@ -1,0 +1,87 @@
+# api
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:5001;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_allowlist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:5001;
+        proxy_set_header Host $host;
+        proxy_read_timeout 1800s;
+    }
+
+    access_log /var/log/nginx/api.access.log;
+    error_log /var/log/nginx/api.error.log;
+}
+
+# gateway
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8080;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_allowlist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_read_timeout 1800s;
+    }
+
+    access_log /var/log/nginx/gateway.access.log;
+    error_log /var/log/nginx/gateway.error.log;
+}
+
+# api v03x
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:15001;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_allowlist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:15001;
+        proxy_set_header Host $host;
+        proxy_read_timeout 1800s;
+    }
+
+    access_log /var/log/nginx/api_v03x.access.log;
+    error_log /var/log/nginx/api_v03x.error.log;
+}
+
+# gateway v03x
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:18080;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_allowlist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:18080;
+        proxy_set_header Host $host;
+        proxy_read_timeout 1800s;
+    }
+
+    access_log /var/log/nginx/gateway_v03x.access.log;
+    error_log /var/log/nginx/gateway_v03x.error.log;
+}

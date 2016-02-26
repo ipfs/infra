@@ -1,0 +1,32 @@
+---
+# nginx vhost for :5001 and :8080 (api/gateway)
+- file: path=/opt/nginx/conf.d state=directory
+- template:
+    src: nginx_ipfs.conf.j2
+    dest: /opt/nginx/conf.d/ipfs.conf
+  notify: reload nginx
+
+
+# restart the v04x and v03x containers every 120 minutes, with a 33 % chance
+- copy:
+    src: files/maybe-restart.sh
+    dest: /ipfs/maybe-restart.sh
+    mode: 755
+- cron:
+    job: /ipfs/maybe-restart.sh 33 docker restart ipfs
+    minute: 55
+    hour: "*/2"
+    state: present
+    name: maybe-restart
+    cron_file: ipfs-maybe-restart
+    user: root
+  when: "inventory_hostname in groups[gateway_group]"
+- cron:
+    job: /ipfs/maybe-restart.sh 33 docker restart ipfs_v03x
+    minute: 25
+    hour: "*/2"
+    state: present
+    name: maybe-restart
+    cron_file: ipfs-v03x-maybe-restart
+    user: root
+  when: "inventory_hostname in groups[gateway_group]"
