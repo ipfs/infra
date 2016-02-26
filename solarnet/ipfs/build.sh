@@ -9,10 +9,14 @@ cat > out/ipfs.opts <<-EOF
 --name ipfs
 --restart always
 --net host
+--user ipfs
+--env IPFS_PATH=/data/ipfs
+--env IPFS_LOGGING=debug
+--entrypoint /usr/local/bin/start_ipfs
 --log-driver=json-file
 --log-opt max-size=100m
 --log-opt max-file=2
--v $(lookup ipfs_repo):/ipfs
+-v $(lookup ipfs_repo):/data/ipfs
 ipfs:$(lookup ipfs_ref | head -c 7)
 EOF
 
@@ -21,9 +25,11 @@ cat > out/ipfs_v03x.opts <<-EOF
 --name ipfs_v03x
 --restart always
 --net host
+--env IPFS_PATH=/data/ipfs
+--env IPFS_LOGGING=debug
 --log-driver=json-file
 --log-opt max-size=100m
 --log-opt max-file=2
--v $(lookup ipfs_v03x_repo):/ipfs
+-v $(lookup ipfs_v03x_repo):/data/ipfs
 ipfs_v03x:$(lookup ipfs_v03x_ref | head -c 7)
 EOF

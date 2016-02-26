@@ -8,7 +8,7 @@ RUN cd /go/src/github.com/ipfs/go-ipfs && make install && rm -rf /go/src/github.
 
 EXPOSE 8080 4001 4002/udp 5001
 
-ENV IPFS_PATH=/ipfs IPFS_LOGGING=debug IPFS_PROF=true
+ENV IPFS_PATH=/data/ipfs IPFS_LOGGING=debug IPFS_PROF=true
 
-WORKDIR /ipfs
+WORKDIR /data/ipfs
 CMD ["ipfs", "daemon", "--enable-gc"]

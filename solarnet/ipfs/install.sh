@@ -13,9 +13,9 @@ ipfs_install() {
   restart=0
 
   ref=$(lookup $name'_ref' | head -c 7)
-  actual_ref=$(docker ps --format '{{.Image}}' | grep "$name:" | cut -d':' -f2 || true)
+  actual_ref=$(docker ps -f name=$name --format '{{.Image}}' | cut -d':' -f2 || true)
 
-  if [ ! -z "$actual_ref" ]; then
+  if [ ! -z "$(docker ps -f name=$name || true)" ]; then
     running=1
   fi
 
@@ -27,9 +27,11 @@ ipfs_install() {
     rebuild=1
   fi
 
-  if [ ! -z "$(git diff "$target/Dockerfile" "Dockerfile" || echo "new")" ]; then
-    echo "$host: $name dockerfile changed"
-    rebuild=1
+  if [ "name$name" == "nameipfs_v03x" ]; then
+    if [ ! -z "$(git diff "$target/Dockerfile" "Dockerfile" || echo "new")" ]; then
+      echo "$host: $name dockerfile changed"
+      rebuild=1
+    fi
   fi
 
   if [ ! -z "$(git diff "$target/docker.opts" "out/$name.opts" || echo "new")" ]; then
@@ -44,19 +46,23 @@ ipfs_install() {
 
   if [ "rebuild$rebuild" == "rebuild1" ]; then
     echo "$host: $name rebuilding"
-    mkdir -p src/
-    git clone -q $(lookup $name'_git') "src/$name"
-    git --work-tree="src/$name" --git-dir="src/$name/.git" reset -q --hard "$ref"
-    cp Dockerfile "src/$name"
-    rm "src/$name/.dockerignore"
-    docker build -t "$name:$ref" "src/$name" >/dev/null
+    [ -d "$target/src/.git" ] || git clone -q $(lookup $name'_git') "$target/src"
+    git --git-dir="$target/src/.git" remote set-url origin $(lookup $name'_git')
+    git --git-dir="$target/src/.git" fetch -q --all
+    git --git-dir="$target/src/.git" --work-tree="$target/src" reset -q --hard "$ref"
+    if [ "name$name" == "nameipfs_v03x" ]; then
+      cp Dockerfile "$target/src"
+      rm "$target/src/.dockerignore"
+    fi
+    docker build -t "$name:$ref" "$target/src" >/dev/null
     echo "$host: $name docker image changed"
     restart=1
   fi
 
   if [ ! -f "$repo/config" ]; then
     mkdir -p "$repo"
-    docker run -i -v "$repo:/ipfs" "$name:$ref" sh -c 'ipfs init --bits 2048'
+    docker run -i -v "$repo:/data/ipfs" --entrypoint /bin/sh "$name:$ref" sh -c 'ipfs init --bits 2048'
+    chown -R 1000:users "$repo"
     restart=1
   fi
 
@@ -78,7 +84,11 @@ ipfs_install() {
   mkdir -p "$target"
   cp -a "out/$name.config" "$target/config"
   cp -a "out/$name.opts" "$target/docker.opts"
-  cp -a "Dockerfile" "$target/Dockerfile"
+  if [ "name$name" == "nameipfs_v03x" ]; then
+    cp -a "Dockerfile" "$target/Dockerfile"
+  else
+    rm -f "$target/Dockerfile"
+  fi
 }
 
 ipfs_install ipfs
