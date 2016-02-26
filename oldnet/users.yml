@@ -8,6 +8,7 @@
         uid: "{{ item.uid }}"
         home: "{{ item.home }}"
         group: users
+        shell: /bin/bash
         state: present
       with_items: "{{ users }}"
     - authorized_key:
