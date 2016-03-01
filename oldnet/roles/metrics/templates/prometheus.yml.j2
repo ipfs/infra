@@ -21,6 +21,16 @@ scrape_configs:
           network: v03x
 {% endfor %}
 
+  - job_name: 'multireq'
+    metrics_path: '/metrics'
+    target_groups:
+{% for hostname in gateway_targets %}
+      - targets:
+          - '[{{ cjdns_identities[hostname].ipv6 }}]:8041'
+        labels:
+          host: '{{ hostname }}'
+{% endfor %}
+
   - job_name: 'storage'
     metrics_path: '/debug/metrics/prometheus'
     target_groups:

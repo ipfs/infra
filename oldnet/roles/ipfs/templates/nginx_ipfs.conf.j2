@@ -85,3 +85,25 @@ server {
     access_log /var/log/nginx/gateway_v03x.access.log;
     error_log /var/log/nginx/gateway_v03x.error.log;
 }
+
+# multireq
+server {
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8041;
+
+    location / {
+{% for hostname in cjdns_identities.keys() %}
+        allow {{ cjdns_identities[hostname].ipv6 }};
+{% endfor %}
+{% for addr in metrics_allowlist %}
+        allow {{ addr }};
+{% endfor %}
+        allow ::1;
+        deny all;
+        proxy_pass http://127.0.0.1:8041;
+        proxy_set_header Host $host;
+        proxy_read_timeout 1800s;
+    }
+
+    access_log /var/log/nginx/multireq.access.log;
+    error_log /var/log/nginx/multireq.error.log;
+}
