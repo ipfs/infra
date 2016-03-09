@@ -20,14 +20,7 @@
             }
         },
 {% endfor %}
-        ],
-        "ETHInterface" : [
-        {
-            "beacon": 2,
-            "bind": "eth0",
-            "connectTo": {}
-        }
-    ]
+        ]
     },
     "authorizedPasswords": [
 {% for user in cjdns_authorized_passwords.keys() %}
