@@ -91,7 +91,7 @@ server {
         rewrite "^/blog(/.*)$" $1 break;
         proxy_set_header Host blog.ipfs.io;
         proxy_set_header X-Ipfs-Gateway-Prefix /blog;
-        proxy_pass http://gateway;
+        proxy_pass http://v04x;
         proxy_read_timeout 1800s;
     }
 
@@ -99,7 +99,7 @@ server {
         rewrite "^/refs(/.*)$" $1 break;
         proxy_set_header Host refs.ipfs.io;
         proxy_set_header X-Ipfs-Gateway-Prefix /refs;
-        proxy_pass http://$pool;
+        proxy_pass http://v04x;
         proxy_pass_header Server;
         proxy_read_timeout 1800s;
     }
