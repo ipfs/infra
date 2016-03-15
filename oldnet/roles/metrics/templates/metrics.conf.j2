@@ -23,6 +23,6 @@ server {
         proxy_set_header Host $host;
     }
 
-    access_log /var/log/nginx/metrics.access.log;
+    access_log /var/log/nginx/metrics.access.log mtail;
     error_log /var/log/nginx/metrics.error.log;
 }
