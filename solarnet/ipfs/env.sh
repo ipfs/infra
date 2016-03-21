@@ -20,7 +20,7 @@ all_ipfs_v03x_swarm_utp=14002
 
 all_ipfs_gc_period=20m
 all_ipfs_gc_watermark=90
-all_ipfs_gc_capacity=10G
+all_ipfs_gc_capacity=30G
 
 earth_ipfs_swarm_tcp=14001
 earth_ipfs_swarm_utp=14002
@@ -42,3 +42,7 @@ mercury_ipfs_swarm_tcp=14001
 mercury_ipfs_swarm_utp=14002
 mercury_ipfs_v03x_swarm_tcp=4001
 mercury_ipfs_v03x_swarm_utp=4002
+
+pollux_ipfs_gc_period=0s
+biham_ipfs_gc_period=0s
+nihal_ipfs_gc_period=0s
