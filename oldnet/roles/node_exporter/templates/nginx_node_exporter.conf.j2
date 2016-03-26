@@ -1,5 +1,6 @@
 server {
-    server_name host.ipfs.local;
+    server_name node_exporter.local;
+    access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:9100;
 
     location / {
@@ -14,7 +15,4 @@ server {
         proxy_pass http://127.0.0.1:9100;
         proxy_set_header Host $host;
     }
-
-    access_log /var/log/nginx/gateway.access.log mtail;
-    error_log /var/log/nginx/gateway.error.log;
 }
