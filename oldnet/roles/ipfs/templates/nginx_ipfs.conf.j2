@@ -42,7 +42,7 @@ server {
 
 # api v03x
 server {
-    server_name api.ipfs_v03x.local;
+    server_name api.ipfs-v03x.local;
     access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:15001;
 
@@ -63,7 +63,7 @@ server {
 
 # gateway v03x
 server {
-    server_name gateway.ipfs_v03x.local;
+    server_name gateway.ipfs-v03x.local;
     access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:18080;
 
