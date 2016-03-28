@@ -1,6 +1,6 @@
-counter http_requests_total by vhost, method, code
-counter http_request_duration_milliseconds_sum by vhost, method, code
-counter http_response_size_bytes_sum by vhost, method, code
+counter http_requests_total by vhost, method, code, content_type
+counter http_request_duration_milliseconds_sum by vhost, method, code, content_type
+counter http_response_size_bytes_sum by vhost, method, code, content_type
 
 # log_format mtail '$server_name $remote_addr - $remote_user [$time_local] '
 #                  '"$request" $status $bytes_sent $request_time'
@@ -17,9 +17,10 @@ counter http_response_size_bytes_sum by vhost, method, code
 /(?P<bytes_sent>\d+) / +
 /(?P<request_seconds>\d+)\.(?P<request_milliseconds>\d+) / +
 /"(?P<http_referer>\S+)" / +
-/"(?P<http_user_agent>[[:print:]]+)"/ +
+/"(?P<http_user_agent>[[:print:]]+)" / +
+/"(?P<content_type>[^;]+)(;.*)?"/ +
 /$/ {
-  http_requests_total[$vhost][tolower($request_method)][$status]++
-  http_request_duration_milliseconds_sum[$vhost][tolower($request_method)][$status] += $request_seconds * 1000 + $request_milliseconds
-  http_response_size_bytes_sum[$vhost][tolower($request_method)][$status] += $bytes_sent
+  http_requests_total[$vhost][tolower($request_method)][$status][$content_type]++
+  http_request_duration_milliseconds_sum[$vhost][tolower($request_method)][$status][$content_type] += $request_seconds * 1000 + $request_milliseconds
+  http_response_size_bytes_sum[$vhost][tolower($request_method)][$status][$content_type] += $bytes_sent
 }
