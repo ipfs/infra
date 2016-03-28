@@ -1,6 +1,7 @@
 # api
 server {
     server_name api.ipfs.local;
+    access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:5001;
 
     location / {
@@ -16,14 +17,12 @@ server {
         proxy_set_header Host $host;
         proxy_read_timeout 1800s;
     }
-
-    access_log /var/log/nginx/api.access.log mtail;
-    error_log /var/log/nginx/api.error.log;
 }
 
 # gateway
 server {
     server_name gateway.ipfs.local;
+    access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8080;
 
     location / {
@@ -39,14 +38,12 @@ server {
         proxy_set_header Host $host;
         proxy_read_timeout 1800s;
     }
-
-    access_log /var/log/nginx/gateway.access.log mtail;
-    error_log /var/log/nginx/gateway.error.log;
 }
 
 # api v03x
 server {
-    server_name v03x.api.ipfs.local;
+    server_name api.ipfs-v03x.local;
+    access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:15001;
 
     location / {
@@ -62,14 +59,12 @@ server {
         proxy_set_header Host $host;
         proxy_read_timeout 1800s;
     }
-
-    access_log /var/log/nginx/api_v03x.access.log mtail;
-    error_log /var/log/nginx/api_v03x.error.log;
 }
 
 # gateway v03x
 server {
-    server_name v03x.gateway.ipfs.local;
+    server_name gateway.ipfs-v03x.local;
+    access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:18080;
 
     location / {
@@ -85,14 +80,12 @@ server {
         proxy_set_header Host $host;
         proxy_read_timeout 1800s;
     }
-
-    access_log /var/log/nginx/gateway_v03x.access.log mtail;
-    error_log /var/log/nginx/gateway_v03x.error.log;
 }
 
 # multireq
 server {
-    server_name multireq.ipfs.local;
+    server_name multireq.local;
+    access_log /var/log/nginx/access.log mtail;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:8041;
 
     location / {
@@ -108,7 +101,4 @@ server {
         proxy_set_header Host $host;
         proxy_read_timeout 1800s;
     }
-
-    access_log /var/log/nginx/multireq.access.log mtail;
-    error_log /var/log/nginx/multireq.error.log;
 }

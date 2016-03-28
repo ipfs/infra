@@ -6,7 +6,7 @@ provsn_groups=()
 all_ssh_options="-o ConnectTimeout=5"
 all_omit_build=(secrets/ipfs)
 
-baseunits=(base docker)
+baseunits=(base docker mtail)
 gatewayunits=(ipfs ipfs/multireq secrets/ipfs)
 
 spacerock_ssh="root@46.101.117.27"

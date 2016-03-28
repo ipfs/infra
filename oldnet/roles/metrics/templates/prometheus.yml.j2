@@ -42,6 +42,25 @@ scrape_configs:
           network: v04x
 {% endfor %}
 
+  - job_name: 'mtail'
+    metrics_path: '/metrics'
+    target_groups:
+{% for hostname in node_targets %}
+      - targets:
+          - '[{{ cjdns_identities[hostname].ipv6 }}]:3903'
+        labels:
+          host: '{{ hostname }}'
+{% endfor %}
+    metric_relabel_configs:
+      - source_labels: [prog]
+        regex: .*
+        action: replace
+        target_label: prog
+      - source_labels: [exported_instance]
+        regex: .*
+        action: replace
+        target_label: exported_instance
+
   - job_name: 'host'
     metrics_path: '/metrics'
     target_groups:
