@@ -54,6 +54,7 @@
     "Last": ""
   },
   "Gateway": {
+    "PathPrefixes": ["/blog"],
     "RootRedirect": "",
     "Writable": false,
     "HTTPHeaders": {
