@@ -18,7 +18,7 @@ all_ipfs_v03x_gateway=18080
 all_ipfs_v03x_swarm_tcp=14001
 all_ipfs_v03x_swarm_utp=14002
 
-all_ipfs_gc_period=20m
+all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
 all_ipfs_gc_capacity=30G
 
