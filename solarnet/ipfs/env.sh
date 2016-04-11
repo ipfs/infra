@@ -22,6 +22,11 @@ all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
 all_ipfs_gc_capacity=30G
 
+jupiter_ipfs_ref=daaa69e276627f6025f305fcacd4a365fb6d5d99
+venus_ipfs_ref=daaa69e276627f6025f305fcacd4a365fb6d5d99
+earth_ipfs_ref=daaa69e276627f6025f305fcacd4a365fb6d5d99
+mercury_ipfs_ref=daaa69e276627f6025f305fcacd4a365fb6d5d99
+
 earth_ipfs_swarm_tcp=14001
 earth_ipfs_swarm_utp=14002
 earth_ipfs_v03x_swarm_tcp=4001
