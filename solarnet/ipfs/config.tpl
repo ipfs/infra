@@ -74,6 +74,9 @@
   "DialBlocklist": null,
   "Swarm": {
     "AddrFilters": [
+$(for h in ${provsn_hosts[@]}; do
+  printf '      "/ip6/%s/ipcidr/128",\n' $(host=$h var cjdns_ipv6)
+done)
       "/ip4/10.0.0.0/ipcidr/8",
       "/ip4/100.64.0.0/ipcidr/10",
       "/ip4/169.254.0.0/ipcidr/16",
