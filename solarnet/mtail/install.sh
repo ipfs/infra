@@ -45,7 +45,7 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   git clone -q $(lookup mtail_git) "src/mtail"
   git --work-tree="src/mtail" --git-dir="src/mtail/.git" reset -q --hard "$ref"
   cp Dockerfile "src/mtail"
-  docker build -t "mtail:$ref" "src/mtail" #>/dev/null
+  docker build -t "mtail:$ref" "src/mtail" >/dev/null
   echo "$host: mtail docker image changed"
 fi
 
