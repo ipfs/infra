@@ -23,4 +23,4 @@ USER mtail
 VOLUME $PROGS_PATH
 VOLUME $LOGS_PATH
 WORKDIR $LOGS_PATH
-ENTRYPOINT ["/usr/local/bin/mtail", "-logtostderr", "-port", "3903", "-progs", "/mtail/progs", "-logs"]
+ENTRYPOINT ["/usr/local/bin/mtail", "-v=2", "-logtostderr", "-port", "3903", "-progs", "/mtail/progs", "-logs"]
