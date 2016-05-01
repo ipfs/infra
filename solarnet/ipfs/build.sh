@@ -11,7 +11,7 @@ cat > out/ipfs.opts <<-EOF
 --net host
 --user ipfs
 --env IPFS_PATH=/data/ipfs
---env IPFS_LOGGING=debug
+--env IPFS_LOGGING=info
 --entrypoint /usr/local/bin/start_ipfs
 --log-driver=json-file
 --log-opt max-size=100m
@@ -26,7 +26,7 @@ cat > out/ipfs_v03x.opts <<-EOF
 --restart always
 --net host
 --env IPFS_PATH=/data/ipfs
---env IPFS_LOGGING=debug
+--env IPFS_LOGGING=info
 --log-driver=json-file
 --log-opt max-size=100m
 --log-opt max-file=2
