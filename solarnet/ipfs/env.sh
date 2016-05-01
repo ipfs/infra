@@ -10,7 +10,7 @@ all_ipfs_api=5001
 all_ipfs_gateway=8080
 
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
-all_ipfs_v03x_ref=43059f0bf495c15b478d51cb4a74f671a28b752f
+all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
 # TODO: move to /mnt/data/ipfs_v03x
 all_ipfs_v03x_repo=/ipfs/ipfs_master/repo_v2
 all_ipfs_v03x_api=15001
