@@ -20,7 +20,7 @@ ipfs_install() {
   fi
 
   if [ "ref$ref" != "ref$actual_ref" ]; then
-    echo "$host: ref changed from $ref to $actual_ref"
+    echo "$host: ref changed from $actual_ref to $ref"
     restart=1
   fi
 
