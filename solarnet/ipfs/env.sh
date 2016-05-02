@@ -9,6 +9,9 @@ all_ipfs_swarm_utp=4002
 all_ipfs_api=5001
 all_ipfs_gateway=8080
 
+mercury_ipfs_ref=d597f4b89d5cf03c301a8523ded595190b7698e2
+pluto_ipfs_ref=d597f4b89d5cf03c301a8523ded595190b7698e2
+
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
 # TODO: move to /mnt/data/ipfs_v03x
