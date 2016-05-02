@@ -13,13 +13,14 @@ ipfs_install() {
   restart=0
 
   ref=$(lookup $name'_ref' | head -c 7)
-  actual_ref=$(docker ps -f name=$name --format '{{.Image}}' | cut -d':' -f2 || true)
+  actual_ref=$(docker ps --format '{{.Image}}' | grep "$name:" | cut -d':' -f2 || true)
 
-  if [ ! -z "$(docker ps -f name=$name || true)" ]; then
+  if [ ! -z "$(docker ps -f status=running | grep "$name:" || true)" ]; then
     running=1
   fi
 
-  if [ "$ref" != "$actual_ref" ]; then
+  if [ "ref$ref" != "ref$actual_ref" ]; then
+    echo "$host: ref changed from $ref to $actual_ref"
     restart=1
   fi
 
