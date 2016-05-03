@@ -43,18 +43,20 @@ server {
     # 2. Generate dhparam:
     #   openssl dhparam -out secrets_plaintext/dhparam.pem 2048
     #
-    # 3. Generate CSR for StartSSL
+    # 3. Generate CSR for StartSSL (only stuff after -----BEGIN... is relevant)
     #   openssl x509 -in secrets_plaintext/ipfs.io.crt -signkey secrets_plaintext/ipfs.io.key -x509toreq -out secrets_plaintext/ipfs.io.csr
     #
-    # 4. Obtain StartSSL Root and Class 1 certs
+    # 4. Obtain StartSSL Root and Class 3 OV certs
     #   wget https://www.startssl.com/certs/ca.pem
-    #   wget https://www.startssl.com/certs/sub.class1.server.ca.pem
+    #   wget https://startssl.com/certs/sca.server3.crt
     #
-    # 5. Build trustchains
-    #   cat sub.class1.server.ca.pem >> secrets_plaintext/ipfs.io.crt
-    #   cat ca.pem                   >> secrets_plaintext/ipfs.io.crt
-    #   cat sub.class1.server.ca.pem >> secrets_plaintext/ipfs.io.trustchain.crt
-    #   cat ca.pem                   >> secrets_plaintext/ipfs.io.trustchain.crt
+    # 5. Download the signed certificate from StartSSL, as PEM
+    #   cat the-signed-cert.pem > secrets_plaintext/ipfs.io.crt
+    #
+    # 6. Build trustchains
+    #   cat sca.server3.crt >> secrets_plaintext/ipfs.io.crt
+    #   cat sca.server3.crt >  secrets_plaintext/ipfs.io.trustchain.crt
+    #   cat ca.pem          >> secrets_plaintext/ipfs.io.trustchain.crt
     #
     # Also see: https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs
 
