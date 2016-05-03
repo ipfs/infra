@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-provsn_hosts=(spacerock pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal phobos deimos)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal phobos deimos)
+# provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal)
+# provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 provsn_groups=()
 
 all_ssh_options="-o ConnectTimeout=5"
@@ -8,11 +10,6 @@ all_omit_build=(secrets/ipfs)
 
 baseunits=(base docker mtail)
 gatewayunits=(ipfs ipfs/multireq secrets/ipfs)
-
-spacerock_ssh="root@46.101.117.27"
-spacerock_units=(${baseunits[@]} ${gatewayunits[@]})
-otherrock_ssh="root@46.101.233.94"
-otherrock_units=(${baseunits[@]} ${gatewayunits[@]})
 
 pluto_ssh="root@104.236.179.241"
 pluto_units=(${baseunits[@]} ${gatewayunits[@]})
