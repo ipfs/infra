@@ -1,6 +1,6 @@
 server {
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80;
-    server_name metrics.i.ipfs.io;
+    server_name metrics.i.ipfs.io metrics.ipfs.team ipfs.team;
 
 {% for hostname in cjdns_identities.keys() %}
     allow {{ cjdns_identities[hostname].ipv6 }};
