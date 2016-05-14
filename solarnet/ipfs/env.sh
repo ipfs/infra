@@ -12,6 +12,9 @@ all_ipfs_gateway=8080
 mercury_ipfs_ref=d58aff068072b44151a717b7c4c252abcf0aa772
 pluto_ipfs_ref=d58aff068072b44151a717b7c4c252abcf0aa772
 
+jupiter_ipfs_ref=eef8b19742f33d6e9bfd25a8b97470f330f2554a
+neptune_ipfs_ref=eef8b19742f33d6e9bfd25a8b97470f330f2554a
+
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
 # TODO: move to /mnt/data/ipfs_v03x
