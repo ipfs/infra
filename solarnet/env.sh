@@ -10,6 +10,7 @@ all_omit_build=(secrets/ipfs)
 
 baseunits=(base docker mtail)
 gatewayunits=(ipfs ipfs/v03x ipfs/multireq secrets/ipfs)
+storageunits=(ipfs secrets/ipfs)
 
 pluto_ssh="root@104.236.179.241"
 pluto_units=(${baseunits[@]} ${gatewayunits[@]})
@@ -36,13 +37,13 @@ mercury_ssh="root@178.62.61.185"
 mercury_units=(${baseunits[@]} ${gatewayunits[@]})
 
 pollux_ssh="root@5.9.59.34"
-pollux_units=(${baseunits[@]} ipfs)
+pollux_units=(${baseunits[@]} ${storageunits[@]})
 
 biham_ssh="root@188.40.114.11"
-biham_units=(${baseunits[@]} ipfs)
+biham_units=(${baseunits[@]} ${storageunits[@]})
 
 nihal_ssh="root@188.40.116.66"
-nihal_units=(${baseunits[@]} ipfs)
+nihal_units=(${baseunits[@]} ${storageunits[@]})
 
 phobos_ssh="root@104.131.3.162"
 phobos_units=(${baseunits[@]})
