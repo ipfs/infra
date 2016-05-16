@@ -25,6 +25,13 @@ server {
     listen [::]:80 default_server;
     listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80 default_server;
 
+    return 301 https://$http_host$request_uri;
+}
+
+server {
+    server_name ipfs.io;
+    access_log /var/log/nginx/access.log mtail;
+
     # Based on intermediate profile of Mozilla SSL Configuration Generator
     # See https://mozilla.github.io/server-side-tls/ssl-config-generator
     #
