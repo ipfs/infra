@@ -49,7 +49,16 @@ server {
     location /_errors {
         root /usr/share/nginx/html;
     }
+    # dmca takedown
     location ~ "^/ipns/Qmbk5dja9CqyrmymV6EdQLzvNo9zCkGyGQKYrL5ya5oHwu" {
+        return 451;
+    }
+    # dmca takedown
+    location ~ "^/ipfs/QmTmMhRv2nh889JfYBWXdxSvNS6zWnh4QFo4Q2knV7Ei2B" {
+        return 451;
+    }
+    # not a dmca takedown -- there be bad bits
+    location ~ "^/ipfs/QmY7KEmJKpx7bNDQ2WfDJp2zdsvX1ATZKWd4AXAhDLCaBM" {
         return 451;
     }
 
