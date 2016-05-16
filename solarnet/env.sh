@@ -9,7 +9,7 @@ all_ssh_options="-o ConnectTimeout=5"
 all_omit_build=(secrets/ipfs)
 
 baseunits=(base docker mtail)
-gatewayunits=(ipfs ipfs/multireq secrets/ipfs)
+gatewayunits=(ipfs ipfs/v03x ipfs/multireq secrets/ipfs)
 
 pluto_ssh="root@104.236.179.241"
 pluto_units=(${baseunits[@]} ${gatewayunits[@]})
