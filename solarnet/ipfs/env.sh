@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref=a7c5a6f6a70cb29b064d18d8ea754d789d7bc377
+all_ipfs_ref=3b8ebe72bb3e82e87e86ac63745a8eb6ec6172e0
 # TODO: move to /mnt/data/ipfs
 all_ipfs_repo=/ipfs/ipfs_master/repo
 all_ipfs_swarm_tcp=4001
