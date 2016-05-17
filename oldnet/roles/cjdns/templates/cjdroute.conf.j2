@@ -6,11 +6,10 @@
     },
     "interfaces": {
         "UDPInterface": [
-{% for interface in cjdns_udp_interfaces %}
         {
-            "bind": "{{ interface.bind }}",
+            "bind": "{{ cjdns_udp6_interface.bind }}",
             "connectTo": {
-{% for peer in interface.peers %}
+{% for peer in cjdns_udp6_interface.peers %}
                 "{{ peer.connect_to }}": {
                     "publicKey": "{{ peer.public_key }}",
                     "password": "{{ peer.password }}",
@@ -19,7 +18,27 @@
 {% endfor %}
             }
         },
+        {
+            "bind": "{{ cjdns_udp4_interface.bind }}",
+            "connectTo": {
+{% for peer in cjdns_udp4_interface.peers %}
+                "{{ peer.connect_to }}": {
+                    "publicKey": "{{ peer.public_key }}",
+                    "password": "{{ peer.password }}",
+                    "peerName": "{{ peer.peer_name }}"
+                },
 {% endfor %}
+{% for hostname in cjdns_identities.keys() %}
+    {% if hostname != inventory_hostname %}
+                "{{ hostvars[hostname].ansible_ssh_host }}:54321": {
+                    "publicKey": "{{ cjdns_identities[hostname].public_key }}",
+                    "password": "{{ cjdns_authorized_passwords.solarnet }}",
+                    "peerName": "{{ hostname }}.i.ipfs.io"
+                },
+    {% endif %}
+{% endfor %}
+            }
+        },
         ]
     },
     "authorizedPasswords": [
