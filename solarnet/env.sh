@@ -5,7 +5,7 @@ provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux bih
 # provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 provsn_groups=()
 
-all_ssh_options="-o ConnectTimeout=5"
+all_ssh_options="-o ConnectTimeout=30"
 all_omit_build=(secrets/ipfs)
 
 baseunits=(base docker mtail)
