@@ -66,7 +66,7 @@ find_units() {
 }
 
 resolve_pattern() {
-  local hosts=${provsn_hosts[@]}
+  local hosts=(${provsn_hosts[@]})
   [ ! -z "$1" ] && [ "$1" != "all" ] && hosts=($1)
   printf %s\\n "${hosts[@]}"
 }
@@ -185,7 +185,10 @@ exec)
   provsn_exec "$(resolve_pattern "$2")" "$3"
   ;;
 units)
-  printf %s\\n "$(find_units)"
+  host="$(resolve_pattern "$2")" lookup units
+  ;;
+hosts)
+  resolve_pattern "$2"
   ;;
 "")
   provsn_usage
