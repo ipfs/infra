@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $PROVSN_TRACE ]] && set -x
 
+# deps: bash ssh parallel readlink dirname find xargs sed awk
+
 provsn_template() {
   local src="$1"
   local dest="$2"
