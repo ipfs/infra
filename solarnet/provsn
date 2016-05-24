@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-set -e
+set -eo pipefail; [[ $PROVSN_TRACE ]] && set -x
 
 provsn_template() {
   local src="$1"
