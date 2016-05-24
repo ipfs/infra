@@ -51,6 +51,8 @@ fi
 
 mkdir -p "$target/logs" "$target/progs"
 cp "progs/nginx.mtail" "$target/progs/nginx.mtail"
+# XXX workaround until mtail can properly reload programs
+restart=1
 
 if [ "restart$restart" == "restart1" ]; then
   echo "$host: mtail restarting"
