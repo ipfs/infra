@@ -38,7 +38,7 @@ eval $(parse_yaml roles/cjdns/defaults/main.yml)
 eval $(parse_yaml secrets_plaintext/secrets.yml)
 
 hosts=$(ansible $1 --list-hosts)
-port=$(echo $cjdns_udp_interfaces_bind | cut -d':' -f2)
+port=$(echo $cjdns_udp4_interface_bind | cut -d':' -f2)
 
 eval "password=\$cjdns_authorized_passwords""_$2"
 [ -z "$password" ] && echo "unknown password: $2" && exit 1
