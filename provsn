@@ -102,7 +102,7 @@ provsn_build() {
   echo "$host: build"
 
   rm -rf "$provsn_root/.build/$host"
-  mkdir "$provsn_root/.build/$host"
+  mkdir -p "$provsn_root/.build/$host"
   cp -a "$0" env.sh "$provsn_root/.build/$host/"
   echo "$host" > "$provsn_root/.build/$host/host"
 
