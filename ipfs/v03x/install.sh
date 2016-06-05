@@ -18,7 +18,7 @@ if [ ! -z "$(docker ps -f status=running | grep "ipfs_v03x:" || true)" ]; then
 fi
 
 if [ "ref$ref" != "ref$actual_ref" ]; then
-  echo "$host: ref changed from $actual_ref to $ref"
+  echo "ref changed from $actual_ref to $ref"
   restart=1
 fi
 
@@ -27,22 +27,22 @@ if [ -z "$(docker images -q ipfs_v03x:$ref)" ]; then
 fi
 
 if [ ! -z "$(git diff "$target/Dockerfile" "Dockerfile" || echo "new")" ]; then
-  echo "$host: ipfs_v03x dockerfile changed"
+  echo "ipfs_v03x dockerfile changed"
   rebuild=1
 fi
 
 if [ ! -z "$(git diff "$target/docker.opts" "out/ipfs_v03x.opts" || echo "new")" ]; then
-  echo "$host: ipfs_v03x docker.opts changed"
+  echo "ipfs_v03x docker.opts changed"
   restart=1
 fi
 
 if [ ! -z "$(git diff "$target/config" "out/ipfs_v03x.config" || echo "new")" ]; then
-  echo "$host: ipfs_v03x config changed"
+  echo "ipfs_v03x config changed"
   restart=1
 fi
 
 if [ "rebuild$rebuild" == "rebuild1" ]; then
-  echo "$host: ipfs_v03x rebuilding"
+  echo "ipfs_v03x rebuilding"
   [ -d "$target/src/.git" ] || git clone -q $(lookup ipfs_v03x_git) "$target/src"
   git --git-dir="$target/src/.git" remote set-url origin $(lookup ipfs_v03x_git)
   git --git-dir="$target/src/.git" fetch -q --all
@@ -50,7 +50,7 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   cp Dockerfile "$target/src"
   rm "$target/src/.dockerignore"
   docker build -t "ipfs_v03x:$ref" "$target/src" >/dev/null
-  echo "$host: ipfs_v03x docker image changed"
+  echo "ipfs_v03x docker image changed"
   restart=1
 fi
 
@@ -64,14 +64,14 @@ fi
 cp "out/ipfs_v03x.config" "$repo/config"
 
 if [ "restart$restart" == "restart1" ]; then
-  echo "$host: ipfs_v03x restarting"
+  echo "ipfs_v03x restarting"
   if [ "running$running" == "running1" ]; then
     docker stop "ipfs_v03x" >/dev/null || true
     docker rm -f "ipfs_v03x" >/dev/null || true
   fi
   docker run $(cat out/ipfs_v03x.opts) >/dev/null
 elif [ "running$running" == "running0" ]; then
-  echo "$host: ipfs_v03x starting"
+  echo "ipfs_v03x starting"
   docker run $(cat out/ipfs_v03x.opts) >/dev/null
 fi
 

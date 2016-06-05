@@ -83,7 +83,7 @@ provsn_upload() {
   tar -c -C "$provsn_root/.build/$host" . |
     ssh $(lookup ssh_options) $(lookup ssh) \
       "rm -rf /opt/provsn && mkdir /opt/provsn && tar -x -C /opt/provsn"
-  echo "upload success"
+  echo "$host: upload success"
 }
 
 provsn_exec() {
@@ -93,7 +93,7 @@ provsn_exec() {
   echo "$host: exec $cmd"
   ssh $(lookup ssh_options) $(lookup ssh) \
     "cd /opt/provsn && $cmd | awk '{print \"$host: \" \$0}' /dev/stdin"
-  echo "exec success"
+  echo "$host: exec success"
 }
 
 provsn_build() {
@@ -120,7 +120,7 @@ provsn_build() {
     fi
   done
 
-  provsn_root="$provsn_root/.build/$host" provsn_run build.sh
+  provsn_root="$provsn_root/.build/$host" provsn_run build.sh | awk "{print \"$host: \" \$0}"
   echo "$host: build success"
 }
 
@@ -131,7 +131,7 @@ provsn_run() {
 
   for unit in $(lookup units); do
     if [ -x "$provsn_root/$unit/$script" ]; then
-      echo "$host: $unit $script"
+      echo "$unit $script"
       (cd "$provsn_root/$unit" && . "$script")
     fi
   done

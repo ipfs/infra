@@ -18,7 +18,7 @@ if [ ! -z "$(docker ps -f status=running | grep "ipfs:" || true)" ]; then
 fi
 
 if [ "ref$ref" != "ref$actual_ref" ]; then
-  echo "$host: ref changed from $actual_ref to $ref"
+  echo "ref changed from $actual_ref to $ref"
   restart=1
 fi
 
@@ -27,23 +27,23 @@ if [ -z "$(docker images -q ipfs:$ref)" ]; then
 fi
 
 if [ ! -z "$(git diff "$target/docker.opts" "out/ipfs.opts" || echo "new")" ]; then
-  echo "$host: ipfs docker.opts changed"
+  echo "ipfs docker.opts changed"
   restart=1
 fi
 
 if [ ! -z "$(git diff "$target/config" "out/ipfs.config" || echo "new")" ]; then
-  echo "$host: ipfs config changed"
+  echo "ipfs config changed"
   restart=1
 fi
 
 if [ "rebuild$rebuild" == "rebuild1" ]; then
-  echo "$host: ipfs rebuilding"
+  echo "ipfs rebuilding"
   [ -d "$target/src/.git" ] || git clone -q $(lookup ipfs_git) "$target/src"
   git --git-dir="$target/src/.git" remote set-url origin $(lookup ipfs_git)
   git --git-dir="$target/src/.git" fetch -q --all
   git --git-dir="$target/src/.git" --work-tree="$target/src" reset -q --hard "$ref"
   docker build -t "ipfs:$ref" "$target/src" >/dev/null
-  echo "$host: ipfs docker image changed"
+  echo "ipfs docker image changed"
   restart=1
 fi
 
@@ -57,14 +57,14 @@ fi
 cp "out/ipfs.config" "$repo/config"
 
 if [ "restart$restart" == "restart1" ]; then
-  echo "$host: ipfs restarting"
+  echo "ipfs restarting"
   if [ "running$running" == "running1" ]; then
     docker stop "ipfs" >/dev/null || true
     docker rm -f "ipfs" >/dev/null || true
   fi
   docker run $(cat out/ipfs.opts) >/dev/null
 elif [ "running$running" == "running0" ]; then
-  echo "$host: ipfs starting"
+  echo "ipfs starting"
   docker run $(cat out/ipfs.opts) >/dev/null
 fi
 

@@ -24,29 +24,29 @@ if [ -z "$(docker images -q mtail:$ref)" ]; then
 fi
 
 if [ ! -z "$(git diff "$target/Dockerfile" "Dockerfile" || echo "new")" ]; then
-  echo "$host: mtail dockerfile changed"
+  echo "mtail dockerfile changed"
   rebuild=1
   restart=1
 fi
 
 if [ ! -z "$(git diff "$target/docker.opts" "docker.opts" || echo "new")" ]; then
-  echo "$host: mtail docker.opts changed"
+  echo "mtail docker.opts changed"
   restart=1
 fi
 
 if [ ! -z "$(git diff "$target/progs/nginx.mtail" "progs/nginx.mtail" || echo "new")" ]; then
-  echo "$host: mtail nginx.mtail changed"
+  echo "mtail nginx.mtail changed"
   restart=1
 fi
 
 if [ "rebuild$rebuild" == "rebuild1" ]; then
-  echo "$host: mtail rebuilding"
+  echo "mtail rebuilding"
   mkdir -p src/
   git clone -q $(lookup mtail_git) "src/mtail"
   git --work-tree="src/mtail" --git-dir="src/mtail/.git" reset -q --hard "$ref"
   cp Dockerfile "src/mtail"
   docker build -t "mtail:$ref" "src/mtail" >/dev/null
-  echo "$host: mtail docker image changed"
+  echo "mtail docker image changed"
 fi
 
 mkdir -p "$target/logs" "$target/progs"
@@ -55,14 +55,14 @@ cp "progs/nginx.mtail" "$target/progs/nginx.mtail"
 restart=1
 
 if [ "restart$restart" == "restart1" ]; then
-  echo "$host: mtail restarting"
+  echo "mtail restarting"
   if [ "running$running" == "running1" ]; then
     docker stop "mtail" >/dev/null || true
     docker rm -f "mtail" >/dev/null || true
   fi
   docker run $(cat docker.opts) >/dev/null
 elif [ "running$running" == "running0" ]; then
-  echo "$host: mtail starting"
+  echo "mtail starting"
   docker run $(cat docker.opts) >/dev/null
 fi
 
