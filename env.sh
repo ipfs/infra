@@ -8,7 +8,7 @@ provsn_groups=()
 all_ssh_options="-o ConnectTimeout=30"
 all_omit_build=(secrets/ipfs)
 
-baseunits=(base docker mtail)
+baseunits=(base docker nginx mtail)
 gatewayunits=(ipfs ipfs/v03x ipfs/multireq secrets/ipfs)
 storageunits=(ipfs secrets/ipfs)
 
