@@ -82,7 +82,7 @@ provsn_upload() {
   echo "$host: upload"
   tar -c -C "$provsn_root/.build/$host" . |
     ssh $(lookup ssh_options) $(lookup ssh) \
-      "rm -rf /opt/provsn && mkdir -p /opt/provsn && tar -x -C /opt/provsn"
+      "set -e && rm -rf /opt/provsn && mkdir -p /opt/provsn && tar -x -C /opt/provsn"
   echo "$host: upload success"
 }
 
@@ -92,8 +92,7 @@ provsn_exec() {
 
   echo "$host: exec $cmd"
   ssh $(lookup ssh_options) $(lookup ssh) \
-    "cd /opt/provsn && $cmd |& awk '{print \"$host: \" \$0}' /dev/stdin"
-  echo "$host: exec success"
+    "set -e && cd /opt/provsn && $cmd |& awk '{print \"$host: \" \$0}' /dev/stdin"
 }
 
 provsn_build() {
