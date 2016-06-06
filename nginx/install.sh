@@ -9,8 +9,9 @@ rebuild=0
 reload=0
 restart=0
 
+image=$(lookup nginx_image)
 ref=$(lookup nginx_ref | head -c 7)
-actual_ref=$(docker ps --format '{{.Image}}' | grep "nginx:" | cut -d':' -f2 || true)
+actual_ref=$(docker ps --format '{{.Image}}' | grep "$image:" | cut -d':' -f2 || true)
 
 if [ ! -z "$(docker ps -f status=running | grep "nginx:" || true)" ]; then
   running=1
@@ -21,7 +22,7 @@ if [ "ref$ref" != "ref$actual_ref" ]; then
   restart=1
 fi
 
-if [ -z "$(docker images -q nginx:$ref)" ]; then
+if [ -z "$(docker images -q $images:$ref)" ]; then
   rebuild=1
 fi
 
@@ -37,7 +38,7 @@ fi
 
 if [ "rebuild$rebuild" == "rebuild1" ]; then
   echo "nginx pulling image"
-  docker pull "nginx:$ref" >/dev/null
+  docker pull "$image:$ref" >/dev/null
   echo "nginx docker image changed"
   restart=1
 fi
