@@ -3,7 +3,7 @@ MAINTAINER Lars Gierth <lgierth@ipfs.io>
 
 EXPOSE 3903
 
-ENV GO_VERSION 1.5.3-r0
+ENV GO_VERSION 1.5.4-r0
 ENV GOPATH     /go
 ENV PATH       /go/bin:$PATH
 ENV SRC_PATH   /go/src/github.com/google/mtail
