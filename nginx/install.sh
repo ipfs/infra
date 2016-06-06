@@ -18,7 +18,7 @@ if [ ! -z "$(docker ps -f status=running | grep "nginx:" || true)" ]; then
 fi
 
 if [ "ref$ref" != "ref$actual_ref" ]; then
-  echo "ref changed from [$actual_ref] to [$ref]"
+  echo "nginx ref changed from [$actual_ref] to [$ref]"
   restart=1
 fi
 
