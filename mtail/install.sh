@@ -23,18 +23,18 @@ if [ -z "$(docker images -q mtail:$ref)" ]; then
   rebuild=1
 fi
 
-if [ ! -z "$(git diff "$target/Dockerfile" "Dockerfile" || echo "new")" ]; then
+if [ ! -z "$(git diff "$target/Dockerfile" "Dockerfile" 2>&1 || echo "new")" ]; then
   echo "mtail dockerfile changed"
   rebuild=1
   restart=1
 fi
 
-if [ ! -z "$(git diff "$target/docker.opts" "docker.opts" || echo "new")" ]; then
+if [ ! -z "$(git diff "$target/docker.opts" "docker.opts" 2>&1 || echo "new")" ]; then
   echo "mtail docker.opts changed"
   restart=1
 fi
 
-if [ ! -z "$(git diff "$target/progs/nginx.mtail" "progs/nginx.mtail" || echo "new")" ]; then
+if [ ! -z "$(git diff "$target/progs/nginx.mtail" "progs/nginx.mtail" 2>&1 || echo "new")" ]; then
   echo "mtail nginx.mtail changed"
   restart=1
 fi
