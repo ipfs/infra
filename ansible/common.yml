@@ -7,4 +7,3 @@
   roles:
     - common
     - docker
-    - nginx
