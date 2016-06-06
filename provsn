@@ -92,7 +92,7 @@ provsn_exec() {
 
   echo "$host: exec $cmd"
   ssh $(lookup ssh_options) $(lookup ssh) \
-    "cd /opt/provsn && $cmd | awk '{print \"$host: \" \$0}' /dev/stdin"
+    "cd /opt/provsn && $cmd |& awk '{print \"$host: \" \$0}' /dev/stdin"
   echo "$host: exec success"
 }
 
