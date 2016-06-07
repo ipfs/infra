@@ -9,6 +9,8 @@ all_ipfs_swarm_utp=4002
 all_ipfs_api=5001
 all_ipfs_gateway=8080
 
+biham_ipfs_ref=0ab55773395ba12e4ba7af852857268eb8750763
+
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
 # TODO: move to /mnt/data/ipfs_v03x
