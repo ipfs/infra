@@ -1,28 +1,4 @@
 ---
-- name: server_key
-  copy:
-    dest: /opt/nginx/certs/ipfs.io.key
-    content: "{{ lookup('file', 'secrets_plaintext/ipfs.io.key') }}"
-  notify:
-    - reload nginx
-- name: server_cert
-  copy:
-    dest: /opt/nginx/certs/ipfs.io.crt
-    content: "{{ lookup('file', 'secrets_plaintext/ipfs.io.crt') }}"
-  notify:
-    - reload nginx
-- name: trustchain
-  copy:
-    dest: /opt/nginx/certs/ipfs.io.trustchain.crt
-    content: "{{ lookup('file', 'secrets_plaintext/ipfs.io.trustchain.crt') }}"
-  notify:
-    - reload nginx
-- name: dhparam
-  copy:
-    dest: /opt/nginx/certs/dhparam.pem
-    content: "{{ lookup('file', 'secrets_plaintext/dhparam.pem') }}"
-  notify:
-    - reload nginx
 - name: install nginx config
   template:
     src: nginx_ipfs_gateway.conf.j2

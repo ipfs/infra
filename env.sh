@@ -6,10 +6,10 @@ provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux bih
 provsn_groups=()
 
 all_ssh_options="-o ConnectTimeout=30"
-all_omit_build=(secrets/ipfs)
+all_omit_build=(secrets/ipfs secrets/cjdns secrets/ssl)
 
 baseunits=(base docker nginx mtail)
-gatewayunits=(ipfs ipfs/v03x ipfs/multireq secrets/ipfs)
+gatewayunits=(ipfs ipfs/v03x ipfs/multireq secrets/ipfs ssl secrets/ssl)
 storageunits=(ipfs secrets/ipfs)
 
 pluto_ssh="root@104.236.179.241"
