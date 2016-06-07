@@ -22,7 +22,7 @@ if [ "ref$ref" != "ref$actual_ref" ]; then
   restart=1
 fi
 
-if [ -z "$(docker images -q $images:$ref)" ]; then
+if [ -z "$(docker images -q $image:$ref)" ]; then
   rebuild=1
 fi
 
