@@ -52,4 +52,4 @@ deimos_ssh="root@46.101.230.158"
 deimos_units=(${baseunits[@]})
 
 rigel_ssh="root@139.59.133.121"
-rigel_units=(${baseunits[@]})
+rigel_units=(${baseunits[@]} ssl secrets/ssl)
