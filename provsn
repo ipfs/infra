@@ -92,7 +92,7 @@ provsn_exec() {
 
   echo "$host: exec $cmd"
   ssh $(lookup ssh_options) $(lookup ssh) \
-    "set -e && cd /opt/provsn && $cmd |& awk '{print \"$host: \" \$0}' /dev/stdin"
+    "set -e && cd /opt/provsn && PROVSN_TRACE=$PROVSN_TRACE $cmd |& awk '{print \"$host: \" \$0}' /dev/stdin"
 }
 
 provsn_build() {
@@ -131,7 +131,8 @@ provsn_run() {
   for unit in $(lookup units); do
     if [ -x "$provsn_root/$unit/$script" ]; then
       echo "$unit $script"
-      (cd "$provsn_root/$unit" && . "$script")
+      cd "$provsn_root/$unit" && . "$script"
+      cd "$provsn_root"
     fi
   done
 }
