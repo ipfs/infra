@@ -10,8 +10,8 @@ all_ipfs_api=5001
 all_ipfs_gateway=8080
 
 biham_ipfs_ref=0ab55773395ba12e4ba7af852857268eb8750763
-mercury_ipfs_ref=0e81124105660e8d714e5151b394d378b39ca591
-neptune_ipfs_ref=0e81124105660e8d714e5151b394d378b39ca591
+mercury_ipfs_ref=c0e971108df8241009b293c807cdb1c9ca6acf15
+neptune_ipfs_ref=c0e971108df8241009b293c807cdb1c9ca6acf15
 
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
