@@ -9,7 +9,12 @@ all_ipfs_swarm_utp=4002
 all_ipfs_api=5001
 all_ipfs_gateway=8080
 
+# storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=0ab55773395ba12e4ba7af852857268eb8750763
+pollux_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
+nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
+
+# master canaries
 mercury_ipfs_ref=c0e971108df8241009b293c807cdb1c9ca6acf15
 neptune_ipfs_ref=c0e971108df8241009b293c807cdb1c9ca6acf15
 
