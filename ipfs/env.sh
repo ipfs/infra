@@ -15,8 +15,8 @@ pollux_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # master canaries
-mercury_ipfs_ref=c0e971108df8241009b293c807cdb1c9ca6acf15
-neptune_ipfs_ref=c0e971108df8241009b293c807cdb1c9ca6acf15
+mercury_ipfs_ref=a4801ed024b39fa3cfb64ac40fdf0499569d89a8
+neptune_ipfs_ref=a4801ed024b39fa3cfb64ac40fdf0499569d89a8
 
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
