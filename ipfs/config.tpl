@@ -52,7 +52,7 @@
     "Last": ""
   },
   "Gateway": {
-    "PathPrefixes": ["/blog"],
+    "PathPrefixes": ["/blog", "/refs"],
     "RootRedirect": "",
     "Writable": false,
     "HTTPHeaders": {
