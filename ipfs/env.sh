@@ -14,9 +14,9 @@ biham_ipfs_ref=0ab55773395ba12e4ba7af852857268eb8750763
 pollux_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
-# master canaries
-mercury_ipfs_ref=a4801ed024b39fa3cfb64ac40fdf0499569d89a8
-neptune_ipfs_ref=a4801ed024b39fa3cfb64ac40fdf0499569d89a8
+# canaries
+mercury_ipfs_ref=62c986d5c28810312a2e5326da415ddcc51a5cc1
+neptune_ipfs_ref=62c986d5c28810312a2e5326da415ddcc51a5cc1
 
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
