@@ -29,13 +29,13 @@
                 },
 {% endfor %}
 {% for hostname in cjdns_identities.keys() %}
-    {% if hostname != inventory_hostname %}
+{% if hostname != inventory_hostname %}
                 "{{ hostvars[hostname].ansible_ssh_host }}:54321": {
                     "publicKey": "{{ cjdns_identities[hostname].public_key }}",
                     "password": "{{ cjdns_authorized_passwords.solarnet }}",
                     "peerName": "{{ hostname }}.i.ipfs.io"
                 },
-    {% endif %}
+{% endif %}
 {% endfor %}
             }
         },
