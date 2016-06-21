@@ -6,7 +6,7 @@
 
 - name: clone cjdns.git
   git:
-    repo: https://github.com/hyperboria/cjdns.git
+    repo: "{{ cjdns_repo }}"
     dest: /opt/cjdns
     version: "{{ cjdns_ref }}"
     force: yes

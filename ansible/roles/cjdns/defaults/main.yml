@@ -1,5 +1,6 @@
 ---
-cjdns_ref: 6047d5450a26cc2a55a126e237a65eaccf9e5d47
+cjdns_repo: https://github.com/cjdelisle/cjdns.git
+cjdns_ref: 116fa2aff419950403eba3530c4e2d2e63db8819
 cjdns_admin_address: 127.0.0.1
 cjdns_admin_port: 11234
 cjdns_admin_password: NONE
