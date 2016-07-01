@@ -41,6 +41,11 @@ scrape_configs:
           host: '{{ hostname }}'
           network: v04x
 {% endfor %}
+      - targets:
+          - '[{{ cjdns_identities.biham.ipv6 }}]:6000'
+        labels:
+          host: biham-npm
+          network: v04x
 
   - job_name: 'mtail'
     metrics_path: '/metrics'
