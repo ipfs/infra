@@ -10,8 +10,8 @@ all_ipfs_api=5001
 all_ipfs_gateway=8080
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
-biham_ipfs_ref=0ab55773395ba12e4ba7af852857268eb8750763
-pollux_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
+biham_ipfs_ref=f3d5fe6c6518b44d82c5e77cb34e7f6f0168d82d
+pollux_ipfs_ref=f3d5fe6c6518b44d82c5e77cb34e7f6f0168d82d
 nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # canaries (@whyrusleeping)
