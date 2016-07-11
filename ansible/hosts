@@ -16,7 +16,6 @@ phobos      ansible_ssh_host=104.131.3.162
 
 [util]
 deimos      ansible_ssh_host=46.101.230.158
-rigel       ansible_ssh_host=139.59.133.121
 
 [storage]
 pollux      ansible_ssh_host=5.9.59.34

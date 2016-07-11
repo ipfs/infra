@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal phobos deimos rigel)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal phobos deimos)
 # provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal)
 # provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 provsn_groups=()
@@ -63,7 +63,3 @@ phobos_units=(${baseunits[@]})
 # digitalocean-fra1
 deimos_ssh="root@46.101.230.158"
 deimos_units=(${baseunits[@]})
-
-# digitalocean-fra1
-rigel_ssh="root@139.59.133.121"
-rigel_units=(${baseunits[@]} ssl secrets/ssl)
