@@ -9,17 +9,17 @@ all_ipfs_swarm_utp=4002
 all_ipfs_api=5001
 all_ipfs_gateway=8080
 
+pluto_ipfs_ref=bc6d71f4cdea90f61b0c9f2d1a68c6474e4c65b9
+
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=f3d5fe6c6518b44d82c5e77cb34e7f6f0168d82d
-pollux_ipfs_ref=f3d5fe6c6518b44d82c5e77cb34e7f6f0168d82d
+pollux_ipfs_ref=bc6d71f4cdea90f61b0c9f2d1a68c6474e4c65b9
 nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # canaries (@whyrusleeping)
+# XXX should one of these be a gateway?
 mercury_ipfs_ref=62c986d5c28810312a2e5326da415ddcc51a5cc1
 neptune_ipfs_ref=62c986d5c28810312a2e5326da415ddcc51a5cc1
-
-# datastore experiment (@kubuxu)
-pluto_ipfs_ref=ba147e2717e5422e2e441821bda7748c32900432
 
 all_ipfs_v03x_git=git://github.com/ipfs/go-ipfs
 all_ipfs_v03x_ref=b21cff6f3efacb5578a2521e2ff27b4c10678c03
