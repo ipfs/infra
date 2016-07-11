@@ -10,6 +10,8 @@ all_ipfs_api=5001
 all_ipfs_gateway=8080
 
 pluto_ipfs_ref=bc6d71f4cdea90f61b0c9f2d1a68c6474e4c65b9
+jupiter_ipfs_ref=bc6d71f4cdea90f61b0c9f2d1a68c6474e4c65b9
+saturn_ipfs_ref=bc6d71f4cdea90f61b0c9f2d1a68c6474e4c65b9
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=f3d5fe6c6518b44d82c5e77cb34e7f6f0168d82d
