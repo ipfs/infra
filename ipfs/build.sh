@@ -20,4 +20,5 @@ cat > out/ipfs.opts <<-EOF
 -v $(lookup ipfs_repo):/data/ipfs
 ipfs:$(lookup ipfs_ref | head -c 7)
 --enable-gc
+--migrate=true
 EOF
