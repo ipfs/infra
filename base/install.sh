@@ -2,14 +2,14 @@
 
 set -e
 
-# dir="$HOME/.ssh"
-# if [ ! -z "$(git diff "$dir/authorized_keys" authorized_keys || echo new)" ]; then
-#   echo "$host: $unit authorized_keys changed"
-#   mkdir -p "$dir"
-#   chmod 700 "$dir"
-#   cp authorized_keys "$dir/authorized_keys"
-#   chmod 400 "$dir/authorized_keys"
-# fi
+dir="$HOME/.ssh"
+if [ ! -z "$(git diff "$dir/authorized_keys" authorized_keys || echo new)" ]; then
+  echo "$host: $unit authorized_keys changed"
+  mkdir -p "$dir"
+  chmod 700 "$dir"
+  cp authorized_keys "$dir/authorized_keys"
+  chmod 400 "$dir/authorized_keys"
+fi
 
 pkgs=()
 which htop >/dev/null || pkgs+=(htop)
