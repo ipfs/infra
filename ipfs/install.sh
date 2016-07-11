@@ -51,22 +51,17 @@ fi
 
 if [ ! -f "$repo/config" ]; then
   mkdir -p "$repo"
-  docker run -i -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" sh -c 'ipfs init --bits 2048'
   chown -R 1000:users "$repo"
+  docker run -i -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" -c 'ipfs init --bits 2048'
   restart=1
 fi
 
 cp "out/ipfs.config" "$repo/config"
 
-if [ "restart$restart" == "restart1" ]; then
-  echo "ipfs restarting"
-  if [ "running$running" == "running1" ]; then
-    docker stop "ipfs" >/dev/null || true
-    docker rm -f "ipfs" >/dev/null || true
-  fi
-  docker run $(cat out/ipfs.opts) >/dev/null
-elif [ "running$running" == "running0" ]; then
-  echo "ipfs starting"
+if (( ("restart$restart" == "restart1") || ("running$running" == "running0") )); then
+  echo "ipfs (re)starting"
+  docker stop "ipfs" 2>&1 >/dev/null || true
+  docker rm -f "ipfs" 2>&1 >/dev/null || true
   docker run $(cat out/ipfs.opts) >/dev/null
 fi
 
