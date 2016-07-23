@@ -30,7 +30,7 @@ all_ipfs_v03x_swarm_utp=14002
 
 all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
-all_ipfs_gc_capacity=30G
+all_ipfs_gc_capacity=60G
 
 pollux_ipfs_gc_period=0s
 biham_ipfs_gc_period=0s
