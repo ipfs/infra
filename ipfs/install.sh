@@ -6,15 +6,15 @@ target="/opt/ipfs"
 repo=$(lookup ipfs_repo)
 api_port=$(lookup ipfs_api)
 
-running=0
 rebuild=0
 restart=0
 
 ref=$(lookup ipfs_ref | head -c 7)
 actual_ref=$(docker ps --format '{{.Image}}' | grep "ipfs:" | cut -d':' -f2 || true)
 
-if [ ! -z "$(docker ps -f status=running | grep "ipfs:" || true)" ]; then
-  running=1
+if [ -z "$(docker ps -f status=running | grep "ipfs:" || true)" ]; then
+  echo "daemon not running"
+  restart=1
 fi
 
 if [ "ref$ref" != "ref$actual_ref" ]; then
@@ -23,6 +23,7 @@ if [ "ref$ref" != "ref$actual_ref" ]; then
 fi
 
 if [ -z "$(docker images -q ipfs:$ref)" ]; then
+  echo "docker image doesn't exist yet"
   rebuild=1
 fi
 
@@ -58,7 +59,7 @@ fi
 
 cp "out/ipfs.config" "$repo/config"
 
-if (( ("restart$restart" == "restart1") || ("running$running" == "running0") )); then
+if [ "restart$restart" == "restart1" ]; then
   echo "ipfs (re)starting"
   docker stop "ipfs" 2>&1 >/dev/null || true
   docker rm -f "ipfs" 2>&1 >/dev/null || true

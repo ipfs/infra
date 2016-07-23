@@ -14,21 +14,6 @@ scrape_configs:
         labels:
           host: '{{ hostname }}'
           network: v04x
-      - targets:
-          - '[{{ cjdns_identities[hostname].ipv6 }}]:15001'
-        labels:
-          host: '{{ hostname }}'
-          network: v03x
-{% endfor %}
-
-  - job_name: 'multireq'
-    metrics_path: '/metrics'
-    target_groups:
-{% for hostname in gateway_targets %}
-      - targets:
-          - '[{{ cjdns_identities[hostname].ipv6 }}]:8041'
-        labels:
-          host: '{{ hostname }}'
 {% endfor %}
 
   - job_name: 'storage'

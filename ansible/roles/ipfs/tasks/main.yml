@@ -7,12 +7,10 @@
   notify: reload nginx
 
 
-# restart the v04x and v03x containers every 120 minutes, with a 33 % chance
-- copy:
-    src: files/maybe-restart.sh
-    dest: /ipfs/maybe-restart.sh
-    mode: 755
 # XXX migration
+- file:
+    path: /ipfs/maybe-restart.sh
+    state: absent
 - cron:
     state: absent
     name: maybe-restart
@@ -20,11 +18,14 @@
     user: root
   when: "inventory_hostname in groups[gateway_group]"
 - cron:
-    job: /ipfs/maybe-restart.sh 33 docker restart ipfs_v03x
-    minute: 25
-    hour: "*/2"
-    state: present
+    state: absent
     name: maybe-restart
     cron_file: ipfs-v03x-maybe-restart
     user: root
   when: "inventory_hostname in groups[gateway_group]"
+- file:
+    path: /etc/cron.d/ipfs-maybe-restart
+    state: absent
+- file:
+    path: /etc/cron.d/ipfs-v03x-maybe-restart
+    state: absent
