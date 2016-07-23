@@ -19,28 +19,6 @@ server {
     }
 }
 
-# daviddias registry-mirror
-# XXX temporary
-server {
-    server_name api-npm.ipfs.local;
-    access_log /var/log/nginx/access.log mtail;
-    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:6000;
-
-    location / {
-{% for hostname in cjdns_identities.keys() %}
-        allow {{ cjdns_identities[hostname].ipv6 }};
-{% endfor %}
-{% for addr in metrics_allowlist %}
-        allow {{ addr }};
-{% endfor %}
-        allow ::1;
-        deny all;
-        proxy_pass http://127.0.0.1:6000;
-        proxy_set_header Host $host;
-        proxy_read_timeout 1800s;
-    }
-}
-
 # gateway
 server {
     server_name gateway.ipfs.local;
