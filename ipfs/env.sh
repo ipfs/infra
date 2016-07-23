@@ -32,19 +32,6 @@ all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
 all_ipfs_gc_capacity=30G
 
-earth_ipfs_swarm_tcp=14001
-earth_ipfs_swarm_utp=14002
-earth_ipfs_v03x_swarm_tcp=4001
-earth_ipfs_v03x_swarm_utp=4002
-saturn_ipfs_swarm_tcp=14001
-saturn_ipfs_swarm_utp=14002
-saturn_ipfs_v03x_swarm_tcp=4001
-saturn_ipfs_v03x_swarm_utp=4002
-venus_ipfs_swarm_tcp=14001
-venus_ipfs_swarm_utp=14002
-venus_ipfs_v03x_swarm_tcp=4001
-venus_ipfs_v03x_swarm_utp=4002
-
 pollux_ipfs_gc_period=0s
 biham_ipfs_gc_period=0s
 nihal_ipfs_gc_period=0s
