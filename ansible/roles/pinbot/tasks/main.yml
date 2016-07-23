@@ -45,12 +45,3 @@
     image: "pinbot:{{ pinbot_ref }}"
     state: restarted
   when: pinbot_config.changed
-
-# XXX migration
-- file:
-    path: /opt/pinbot_v03x
-    state: absent
-- docker:
-    name: pinbot_v03x
-    image: "pinbot:{{ pinbot_ref }}"
-    state: absent
