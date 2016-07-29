@@ -67,9 +67,13 @@ find_units() {
 }
 
 resolve_pattern() {
-  local hosts=(${provsn_hosts[@]})
-  [ ! -z "$1" ] && [ "$1" != "all" ] && hosts=($1)
-  printf %s\\n "${hosts[@]}"
+  local pattern="$1"
+  test -n "$pattern" || pattern="all"
+  if test "$pattern" = "all"; then
+    printf %s\\n "${provsn_hosts[@]}"
+  else
+    printf %s\\n "${provsn_hosts[@]}" | grep -x "$pattern"
+  fi
 }
 
 provsn_usage() {
@@ -190,7 +194,7 @@ units)
   host="$2" lookup units
   ;;
 hosts)
-  echo $2
+  resolve_pattern "$2"
   ;;
 "")
   provsn_usage
