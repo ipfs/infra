@@ -152,22 +152,31 @@ unit=
 
 test -z "$PROVSN_JOBS" && PROVSN_JOBS=4
 
-hostpattern="$2"
-test -z "$2" && hostpattern="all"
-hosts="$(resolve_pattern "$hostpattern")"
-if test 1 -lt "$(printf %s\\n "${hosts[@]}" | wc -l)"; then
-  printf %s\\n "${hosts[@]}" |
-    parallel -j$PROVSN_JOBS --halt 1 --line-buffer --no-notice "$0" "$1" {} "'$3'"
-  exit 0
-fi
+# exits if no host matched
+# returns 1 if parallel did happen
+# returns 0 if it didn't
+provsn_in_parallel() {
+  hosts=`resolve_pattern "$2"`
+  test -z "$hosts" && echo "error: unknown host: $2" 1>&2 && exit 1
+  n=`printf %s\\\n "${hosts[@]}" | wc -l`
+  if test 1 -lt "$n"; then
+    printf %s\\n "${hosts[@]}" \
+      | parallel -j$PROVSN_JOBS --halt 1 --line-buffer --no-notice "$0" "$1" {} "'$3'"
+    return 1
+  fi
+  return 0
+}
 
 case $1 in
 deploy)
+  provsn_in_parallel "$@" || exit 0
+
   provsn_build "$2"
   provsn_upload "$2"
   provsn_exec "$2" "./provsn run install.sh"
   ;;
 build)
+  provsn_in_parallel "$@" || exit 0
   # creates host's build dir
   # copies provsn and env.sh files to build dirs
   # put the host name somewhere in the build dirs
@@ -175,10 +184,12 @@ build)
   provsn_build "$2"
   ;;
 upload)
+  provsn_in_parallel "$@" || exit 0
   # uploads each host's build dir
   provsn_upload "$2"
   ;;
 install)
+  provsn_in_parallel "$@" || exit 0
   # execs provsn run install.sh
   provsn_exec "$2" "./provsn run install.sh"
   ;;
@@ -188,6 +199,7 @@ run)
   provsn_run "$2"
   ;;
 exec)
+  provsn_in_parallel "$@" || exit 0
   provsn_exec "$2" "$3"
   ;;
 units)
@@ -200,8 +212,9 @@ hosts)
   provsn_usage
   ;;
 *)
-  { echo "Unknown command: $1";
+  { echo "error: unknown command: $1";
     echo;
     provsn_usage; } 1>&2
+  exit 1
   ;;
 esac
