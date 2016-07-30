@@ -1,0 +1,3 @@
+[submodule "secrets_secure"]
+	path = secrets_secure
+	url = git@github.com:protocol/infrastructure-secrets.git
