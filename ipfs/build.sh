@@ -3,7 +3,7 @@
 set -e
 
 mkdir -p out/
-name=ipfs provsn_template "config.tpl" "out/ipfs.config"
+provsn_template "config.tpl" "out/ipfs.config"
 
 cat > out/ipfs.opts <<-EOF
 -d

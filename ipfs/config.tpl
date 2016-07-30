@@ -13,11 +13,11 @@
   },
   "Addresses": {
     "Swarm": [
-      "/ip4/0.0.0.0/tcp/$(var $name'_swarm_tcp')",
-      "/ip6/::/tcp/$(var $name'_swarm_tcp')"
+      "/ip4/0.0.0.0/tcp/$(var ipfs_swarm_tcp)",
+      "/ip6/::/tcp/$(var ipfs_swarm_tcp)"
     ],
-    "API": "/ip4/127.0.0.1/tcp/$(var $name'_api')",
-    "Gateway": "/ip4/127.0.0.1/tcp/$(var $name'_gateway')"
+    "API": "/ip4/127.0.0.1/tcp/$(var ipfs_api)",
+    "Gateway": "/ip4/127.0.0.1/tcp/$(var ipfs_gateway)"
   },
   "Mounts": {
     "IPFS": "/ipfs",
