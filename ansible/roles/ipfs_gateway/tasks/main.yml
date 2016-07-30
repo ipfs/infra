@@ -1,7 +1,5 @@
 ---
-- name: install nginx config
-  template:
-    src: nginx_ipfs_gateway.conf.j2
-    dest: /opt/nginx/conf.d/ipfs_gateway.conf
-  notify:
-    - reload nginx
+# XXX migration
+- file:
+    path: /opt/nginx/conf.d/ipfs_gateway.conf
+    state: absent
