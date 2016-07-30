@@ -71,16 +71,3 @@ mkdir -p "$target"
 cp -a "out/ipfs.config" "$target/config"
 cp -a "out/ipfs.opts" "$target/docker.opts"
 rm -f "$target/Dockerfile"
-
-reload=0
-if [ ! -z "$(diff -Naur "/opt/nginx/conf.d/6-ipfs.conf" "out/6-ipfs.conf")" ]; then
-  echo "ipfs nginx config changed"
-  cp "out/6-ipfs.conf" "/opt/nginx/conf.d/6-ipfs.conf"
-  reload=1
-fi
-
-if [ "reload$reload" == "reload1" ]; then
-  echo "ipfs nginx reloading"
-  out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
-  echo $out | grep -v failed >/dev/null && echo $out && exit 1
-fi

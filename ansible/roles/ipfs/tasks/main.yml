@@ -1,5 +1,7 @@
 ---
-# XXX migration
-- file:
-    path: /opt/nginx/conf.d/ipfs.conf
-    state: absent
+# nginx vhost for :5001 and :8080 (api/gateway)
+- file: path=/opt/nginx/conf.d state=directory
+- template:
+    src: nginx_ipfs.conf.j2
+    dest: /opt/nginx/conf.d/ipfs.conf
+  notify: reload nginx
