@@ -1,5 +1,0 @@
----
-# XXX migration
-- file:
-    path: /opt/nginx/conf.d/ipfs.conf
-    state: absent
