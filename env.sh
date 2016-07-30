@@ -9,7 +9,7 @@ all_ssh_options="-o ConnectTimeout=30"
 all_omit_build=(secrets)
 
 baseunits=(secrets base docker nginx mtail)
-gatewayunits=(ipfs ssl)
+gatewayunits=(ipfs ipfs/gateway ssl)
 storageunits=(ipfs)
 
 # digitalocean-sfo1
