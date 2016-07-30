@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal phobos deimos)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham phobos deimos)
 # provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal)
 # provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 provsn_groups=()
