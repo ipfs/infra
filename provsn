@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $PROVSN_TRACE ]] && set -x
 
-# deps: bash ssh parallel readlink dirname find xargs sed awk
+# deps: parallel bash ssh jq readlink dirname find xargs sed awk uniq sort
 
 provsn_template() {
   local src="$1"
@@ -142,13 +142,27 @@ provsn_run() {
 }
 
 provsn_root=`pwd`
-provsn_units="$(find_units)"
+. "$provsn_root/env.sh"
 
-# printf %s\\n "$(find_units)"
-# exit 1
+find_units() {
+  local host=
+  local the_units=()
+  for host in ${provsn_hosts[@]}; do
+    for u in $(lookup units); do
+      the_units+=($u)
+    done
+  done
+  printf %s\\n ${the_units[@]} | sort | uniq
+}
 
-. env.sh
-for unit in ${provsn_units[@]}; do . "$unit/env.sh"; done
+provsn_units=`find_units`
+for unit in ${provsn_units[@]}; do
+  if [ -f "$unit/env.sh" ]; then
+    . "$unit/env.sh"
+  else
+    echo "skipping $unit"
+  fi
+done
 unit=
 
 test -z "$PROVSN_JOBS" && PROVSN_JOBS=4
