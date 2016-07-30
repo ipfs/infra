@@ -5,6 +5,7 @@ all_ssh_keys+=('ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvs4R6b65em07jLEgQwkz0/jLPx/V
 all_ssh_keys+=('ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDMOVSxmjuhRX9E3PLBYywtxpruvBWkkpCSNPxqPS4LHG91ZcVtIDyo79vKu9sy0/jSbZP5ysmiw7BXPgwObv6ZoZS0ay7mfthczKo/7cM/HaoNgPM0sKxjVW+m99y31B2UYZAkwciw3AsBahDrSEL4MZ00tF0jWMchMSQMOqI6A/8NSfdM/7XtCHXje6UxyPV5Il2DnPxzhgT5BgwndaB02yGwPxiYNw4OUbPJ7Tm7nS4yPHHHJIAQCQWRrvJPcSCe4BZ2ikVfVD/XkfwQW1uIylcfZxVyGLQ3Crmg5J+y9ZENRwU6BBMmA6ObzesfoY5O4A9RudgOiGUSIGG/+UUR whyrusleeping')
 all_ssh_keys+=('ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGjmBIHEnVszhvtgdD0RbiSK9+h+n1zCHQFVKrN5EVD6 lgierth-desktop')
 all_ssh_keys+=('ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK6NzDrOvUMqaQph0JsRK5DRnVqmajZHCcajWOiAnSjE lgierth-laptop')
+all_ssh_keys+=('ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJpebQMvIoun5RK3IZ/DaDgMqnLzgUCtwWlXMfxihGLO Kubuxu')
 
 pluto_cjdns_public_key="jxj2fuv4bluz0xwv6umul7w01vuugpdkprkncvuxdrqquqmjxb00.k"
 pluto_cjdns_ipv6="fc98:424c:b433:d7e2:7ee3:9541:73ff:2cdb"
