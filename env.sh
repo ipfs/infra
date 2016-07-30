@@ -6,11 +6,11 @@ provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux bih
 provsn_groups=()
 
 all_ssh_options="-o ConnectTimeout=30"
-all_omit_build=(secrets/ipfs secrets/cjdns secrets/ssl)
+all_omit_build=(secrets)
 
-baseunits=(base docker nginx mtail)
-gatewayunits=(ipfs secrets/ipfs ssl secrets/ssl)
-storageunits=(ipfs secrets/ipfs)
+baseunits=(secrets base docker nginx mtail)
+gatewayunits=(ipfs ssl)
+storageunits=(ipfs)
 
 # digitalocean-sfo1
 pluto_ssh="root@104.236.179.241"
