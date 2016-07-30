@@ -8,7 +8,7 @@ server {
 
     listen 80 default_server;
     listen [::]:80 default_server;
-    listen [$(var cjdns_ipv6)]:80 default_server;
+    listen [{{ cjdns_identities[inventory_hostname].ipv6 }}]:80 default_server;
 
     listen 443 default_server ssl;
     listen [::]:443 default_server ssl;
