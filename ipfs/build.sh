@@ -4,6 +4,7 @@ set -e
 
 mkdir -p out/
 provsn_template "config.tpl" "out/ipfs.config"
+provsn_template "nginx.conf" "out/6-ipfs.conf"
 
 cat > out/ipfs.opts <<-EOF
 -d
