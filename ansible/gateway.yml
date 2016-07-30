@@ -1,0 +1,10 @@
+---
+- hosts: gateway
+  vars:
+    gateway_group: gateway
+  pre_tasks:
+    - include_vars: secrets_plaintext/secrets.yml
+  handlers:
+    - include: roles/nginx/handlers/main.yml
+  roles:
+    - ipfs_gateway
