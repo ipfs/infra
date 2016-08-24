@@ -74,6 +74,10 @@ server {
     location ~ "^/ipfs/QmY7KEmJKpx7bNDQ2WfDJp2zdsvX1ATZKWd4AXAhDLCaBM" {
         return 451;
     }
+    # dmca takedown
+    location ~ "^/ipfs/QmZhpyoqRocNsZ6AWofbVcigiANcgnpUBbokB9qLipsGkU" {
+        return 451;
+    }
 
     location ~ "^/(ipfs|ipns|api)(/|$)" {
         proxy_set_header Host "";
