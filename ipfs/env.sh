@@ -16,8 +16,8 @@ nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # canaries (@whyrusleeping)
 # XXX should one of these be a gateway?
-mercury_ipfs_ref=685cd28dc829901768fe53053adaa8330728392c
-neptune_ipfs_ref=685cd28dc829901768fe53053adaa8330728392c
+mercury_ipfs_ref=813bcb641da3fc8f692f63b9b3c877ad22c8f9ba
+neptune_ipfs_ref=71a699ca09fcfe72d1c1ff866cc9ed67615dd227
 
 all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
