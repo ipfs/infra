@@ -9,7 +9,8 @@
     "Path": "/data/ipfs/datastore",
     "StorageGCWatermark": $(var ipfs_gc_watermark),
     "StorageMax": "$(var ipfs_gc_capacity)",
-    "Type": "leveldb"
+    "Type": "leveldb",
+    "BloomFilterSize": $(var ipfs_bloom_size)"
   },
   "Addresses": {
     "Swarm": [

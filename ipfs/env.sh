@@ -8,6 +8,7 @@ all_ipfs_swarm_tcp=4001
 all_ipfs_swarm_utp=4002
 all_ipfs_api=5001
 all_ipfs_gateway=8080
+all_ipfs_bloom_size=0
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=f3d5fe6c6518b44d82c5e77cb34e7f6f0168d82d
@@ -18,6 +19,10 @@ nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 # XXX should one of these be a gateway?
 mercury_ipfs_ref=8803a7628f1979d9b65b2775624bc805c451b7ed
 neptune_ipfs_ref=8803a7628f1979d9b65b2775624bc805c451b7ed
+
+# metrics test (@Kubuxu) - shouldn't matter after 2016-09-20
+pollux_ipfs_ref=b5fd41d4388ecb41600cb423209589771170450d
+pollux_ipfs_bloom_size=16777216 # 16MiB
 
 all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
