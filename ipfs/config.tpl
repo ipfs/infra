@@ -10,7 +10,7 @@
     "StorageGCWatermark": $(var ipfs_gc_watermark),
     "StorageMax": "$(var ipfs_gc_capacity)",
     "Type": "leveldb",
-    "BloomFilterSize": $(var ipfs_bloom_size)"
+    "BloomFilterSize": "$(var ipfs_bloom_size)"
   },
   "Addresses": {
     "Swarm": [
