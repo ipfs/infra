@@ -21,7 +21,7 @@ mercury_ipfs_ref=4dfafce47608173f85370b6b021d10ace368036a
 neptune_ipfs_ref=4dfafce47608173f85370b6b021d10ace368036a
 
 # metrics test (@Kubuxu) - shouldn't matter after 2016-09-20
-pollux_ipfs_ref=b5fd41d4388ecb41600cb423209589771170450d
+pollux_ipfs_ref=47d568cd0fadab8c77141c730609ed86bb3df686
 pollux_ipfs_bloom_size=16777216 # 16MiB
 
 all_ipfs_gc_period=1h
