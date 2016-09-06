@@ -17,8 +17,8 @@ nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # canaries (@whyrusleeping)
 # XXX should one of these be a gateway?
-mercury_ipfs_ref=8803a7628f1979d9b65b2775624bc805c451b7ed
-neptune_ipfs_ref=8803a7628f1979d9b65b2775624bc805c451b7ed
+mercury_ipfs_ref=4dfafce47608173f85370b6b021d10ace368036a
+neptune_ipfs_ref=4dfafce47608173f85370b6b021d10ace368036a
 
 # metrics test (@Kubuxu) - shouldn't matter after 2016-09-20
 pollux_ipfs_ref=b5fd41d4388ecb41600cb423209589771170450d
