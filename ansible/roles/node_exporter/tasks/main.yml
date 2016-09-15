@@ -1,4 +1,5 @@
 ---
+# install node_exporter
 - name: check current node_exporter ref
   shell: "cat /opt/node_exporter.ref | grep {{ node_exporter_ref }}"
   ignore_errors: true
@@ -42,4 +43,36 @@
 - template:
     src: nginx_node_exporter.conf.j2
     dest: /opt/nginx/conf.d/node_exporter.conf
+  notify: reload nginx
+
+# install blackbox_exporter
+- file:
+    path: /opt/blackbox_exporter/config
+    state: directory
+- template:
+    src: blackbox_exporter.yml.j2
+    dest: /opt/blackbox_exporter/config/blackbox.yml
+    mode: 0400
+  register: blackbox_exporter_yml
+
+- docker:
+    name: blackbox_exporter
+    image: "prom/blackbox-exporter:{{ blackbox_exporter_ref }}"
+    command: -config.file=/config/blackbox.yml
+    state: reloaded
+    restart_policy: always
+    net: host
+    volumes:
+    - /opt/blackbox_exporter/config:/config
+
+- docker:
+    name: blackbox_exporter
+    image: "prom/blackbox-exporter:{{ blackbox_exporter_ref }}"
+    state: restarted
+  when: "blackbox_exporter_yml.changed"
+
+- file: path=/opt/nginx/conf.d state=directory
+- template:
+    src: nginx_blackbox_exporter.conf.j2
+    dest: /opt/nginx/conf.d/blackbox_exporter.conf
   notify: reload nginx
