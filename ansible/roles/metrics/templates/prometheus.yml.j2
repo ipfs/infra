@@ -7,7 +7,7 @@ global:
 scrape_configs:
   - job_name: 'gateway'
     metrics_path: '/debug/metrics/prometheus'
-    target_groups:
+    static_configs:
 {% for hostname in gateway_targets %}
       - targets:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
@@ -18,7 +18,7 @@ scrape_configs:
 
   - job_name: 'storage'
     metrics_path: '/debug/metrics/prometheus'
-    target_groups:
+    static_configs:
 {% for hostname in storage_targets %}
       - targets:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:5001'
@@ -29,7 +29,7 @@ scrape_configs:
 
   - job_name: 'mtail'
     metrics_path: '/metrics'
-    target_groups:
+    static_configs:
 {% for hostname in node_targets %}
       - targets:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:3903'
@@ -48,7 +48,7 @@ scrape_configs:
 
   - job_name: 'host'
     metrics_path: '/metrics'
-    target_groups:
+    static_configs:
 {% for hostname in node_targets %}
       - targets:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:9100'
@@ -58,7 +58,7 @@ scrape_configs:
 
   - job_name: 'blackbox'
     metrics_path: '/metrics'
-    target_groups:
+    static_configs:
 {% for hostname in node_targets %}
       - targets:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:9115'
@@ -73,7 +73,7 @@ scrape_configs:
 
   - job_name: 'prometheus'
     metrics_path: '/prometheus/metrics'
-    target_groups:
+    static_configs:
 {% for hostname in metrics_targets %}
       - targets:
           - '[{{ cjdns_identities[hostname].ipv6 }}]:80'
@@ -83,7 +83,7 @@ scrape_configs:
 
   - job_name: 'watcher'
     metrics_path: '/metrics'
-    target_groups:
+    static_configs:
       - targets:
           - 'mars.i.ipfs.team:9999'
         labels:
