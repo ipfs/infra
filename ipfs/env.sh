@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref=566c08e256bdbd5a292a1518c5a9a399b99526f3
+all_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 # TODO: move to /mnt/data/ipfs
 all_ipfs_repo=/ipfs/ipfs_master/repo
 all_ipfs_swarm_tcp=4001
@@ -16,9 +16,8 @@ pollux_ipfs_ref=566c08e256bdbd5a292a1518c5a9a399b99526f3
 nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # canaries (@whyrusleeping)
-# XXX should one of these be a gateway?
-mercury_ipfs_ref=4dfafce47608173f85370b6b021d10ace368036a
-neptune_ipfs_ref=4dfafce47608173f85370b6b021d10ace368036a
+mercury_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
+neptune_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 
 # metrics test (@Kubuxu) - shouldn't matter after 2016-09-20
 pollux_ipfs_ref=47d568cd0fadab8c77141c730609ed86bb3df686
