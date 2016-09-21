@@ -16,8 +16,8 @@ pollux_ipfs_ref=566c08e256bdbd5a292a1518c5a9a399b99526f3
 nihal_ipfs_ref=994109c7316166fe89e6f4df91b91ca93283691c
 
 # canaries (@whyrusleeping)
-mercury_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
-neptune_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
+mercury_ipfs_ref=300187ac52325453a632313fc8bf3423c078882e
+neptune_ipfs_ref=300187ac52325453a632313fc8bf3423c078882e
 
 # metrics test (@Kubuxu) - shouldn't matter after 2016-09-20
 pollux_ipfs_ref=47d568cd0fadab8c77141c730609ed86bb3df686
