@@ -13,6 +13,7 @@
     gateway_targets: "{{ groups.gateway }}"
     storage_targets: "{{ groups.storage }}"
     metrics_targets: "{{ groups.metrics }}"
+    probers: "{{ groups.metrics + groups.util }}"
   pre_tasks:
     - include_vars: secrets_plaintext/secrets.yml
   handlers:

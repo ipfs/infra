@@ -1,3 +1,11 @@
 ---
 node_exporter_ref: 1384becb12fc878d543c5565583ecd8815fae52c
 blackbox_exporter_ref: v0.2.0
+blackbox_exporter_pages:
+  # module name => Host header
+  ipfs_io: ipfs.io
+  dist_ipfs_io: dist.ipfs.io
+  blog_ipfs_io: blog.ipfs.io
+  libp2p_io: libp2p.io
+  ipld_io: ipld.io
+  multiformats_io: multiformats.io
