@@ -58,7 +58,7 @@
 - docker:
     name: blackbox_exporter
     image: "prom/blackbox-exporter:{{ blackbox_exporter_ref }}"
-    command: -config.file=/config/blackbox.yml
+    command: -config.file=/config/blackbox.yml -web.listen-address=127.0.0.1:9115
     state: reloaded
     restart_policy: always
     net: host
