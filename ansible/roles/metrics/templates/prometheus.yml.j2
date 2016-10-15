@@ -102,7 +102,7 @@ scrape_configs:
         regex: .*
         target_label: __address__
         replacement: 127.0.0.1:9115  # Blackbox exporter.
-}
+{% endfor %}
 
 {% for dest in gateway_targets %}
   - job_name: pages_ipfs_io_{{dest}}
