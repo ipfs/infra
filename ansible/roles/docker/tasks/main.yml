@@ -8,10 +8,6 @@
   notify:
     - restart docker
 
-- apt:
-    name: lxc-docker
-    state: latest
-
 - name: docker service
   service:
     name: docker
