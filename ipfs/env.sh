@@ -16,8 +16,8 @@ pollux_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 nihal_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 
 # canaries (@whyrusleeping)
-mercury_ipfs_ref=300187ac52325453a632313fc8bf3423c078882e
-neptune_ipfs_ref=300187ac52325453a632313fc8bf3423c078882e
+mercury_ipfs_ref=5ec0e594079342e960665b5d3a2b72973b78dbd8
+neptune_ipfs_ref=5ec0e594079342e960665b5d3a2b72973b78dbd8
 
 all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
