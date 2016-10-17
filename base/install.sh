@@ -4,7 +4,7 @@ set -e
 
 dir="$HOME/.ssh"
 if [ ! -z "$(git diff "$dir/authorized_keys" authorized_keys || echo new)" ]; then
-  echo "$host: $unit authorized_keys changed"
+  echo "$unit authorized_keys changed"
   mkdir -p "$dir"
   chmod 700 "$dir"
   cp authorized_keys "$dir/authorized_keys"
@@ -36,4 +36,10 @@ which tree >/dev/null || pkgs+=(tree)
 
 if [ ! -z "${pkgs}" ]; then
   apt-get install -qq -y "${pkgs[@]}"
+fi
+
+if [ "$host" != "$(hostname)" ]; then
+  echo "setting hostname"
+  hostname "$host"
+  echo "$host" > /etc/hostname
 fi

@@ -1,5 +1,4 @@
 ---
-- hostname: "name={{ inventory_hostname }}"
 - file:
     src: /usr/bin/nodejs
     path: /usr/bin/node
