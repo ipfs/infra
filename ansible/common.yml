@@ -5,5 +5,4 @@
   handlers:
     - include: roles/nginx/handlers/main.yml
   roles:
-    - common
     - docker

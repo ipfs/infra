@@ -15,6 +15,11 @@ pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq)
 pkgs+=(git mercurial nodejs npm build-essential autoconf libtool bison flex)
 apt-get install -qq -y "${pkgs[@]}"
 
+if [ ! -e "/usr/bin/node" ]; then
+  echo "linking nodejs => node (thanks ubuntu)"
+  ln -s "$(which nodejs)" /usr/bin/node
+fi
+
 if [ "$host" != "$(hostname)" ]; then
   echo "setting hostname"
   hostname "$host"
