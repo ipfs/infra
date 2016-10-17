@@ -8,7 +8,7 @@ all_ipfs_swarm_tcp=4001
 all_ipfs_swarm_utp=4002
 all_ipfs_api=5001
 all_ipfs_gateway=8080
-all_ipfs_bloom_size=0
+all_ipfs_bloom_size=131072 # 128KiB
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
