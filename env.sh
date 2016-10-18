@@ -78,5 +78,5 @@ all_vpn_allowlist+=("fc72:84:1b05:1e14:ef35:e055:651b:8465")
 # dignifiedquire
 all_vpn_allowlist+=("fcd3:58f5:a447:74a2:a0fa:ce6b:5e60:1d98")
 # kubuxu
-all_vpn_allowlist+=("fcf1:3795:9bdf:79fb:824c:ea55:cf37:d955")
+all_vpn_allowlist+=("fc00:5555:b994:a83e:ea79:eabc:61a5:8af8")
 all_vpn_allowlist+=("fc68:4444:9c8d:7936:4e9d:1470:b2cc:677f")
