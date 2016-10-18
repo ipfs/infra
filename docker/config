@@ -1,0 +1,2 @@
+DOCKER_OPTS="$DOCKER_OPTS --log-driver=json-file --log-opt max-size=100m --log-opt max-file=2"
+DOCKER_OPTS="$DOCKER_OPTS  --dns 8.8.8.8 --dns 8.8.4.4"
