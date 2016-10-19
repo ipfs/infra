@@ -14,9 +14,11 @@ all_ssh_options="-o ConnectTimeout=30"
 #   gateway_hosts=(pluto neptune ...)
 #   gateway_units=(ipfs ipfs/gateway ssl)
 # We can then omit the repeated <host>_units definitions.
-baseunits=(secrets base docker nginx mtail)
+baseunits=(secrets base docker nginx)
+baseunits+=(mtail metrics/node_exporter metrics/blackbox_exporter)
 gatewayunits=(ipfs ipfs/gateway ssl)
 storageunits=(ipfs)
+metricsunits=(metrics/grafana)
 
 # Units listed in `omit_build` will not be copied into each host's .build dir.
 # This Avoids copying secrets to hosts that shouldn't have them.
@@ -70,7 +72,7 @@ nihal_units=(${baseunits[@]} ${storageunits[@]})
 
 # digitalocean-nyc3
 phobos_ssh="root@104.131.3.162"
-phobos_units=(${baseunits[@]})
+phobos_units=(${baseunits[@]} ${metricsunits[@]})
 
 # digitalocean-fra1
 deimos_ssh="root@46.101.230.158"

@@ -1,3 +1,0 @@
----
-- name: reload nginx
-  shell: "docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload'"

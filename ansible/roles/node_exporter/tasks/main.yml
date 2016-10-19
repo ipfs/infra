@@ -39,11 +39,8 @@
   shell: "echo {{ node_exporter_ref }} > /opt/node_exporter.ref"
   when: "node_exporter_ref_present.rc != 0"
 
-- file: path=/opt/nginx/conf.d state=directory
-- template:
-    src: nginx_node_exporter.conf.j2
-    dest: /opt/nginx/conf.d/node_exporter.conf
-  notify: reload nginx
+# XXX migration
+- file: path=/opt/nginx/conf.d/node_exporter.conf state=absent
 
 # install blackbox_exporter
 - file:
@@ -71,8 +68,5 @@
     state: restarted
   when: "blackbox_exporter_yml.changed"
 
-- file: path=/opt/nginx/conf.d state=directory
-- template:
-    src: nginx_blackbox_exporter.conf.j2
-    dest: /opt/nginx/conf.d/blackbox_exporter.conf
-  notify: reload nginx
+# XXX migration
+- file: path=/opt/nginx/conf.d/blackbox_exporter.conf state=absent
