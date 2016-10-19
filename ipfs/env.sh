@@ -19,6 +19,9 @@ nihal_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 mercury_ipfs_ref=68d8a298c58ed950bd44118cc5e6d1ffc2def395
 neptune_ipfs_ref=68d8a298c58ed950bd44118cc5e6d1ffc2def395
 
+# testing ARC cache without bloom remove after 2016-10-30
+neptune_ipfs_bloom_size=0
+
 all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
 all_ipfs_gc_capacity=60G
