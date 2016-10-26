@@ -86,13 +86,12 @@ all_vpn_allowlist=()
 all_vpn_allowlist+=("fc3d:7777:a6a4:fcdb:f218:5856:5de:eb1a")
 all_vpn_allowlist+=("fc0c:f70f:320e:21c2:bfe8:b9ff:fcbf:43e9")
 all_vpn_allowlist+=("fc0d:66d:1e17:d13d:a1e7:1f41:87f0:5e63")
-# cryptix
-all_vpn_allowlist+=("fc58:6e49:3820:8c65:a37b:a250:6e03:ab9")
-all_vpn_allowlist+=("fce4:cb57:6b99:1f23:10d:6902:f947:2218")
 # whyrusleeping
-all_vpn_allowlist+=("fc72:84:1b05:1e14:ef35:e055:651b:8465")
+all_vpn_allowlist+=("fcd2:11ef:3362:a108:faa5:1d61:58a4:1292")
 # dignifiedquire
 all_vpn_allowlist+=("fc04:f62e:6fcf:9c82:b020:69ce:c2e6:34b2")
 # kubuxu
 all_vpn_allowlist+=("fc00:5555:b994:a83e:ea79:eabc:61a5:8af8")
 all_vpn_allowlist+=("fc68:4444:9c8d:7936:4e9d:1470:b2cc:677f")
+# victorbjelkholm
+all_vpn_allowlist+=("fc7e:76f4:cfae:c1f3:e754:6b1d:bcd6:6281")
