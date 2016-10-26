@@ -1,16 +1,28 @@
 #!/usr/bin/env bash
 
+# Names of the target hosts.
+# These are just names, nothing is being inferred from them.
+# Host-specific settings can be set like this: <host>_<setting>
 provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham phobos deimos)
-# provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal)
-# provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
-provsn_groups=()
 
+# Provsn appends these to every SSH invocation.
 all_ssh_options="-o ConnectTimeout=30"
-all_omit_build=(secrets)
 
+# These unit shorthands are a workaround for the current lack of host-groups.
+# TODO: We'll eventually be able to specify e.g. the following:
+#   provsn_groups=(gateway storage)
+#   gateway_hosts=(pluto neptune ...)
+#   gateway_units=(ipfs ipfs/gateway ssl)
+# We can then omit the repeated <host>_units definitions.
 baseunits=(secrets base docker nginx mtail)
 gatewayunits=(ipfs ipfs/gateway ssl)
 storageunits=(ipfs)
+
+# Units listed in `omit_build` will not be copied into each host's .build dir.
+# This Avoids copying secrets to hosts that shouldn't have them.
+# If a unit e.g. makes use of a certain secret, it needs to somehow process
+# it within its build script. See the ipfs and ssl units for examples.
+all_omit_build=(secrets)
 
 # digitalocean-sfo1
 pluto_ssh="root@104.236.179.241"
@@ -32,11 +44,11 @@ saturn_units=(${baseunits[@]} ${gatewayunits[@]})
 jupiter_ssh="root@104.236.151.122"
 jupiter_units=(${baseunits[@]} ${gatewayunits[@]})
 
-# digitalocean-nyc3, A ipfs.io
+# digitalocean-nyc3
 venus_ssh="root@104.236.76.40"
 venus_units=(${baseunits[@]} ${gatewayunits[@]})
 
-# digitalocean-ams2, A ipfs.io
+# digitalocean-ams2
 earth_ssh="root@178.62.158.247"
 earth_units=(${baseunits[@]} ${gatewayunits[@]})
 
@@ -64,8 +76,9 @@ phobos_units=(${baseunits[@]})
 deimos_ssh="root@46.101.230.158"
 deimos_units=(${baseunits[@]})
 
-# cjdns ipv6 addresses of community members
-# allows access to internal http endpoints on each host's cjdns ipv6 address.
+# Cjdns IPv6 addresses allowed to access internal HTTP endpoints on each host.
+# These are e.g. the IPFS HTTP API on tcp/5001, or various metrics collectors.
+# See the base unit for each hosts cjdns IPv6 address.
 all_vpn_allowlist=()
 # lgierth
 all_vpn_allowlist+=("fc3d:7777:a6a4:fcdb:f218:5856:5de:eb1a")
