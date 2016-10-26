@@ -39,9 +39,6 @@
   shell: "echo {{ node_exporter_ref }} > /opt/node_exporter.ref"
   when: "node_exporter_ref_present.rc != 0"
 
-# XXX migration
-- file: path=/opt/nginx/conf.d/node_exporter.conf state=absent
-
 # install blackbox_exporter
 - file:
     path: /opt/blackbox_exporter/config
@@ -67,6 +64,3 @@
     image: "prom/blackbox-exporter:{{ blackbox_exporter_ref }}"
     state: restarted
   when: "blackbox_exporter_yml.changed"
-
-# XXX migration
-- file: path=/opt/nginx/conf.d/blackbox_exporter.conf state=absent

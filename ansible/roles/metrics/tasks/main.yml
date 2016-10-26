@@ -52,6 +52,3 @@
     image: "luzifer/grafana:{{ grafana_ref }}"
     state: restarted
   when: "grafana_ini.changed"
-
-# XXX migration
-- file: path=/opt/nginx/conf.d/metrics.conf state=absent
