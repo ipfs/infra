@@ -35,10 +35,9 @@ nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
 # Repo settings (aka fs-repo)
 # Historical location, TODO: move to /mnt/data/ipfs
 all_ipfs_repo=/ipfs/ipfs_master/repo
-# The datastore lookup cache - 128KiB
-all_ipfs_bloom_size=131072
-# testing ARC cache without bloom, TODO(Kubuxu): remove after 2016-10-30
-neptune_ipfs_bloom_size=0
+
+# The datastore lookup cache - 512KiB
+all_ipfs_bloom_size=524288
 
 # Once an hour, the daemon checks whether repo size is above 90% of 60G,
 # and runs GC if it is.
