@@ -83,26 +83,22 @@ provsn_usage() {
 provsn_upload() {
   local host="$1"
 
-  echo "$host: upload"
+  echo "$host: uploading"
   tar -c -C "$provsn_root/.build/$host" . |
     ssh $(lookup ssh_options) $(lookup ssh) \
       "set -e && rm -rf /opt/provsn && mkdir -p /opt/provsn && tar -x -C /opt/provsn"
-  echo "$host: upload success"
 }
 
 provsn_exec() {
   local host="$1"
   local cmd="$2"
 
-  echo "$host: exec $cmd"
   ssh $(lookup ssh_options) $(lookup ssh) \
     "set -e && cd /opt/provsn && PROVSN_TRACE=$PROVSN_TRACE $cmd |& awk '{print \"$host: \" \$0}' /dev/stdin"
 }
 
 provsn_build() {
   local host="$1"
-
-  echo "$host: build"
 
   rm -rf "$provsn_root/.build/$host"
   mkdir -p "$provsn_root/.build/$host"
@@ -116,7 +112,6 @@ provsn_build() {
     if [ ! -z "$omit" ]; then
       echo "$host: omit $unit"
     else
-      echo "$host: build $unit"
       local parent_dir="$provsn_root/.build/$host/$(dirname $unit)"
       [ ! -d "$parent_dir" ] && mkdir -p $parent_dir
       [ -d "$provsn_root/$unit" ] && cp -a "$provsn_root/$unit" "$provsn_root/.build/$host/$unit"
@@ -124,7 +119,6 @@ provsn_build() {
   done
 
   provsn_root="$provsn_root/.build/$host" provsn_run build.sh | awk "{print \"$host: \" \$0}"
-  echo "$host: build success"
 }
 
 provsn_run() {
@@ -132,13 +126,16 @@ provsn_run() {
   local script="$1"
   local unit
 
+  echo "run $script"
+
   for unit in $(lookup units); do
     if [ -x "$provsn_root/$unit/$script" ]; then
-      echo "$unit $script"
       cd "$provsn_root/$unit" && . "$script"
       cd "$provsn_root"
     fi
   done
+
+  echo "finished run $script"
 }
 
 provsn_root=`pwd`
