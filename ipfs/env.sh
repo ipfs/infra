@@ -4,8 +4,8 @@ all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref=68d8a298c58ed950bd44118cc5e6d1ffc2def395
 
 # canaries (@whyrusleeping)
-mercury_ipfs_ref=68d8a298c58ed950bd44118cc5e6d1ffc2def395
-neptune_ipfs_ref=68d8a298c58ed950bd44118cc5e6d1ffc2def395
+mercury_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
+neptune_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
