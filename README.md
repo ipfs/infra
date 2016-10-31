@@ -13,16 +13,6 @@
 - Known issues
 - Common tasks
 
-TODO before @lgierth vacation:
-
-- secrets submodule
-- make parallelism less awkward
-- fix unwanted `./provsn` parallelism
-- make sure `./provsn help` is up-to-date
-- migrate ansible/{common,ipfs,ipfs_gateway,nginx}
-  - cjdns,metrics,node_exporter,pinbot remain todo
-- migrate peering script
-
 ### Introduction
 
 This repository contains the technical infrastructure of the IPFS community.
@@ -42,7 +32,7 @@ Infrastructure that isn't contained here:
 
 ### Getting started
 
-We use an experimental tool called Provsn to maintain the setup of hosts and services.
+We use a tool called Provsn to maintain the setup of hosts and services.
 The fundamental principle of Provsn is that hosts are in a certain state,
 and units of code are run to transition into a different state.
 
