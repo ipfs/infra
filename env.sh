@@ -14,7 +14,7 @@ all_ssh_options="-o ConnectTimeout=30"
 #   gateway_hosts=(pluto neptune ...)
 #   gateway_units=(ipfs ipfs/gateway ssl)
 # We can then omit the repeated <host>_units definitions.
-baseunits=(secrets base docker nginx)
+baseunits=(secrets base cjdns docker nginx)
 baseunits+=(mtail metrics/node_exporter metrics/blackbox_exporter)
 gatewayunits=(ipfs ipfs/gateway ssl)
 storageunits=(ipfs)
