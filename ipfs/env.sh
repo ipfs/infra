@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref=68d8a298c58ed950bd44118cc5e6d1ffc2def395
+all_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
 
 # canaries (@whyrusleeping)
 mercury_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
