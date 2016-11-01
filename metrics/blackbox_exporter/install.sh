@@ -16,8 +16,8 @@ nginx_src="out/nginx.conf"
 nginx_dest="/opt/nginx/conf.d/7-blackbox-exporter.conf"
 nginx_checkpoint="/opt/blackbox_exporter/nginx.conf"
 
-mkdir -p "$(basename "$nginx_dest")"
-mkdir -p "$(basename "$nginx_checkpoint")"
+mkdir -vp "$(dirname "$nginx_dest")"
+mkdir -vp "$(dirname "$nginx_checkpoint")"
 
 reload=0
 if [ ! -z "$(diff -Naur "$nginx_checkpoint" "$nginx_src")" ]; then
@@ -39,5 +39,5 @@ if [ "reload$reload" == "reload1" ]; then
   fi
 
   # sucessfully reloaded, now "commit" the checkpoint file
-  cp "$nginx_src" "$nginx_checkpoint"
+  cp -v "$nginx_src" "$nginx_checkpoint"
 fi

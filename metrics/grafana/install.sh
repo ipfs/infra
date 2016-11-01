@@ -16,8 +16,8 @@ nginx_src="out/nginx.conf"
 nginx_dest="/opt/nginx/conf.d/7-grafana.conf"
 nginx_checkpoint="/opt/grafana/nginx.conf"
 
-mkdir -p "$(basename "$nginx_dest")"
-mkdir -p "$(basename "$nginx_checkpoint")"
+mkdir -p "$(dirname "$nginx_dest")"
+mkdir -p "$(dirname "$nginx_checkpoint")"
 
 reload=0
 if [ ! -z "$(diff -Naur "$nginx_checkpoint" "$nginx_src")" ]; then
