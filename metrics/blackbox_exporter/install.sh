@@ -29,7 +29,7 @@ if [ "reload$reload" == "reload1" ]; then
   echo "metrics/blackbox_exporter nginx reloading"
 
   cp "$nginx_src" "$nginx_dest"
-  out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload' 2>/dev/null)
+  out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 
   if echo $out | grep failed >/dev/null; then
     echo $out
