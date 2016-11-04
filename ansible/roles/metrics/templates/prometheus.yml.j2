@@ -81,29 +81,6 @@ scrape_configs:
           host: '{{ hostname }}'
 {% endfor %}
 
-{% for src in probers %}
-  - job_name: pages_{{src}}
-    metrics_path: /probe
-    params:
-      module: []  # Look for a HTTP 200 response.
-    static_configs:
-      - targets:
-        - prometheus.io   # Target to probe
-    relabel_configs:
-      - source_labels: [__address__]
-        regex: (.*)(:80)?
-        target_label: __param_target
-        replacement: ${1}
-      - source_labels: [__param_target]
-        regex: (.*)
-        target_label: instance
-        replacement: ${1}
-      - source_labels: []
-        regex: .*
-        target_label: __address__
-        replacement: 127.0.0.1:9115  # Blackbox exporter.
-{% endfor %}
-
 {% for dest in gateway_targets %}
   - job_name: pages_ipfs_io_{{dest}}
     metrics_path: /probe
