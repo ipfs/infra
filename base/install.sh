@@ -3,7 +3,7 @@
 set -e
 
 pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq)
-pkgs+=(git mercurial nodejs npm build-essential autoconf libtool bison flex)
+pkgs+=(git mercurial nodejs npm build-essential autoconf libtool bison flex devscripts)
 apt-get install -qq -y "${pkgs[@]}"
 
 if [ ! -e "/usr/bin/node" ]; then
