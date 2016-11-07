@@ -10,7 +10,7 @@ neptune_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 pollux_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
-nihal_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
+nihal_ipfs_ref=d905d485192616abaea25f7e721062a9e1093ab9
 
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
