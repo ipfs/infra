@@ -20,6 +20,6 @@ cat > out/ipfs.opts <<-EOF
 --log-opt max-file=2
 -v $(lookup ipfs_repo):/data/ipfs
 ipfs:$(lookup ipfs_ref | head -c 7)
---enable-gc
+$(lookup ipfs_daemon_opts)
 --migrate=true
 EOF

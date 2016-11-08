@@ -12,6 +12,8 @@ biham_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 pollux_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
 nihal_ipfs_ref=d905d485192616abaea25f7e721062a9e1093ab9
 
+all_ipfs_daemon_opts="--enable-gc"
+
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
 all_ipfs_swarm_tcp=4001
