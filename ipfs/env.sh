@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
+all_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
 
 # canaries (@whyrusleeping)
-mercury_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
-neptune_ipfs_ref=9eba0e4ffbbf5230a54788e546ea822b357eea6f
+mercury_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
+neptune_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
-biham_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
-pollux_ipfs_ref=83a85143e6fa976c9d242ecb43a68cf133d02d30
-nihal_ipfs_ref=d905d485192616abaea25f7e721062a9e1093ab9
+biham_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
+pollux_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
+nihal_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
 
 all_ipfs_daemon_opts="--enable-gc"
 
