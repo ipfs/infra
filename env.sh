@@ -99,3 +99,5 @@ all_vpn_allowlist+=("fc00:5555:b994:a83e:ea79:eabc:61a5:8af8")
 all_vpn_allowlist+=("fc68:4444:9c8d:7936:4e9d:1470:b2cc:677f")
 # victorbjelkholm
 all_vpn_allowlist+=("fc7e:76f4:cfae:c1f3:e754:6b1d:bcd6:6281")
+# benhylau
+all_vpn_allowlist+=("fcaf:c9e1:bfff:73a3:c08c:51aa:3711:2ccc")
