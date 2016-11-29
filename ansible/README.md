@@ -1,3 +1,9 @@
+## DEPRECATED
+
+We're trying to move away from ansible and this document is just here for history.
+
+We should try to migrate this documentation to provsn
+
 # solarnet
 
 - [Overview](#overview)
