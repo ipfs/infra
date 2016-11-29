@@ -75,7 +75,7 @@ Two environment variables can be used to alter Provsn's operation:
 
 ### How can I get ssh access to the instances?
 
-Add you ssh-key to the list of keys available in `env.sh`, like this: https://github.com/ipfs/infrastructure/blob/master/base/env.sh#L9 and then submit a PR with the changes.
+Add you ssh-key to the list of keys available in `base/env.sh`, like this: https://github.com/ipfs/infrastructure/blob/master/base/env.sh#L9 and then submit a PR with the changes.
 
 ### Other community infrastructure:
 
