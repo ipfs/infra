@@ -4,8 +4,8 @@ all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
-biham_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
-pollux_ipfs_ref=8d6ac7a83f91089d536790f3db07ed653a8a1c04
+biham_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
+pollux_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 nihal_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 
 all_ipfs_daemon_opts="--enable-gc"
