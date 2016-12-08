@@ -101,3 +101,5 @@ all_vpn_allowlist+=("fc68:4444:9c8d:7936:4e9d:1470:b2cc:677f")
 all_vpn_allowlist+=("fc7e:76f4:cfae:c1f3:e754:6b1d:bcd6:6281")
 # benhylau
 all_vpn_allowlist+=("fcaf:c9e1:bfff:73a3:c08c:51aa:3711:2ccc")
+# teamcity
+all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
