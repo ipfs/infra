@@ -214,6 +214,18 @@ exec)
   provsn_in_parallel "$@" || exit 0
   provsn_exec "$2" "$3"
   ;;
+get)
+  hosts=`resolve_pattern "$2"`
+  test -z "$hosts" && echo "error: unknown host: $2" 1>&2 && exit 1
+  if test "$(printf %s\\n ${hosts[@]} | wc -l)" -gt 1; then
+    for host in ${hosts[@]}; do
+      printf %s\\n "$(lookup "$3")" | awk "{print \"$host: \" \$0}" /dev/stdin
+    done
+  else
+    host="${hosts[0]}"
+    printf %s\\n "$(lookup $3)"
+  fi
+  ;;
 units)
   test -z "$2" && printf %s\\n "${provsn_units[@]}" && exit 0
   hosts=`resolve_pattern "$2"`
