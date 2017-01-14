@@ -18,7 +18,7 @@ baseunits=(secrets base base/golang cjdns docker nginx)
 baseunits+=(mtail metrics/node_exporter metrics/blackbox_exporter)
 gatewayunits=(ipfs ipfs/gateway ssl)
 storageunits=(ipfs)
-metricsunits=(metrics/grafana)
+metricsunits=(metrics/grafana metrics/prometheus)
 
 # Units listed in `omit_build` will not be copied into each host's .build dir.
 # This Avoids copying secrets to hosts that shouldn't have them.
