@@ -13,6 +13,6 @@ all_prometheus_evaluation_interval="15s"
 
 all_prometheus_gateway_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 all_prometheus_storage_hosts=(pollux biham nihal)
-all_prometheus_metrics_hosts=(phobos banana)
-all_prometheus_probe_hosts=(phobos banana deimos)
+all_prometheus_metrics_hosts=(banana)
+all_prometheus_probe_hosts=(banana deimos)
 all_prometheus_all_hosts=${provsn_hosts[@]}
