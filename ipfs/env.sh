@@ -36,6 +36,10 @@ all_ipfs_repo=/ipfs/ipfs_master/repo
 
 # The datastore lookup cache - 512KiB
 all_ipfs_bloom_size=524288
+# 128MiB for storage hosts, should be good for up to about 200M objects
+biham_ipfs_bloom_size=134217728
+pollux_ipfs_bloom_size=134217728
+nihal_ipfs_bloom_size=134217728
 
 # Once an hour, the daemon checks whether repo size is above 90% of 60G,
 # and runs GC if it is.
