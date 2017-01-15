@@ -10,10 +10,10 @@ cat > out/docker.opts <<-EOF
 -d
 --name grafana
 --restart always
+--net host
 --log-driver=json-file
 --log-opt max-size=100m
 --log-opt max-file=2
--p 127.0.0.1:3000:3000
 -v /opt/grafana/config:/etc/grafana
 -v /opt/grafana/data:/var/lib/grafana
 grafana/grafana:$(lookup grafana_ref)
