@@ -111,7 +111,7 @@ $(for dest in $(lookup prometheus_gateway_hosts); do
     echo   '        labels:'
     printf '          host: %s\n' $dest
     printf '          prober: %s\n' $src
-    echo   '          page: ipfs.io'
+    echo   '          page: multiformats.io'
   done
 done)
 
@@ -128,7 +128,24 @@ $(for dest in $(lookup prometheus_gateway_hosts); do
     echo   '        labels:'
     printf '          host: %s\n' $dest
     printf '          prober: %s\n' $src
-    echo   '          page: ipfs.io'
+    echo   '          page: ipld.io'
+  done
+done)
+
+$(for dest in $(lookup prometheus_gateway_hosts); do
+  printf '  - job_name: pages_libp2p_io_%s\n' $dest
+  echo   '    metrics_path: /probe'
+  echo   '    params:'
+  echo   '      module: [libp2p_io]'
+  printf '      target: [%s.i.ipfs.io]\n' $dest
+  echo   '    static_configs:'
+  for src in $(lookup prometheus_probe_hosts); do
+    echo   '      - targets:'
+    printf '        - "[%s]:9115"\n' $(host=$src var cjdns_ipv6)
+    echo   '        labels:'
+    printf '          host: %s\n' $dest
+    printf '          prober: %s\n' $src
+    echo   '          page: libp2p.io'
   done
 done)
 
