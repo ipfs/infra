@@ -148,11 +148,3 @@ $(for dest in $(lookup prometheus_gateway_hosts); do
     echo   '          page: libp2p.io'
   done
 done)
-
-  - job_name: 'watcher'
-    metrics_path: '/metrics'
-    static_configs:
-      - targets:
-          - 'mars.i.ipfs.team:9999'
-        labels:
-          host: mars
