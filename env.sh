@@ -3,7 +3,7 @@
 # Names of the target hosts.
 # These are just names, nothing is being inferred from them.
 # Host-specific settings can be set like this: <host>_<setting>
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal phobos banana deimos)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal banana deimos)
 
 # Provsn appends these to every SSH invocation.
 all_ssh_options="-o ConnectTimeout=30"
@@ -14,11 +14,11 @@ all_ssh_options="-o ConnectTimeout=30"
 #   gateway_hosts=(pluto neptune ...)
 #   gateway_units=(ipfs ipfs/gateway ssl)
 # We can then omit the repeated <host>_units definitions.
-baseunits=(secrets base cjdns docker nginx)
+baseunits=(secrets base base/golang cjdns docker nginx)
 baseunits+=(mtail metrics/node_exporter metrics/blackbox_exporter)
 gatewayunits=(ipfs ipfs/gateway ssl)
 storageunits=(ipfs)
-metricsunits=(metrics/grafana)
+metricsunits=(metrics/grafana metrics/prometheus)
 
 # Units listed in `omit_build` will not be copied into each host's .build dir.
 # This Avoids copying secrets to hosts that shouldn't have them.
@@ -69,10 +69,6 @@ biham_units=(${baseunits[@]} ${storageunits[@]})
 # hetzner-nuremberg
 nihal_ssh="root@188.40.116.66"
 nihal_units=(${baseunits[@]} ${storageunits[@]})
-
-# digitalocean-nyc3
-phobos_ssh="root@104.131.3.162"
-phobos_units=(${baseunits[@]} ${metricsunits[@]})
 
 # hetzner
 banana_ssh="root@78.46.136.129"
