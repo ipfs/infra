@@ -2,6 +2,69 @@
 
 set -e
 
+target="/opt/blackbox_exporter"
+mkdir -p "$target"
+
+rebuild=0
+restart=0
+
+ref=$(lookup blackbox_exporter_ref)
+actual_ref=$(docker ps --format '{{.Image}}' | grep "blackbox_exporter:" | cut -d':' -f2 || true)
+
+if [ -z "$(docker ps -f status=running | grep "blackbox_exporter:" || true)" ]; then
+  echo "daemon not running"
+  restart=1
+fi
+
+if [ "ref$ref" != "ref$actual_ref" ]; then
+  echo "ref changed from $actual_ref to $ref"
+  restart=1
+fi
+
+if [ -z "$(docker images -q blackbox_exporter:$ref)" ]; then
+  echo "docker image doesn't exist yet"
+  rebuild=1
+fi
+
+if [ ! -z "$(git diff "$target/docker.opts" "out/docker.opts" || echo "new")" ]; then
+  echo "blackbox_exporter docker.opts changed"
+  restart=1
+fi
+
+if [ ! -z "$(git diff "$target/config.yml" "out/config.yml" || echo "new")" ]; then
+  echo "blackbox_exporter config changed"
+  restart=1
+fi
+
+if [ "rebuild$rebuild" == "rebuild1" ]; then
+  echo "blackbox_exporter rebuilding"
+  go get -d github.com/prometheus/blackbox_exporter
+  cd $GOPATH/src/github.com/prometheus/blackbox_exporter/
+  git remote set-url origin https://github.com/prometheus/blackbox_exporter
+  git remote prune origin >/dev/null
+  git gc
+  git fetch -q --all
+  git reset -q --hard "$ref"
+  DOCKER_IMAGE_NAME=blackbox_exporter DOCKER_IMAGE_TAG="$ref" make build docker >/dev/null
+  cd -
+  echo "blackbox_exporter docker image changed"
+  restart=1
+fi
+
+cp "out/config.yml" "$target/config.yml"
+
+if [ "restart$restart" == "restart1" ]; then
+  echo "blackbox_exporter (re)starting"
+  docker stop "blackbox_exporter" |& cat >/dev/null || true
+  docker rm -f "blackbox_exporter" |& cat >/dev/null || true
+  docker run $(cat out/docker.opts) >/dev/null
+fi
+
+# we only install these so we can get a diff and rebuild/restart if needed
+mkdir -p "$target"
+cp -a "out/config.yml" "$target/config.yml"
+cp -a "out/docker.opts" "$target/docker.opts"
+
 # How this install script works
 #
 # Checks if the config changed, applies the change, reloads nginx if neccessary.

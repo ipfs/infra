@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+all_blackbox_exporter_ref=be7a4226ed32a6407d7895ee5a0bd892f0f34692
+
+all_blackbox_exporter_probers=(ipfs_io dist_ipfs_io blog_ipfs_io)
+all_blackbox_exporter_probers+=(libp2p_io ipld_io multiformats_io)
+all_blackbox_exporter_probers+=(gaps)
+all_blackbox_exporter_probers_ipfs_io=ipfs.io
+all_blackbox_exporter_probers_dist_ipfs_io=dist.ipfs.io
+all_blackbox_exporter_probers_blog_ipfs_io=blog.ipfs.io
+all_blackbox_exporter_probers_libp2p_io=libp2p.io
+all_blackbox_exporter_probers_ipld_io=ipld.io
+all_blackbox_exporter_probers_multiformats_io=multiformats.io
+all_blackbox_exporter_probers_gaps=protocol-com.herokuapp.com
