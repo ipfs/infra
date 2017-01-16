@@ -25,7 +25,7 @@ if [ ! -z "$actual_ref" ]; then
 fi
 
 if [ "$ref" != "$actual_ref" ]; then
-  restart=1
+  rebuild=1
 fi
 
 if [ -z "$(docker images -q prometheus:$ref)" ]; then
