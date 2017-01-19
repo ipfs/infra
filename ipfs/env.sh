@@ -3,6 +3,15 @@
 all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref=e2ba43c12dd7076357d5627ef02ed56bf2a55c30
 
+pluto_ipfs_ref=a90c508952568348a16e667866e4c74857b9214b
+venus_ipfs_ref=a90c508952568348a16e667866e4c74857b9214b
+earth_ipfs_ref=a90c508952568348a16e667866e4c74857b9214b
+uranus_ipfs_ref=a90c508952568348a16e667866e4c74857b9214b
+pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
+venus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
+earth_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
+uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
+
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar)
 biham_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 pollux_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
