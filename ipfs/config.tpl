@@ -15,7 +15,8 @@
   "Addresses": {
     "Swarm": [
       "/ip4/0.0.0.0/tcp/$(var ipfs_swarm_tcp)",
-      "/ip6/::/tcp/$(var ipfs_swarm_tcp)"
+      "/ip6/::/tcp/$(var ipfs_swarm_tcp)",
+      "/ip4/127.0.0.1/tcp/$(var ipfs_swarm_ws)/ws"
     ],
     "API": "/ip4/127.0.0.1/tcp/$(var ipfs_api)",
     "Gateway": "/ip4/127.0.0.1/tcp/$(var ipfs_gateway)"
