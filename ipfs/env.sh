@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref=e2ba43c12dd7076357d5627ef02ed56bf2a55c30
+all_ipfs_ref=28b086895b7a2f5abeaaa270080e4e7d3734b1ad
 
 pluto_ipfs_ref=a90c508952568348a16e667866e4c74857b9214b
 venus_ipfs_ref=a90c508952568348a16e667866e4c74857b9214b
