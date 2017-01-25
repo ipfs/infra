@@ -1,3 +1,3 @@
 {% for host in pinbot_targets %}
-[{{ cjdns_identities[host].ipv6 }}]:5001
+{{host}}.v.ipfs.team:5001
 {% endfor %}
