@@ -17,12 +17,17 @@ biham_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 pollux_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 nihal_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 
+# dedicated bootstrap hosts
+strawberry_ipfs_ref=ed12bc5480860ad02b9d55d4d727f50a0baf6f91
+blueberry_ipfs_ref=ed12bc5480860ad02b9d55d4d727f50a0baf6f91
+
 all_ipfs_daemon_opts="--enable-gc"
 
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
 all_ipfs_swarm_tcp=4001
 all_ipfs_swarm_utp=4002
+all_ipfs_swarm_ws=8081
 all_ipfs_api=5001
 all_ipfs_gateway=8080
 
@@ -38,6 +43,8 @@ mercury_ipfs_peerid="QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3"
 pollux_ipfs_peerid="QmRv1GNseNP1krEwHDjaQMeQVJy41879QcDwpJVhY8SWve"
 biham_ipfs_peerid="QmZY7MtK8ZbG1suwrxc7xEYZ2hQLf1dAWPRHhjxC8rjq8E"
 nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
+strawberry_ipfs_peerid="QmWyLSnMHW2H6bmCG9e9PQq4ARve94JduvGjbutUuzx4a8"
+blueberry_ipfs_peerid="QmVcj9MATxGTAFoQSbrJvZ9Fbs4Jzvrxy9hyJeRwbW8NeA"
 
 # Repo settings (aka fs-repo)
 # Historical location, TODO: move to /mnt/data/ipfs
