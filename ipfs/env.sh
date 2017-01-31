@@ -18,8 +18,8 @@ pollux_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 nihal_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 
 # dedicated bootstrap hosts
-strawberry_ipfs_ref=ed12bc5480860ad02b9d55d4d727f50a0baf6f91
-blueberry_ipfs_ref=ed12bc5480860ad02b9d55d4d727f50a0baf6f91
+strawberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
+blueberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
 
 all_ipfs_daemon_opts="--enable-gc"
 
