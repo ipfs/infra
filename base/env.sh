@@ -38,3 +38,5 @@ strawberry_cjdns_public_key="bvqlclrnx37nw31yv3jr6url8n08gdbkpfhlyg9614f8yu3bjp6
 strawberry_cjdns_ipv6="fc26:964b:b241:2ef3:50f4:6883:2f51:e253"
 blueberry_cjdns_public_key="4f8n6v706j81sr9w7c13wphjblxsxnyv9qhmz8yjkfdckbzw44d0.k"
 blueberry_cjdns_ipv6="fc3f:163e:e29f:449e:ad27:2086:a00a:47e3"
+jenkins_cjdns_public_key="uqts7lhxkxc4pfllrdjt8gcnjjq7t240znl2bvvzpj1zc1c271n0.k"
+jenkins_cjdns_ipv6="fce3:5702:8051:3e65:3a36:1299:c458:1470"
