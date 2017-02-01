@@ -3,7 +3,7 @@
 # Names of the target hosts.
 # These are just names, nothing is being inferred from them.
 # Host-specific settings can be set like this: <host>_<setting>
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal banana deimos blueberry strawberry)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal banana deimos blueberry strawberry jenkins)
 
 # Provsn appends these to every SSH invocation.
 all_ssh_options="-o ConnectTimeout=30"
@@ -86,6 +86,10 @@ blueberry_units=(${baseunits[@]} ${bootstrapunits[@]})
 # digitalocean-nyc3
 strawberry_ssh="root@159.203.166.189"
 strawberry_units=(${baseunits[@]} ${bootstrapunits[@]})
+
+jenkins_ssh="root@104.236.203.34"
+jenkins_units=(secrets base base/golang nginx)
+jenkins_units+=(mtail metrics/node_exporter metrics/blackbox_exporter)
 
 # Cjdns IPv6 addresses allowed to access internal HTTP endpoints on each host.
 # These are e.g. the IPFS HTTP API on tcp/5001, or various metrics collectors.
