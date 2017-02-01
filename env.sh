@@ -88,8 +88,7 @@ strawberry_ssh="root@159.203.166.189"
 strawberry_units=(${baseunits[@]} ${bootstrapunits[@]})
 
 jenkins_ssh="root@104.236.203.34"
-jenkins_units=(secrets base base/golang nginx)
-jenkins_units+=(mtail metrics/node_exporter metrics/blackbox_exporter)
+jenkins_units=(${baseunits[@]})
 
 # Cjdns IPv6 addresses allowed to access internal HTTP endpoints on each host.
 # These are e.g. the IPFS HTTP API on tcp/5001, or various metrics collectors.

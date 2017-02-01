@@ -1,0 +1,11 @@
+[Unit]
+Description=node_exporter: exports host-related metrics (CPU, RAM, IO, etc.) for scraping by prometheus.
+Wants=network.target
+After=network.target
+
+[Service]
+ProtectHome=true
+ProtectSystem=true
+SyslogIdentifier=node_exporter
+ExecStart=/usr/bin/node_exporter --web.listen-address="127.0.0.1:9100" -collectors.enabled=filesystem,netdev
+Restart=always
