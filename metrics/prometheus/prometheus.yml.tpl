@@ -17,7 +17,7 @@ $(for h in $(lookup prometheus_gateway_hosts); do
 done)
 
   - job_name: 'jenkins'
-    metrics_path: '/prometheus'
+    metrics_path: '/prometheus/'
     honor_labels: false
     static_configs:
 $(for h in $(lookup prometheus_jenkins_hosts); do
