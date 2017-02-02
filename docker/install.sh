@@ -2,6 +2,11 @@
 
 set -e
 
+systemd=0
+if [ "init-$(ps -o comm= 1)" == "init-systemd" ]; then
+  systemd=1
+fi
+
 which docker >/dev/null || ./getdocker.sh
 
 restart=0
@@ -18,7 +23,14 @@ cp config /etc/default/docker
 
 if [ "restart$restart" == "restart1" ]; then
   echo "docker restarting"
-  # TODO systemd
-  restart docker 2>&1 >/dev/null || start docker >/dev/null
+  if [ "systemd$systemd" == "systemd1" ]; then
+    systemctl restart docker
+  else
+    cmd=restart
+    service docker status | grep start >/dev/null || cmd=start
+    service docker status | grep stop >/dev/null || cmd=restart
+    service docker "$cmd"
+  fi
+
   cp config "$target/config"
 fi

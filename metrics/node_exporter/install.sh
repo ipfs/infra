@@ -21,19 +21,31 @@ set -e
 target="/opt/node_exporter"
 mkdir -p "$target"
 
+systemd=0
+if [ "init-$(ps -o comm= 1)" == "init-systemd" ]; then
+  systemd=1
+fi
+
 rebuild=0
 restart=0
 
 ref=$(lookup node_exporter_ref)
 actual_ref=$(cat $target/current.ref || true)
 
-if [ "$ref" != "$actual_ref" ]; then
+if [ "ref$ref" != "ref$actual_ref" ]; then
   rebuild=1
 fi
 
-if [ ! -z "$(git diff "/etc/init/node_exporter.conf" "upstart.conf" 2>&1 || echo "new")" ]; then
-  echo "metrics/node_exporter upstart.conf changed"
-  restart=1
+if [ "systemd$systemd" == "systemd1" ]; then
+  if [ ! -z "$(git diff "/lib/systemd/system/node_exporter.service" "systemd.service" 2>&1 || echo "new")" ]; then
+    echo "metrics/node_exporter systemd service changed"
+    restart=1
+  fi
+else
+  if [ ! -z "$(git diff "/etc/init/node_exporter.conf" "upstart.conf" 2>&1 || echo "new")" ]; then
+    echo "metrics/node_exporter upstart config changed"
+    restart=1
+  fi
 fi
 
 if [ "rebuild$rebuild" == "rebuild1" ]; then
@@ -54,12 +66,17 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   restart=1
 fi
 
-cp upstart.conf /etc/init/node_exporter.conf
-
 if [ "restart$restart" == "restart1" ]; then
   echo "metrics/node_exporter restarting"
-  service node_exporter stop >/dev/null || true
-  service node_exporter start >/dev/null
+  if [ "systemd$systemd" == "systemd1" ]; then
+    cp systemd.service /lib/systemd/system/node_exporter.service
+    systemctl daemon-reload
+    systemctl restart node_exporter
+  else
+    cp upstart.conf /etc/init/node_exporter.conf
+    service node_exporter stop >/dev/null || true
+    service node_exporter start >/dev/null
+  fi
 fi
 
 nginx_src="out/nginx.conf"
