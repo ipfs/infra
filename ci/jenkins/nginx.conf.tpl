@@ -1,8 +1,13 @@
 server {
     server_name ci.ipfs.team;
     access_log /var/log/nginx/access.log mtail;
-    listen 80;
-    listen [::]:80;
+
+    listen 443 default_server ssl;
+    listen [::]:443 default_server ssl;
+    ssl_certificate /etc/nginx/certs/ci.ipfs.team.crt;
+    ssl_certificate_key /etc/nginx/certs/ci.ipfs.team.key;
+    ssl_dhparam /etc/nginx/certs/ci.ipfs.team.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/ci.ipfs.team.trustchain.crt;
 
     location / {
         proxy_pass http://127.0.0.1:8090;
@@ -12,6 +17,14 @@ server {
     location /prometheus {
         return 403;
     }
+}
+
+server {
+    server_name ci.ipfs.team;
+    listen 80;
+    listen [::]:80;
+
+    return 301 https://\$server_name\$request_uri;
 }
 
 server {
