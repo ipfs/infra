@@ -1,8 +1,6 @@
 server {
     server_name ci.ipfs.team;
     access_log /var/log/nginx/access.log mtail;
-    listen 80;
-    listen [::]:80;
 
     listen 443 default_server ssl;
     listen [::]:443 default_server ssl;
@@ -19,6 +17,14 @@ server {
     location /prometheus {
         return 403;
     }
+}
+
+server {
+    server_name ci.ipfs.team;
+    listen 80;
+    listen [::]:80;
+
+    return 301 https://\$server_name\$request_uri;
 }
 
 server {
