@@ -4,6 +4,13 @@ server {
     listen 80;
     listen [::]:80;
 
+    listen 443 default_server ssl;
+    listen [::]:443 default_server ssl;
+    ssl_certificate /etc/nginx/certs/ci.ipfs.team.crt;
+    ssl_certificate_key /etc/nginx/certs/ci.ipfs.team.key;
+    ssl_dhparam /etc/nginx/certs/ci.ipfs.team.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/ci.ipfs.team.trustchain.crt;
+
     location / {
         proxy_pass http://127.0.0.1:8090;
         proxy_set_header Host \$host;
