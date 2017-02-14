@@ -81,11 +81,11 @@ deimos_units=(${baseunits[@]})
 
 # digitalocean-ams3
 blueberry_ssh="root@178.62.215.134"
-blueberry_units=(${baseunits[@]} ${bootstrapunits[@]})
+blueberry_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-nyc3
 strawberry_ssh="root@159.203.166.189"
-strawberry_units=(${baseunits[@]} ${bootstrapunits[@]})
+strawberry_units=(${baseunits[@]} ${gatewayunits[@]})
 
 jenkins_ssh="root@104.236.203.34"
 jenkins_units=(${baseunits[@]} ci/jenkins ssl)
