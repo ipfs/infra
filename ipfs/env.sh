@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
+# TODO warning, this is still fs-repo@4
 all_ipfs_ref=28b086895b7a2f5abeaaa270080e4e7d3734b1ad
 
 # mplex experiment
@@ -22,10 +23,10 @@ pollux_ipfs_ref=4e8015d74a945012b6f638439cdcb905f9a4971c
 strawberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
 blueberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
 
-# test fs-repo-migrations
-earth_ipfs_ref=478551a1fdfb0921ec2031e25a4baa5a595dd38d
-saturn_ipfs_ref=478551a1fdfb0921ec2031e25a4baa5a595dd38d
-nihal_ipfs_ref=478551a1fdfb0921ec2031e25a4baa5a595dd38d
+# XXX warning, these are the only ones with fs-repo@5
+earth_ipfs_ref=11a67b816050c0cdd85a327108e81d02363ec3b9
+saturn_ipfs_ref=11a67b816050c0cdd85a327108e81d02363ec3b9
+nihal_ipfs_ref=11a67b816050c0cdd85a327108e81d02363ec3b9
 
 all_ipfs_daemon_opts="--enable-gc"
 
