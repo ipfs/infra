@@ -42,7 +42,8 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   [ -d "$target/src/.git" ] || git clone -q $(lookup ipfs_git) "$target/src"
   git --git-dir="$target/src/.git" remote set-url origin $(lookup ipfs_git)
   git --git-dir="$target/src/.git" remote prune origin >/dev/null
-  git --git-dir="$target/src/.git" gc
+  git --git-dir="$target/src/.git" prune
+  git --git-dir="$target/src/.git" gc --quiet
   git --git-dir="$target/src/.git" fetch -q --all
   git --git-dir="$target/src/.git" --work-tree="$target/src" reset -q --hard "$ref"
   docker build -t "ipfs:$ref" "$target/src" >/dev/null
