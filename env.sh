@@ -3,7 +3,7 @@
 # Names of the target hosts.
 # These are just names, nothing is being inferred from them.
 # Host-specific settings can be set like this: <host>_<setting>
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal banana deimos blueberry strawberry jenkins)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal auva banana deimos blueberry strawberry jenkins)
 
 # Provsn appends these to every SSH invocation.
 all_ssh_options="-o ConnectTimeout=30"
@@ -70,6 +70,10 @@ biham_units=(${baseunits[@]} ${storageunits[@]})
 # hetzner-nuremberg
 nihal_ssh="root@188.40.116.66"
 nihal_units=(${baseunits[@]} ${storageunits[@]})
+
+# hetzner-nuremberg
+auva_ssh="root@144.76.60.46"
+auva_units=(${baseunits[@]} ${storageunits[@]})
 
 # hetzner
 banana_ssh="root@78.46.136.129"
