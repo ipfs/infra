@@ -2,7 +2,7 @@
 
 set -e
 
-pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq)
+pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq mtr traceroute dnsutils psmisc)
 pkgs+=(git mercurial nodejs npm build-essential autoconf libtool bison flex devscripts)
 apt-get install -qq -y "${pkgs[@]}"
 
