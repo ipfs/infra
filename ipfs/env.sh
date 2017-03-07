@@ -41,6 +41,7 @@ mercury_ipfs_peerid="QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3"
 pollux_ipfs_peerid="QmRv1GNseNP1krEwHDjaQMeQVJy41879QcDwpJVhY8SWve"
 biham_ipfs_peerid="QmZY7MtK8ZbG1suwrxc7xEYZ2hQLf1dAWPRHhjxC8rjq8E"
 nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
+auva_ipfs_peerid="QmZSe5GZJb5jcKQZzQmdWaFtimTHafjvtxyMMTJy5nZ6hN"
 strawberry_ipfs_peerid="QmWyLSnMHW2H6bmCG9e9PQq4ARve94JduvGjbutUuzx4a8"
 blueberry_ipfs_peerid="QmVcj9MATxGTAFoQSbrJvZ9Fbs4Jzvrxy9hyJeRwbW8NeA"
 
@@ -54,6 +55,7 @@ all_ipfs_bloom_size=524288
 biham_ipfs_bloom_size=134217728
 pollux_ipfs_bloom_size=134217728
 nihal_ipfs_bloom_size=134217728
+auva_ipfs_bloom_size=134217728
 
 # Once an hour, the daemon checks whether repo size is above 90% of 60G,
 # and runs GC if it is.
@@ -65,3 +67,4 @@ all_ipfs_gc_capacity=60G
 pollux_ipfs_gc_period=0s
 biham_ipfs_gc_period=0s
 nihal_ipfs_gc_period=0s
+auva_ipfs_gc_period=0s
