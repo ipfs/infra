@@ -14,6 +14,7 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
 biham_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 pollux_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 nihal_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
+auva_ipfs_ref=74afd87986d322ba6180670ed95af9884cb45c26
 
 # dedicated bootstrap hosts
 strawberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
