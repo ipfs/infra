@@ -9,12 +9,15 @@ pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
 venus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
 earth_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
 uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
+# nihal_ipfs_daemon_opts="--enable-mplex-experiment"
+# auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 pollux_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 nihal_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 auva_ipfs_ref=74afd87986d322ba6180670ed95af9884cb45c26
+auva_ipfs_daemon_opts="--routing=none"
 
 # dedicated bootstrap hosts
 strawberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
