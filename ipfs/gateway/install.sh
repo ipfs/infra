@@ -31,12 +31,19 @@ if [ ! -z "$(diff -Naur "$target/certs/dhparam.pem" "out/dhparam.pem")" ]; then
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$target/conf.d/gateway/denylist.conf" "denylist.conf")" ]; then
+  echo "ipfs/gateway denylist changed"
+  reload=1
+fi
+
 cp "out/6-ipfs-gateway.conf" "$target/conf.d/6-ipfs-gateway.conf"
 cp "out/ipfs.io.crt" "$target/certs/ipfs.io.crt"
 cp "out/ipfs.io.key" "$target/certs/ipfs.io.key"
 cp "out/ipfs.io.trustchain.crt" "$target/certs/ipfs.io.trustchain.crt"
 # TODO: rename to ipfs.io.dhparam.pem
 cp "out/dhparam.pem" "$target/certs/dhparam.pem"
+mkdir -p "$target/conf.d/gateway"
+cp "denylist.conf" "$target/conf.d/gateway/denylist.conf"
 
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/gateway nginx reloading"
