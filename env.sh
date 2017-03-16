@@ -104,6 +104,7 @@ all_vpn_allowlist+=("fc0c:f70f:320e:21c2:bfe8:b9ff:fcbf:43e9")
 all_vpn_allowlist+=("fc0d:66d:1e17:d13d:a1e7:1f41:87f0:5e63")
 # whyrusleeping
 all_vpn_allowlist+=("fcd2:11ef:3362:a108:faa5:1d61:58a4:1292")
+all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
 # dignifiedquire
 all_vpn_allowlist+=("fc04:f62e:6fcf:9c82:b020:69ce:c2e6:34b2")
 # kubuxu
