@@ -54,7 +54,7 @@ fi
 if [ ! -f "$repo/config" ]; then
   mkdir -p "$repo"
   chown -R 1000:users "$repo"
-  docker run -i -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" -c 'ipfs init --bits 2048'
+  docker run -i -u 1000 -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" -c 'ipfs init --bits 2048'
   restart=1
 fi
 
