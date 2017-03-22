@@ -2,7 +2,7 @@
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
 # TODO warning, this is still fs-repo@4
-all_ipfs_ref=f76b48dfa08acdda0d89183b8e041757211d2eeb
+all_ipfs_ref=fce80189778b795a6d9b4aa1f90267d5350d831c
 
 # mplex experiment
 pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
