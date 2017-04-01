@@ -20,3 +20,149 @@ server {
         proxy_read_timeout 60s;
     }
 }
+
+upstream ws_bootstrap {
+    server 127.0.0.1:8081;
+}
+
+server {
+    server_name $(var pages_bootstrap_hostname).bootstrap.libp2p.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/bootstrap.libp2p.io.crt;
+    ssl_certificate_key /etc/nginx/certs/bootstrap.libp2p.io.key;
+    ssl_dhparam /etc/nginx/certs/bootstrap.libp2p.io.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/bootstrap.libp2p.io.trustchain.crt;
+
+    location / {
+        proxy_set_header Host \$host:80;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$http_connection;
+        proxy_set_header Sec-WebSocket-Key \$http_sec_websocket_key;
+        proxy_set_header Sec-WebSocket-Extensions \$http_sec_websocket_extensions;
+        proxy_set_header Sec-WebSocket-Version \$http_sec_websocket_version;
+        proxy_pass http://ws_bootstrap;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name ipld.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/ipld.io.crt;
+    ssl_certificate_key /etc/nginx/certs/ipld.io.key;
+    ssl_dhparam /etc/nginx/certs/ipld.io.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/ipld.io.trustchain.crt;
+
+    location / {
+        proxy_set_header Host ipld.io;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name libp2p.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/libp2p.io.crt;
+    ssl_certificate_key /etc/nginx/certs/libp2p.io.key;
+    ssl_dhparam /etc/nginx/certs/libp2p.io.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/libp2p.io.trustchain.crt;
+
+    location / {
+        proxy_set_header Host libp2p.io;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name multiformats.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/multiformats.io.crt;
+    ssl_certificate_key /etc/nginx/certs/multiformats.io.key;
+    ssl_dhparam /etc/nginx/certs/multiformats.io.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/multiformats.io.trustchain.crt;
+
+    location / {
+        proxy_set_header Host multiformats.io;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name zcash.dag.ipfs.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/zcash.dag.ipfs.io.crt;
+    ssl_certificate_key /etc/nginx/certs/zcash.dag.ipfs.io.key;
+    ssl_dhparam /etc/nginx/certs/zcash.dag.ipfs.io.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/zcash.dag.ipfs.io.trustchain.crt;
+
+    location / {
+        proxy_set_header Host zcash.dag.ipfs.io;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name protocol.ai;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/protocol.ai.crt;
+    ssl_certificate_key /etc/nginx/certs/protocol.ai.key;
+    ssl_dhparam /etc/nginx/certs/protocol.ai.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/protocol.ai.trustchain.crt;
+
+    location / {
+        proxy_set_header Host protocol.ai;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
