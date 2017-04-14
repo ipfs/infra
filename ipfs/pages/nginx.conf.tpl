@@ -1,4 +1,14 @@
 server {
+    server_name ipn.io www.ipn.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    return 301 https://protocol.ai$request_uri;
+}
+
+server {
     server_name orbit.chat;
     access_log /var/log/nginx/access.log mtail;
 
