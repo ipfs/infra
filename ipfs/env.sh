@@ -5,10 +5,10 @@ all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref=fce80189778b795a6d9b4aa1f90267d5350d831c
 
 # mplex experiment
-pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
-venus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
-earth_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
-uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment"
+pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
+venus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
+earth_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
+uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
 # nihal_ipfs_daemon_opts="--enable-mplex-experiment"
 # auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
@@ -23,7 +23,7 @@ auva_ipfs_daemon_opts="--routing=none"
 strawberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
 blueberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
 
-all_ipfs_daemon_opts="--enable-gc"
+all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
