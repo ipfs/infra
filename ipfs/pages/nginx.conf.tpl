@@ -1,11 +1,11 @@
 server {
-    server_name ipn.io www.ipn.io;
+    server_name protocol.ai ipn.io www.ipn.io;
     access_log /var/log/nginx/access.log mtail;
 
     listen 80;
     listen [::]:80;
 
-    return 301 https://protocol.ai$request_uri;
+    return 301 https://protocol.ai\$request_uri;
 }
 
 server {
@@ -157,9 +157,6 @@ server {
 server {
     server_name protocol.ai;
     access_log /var/log/nginx/access.log mtail;
-
-    listen 80;
-    listen [::]:80;
 
     listen 443 ssl;
     listen [::]:443 ssl;
