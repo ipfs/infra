@@ -75,6 +75,7 @@
   },
   "DialBlocklist": null,
   "Swarm": {
+    "DisableNatPortMap": true,
     "AddrFilters": [
 $(for h in ${provsn_hosts[@]}; do
   printf '      "/ip6/%s/ipcidr/128",\n' $(host=$h var cjdns_ipv6)
