@@ -19,10 +19,6 @@ nihal_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 auva_ipfs_ref=74afd87986d322ba6180670ed95af9884cb45c26
 auva_ipfs_daemon_opts="--routing=none"
 
-# dedicated bootstrap hosts
-strawberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
-blueberry_ipfs_ref=8291bd6ec6b9881a12ad6a137e78f5c3351b63cf
-
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
 # Network ports. See config.tpl for how they are bound.
@@ -46,8 +42,6 @@ pollux_ipfs_peerid="QmRv1GNseNP1krEwHDjaQMeQVJy41879QcDwpJVhY8SWve"
 biham_ipfs_peerid="QmZY7MtK8ZbG1suwrxc7xEYZ2hQLf1dAWPRHhjxC8rjq8E"
 nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
 auva_ipfs_peerid="QmZSe5GZJb5jcKQZzQmdWaFtimTHafjvtxyMMTJy5nZ6hN"
-strawberry_ipfs_peerid="QmWyLSnMHW2H6bmCG9e9PQq4ARve94JduvGjbutUuzx4a8"
-blueberry_ipfs_peerid="QmVcj9MATxGTAFoQSbrJvZ9Fbs4Jzvrxy9hyJeRwbW8NeA"
 
 # Repo settings (aka fs-repo)
 # Historical location, TODO: move to /mnt/data/ipfs
