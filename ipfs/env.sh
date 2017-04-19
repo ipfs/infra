@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-# TODO warning, this is still fs-repo@4
 all_ipfs_ref=ab92d39410655067b02c5e510251fb97fedff5a0
 
 # mplex experiment
