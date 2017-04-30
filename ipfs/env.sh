@@ -15,7 +15,7 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-e
 biham_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 pollux_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 nihal_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
-auva_ipfs_ref=e2b2d0996f2faf676d479f1f71dafb330850c2fe # adder flush PR #3888
+auva_ipfs_ref=2930e3fd6656d8e36bc554ef86a11ec1999646c2 # adder flush PR #3888 and sharding fix
 auva_ipfs_daemon_opts="--routing=none"
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
