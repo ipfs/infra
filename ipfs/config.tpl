@@ -12,6 +12,9 @@
     "Type": "leveldb",
     "BloomFilterSize": $(var ipfs_bloom_size)
   },
+  "Experimental": {
+    "ShardingEnabled": $(var ipfs_enable_sharding)
+  },
   "Addresses": {
     "Swarm": [
       "/ip4/0.0.0.0/tcp/$(var ipfs_swarm_tcp)",
