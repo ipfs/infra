@@ -16,7 +16,6 @@ biham_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 pollux_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 nihal_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
 auva_ipfs_ref=8a7c6affc807a76fa12f7d3c41be4d8b0cd82261 # adder flush PR #3888 and sharding fix
-auva_ipfs_daemon_opts="--routing=none"
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
