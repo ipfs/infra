@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_cjdns_git="https://github.com/cjdelisle/cjdns.git"
-all_cjdns_ref="642a2697d2e40f7418662008b437ce90ed939389"
+all_cjdns_ref="f4f73cdc120907f9952f7c74abe68394fd2879a0"
 all_cjdns_admin_address="127.0.0.1"
 all_cjdns_admin_port="11234"
 all_cjdns_admin_password="NONE"
