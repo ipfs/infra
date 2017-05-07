@@ -12,7 +12,7 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-e
 # auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
+biham_ipfs_ref=348c75f3f90bbe05203e4c3a0177de3ea9146df3
 pollux_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
 nihal_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
 auva_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
