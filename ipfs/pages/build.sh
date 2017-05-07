@@ -39,3 +39,18 @@ printf %s\\n "$(lookup pages_protocol_ssl_cert)" > out/protocol.ai.crt
 printf %s\\n "$(lookup pages_protocol_ssl_key)" > out/protocol.ai.key
 printf %s\\n "$(lookup pages_protocol_ssl_trustchain)" > out/protocol.ai.trustchain.crt
 printf %s\\n "$(lookup pages_protocol_ssl_dhparam)" > out/protocol.ai.dhparam.pem
+
+printf %s\\n "$(lookup pages_wikipediaonipfs_ssl_cert)" > out/wikipedia-on-ipfs.org.crt
+printf %s\\n "$(lookup pages_wikipediaonipfs_ssl_key)" > out/wikipedia-on-ipfs.org.key
+printf %s\\n "$(lookup pages_wikipediaonipfs_ssl_trustchain)" > out/wikipedia-on-ipfs.org.trustchain.crt
+printf %s\\n "$(lookup pages_wikipediaonipfs_ssl_dhparam)" > out/wikipedia-on-ipfs.org.dhparam.pem
+
+printf %s\\n "$(lookup pages_en_wikipediaonipfs_ssl_cert)" > out/en.wikipedia-on-ipfs.org.crt
+printf %s\\n "$(lookup pages_en_wikipediaonipfs_ssl_key)" > out/en.wikipedia-on-ipfs.org.key
+printf %s\\n "$(lookup pages_en_wikipediaonipfs_ssl_trustchain)" > out/en.wikipedia-on-ipfs.org.trustchain.crt
+printf %s\\n "$(lookup pages_en_wikipediaonipfs_ssl_dhparam)" > out/en.wikipedia-on-ipfs.org.dhparam.pem
+
+printf %s\\n "$(lookup pages_tr_wikipediaonipfs_ssl_cert)" > out/tr.wikipedia-on-ipfs.org.crt
+printf %s\\n "$(lookup pages_tr_wikipediaonipfs_ssl_key)" > out/tr.wikipedia-on-ipfs.org.key
+printf %s\\n "$(lookup pages_tr_wikipediaonipfs_ssl_trustchain)" > out/tr.wikipedia-on-ipfs.org.trustchain.crt
+printf %s\\n "$(lookup pages_tr_wikipediaonipfs_ssl_dhparam)" > out/tr.wikipedia-on-ipfs.org.dhparam.pem
