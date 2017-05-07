@@ -12,10 +12,10 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-e
 # auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
-pollux_ipfs_ref=ed729423ce548785834cdcaa21aab11ebc3a1b1a
-nihal_ipfs_ref=04d276e420a6867b576ebde3f095cbb64c80a144
-auva_ipfs_ref=8a7c6affc807a76fa12f7d3c41be4d8b0cd82261 # adder flush PR #3888 and sharding fix
+biham_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
+pollux_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
+nihal_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
+auva_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
