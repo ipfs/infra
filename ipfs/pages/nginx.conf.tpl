@@ -178,6 +178,8 @@ server {
     server_name wikipedia-on-ipfs.org;
     access_log /var/log/nginx/access.log mtail;
 
+    listen 80;
+    listen [::]:80;
     listen 443 ssl;
     listen [::]:443 ssl;
     ssl_certificate /etc/nginx/certs/wikipedia-on-ipfs.org.crt;
@@ -185,13 +187,7 @@ server {
     ssl_dhparam /etc/nginx/certs/wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/wikipedia-on-ipfs.org.trustchain.crt;
 
-    location / {
-        proxy_set_header Host wikipedia-on-ipfs.org;
-        # The gateway upstream is defined in the ipfs/gateway unit.
-        proxy_pass http://gateway;
-        proxy_pass_header Server;
-        proxy_read_timeout 60s;
-    }
+    return 301 https://ipfs.io/blog/24-uncensorable-wikipedia/;
 }
 
 server {
