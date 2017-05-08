@@ -172,6 +172,66 @@ if [ ! -z "$(diff -Naur "$cert_dest/protocol.ai.dhparam.pem" "out/protocol.ai.dh
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/wikipedia-on-ipfs.org.crt" "out/wikipedia-on-ipfs.org.crt")" ]; then
+  echo "ipfs/pages wikipedia-on-ipfs.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/wikipedia-on-ipfs.org.key" "out/wikipedia-on-ipfs.org.key")" ]; then
+  echo "ipfs/pages wikipedia-on-ipfs.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/wikipedia-on-ipfs.org.trustchain.crt" "out/wikipedia-on-ipfs.org.trustchain.crt")" ]; then
+  echo "ipfs/pages wikipedia-on-ipfs.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/wikipedia-on-ipfs.org.dhparam.pem" "out/wikipedia-on-ipfs.org.dhparam.pem")" ]; then
+  echo "ipfs/pages wikipedia-on-ipfs.org ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/en.wikipedia-on-ipfs.org.crt" "out/en.wikipedia-on-ipfs.org.crt")" ]; then
+  echo "ipfs/pages en.wikipedia-on-ipfs.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/en.wikipedia-on-ipfs.org.key" "out/en.wikipedia-on-ipfs.org.key")" ]; then
+  echo "ipfs/pages en.wikipedia-on-ipfs.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/en.wikipedia-on-ipfs.org.trustchain.crt" "out/en.wikipedia-on-ipfs.org.trustchain.crt")" ]; then
+  echo "ipfs/pages en.wikipedia-on-ipfs.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/en.wikipedia-on-ipfs.org.dhparam.pem" "out/en.wikipedia-on-ipfs.org.dhparam.pem")" ]; then
+  echo "ipfs/pages en.wikipedia-on-ipfs.org ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/tr.wikipedia-on-ipfs.org.crt" "out/tr.wikipedia-on-ipfs.org.crt")" ]; then
+  echo "ipfs/pages tr.wikipedia-on-ipfs.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/tr.wikipedia-on-ipfs.org.key" "out/tr.wikipedia-on-ipfs.org.key")" ]; then
+  echo "ipfs/pages tr.wikipedia-on-ipfs.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/tr.wikipedia-on-ipfs.org.trustchain.crt" "out/tr.wikipedia-on-ipfs.org.trustchain.crt")" ]; then
+  echo "ipfs/pages tr.wikipedia-on-ipfs.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/tr.wikipedia-on-ipfs.org.dhparam.pem" "out/tr.wikipedia-on-ipfs.org.dhparam.pem")" ]; then
+  echo "ipfs/pages tr.wikipedia-on-ipfs.org ssl dhparam changed"
+  reload=1
+fi
+
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
@@ -204,6 +264,18 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/protocol.ai.key" "$cert_dest/protocol.ai.key"
   cp "out/protocol.ai.trustchain.crt" "$cert_dest/protocol.ai.trustchain.crt"
   cp "out/protocol.ai.dhparam.pem" "$cert_dest/protocol.ai.dhparam.pem"
+  cp "out/wikipedia-on-ipfs.org.crt" "$cert_dest/wikipedia-on-ipfs.org.crt"
+  cp "out/wikipedia-on-ipfs.org.key" "$cert_dest/wikipedia-on-ipfs.org.key"
+  cp "out/wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/wikipedia-on-ipfs.org.trustchain.crt"
+  cp "out/wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/wikipedia-on-ipfs.org.dhparam.pem"
+  cp "out/en.wikipedia-on-ipfs.org.crt" "$cert_dest/en.wikipedia-on-ipfs.org.crt"
+  cp "out/en.wikipedia-on-ipfs.org.key" "$cert_dest/en.wikipedia-on-ipfs.org.key"
+  cp "out/en.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/en.wikipedia-on-ipfs.org.trustchain.crt"
+  cp "out/en.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/en.wikipedia-on-ipfs.org.dhparam.pem"
+  cp "out/tr.wikipedia-on-ipfs.org.crt" "$cert_dest/tr.wikipedia-on-ipfs.org.crt"
+  cp "out/tr.wikipedia-on-ipfs.org.key" "$cert_dest/tr.wikipedia-on-ipfs.org.key"
+  cp "out/tr.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/tr.wikipedia-on-ipfs.org.trustchain.crt"
+  cp "out/tr.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/tr.wikipedia-on-ipfs.org.dhparam.pem"
 
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 
