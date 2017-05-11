@@ -5,6 +5,11 @@ set -e
 mkdir -p out/
 provsn_template nginx.conf.tpl out/nginx.conf
 
+printf %s\\n "$(lookup pages_iipfs_ssl_cert)" > out/i.ipfs.io.crt
+printf %s\\n "$(lookup pages_iipfs_ssl_key)" > out/i.ipfs.io.key
+printf %s\\n "$(lookup pages_iipfs_ssl_trustchain)" > out/i.ipfs.io.trustchain.crt
+printf %s\\n "$(lookup pages_iipfs_ssl_dhparam)" > out/i.ipfs.io.dhparam.pem
+
 printf %s\\n "$(lookup pages_orbit_ssl_cert)" > out/orbit.chat.crt
 printf %s\\n "$(lookup pages_orbit_ssl_key)" > out/orbit.chat.key
 printf %s\\n "$(lookup pages_orbit_ssl_trustchain)" > out/orbit.chat.trustchain.crt

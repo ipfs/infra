@@ -32,6 +32,26 @@ if [ ! -z "$(diff -Naur "$nginx_checkpoint" "$nginx_src")" ]; then
 fi
 
 # TODO: checkpoints for the ssl files?
+if [ ! -z "$(diff -Naur "$cert_dest/i.ipfs.io.crt" "out/i.ipfs.io.crt")" ]; then
+  echo "ipfs/pages i.ipfs.io ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/i.ipfs.io.key" "out/i.ipfs.io.key")" ]; then
+  echo "ipfs/pages i.ipfs.io ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/i.ipfs.io.trustchain.crt" "out/i.ipfs.io.trustchain.crt")" ]; then
+  echo "ipfs/pages i.ipfs.io ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/i.ipfs.io.dhparam.pem" "out/i.ipfs.io.dhparam.pem")" ]; then
+  echo "ipfs/pages i.ipfs.io ssl dhparam changed"
+  reload=1
+fi
+
 if [ ! -z "$(diff -Naur "$cert_dest/orbit.chat.crt" "out/orbit.chat.crt")" ]; then
   echo "ipfs/pages orbit.chat ssl cert changed"
   reload=1
@@ -236,6 +256,10 @@ if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
   cp "$nginx_src" "$nginx_dest"
+  cp "out/i.ipfs.io.crt" "$cert_dest/i.ipfs.io.crt"
+  cp "out/i.ipfs.io.key" "$cert_dest/i.ipfs.io.key"
+  cp "out/i.ipfs.io.trustchain.crt" "$cert_dest/i.ipfs.io.trustchain.crt"
+  cp "out/i.ipfs.io.dhparam.pem" "$cert_dest/i.ipfs.io.dhparam.pem"
   cp "out/orbit.chat.crt" "$cert_dest/orbit.chat.crt"
   cp "out/orbit.chat.key" "$cert_dest/orbit.chat.key"
   cp "out/orbit.chat.trustchain.crt" "$cert_dest/orbit.chat.trustchain.crt"

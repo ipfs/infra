@@ -48,5 +48,10 @@ cp "denylist.conf" "$target/conf.d/gateway/denylist.conf"
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/gateway nginx reloading"
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
-  echo $out | grep -v failed >/dev/null && echo $out && exit 1
+  if echo $out | grep failed >/dev/null; then
+    echo $out
+    # Reload failed, roll back.
+    cp "$nginx_checkpoint" "$nginx_dest" || true
+    exit 1
+  fi
 fi
