@@ -252,6 +252,66 @@ if [ ! -z "$(diff -Naur "$cert_dest/tr.wikipedia-on-ipfs.org.dhparam.pem" "out/t
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/simple.wikipedia-on-ipfs.org.crt" "out/simple.wikipedia-on-ipfs.org.crt")" ]; then
+  echo "ipfs/pages simple.wikipedia-on-ipfs.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/simple.wikipedia-on-ipfs.org.key" "out/simple.wikipedia-on-ipfs.org.key")" ]; then
+  echo "ipfs/pages simple.wikipedia-on-ipfs.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/simple.wikipedia-on-ipfs.org.trustchain.crt" "out/simple.wikipedia-on-ipfs.org.trustchain.crt")" ]; then
+  echo "ipfs/pages simple.wikipedia-on-ipfs.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/simple.wikipedia-on-ipfs.org.dhparam.pem" "out/simple.wikipedia-on-ipfs.org.dhparam.pem")" ]; then
+  echo "ipfs/pages simple.wikipedia-on-ipfs.org ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ar.wikipedia-on-ipfs.org.crt" "out/ar.wikipedia-on-ipfs.org.crt")" ]; then
+  echo "ipfs/pages ar.wikipedia-on-ipfs.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ar.wikipedia-on-ipfs.org.key" "out/ar.wikipedia-on-ipfs.org.key")" ]; then
+  echo "ipfs/pages ar.wikipedia-on-ipfs.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ar.wikipedia-on-ipfs.org.trustchain.crt" "out/ar.wikipedia-on-ipfs.org.trustchain.crt")" ]; then
+  echo "ipfs/pages ar.wikipedia-on-ipfs.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ar.wikipedia-on-ipfs.org.dhparam.pem" "out/ar.wikipedia-on-ipfs.org.dhparam.pem")" ]; then
+  echo "ipfs/pages ar.wikipedia-on-ipfs.org ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ku.wikipedia-on-ipfs.org.crt" "out/ku.wikipedia-on-ipfs.org.crt")" ]; then
+  echo "ipfs/pages ku.wikipedia-on-ipfs.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ku.wikipedia-on-ipfs.org.key" "out/ku.wikipedia-on-ipfs.org.key")" ]; then
+  echo "ipfs/pages ku.wikipedia-on-ipfs.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ku.wikipedia-on-ipfs.org.trustchain.crt" "out/ku.wikipedia-on-ipfs.org.trustchain.crt")" ]; then
+  echo "ipfs/pages ku.wikipedia-on-ipfs.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/ku.wikipedia-on-ipfs.org.dhparam.pem" "out/ku.wikipedia-on-ipfs.org.dhparam.pem")" ]; then
+  echo "ipfs/pages ku.wikipedia-on-ipfs.org ssl dhparam changed"
+  reload=1
+fi
+
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
@@ -300,6 +360,18 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/tr.wikipedia-on-ipfs.org.key" "$cert_dest/tr.wikipedia-on-ipfs.org.key"
   cp "out/tr.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/tr.wikipedia-on-ipfs.org.trustchain.crt"
   cp "out/tr.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/tr.wikipedia-on-ipfs.org.dhparam.pem"
+  cp "out/simple.wikipedia-on-ipfs.org.crt" "$cert_dest/simple.wikipedia-on-ipfs.org.crt"
+  cp "out/simple.wikipedia-on-ipfs.org.key" "$cert_dest/simple.wikipedia-on-ipfs.org.key"
+  cp "out/simple.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/simple.wikipedia-on-ipfs.org.trustchain.crt"
+  cp "out/simple.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/simple.wikipedia-on-ipfs.org.dhparam.pem"
+  cp "out/ar.wikipedia-on-ipfs.org.crt" "$cert_dest/ar.wikipedia-on-ipfs.org.crt"
+  cp "out/ar.wikipedia-on-ipfs.org.key" "$cert_dest/ar.wikipedia-on-ipfs.org.key"
+  cp "out/ar.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/ar.wikipedia-on-ipfs.org.trustchain.crt"
+  cp "out/ar.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/ar.wikipedia-on-ipfs.org.dhparam.pem"
+  cp "out/ku.wikipedia-on-ipfs.org.crt" "$cert_dest/ku.wikipedia-on-ipfs.org.crt"
+  cp "out/ku.wikipedia-on-ipfs.org.key" "$cert_dest/ku.wikipedia-on-ipfs.org.key"
+  cp "out/ku.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/ku.wikipedia-on-ipfs.org.trustchain.crt"
+  cp "out/ku.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/ku.wikipedia-on-ipfs.org.dhparam.pem"
 
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 
