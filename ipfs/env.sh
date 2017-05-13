@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
+all_ipfs_ref=51af72de8dd85dd0e15b67571a4a67d312d10914
 
 # mplex experiment
 pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
