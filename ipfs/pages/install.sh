@@ -52,6 +52,26 @@ if [ ! -z "$(diff -Naur "$cert_dest/i.ipfs.io.dhparam.pem" "out/i.ipfs.io.dhpara
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/filecoin.io.crt" "out/filecoin.io.crt")" ]; then
+  echo "ipfs/pages filecoin.io ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/filecoin.io.key" "out/filecoin.io.key")" ]; then
+  echo "ipfs/pages filecoin.io ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/filecoin.io.trustchain.crt" "out/filecoin.io.trustchain.crt")" ]; then
+  echo "ipfs/pages filecoin.io ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/filecoin.io.dhparam.pem" "out/filecoin.io.dhparam.pem")" ]; then
+  echo "ipfs/pages filecoin.io ssl dhparam changed"
+  reload=1
+fi
+
 if [ ! -z "$(diff -Naur "$cert_dest/orbit.chat.crt" "out/orbit.chat.crt")" ]; then
   echo "ipfs/pages orbit.chat ssl cert changed"
   reload=1
@@ -320,6 +340,10 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/i.ipfs.io.key" "$cert_dest/i.ipfs.io.key"
   cp "out/i.ipfs.io.trustchain.crt" "$cert_dest/i.ipfs.io.trustchain.crt"
   cp "out/i.ipfs.io.dhparam.pem" "$cert_dest/i.ipfs.io.dhparam.pem"
+  cp "out/filecoin.io.crt" "$cert_dest/filecoin.io.crt"
+  cp "out/filecoin.io.key" "$cert_dest/filecoin.io.key"
+  cp "out/filecoin.io.trustchain.crt" "$cert_dest/filecoin.io.trustchain.crt"
+  cp "out/filecoin.io.dhparam.pem" "$cert_dest/filecoin.io.dhparam.pem"
   cp "out/orbit.chat.crt" "$cert_dest/orbit.chat.crt"
   cp "out/orbit.chat.key" "$cert_dest/orbit.chat.key"
   cp "out/orbit.chat.trustchain.crt" "$cert_dest/orbit.chat.trustchain.crt"
