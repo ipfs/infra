@@ -33,7 +33,7 @@
 - docker:
     name: pinbot
     image: "pinbot:{{ pinbot_ref }}"
-    command: '--name=pinbot --channel=#ipfs --prefix="!"'
+    command: '--name={{ pinbot_nick }} --channel={{ pinbot_channel }} --prefix="!"'
     state: reloaded
     restart_policy: always
     net: host

@@ -1,3 +1,5 @@
 ---
 pinbot_git: https://github.com/whyrusleeping/pinbot.git
-pinbot_ref: a720a996808c9eca8f82510b91347c117f8d57fc
+pinbot_ref: ff91f4fb6fffe7d80f41fa8b15b36245bdc80949
+pinbot_channel: "#ipfs-pinbot"
+pinbot_nick: pinbot

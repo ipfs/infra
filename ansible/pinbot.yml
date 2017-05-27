@@ -2,7 +2,5 @@
 - hosts: util
   vars:
     pinbot_targets: "{{ groups.gateway }}"
-  pre_tasks:
-    - include_vars: secrets_plaintext/secrets.yml
   roles:
     - pinbot
