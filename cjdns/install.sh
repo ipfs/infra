@@ -65,6 +65,7 @@ if [ "restart$restart" == "restart1" ]; then
   if [ "systemd$systemd" == "systemd1" ]; then
     cp systemd.service /lib/systemd/system/cjdns.service
     systemctl daemon-reload
+    systemctl is-enabled cjdns || systemctl enable cjdns
     systemctl restart cjdns
   else
     cp upstart.conf /etc/init/cjdns.conf

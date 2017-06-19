@@ -71,6 +71,7 @@ if [ "restart$restart" == "restart1" ]; then
   if [ "systemd$systemd" == "systemd1" ]; then
     cp systemd.service /lib/systemd/system/node_exporter.service
     systemctl daemon-reload
+    systemctl is-enabled node_exporter || systemctl enable node_exporter
     systemctl restart node_exporter
   else
     cp upstart.conf /etc/init/node_exporter.conf
