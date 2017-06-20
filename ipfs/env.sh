@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="edbb42b712d5e0f82feebba4cd35b608fc75863d"
-
-# bitswap concurrency experiment, see https://github.com/ipfs/go-ipfs/pull/3952
-pluto_ipfs_ref="f60090d946baa442a70a5878cd456022ab8f9e00"
-earth_ipfs_ref="f60090d946baa442a70a5878cd456022ab8f9e00"
+all_ipfs_ref="db6073bc276d4c311da0a304305aedf1223c7f06"
 
 # mplex experiment
 pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
