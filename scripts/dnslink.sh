@@ -36,7 +36,7 @@ if [ -z "$record_id" ]; then
     -H "X-DNSimple-Domain-Token: $DNSIMPLE_TOKEN" \
     -H "Accept: application/json" \
     -H "Content-Type: application/json" \
-    -d "{\"record\":{ \"name\":\"$RECORD_NAME\", \"type\":\"TXT\", \"content\":\"dnslink=/ipfs/$HASH\", \"ttl\":\"$RECORD_TTL\" }}" \
+    -d "{\"record\":{ \"name\":\"$RECORD_NAME\", \"record_type\":\"TXT\", \"content\":\"dnslink=/ipfs/$HASH\", \"ttl\":\"$RECORD_TTL\" }}" \
     | jq -r '.record' \
   && printf "\\nIt looks like we're good: https://ipfs.io/ipns/$ZONE\\n"
 else
