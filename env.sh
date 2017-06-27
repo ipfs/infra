@@ -92,8 +92,7 @@ jenkins_units=(${baseunits[@]} ci/jenkins ssl)
 all_vpn_allowlist=()
 # lgierth
 all_vpn_allowlist+=("fc3d:7777:a6a4:fcdb:f218:5856:5de:eb1a")
-all_vpn_allowlist+=("fc0c:f70f:320e:21c2:bfe8:b9ff:fcbf:43e9")
-all_vpn_allowlist+=("fc0d:66d:1e17:d13d:a1e7:1f41:87f0:5e63")
+all_vpn_allowlist+=("fcd0:ad3d:c5e4:afa8:56ed:cce2:57a3:39ba")
 # whyrusleeping
 all_vpn_allowlist+=("fcd2:11ef:3362:a108:faa5:1d61:58a4:1292")
 all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
@@ -104,8 +103,6 @@ all_vpn_allowlist+=("fc00:5555:b994:a83e:ea79:eabc:61a5:8af8")
 all_vpn_allowlist+=("fc68:4444:9c8d:7936:4e9d:1470:b2cc:677f")
 # victorbjelkholm
 all_vpn_allowlist+=("fc7e:76f4:cfae:c1f3:e754:6b1d:bcd6:6281")
-# benhylau
-all_vpn_allowlist+=("fcaf:c9e1:bfff:73a3:c08c:51aa:3711:2ccc")
 # teamcity
 all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
 # jbenet
