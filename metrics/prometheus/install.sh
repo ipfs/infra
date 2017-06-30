@@ -50,7 +50,9 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   git remote prune origin >/dev/null
   git gc
   git fetch -q --all
-  git reset -q --hard "$ref"
+  # git reset -q --hard "$ref"
+  docker pull quay.io/prometheus/busybox:latest
+  docker pull quay.io/prometheus/busybox:glibc
   DOCKER_IMAGE_TAG="$ref" make build docker >/dev/null
   cd -
   echo "prometheus docker image changed"
@@ -64,8 +66,8 @@ if [ "restart$restart" == "restart1" ]; then
   echo "prometheus restarting"
   if [ "running$running" == "running1" ]; then
     docker stop "prometheus" >/dev/null || true
-    docker rm -f "prometheus" >/dev/null || true
   fi
+  docker rm -f "prometheus" >/dev/null || true
   docker run $(cat out/docker.opts) >/dev/null
 elif [ "running$running" == "running0" ]; then
   echo "prometheus starting"
