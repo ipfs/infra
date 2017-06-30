@@ -30,6 +30,7 @@ if [ "reinstall$reinstall" == "reinstall1" ]; then
   fi
 
   echo "golang unpacking $version"
+  rm -rf "$goroot" "$HOME/go/pkg"
   tar -C $(dirname "$goroot") -xf "$tarball"
 fi
 
