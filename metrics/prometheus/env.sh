@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_prometheus_git="https://github.com/prometheus/prometheus.git"
-all_prometheus_ref="36fbdcc30fd13ad796381dc934742c559feeb1b5"
+all_prometheus_ref="3afb3fffa3a29c3de865e1172fb740442e9d0133"
 
 all_prometheus_opts=("-storage.local.memory-chunks=512288"
                      "-storage.local.retention=43800h0m0s"
