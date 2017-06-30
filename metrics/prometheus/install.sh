@@ -64,8 +64,8 @@ if [ "restart$restart" == "restart1" ]; then
   echo "prometheus restarting"
   if [ "running$running" == "running1" ]; then
     docker stop "prometheus" >/dev/null || true
-    docker rm -f "prometheus" >/dev/null || true
   fi
+  docker rm -f "prometheus" >/dev/null || true
   docker run $(cat out/docker.opts) >/dev/null
 elif [ "running$running" == "running0" ]; then
   echo "prometheus starting"
