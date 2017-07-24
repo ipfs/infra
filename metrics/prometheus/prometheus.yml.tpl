@@ -5,6 +5,7 @@ global:
   evaluation_interval: $(var prometheus_evaluation_interval)
 
 scrape_configs:
+
   - job_name: 'gateway'
     metrics_path: '/debug/metrics/prometheus'
     static_configs:
@@ -159,3 +160,13 @@ $(for dest in $(lookup prometheus_gateway_hosts); do
     echo   '          page: libp2p.io'
   done
 done)
+
+  - job_name: mailchimp_filecoin
+    metrics_path: $(var prometheus_mailchimp_path)
+    basic_auth:
+      username: $(var prometheus_mailchimp_user)
+      password: $(var prometheus_mailchimp_password)
+    scheme: https
+    static_configs:
+      - targets:
+        - $(var prometheus_mailchimp_target)
