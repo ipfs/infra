@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="db6073bc276d4c311da0a304305aedf1223c7f06"
+all_ipfs_ref="4679f806bd00c0a5299c22c82d1fbfdbad928e6d"
 
 # mplex experiment
 pluto_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-experiment"
@@ -12,10 +12,10 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-e
 # auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=348c75f3f90bbe05203e4c3a0177de3ea9146df3
-pollux_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
-nihal_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
-auva_ipfs_ref=a6e96e6c99c4240427af6c3bd9a9ca1b4cea99b4
+biham_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
+pollux_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
+nihal_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
+auva_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
