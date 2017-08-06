@@ -3,7 +3,7 @@
 # Names of the target hosts.
 # These are just names, nothing is being inferred from them.
 # Host-specific settings can be set like this: <host>_<setting>
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury pollux biham nihal auva banana deimos jenkins)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury scrappy pollux biham nihal auva banana deimos jenkins)
 
 # Provsn appends these to every SSH invocation.
 all_ssh_options="-o ConnectTimeout=30"
@@ -58,6 +58,10 @@ earth_units=(${baseunits[@]} ${gatewayunits[@]})
 # digitalocean-lon1
 mercury_ssh="root@178.62.61.185"
 mercury_units=(${baseunits[@]} ${gatewayunits[@]})
+
+# ovh
+scrappy_ssh="root@217.182.195.23"
+scrappy_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # hetzner-nuremberg
 pollux_ssh="root@5.9.59.34"
