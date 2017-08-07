@@ -37,6 +37,7 @@ venus_ipfs_peerid="QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64"
 earth_ipfs_peerid="QmSoLer265NRgSp2LA3dPaeykiS1J6DifTC88f5uVQKNAd"
 mercury_ipfs_peerid="QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3"
 scrappy_ipfs_peerid="Qmbut9Ywz9YEDrz8ySBSgWyJk41Uvm2QJPhwDJzJyGFsD6"
+chappy_ipfs_peerid="QmZMxNdpMkewiVZLMRxaNxUeZpDUb34pWjZ1kZvsd16Zic"
 pollux_ipfs_peerid="QmRv1GNseNP1krEwHDjaQMeQVJy41879QcDwpJVhY8SWve"
 biham_ipfs_peerid="QmZY7MtK8ZbG1suwrxc7xEYZ2hQLf1dAWPRHhjxC8rjq8E"
 nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
@@ -63,6 +64,8 @@ auva_ipfs_enable_sharding=true
 all_ipfs_gc_period=1h
 all_ipfs_gc_watermark=90
 all_ipfs_gc_capacity=60G
+scrappy_ipfs_gc_capacity=1000G
+chappy_ipfs_gc_capacity=1000G
 
 # On the storage nodes, we don't automatically run GC.
 pollux_ipfs_gc_period=0s
