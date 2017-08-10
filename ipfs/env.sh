@@ -11,12 +11,6 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-e
 # nihal_ipfs_daemon_opts="--enable-mplex-experiment"
 # auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
-# v0.4.11-pre canary
-pluto_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
-earth_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
-jupiter_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
-neptune_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
-
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
 pollux_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
