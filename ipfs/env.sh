@@ -12,10 +12,12 @@ uranus_ipfs_daemon_opts="--enable-gc --enable-mplex-experiment --enable-pubsub-e
 # auva_ipfs_daemon_opts="--enable-mplex-experiment"
 
 # v0.4.11-pre canary
-pluto_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
 earth_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
 jupiter_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
 neptune_ipfs_ref=a3c506ff92b55eda2cd4f2ce1652fa5e9d9a6d86
+
+# https://github.com/ipfs/go-ipfs/pull/4135 (gc tests @Kubuxu)
+pluto_ipfs_ref=5e3fd5e7088b0d07fa8a0fa781d7252e971fdf32
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
