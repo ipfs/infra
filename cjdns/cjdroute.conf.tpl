@@ -31,6 +31,15 @@ for peer in $(lookup cjdns_udp4_peers); do
     printf '                    "password": "%s"\n' $(var 'cjdns_'$peer'_password')
     printf '                },\n'
 done
+for h in ${provsn_hosts[@]}; do
+    if [ "h$h" != "h$host" ]; then
+        printf '                "%s:%s": {\n' $(host=$h var ipv4_address) $(host=$h var cjdns_udp4_port)
+        printf '                    "peerName": "%s.i.ipfs.team",\n' $h
+        printf '                    "publicKey": "%s",\n' $(host=$h var cjdns_public_key)
+        printf '                    "password": "%s"\n' $(var cjdns_solarnet_password)
+        printf '                },\n'
+    fi
+done
 )
             }
         },
