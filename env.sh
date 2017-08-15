@@ -6,7 +6,7 @@
 provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury scrappy chappy pollux biham nihal auva banana deimos jenkins)
 
 # Provsn appends these to every SSH invocation.
-all_ssh_options="-o ConnectTimeout=30"
+all_ssh_options="-o ConnectTimeout=30 -o UserKnownHostsFile=$provsn_root/known_hosts -o StrictHostKeyChecking=yes"
 
 # These unit shorthands are a workaround for the current lack of host-groups.
 # TODO: We'll eventually be able to specify e.g. the following:
@@ -28,86 +28,86 @@ metricsunits=(metrics/grafana metrics/prometheus)
 all_omit_build=(secrets)
 
 # digitalocean-sfo1
-pluto_ssh="root@104.236.179.241"
+pluto_ssh="root@pluto.i.ipfs.team"
 pluto_ipv4_address="104.236.179.241"
 pluto_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-sfo1
-neptune_ssh="root@104.236.176.52"
+neptune_ssh="root@neptune.i.ipfs.team"
 neptune_ipv4_address="104.236.176.52"
 neptune_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-nyc2
-uranus_ssh="root@162.243.248.213"
+uranus_ssh="root@uranus.i.ipfs.team"
 uranus_ipv4_address="162.243.248.213"
 uranus_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-sgp1
-saturn_ssh="root@128.199.219.111"
+saturn_ssh="root@saturn.i.ipfs.team"
 saturn_ipv4_address="128.199.219.111"
 saturn_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-sfo1
-jupiter_ssh="root@104.236.151.122"
+jupiter_ssh="root@jupiter.i.ipfs.team"
 jupiter_ipv4_address="104.236.151.122"
 jupiter_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-nyc3
-venus_ssh="root@104.236.76.40"
+venus_ssh="root@venus.i.ipfs.team"
 venus_ipv4_address="104.236.76.40"
 venus_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-ams2
-earth_ssh="root@178.62.158.247"
+earth_ssh="root@earth.i.ipfs.team"
 earth_ipv4_address="178.62.158.247"
 earth_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # digitalocean-lon1
-mercury_ssh="root@178.62.61.185"
+mercury_ssh="root@mercury.i.ipfs.team"
 mercury_ipv4_address="178.62.61.185"
 mercury_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # ovh
-scrappy_ssh="root@217.182.195.23"
+scrappy_ssh="root@scrappy.i.ipfs.team"
 scrappy_ipv4_address="217.182.195.23"
 scrappy_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # ovh
-chappy_ssh="root@147.135.130.181"
+chappy_ssh="root@chappy.i.ipfs.team"
 chappy_ipv4_address="147.135.130.181"
 chappy_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # hetzner-nuremberg
-pollux_ssh="root@5.9.59.34"
+pollux_ssh="root@pollux.i.ipfs.team"
 pollux_ipv4_address="5.9.59.34"
 pollux_units=(${baseunits[@]} ${storageunits[@]})
 
 # hetzer-nuremberg
-biham_ssh="root@188.40.114.11"
+biham_ssh="root@biham.i.ipfs.team"
 biham_ipv4_address="188.40.114.11"
 biham_units=(${baseunits[@]} ${storageunits[@]})
 
 # hetzner-nuremberg
-nihal_ssh="root@188.40.116.66"
+nihal_ssh="root@nihal.i.ipfs.team"
 nihal_ipv4_address="188.40.116.66"
 nihal_units=(${baseunits[@]} ${storageunits[@]})
 
 # hetzner-nuremberg
-auva_ssh="root@144.76.60.46"
+auva_ssh="root@auva.i.ipfs.team"
 auva_ipv4_address="144.76.60.46"
 auva_units=(${baseunits[@]} ${storageunits[@]})
 
 # hetzner
-banana_ssh="root@78.46.136.129"
+banana_ssh="root@banana.i.ipfs.team"
 banana_ipv4_address="78.46.136.129"
 banana_units=(${baseunits[@]} ${metricsunits[@]})
 
 # digitalocean-fra1
-deimos_ssh="root@46.101.230.158"
+deimos_ssh="root@deimos.i.ipfs.team"
 deimos_ipv4_address="46.101.230.158"
 deimos_units=(${baseunits[@]})
 
-jenkins_ssh="root@104.236.203.34"
+jenkins_ssh="root@jenkins.i.ipfs.team"
 jenkins_ipv4_address="104.236.203.34"
 jenkins_units=(${baseunits[@]} ci/jenkins ssl)
 
