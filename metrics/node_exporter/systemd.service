@@ -4,7 +4,7 @@ Wants=network.target
 After=network.target
 
 [Service]
-ProtectHome=true
+ProtectHome=read-only
 ProtectSystem=true
 SyslogIdentifier=node_exporter
 ExecStart=/usr/bin/node_exporter --web.listen-address="127.0.0.1:9100" -collectors.enabled=filesystem,netdev
