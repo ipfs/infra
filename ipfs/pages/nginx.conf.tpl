@@ -335,3 +335,26 @@ server {
         proxy_read_timeout 60s;
     }
 }
+
+server {
+    server_name datatogether.org;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/datatogether.org.crt;
+    ssl_certificate_key /etc/nginx/certs/datatogether.org.key;
+    ssl_dhparam /etc/nginx/certs/datatogether.org.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/datatogether.org.trustchain.crt;
+
+    location / {
+        proxy_set_header Host datatogether.org;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}

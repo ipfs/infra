@@ -332,6 +332,26 @@ if [ ! -z "$(diff -Naur "$cert_dest/ku.wikipedia-on-ipfs.org.dhparam.pem" "out/k
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/datatogether.org.crt" "out/datatogether.org.crt")" ]; then
+  echo "ipfs/pages datatogether.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/datatogether.org.key" "out/datatogether.org.key")" ]; then
+  echo "ipfs/pages datatogether.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/datatogether.org.trustchain.crt" "out/datatogether.org.trustchain.crt")" ]; then
+  echo "ipfs/pages datatogether.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/datatogether.org.dhparam.pem" "out/datatogether.org.dhparam.pem")" ]; then
+  echo "ipfs/pages datatogether.org ssl dhparam changed"
+  reload=1
+fi
+
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
@@ -396,6 +416,10 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/ku.wikipedia-on-ipfs.org.key" "$cert_dest/ku.wikipedia-on-ipfs.org.key"
   cp "out/ku.wikipedia-on-ipfs.org.trustchain.crt" "$cert_dest/ku.wikipedia-on-ipfs.org.trustchain.crt"
   cp "out/ku.wikipedia-on-ipfs.org.dhparam.pem" "$cert_dest/ku.wikipedia-on-ipfs.org.dhparam.pem"
+  cp "out/datatogether.org.crt" "$cert_dest/datatogether.org.crt"
+  cp "out/datatogether.org.key" "$cert_dest/datatogether.org.key"
+  cp "out/datatogether.org.trustchain.crt" "$cert_dest/datatogether.org.trustchain.crt"
+  cp "out/datatogether.org.dhparam.pem" "$cert_dest/datatogether.org.dhparam.pem"
 
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 

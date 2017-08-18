@@ -79,3 +79,8 @@ printf %s\\n "$(lookup pages_ku_wikipediaonipfs_ssl_cert)" > out/ku.wikipedia-on
 printf %s\\n "$(lookup pages_ku_wikipediaonipfs_ssl_key)" > out/ku.wikipedia-on-ipfs.org.key
 printf %s\\n "$(lookup pages_ku_wikipediaonipfs_ssl_trustchain)" > out/ku.wikipedia-on-ipfs.org.trustchain.crt
 printf %s\\n "$(lookup pages_ku_wikipediaonipfs_ssl_dhparam)" > out/ku.wikipedia-on-ipfs.org.dhparam.pem
+
+printf %s\\n "$(lookup pages_datatogether_ssl_cert)" > out/datatogether.org.crt
+printf %s\\n "$(lookup pages_datatogether_ssl_key)" > out/datatogether.org.key
+printf %s\\n "$(lookup pages_datatogether_ssl_trustchain)" > out/datatogether.org.trustchain.crt
+printf %s\\n "$(lookup pages_datatogether_ssl_dhparam)" > out/datatogether.org.dhparam.pem
