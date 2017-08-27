@@ -31,7 +31,7 @@ if [ ! -z "$(git diff "$target/docker.opts" "out/docker.opts" || echo "new")" ];
   restart=1
 fi
 
-if [ ! -z "$(git diff "$target/conf.d/0-nginx.conf" "out/nginx.conf" || echo "new")" ]; then
+if [ ! -z "$(git diff "$target/nginx.conf" "out/nginx.conf" || echo "new")" ]; then
   echo "nginx config changed"
   reload=1
 fi
@@ -48,8 +48,11 @@ mkdir -p "$target/certs"
 mkdir -p "$target/logs"
 mkdir -p "$target/html/_errors"
 
-cp "out/nginx.conf" "$target/conf.d/0-nginx.conf"
+cp "out/nginx.conf" "$target/nginx.conf"
 cp "out/451.html" "$target/html/_errors/451.html"
+
+# TODO: remove this migration
+rm -vf "$target/conf.d/0-nginx.conf"
 
 if [ "restart$restart" == "restart1" ]; then
   echo "nginx restarting"
