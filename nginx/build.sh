@@ -14,6 +14,7 @@ cat > out/docker.opts <<-EOF
 --log-driver=json-file
 --log-opt max-size=100m
 --log-opt max-file=2
+-v /opt/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 -v /opt/nginx/conf.d:/etc/nginx/conf.d:ro
 -v /opt/nginx/certs:/etc/nginx/certs:ro
 -v /opt/nginx/logs:/var/log/nginx
