@@ -21,7 +21,7 @@ This repository contains the technical infrastructure of the IPFS community.
 - Default bootstrap used by IPFS: `ipfs bootstrap`
 - Private networking between the hosts
 - Monitoring of services and hosts: http://metrics.ipfs.team
-- Pinbot, an IRC bot in chat.freenode.net/#ipfs-ircbot
+- Pinbot, an IRC bot in chat.freenode.net/#ipfs-pinbot
 - Seeding of $important objects, in `seeding/` (not really maintained at the moment)
 
 Infrastructure that isn't contained here:
