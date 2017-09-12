@@ -4,14 +4,40 @@
     "PrivKey": "$(var ipfs_private_key)"
   },
   "Datastore": {
-    "GCPeriod": "$(var ipfs_gc_period)",
+    "BloomFilterSize": $(var ipfs_bloom_size),
     "NoSync": true,
-    "Path": "/data/ipfs/datastore",
+    "HashOnRead": false,
+    "GCPeriod": "$(var ipfs_gc_period)",
     "StorageGCWatermark": $(var ipfs_gc_watermark),
     "StorageMax": "$(var ipfs_gc_capacity)",
-    "Type": "leveldb",
-    "BloomFilterSize": $(var ipfs_bloom_size)
+    "Spec": {
+      "mounts": [
+        {
+          "child": {
+            "path": "blocks",
+            "shardFunc": "/repo/flatfs/shard/v1/next-to-last/2",
+            "sync": true,
+            "type": "flatfs"
+          },
+          "mountpoint": "/blocks",
+          "prefix": "flatfs.datastore",
+          "type": "measure"
+        },
+        {
+          "child": {
+            "compression": "none",
+            "path": "datastore",
+            "type": "levelds"
+          },
+          "mountpoint": "/",
+          "prefix": "leveldb.datastore",
+          "type": "measure"
+        }
+      ],
+      "type": "mount"
+    }
   },
+
   "Experimental": {
     "ShardingEnabled": $(var ipfs_enable_sharding)
   },
