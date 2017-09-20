@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="2fa39fbfc508be7a217f88c4a77192c8526e3088"
-
-neptune_ipfs_ref="450dc208682fb888c3c821e055b0b20ec7cef2ad"
-pluto_ipfs_ref="450dc208682fb888c3c821e055b0b20ec7cef2ad"
-jupiter_ipfs_ref="450dc208682fb888c3c821e055b0b20ec7cef2ad"
-scrappy_ipfs_ref="450dc208682fb888c3c821e055b0b20ec7cef2ad"
+all_ipfs_ref="2b12a33ed7099b66e81749ad43970b5bd68363c3"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
