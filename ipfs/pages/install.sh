@@ -352,6 +352,86 @@ if [ ! -z "$(diff -Naur "$cert_dest/datatogether.org.dhparam.pem" "out/datatoget
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/saftproject.com.crt" "out/saftproject.com.crt")" ]; then
+  echo "ipfs/pages saftproject.com ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saftproject.com.key" "out/saftproject.com.key")" ]; then
+  echo "ipfs/pages saftproject.com ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saftproject.com.trustchain.crt" "out/saftproject.com.trustchain.crt")" ]; then
+  echo "ipfs/pages saftproject.com ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saftproject.com.dhparam.pem" "out/saftproject.com.dhparam.pem")" ]; then
+  echo "ipfs/pages saftproject.com ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saftproject.com.crt" "out/www.saftproject.com.crt")" ]; then
+  echo "ipfs/pages www.saftproject.com ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saftproject.com.key" "out/www.saftproject.com.key")" ]; then
+  echo "ipfs/pages www.saftproject.com ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saftproject.com.trustchain.crt" "out/www.saftproject.com.trustchain.crt")" ]; then
+  echo "ipfs/pages www.saftproject.com ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saftproject.com.dhparam.pem" "out/www.saftproject.com.dhparam.pem")" ]; then
+  echo "ipfs/pages www.saftproject.com ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.org.crt" "out/saft-project.org.crt")" ]; then
+  echo "ipfs/pages saft-project.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.org.key" "out/saft-project.org.key")" ]; then
+  echo "ipfs/pages saft-project.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.org.trustchain.crt" "out/saft-project.org.trustchain.crt")" ]; then
+  echo "ipfs/pages saft-project.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.org.dhparam.pem" "out/saft-project.org.dhparam.pem")" ]; then
+  echo "ipfs/pages saft-project.org ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.org.crt" "out/www.saft-project.org.crt")" ]; then
+  echo "ipfs/pages www.saft-project.org ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.org.key" "out/www.saft-project.org.key")" ]; then
+  echo "ipfs/pages www.saft-project.org ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.org.trustchain.crt" "out/www.saft-project.org.trustchain.crt")" ]; then
+  echo "ipfs/pages www.saft-project.org ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.org.dhparam.pem" "out/www.saft-project.org.dhparam.pem")" ]; then
+  echo "ipfs/pages www.saft-project.org ssl dhparam changed"
+  reload=1
+fi
+
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
@@ -420,6 +500,22 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/datatogether.org.key" "$cert_dest/datatogether.org.key"
   cp "out/datatogether.org.trustchain.crt" "$cert_dest/datatogether.org.trustchain.crt"
   cp "out/datatogether.org.dhparam.pem" "$cert_dest/datatogether.org.dhparam.pem"
+  cp "out/saftproject.com.crt" "$cert_dest/saftproject.com.crt"
+  cp "out/saftproject.com.key" "$cert_dest/saftproject.com.key"
+  cp "out/saftproject.com.trustchain.crt" "$cert_dest/saftproject.com.trustchain.crt"
+  cp "out/saftproject.com.dhparam.pem" "$cert_dest/saftproject.com.dhparam.pem"
+  cp "out/www.saftproject.com.crt" "$cert_dest/www.saftproject.com.crt"
+  cp "out/www.saftproject.com.key" "$cert_dest/www.saftproject.com.key"
+  cp "out/www.saftproject.com.trustchain.crt" "$cert_dest/www.saftproject.com.trustchain.crt"
+  cp "out/www.saftproject.com.dhparam.pem" "$cert_dest/www.saftproject.com.dhparam.pem"
+  cp "out/saft-project.org.crt" "$cert_dest/saft-project.org.crt"
+  cp "out/saft-project.org.key" "$cert_dest/saft-project.org.key"
+  cp "out/saft-project.org.trustchain.crt" "$cert_dest/saft-project.org.trustchain.crt"
+  cp "out/saft-project.org.dhparam.pem" "$cert_dest/saft-project.org.dhparam.pem"
+  cp "out/www.saft-project.org.crt" "$cert_dest/www.saft-project.org.crt"
+  cp "out/www.saft-project.org.key" "$cert_dest/www.saft-project.org.key"
+  cp "out/www.saft-project.org.trustchain.crt" "$cert_dest/www.saft-project.org.trustchain.crt"
+  cp "out/www.saft-project.org.dhparam.pem" "$cert_dest/www.saft-project.org.dhparam.pem"
 
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 

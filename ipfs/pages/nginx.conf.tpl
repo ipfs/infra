@@ -358,3 +358,77 @@ server {
         proxy_read_timeout 60s;
     }
 }
+
+server {
+    server_name saftproject.com;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/saftproject.com.crt;
+    ssl_certificate_key /etc/nginx/certs/saftproject.com.key;
+    ssl_dhparam /etc/nginx/certs/saftproject.com.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/saftproject.com.trustchain.crt;
+
+    location / {
+        proxy_set_header Host saftproject.com;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name www.saftproject.com;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/www.saftproject.com.crt;
+    ssl_certificate_key /etc/nginx/certs/www.saftproject.com.key;
+    ssl_dhparam /etc/nginx/certs/www.saftproject.com.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/www.saftproject.com.trustchain.crt;
+
+    return 301 https://saftproject.com\$request_uri;
+}
+
+server {
+    server_name saft-project.org;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/saft-project.org.crt;
+    ssl_certificate_key /etc/nginx/certs/saft-project.org.key;
+    ssl_dhparam /etc/nginx/certs/saft-project.org.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/saft-project.org.trustchain.crt;
+
+    return 301 https://saftproject.com\$request_uri;
+}
+
+server {
+    server_name www.saft-project.org;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/www.saft-project.org.crt;
+    ssl_certificate_key /etc/nginx/certs/www.saft-project.org.key;
+    ssl_dhparam /etc/nginx/certs/www.saft-project.org.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/www.saft-project.org.trustchain.crt;
+
+    return 301 https://saftproject.com\$request_uri;
+}
