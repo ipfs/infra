@@ -78,7 +78,7 @@
     "HTTPHeaders": {
       "Access-Control-Allow-Origin": ["*"],
       "Access-Control-Allow-Methods": ["GET"],
-      "Access-Control-Allow-Headers": ["X-Requested-With"]
+      "Access-Control-Allow-Headers": ["X-Requested-With", "Range"]
     }
   },
   "API": {
@@ -93,6 +93,7 @@
   },
   "DialBlocklist": null,
   "Swarm": {
+    "DisableBandwidthMetrics": true,
     "DisableNatPortMap": true,
     "AddrFilters": [
 $(for h in ${provsn_hosts[@]}; do
