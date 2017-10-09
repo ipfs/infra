@@ -37,7 +37,6 @@
       "type": "mount"
     }
   },
-
   "Experimental": {
     "ShardingEnabled": $(var ipfs_enable_sharding)
   },
@@ -54,13 +53,6 @@
     "IPFS": "/ipfs",
     "IPNS": "/ipns",
     "FuseAllowOther": false
-  },
-  "Version": {
-    "Current": "0.3.5",
-    "Check": "error",
-    "CheckDate": "0001-01-01T00:00:00Z",
-    "CheckPeriod": "172800000000000",
-    "AutoUpdate": "minor"
   },
   "Discovery": {
     "MDNS": {
@@ -79,9 +71,6 @@
     "/ip4/178.62.61.185/tcp/4001/ipfs/QmSoLMeWqB7YGVLJN3pNLQpmmEk35v6wYtsMGLzSr5QBU3",
     "/ip4/104.236.151.122/tcp/4001/ipfs/QmSoLju6m7xTh3DuokvT3886QRYqxAzb1kShaanJgW36yx"
   ],
-  "Tour": {
-    "Last": ""
-  },
   "Gateway": {
     "PathPrefixes": ["/blog", "/refs"],
     "RootRedirect": "",
