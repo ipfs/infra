@@ -114,6 +114,12 @@ done)
       "/ip4/198.51.100.0/ipcidr/24",
       "/ip4/203.0.113.0/ipcidr/24",
       "/ip4/240.0.0.0/ipcidr/4"
-    ]
+    ],
+    "ConnMgr": {
+      "GracePeriod": "$(var ipfs_connmgr_period)",
+      "HighWater": $(var ipfs_connmgr_highwater),
+      "LowWater": $(var ipfs_connmgr_lowwater),
+      "Type": "basic"
+    }
   }
 }

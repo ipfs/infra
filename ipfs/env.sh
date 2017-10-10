@@ -3,6 +3,12 @@
 all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref="2b12a33ed7099b66e81749ad43970b5bd68363c3"
 
+# connection closing experiment (@whyrusleeping)
+pluto_ipfs_ref="76c4b04160fb93d33a150597ec78041dc691adc4"
+all_ipfs_connmgr_period="1m"
+all_ipfs_connmgr_highwater="1000"
+all_ipfs_connmgr_lowwater="500"
+
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
 pollux_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
