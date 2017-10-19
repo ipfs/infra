@@ -5,7 +5,7 @@ set -e
 # TODO add nodesource repo
 pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq mtr traceroute dnsutils psmisc)
 pkgs+=(git mercurial nodejs build-essential autoconf libtool bison flex devscripts)
-apt-get install -qq -y "${pkgs[@]}"
+DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=--force-confold install -qq -y "${pkgs[@]}"
 
 if [ ! -e "/usr/bin/node" ]; then
   echo "linking nodejs => node (thanks ubuntu)"

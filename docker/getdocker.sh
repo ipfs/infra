@@ -16,7 +16,7 @@ set -e
 #
 # Git commit from https://github.com/docker/docker-install when
 # the script was uploaded (Should only be modified by upload job):
-SCRIPT_COMMIT_SHA=6a2b5fd
+SCRIPT_COMMIT_SHA=490beaa
 
 
 # This value will automatically get changed for:
@@ -46,6 +46,8 @@ x86_64-ubuntu-zesty
 s390x-ubuntu-xenial
 s390x-ubuntu-yakkety
 s390x-ubuntu-zesty
+ppc64le-ubuntu-xenial
+ppc64le-ubuntu-zesty
 aarch64-ubuntu-xenial
 armv6l-raspbian-jessie
 armv7l-raspbian-jessie
@@ -60,13 +62,17 @@ armv7l-ubuntu-zesty
 "
 
 mirror=''
+DRY_RUN=${DRY_RUN:-}
 while [ $# -gt 0 ]; do
 	case "$1" in
 		--mirror)
 			mirror="$2"
 			shift
 			;;
-		*)
+		--dry-run)
+			DRY_RUN=1
+			;;
+		--*)
 			echo "Illegal option $1"
 			;;
 	esac
@@ -152,6 +158,14 @@ command_exists() {
 	command -v "$@" > /dev/null 2>&1
 }
 
+is_dry_run() {
+	if [ -z "$DRY_RUN" ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
 get_distribution() {
 	lsb_dist=""
 	# Every system that we officially support has /etc/os-release
@@ -164,6 +178,9 @@ get_distribution() {
 }
 
 echo_docker_as_nonroot() {
+	if is_dry_run; then
+		return
+	fi
 	if command_exists docker && [ -e /var/run/docker.sock ]; then
 		(
 			set -x
@@ -253,7 +270,7 @@ ee_notice() {
 }
 
 do_install() {
-	echo "Executing docker install script, commit: $SCRIPT_COMMIT_SHA"
+	echo "# Executing docker install script, commit: $SCRIPT_COMMIT_SHA"
 
 	if command_exists docker; then
 		version="$(docker -v | cut -d ' ' -f3 | cut -d ',' -f1)"
@@ -319,6 +336,10 @@ do_install() {
 		fi
 	fi
 
+	if is_dry_run; then
+		sh_c="echo"
+	fi
+
 	# perform some very rudimentary platform detection
 	lsb_dist=$( get_distribution )
 	lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
@@ -349,10 +370,7 @@ do_install() {
 			esac
 		;;
 
-		*)
-			if command_exists lsb_release; then
-				dist_version="$(lsb_release --codename | cut -f2)"
-			fi
+		centos)
 			if [ -z "$dist_version" ] && [ -r /etc/os-release ]; then
 				dist_version="$(. /etc/os-release && echo "$VERSION_ID")"
 			fi
@@ -362,6 +380,15 @@ do_install() {
 			ee_notice "$lsb_dist"
 			exit 1
 			;;
+
+		*)
+			if command_exists lsb_release; then
+				dist_version="$(lsb_release --codename | cut -f2)"
+			fi
+			if [ -z "$dist_version" ] && [ -r /etc/os-release ]; then
+				dist_version="$(. /etc/os-release && echo "$VERSION_ID")"
+			fi
+		;;
 
 	esac
 
@@ -400,16 +427,18 @@ do_install() {
 			fi
 			apt_repo="deb [arch=$(dpkg --print-architecture)] $DOWNLOAD_URL/linux/$lsb_dist $dist_version $CHANNEL"
 			(
-				set -x
-				$sh_c 'apt-get update'
-				$sh_c "apt-get install -y -q $pre_reqs"
-				curl "$DOWNLOAD_URL/linux/$lsb_dist/gpg" | $sh_c 'apt-key add -'
+				if ! is_dry_run; then
+					set -x
+				fi
+				$sh_c 'apt-get update -qq >/dev/null'
+				$sh_c "DEBIAN_FRONTEND=noninteractive apt-get install -y -qq -o Dpkg::Options::=--force-confold $pre_reqs >/dev/null"
+				$sh_c "curl -fsSL \"$DOWNLOAD_URL/linux/$lsb_dist/gpg\" | apt-key add -qq - >/dev/null"
 				$sh_c "echo \"$apt_repo\" > /etc/apt/sources.list.d/docker.list"
 				if [ "$lsb_dist" = "debian" ] && [ "$dist_version" = "wheezy" ]; then
 					$sh_c 'sed -i "/deb-src.*download\.docker/d" /etc/apt/sources.list.d/docker.list'
 				fi
-				$sh_c 'apt-get update'
-				$sh_c 'apt-get install -o Dpkg::Options::="--force-confold" -y -q docker-ce'
+				$sh_c 'apt-get update -qq >/dev/null'
+				$sh_c 'DEBIAN_FRONTEND=noninteractive apt-get install -y -qq -o Dpkg::Options::=--force-confold docker-ce >/dev/null'
 			)
 			echo_docker_as_nonroot
 			exit 0
@@ -439,11 +468,12 @@ do_install() {
 				pre_reqs="yum-utils"
 			fi
 			(
-				set -x
+				if ! is_dry_run; then
+					set -x
+				fi
 				$sh_c "$pkg_manager install -y -q $pre_reqs"
 				$sh_c "$config_manager --add-repo $yum_repo"
 				if [ "$CHANNEL" != "stable" ]; then
-					echo "Info: Enabling channel '$CHANNEL' for docker-ce repo"
 					$sh_c "$config_manager $enable_channel_flag docker-ce-$CHANNEL"
 				fi
 				$sh_c "$pkg_manager makecache"
