@@ -1,19 +1,13 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="2b12a33ed7099b66e81749ad43970b5bd68363c3"
-
-# connection closing experiment (@whyrusleeping)
-pluto_ipfs_ref="76c4b04160fb93d33a150597ec78041dc691adc4"
-all_ipfs_connmgr_period="1m"
-all_ipfs_connmgr_highwater="2000"
-all_ipfs_connmgr_lowwater="1500"
+all_ipfs_ref="bae3d73e07fc27eb9c8ca819b3f2faf319d9e218"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=76c4b04160fb93d33a150597ec78041dc691adc4 # connection closing (@whyrusleeping @Kubuxu)
-pollux_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
-nihal_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
-auva_ipfs_ref=4679f806bd00c0a5299c22c82d1fbfdbad928e6d
+biham_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
+pollux_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
+nihal_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
+auva_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
@@ -24,6 +18,11 @@ all_ipfs_swarm_utp=4002
 all_ipfs_swarm_ws=8081
 all_ipfs_api=5001
 all_ipfs_gateway=8080
+
+# Connection management. Closes unused connections to save resources.
+all_ipfs_connmgr_period="1m"
+all_ipfs_connmgr_highwater="2000"
+all_ipfs_connmgr_lowwater="1500"
 
 # Identities of the nodes. The private keys are hidden away in the secrets unit.
 pluto_ipfs_peerid="QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM"
