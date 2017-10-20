@@ -1,17 +1,13 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="bae3d73e07fc27eb9c8ca819b3f2faf319d9e218"
-
-scrappy_ipfs_ref="b5794c447476ea28f80dd48934393cd10cee9110"
-pluto_ipfs_ref="b5794c447476ea28f80dd48934393cd10cee9110"
-earth_ipfs_ref="b5794c447476ea28f80dd48934393cd10cee9110"
+all_ipfs_ref="b5794c447476ea28f80dd48934393cd10cee9110"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
-pollux_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
-nihal_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
-auva_ipfs_ref=bae3d73e07fc27eb9c8ca819b3f2faf319d9e218
+biham_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
+pollux_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
+nihal_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
+auva_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
