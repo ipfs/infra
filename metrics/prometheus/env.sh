@@ -11,7 +11,8 @@ all_prometheus_scrape_interval="15s"
 all_prometheus_scrape_timeout="10s"
 all_prometheus_evaluation_interval="15s"
 
-all_prometheus_gateway_hosts=(pluto neptune uranus saturn jupiter venus earth mercury scrappy chappy)
+all_prometheus_gateway_hosts=(scrappy chappy)
+all_prometheus_bootstrap_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 all_prometheus_storage_hosts=(pollux biham nihal auva)
 all_prometheus_metrics_hosts=(banana)
 all_prometheus_probe_hosts=(banana deimos)
