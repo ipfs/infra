@@ -119,8 +119,7 @@ all_vpn_allowlist=()
 all_vpn_allowlist+=("fc3d:7777:a6a4:fcdb:f218:5856:5de:eb1a")
 all_vpn_allowlist+=("fcd0:ad3d:c5e4:afa8:56ed:cce2:57a3:39ba")
 # whyrusleeping
-all_vpn_allowlist+=("fcd2:11ef:3362:a108:faa5:1d61:58a4:1292")
-all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
+all_vpn_allowlist+=("fceb:9e0b:da69:391f:ff35:22b3:2d04:3214")
 # dignifiedquire
 all_vpn_allowlist+=("fc04:f62e:6fcf:9c82:b020:69ce:c2e6:34b2")
 # kubuxu
