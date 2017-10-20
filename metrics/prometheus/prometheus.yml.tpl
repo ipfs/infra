@@ -17,6 +17,17 @@ $(for h in $(lookup prometheus_gateway_hosts); do
   echo   '          network: v04x'
 done)
 
+  - job_name: 'bootstrap'
+    metrics_path: '/debug/metrics/prometheus'
+    static_configs:
+$(for h in $(lookup prometheus_bootstrap_hosts); do
+  echo   '      - targets:'
+  printf '        - "[%s]:5001"\n' $(host=$h var cjdns_ipv6)
+  echo   '        labels:'
+  printf '          host: %s\n' $h
+  echo   '          network: v04x'
+done)
+
   - job_name: 'jenkins'
     metrics_path: '/prometheus/'
     honor_labels: false
