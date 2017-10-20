@@ -119,7 +119,7 @@ done)
       "GracePeriod": "$(var ipfs_connmgr_period)",
       "HighWater": $(var ipfs_connmgr_highwater),
       "LowWater": $(var ipfs_connmgr_lowwater),
-      "Type": "basic"
+      "Type": "$(var ipfs_connmgr_type)"
     }
   }
 }

@@ -20,6 +20,7 @@ all_ipfs_api=5001
 all_ipfs_gateway=8080
 
 # Connection management. Closes unused connections to save resources.
+all_ipfs_connmgr_type="basic"
 all_ipfs_connmgr_period="1m"
 all_ipfs_connmgr_highwater="2000"
 all_ipfs_connmgr_lowwater="1500"
