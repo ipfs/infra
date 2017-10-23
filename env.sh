@@ -131,3 +131,5 @@ all_vpn_allowlist+=("fc7e:76f4:cfae:c1f3:e754:6b1d:bcd6:6281")
 all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
 # jbenet
 all_vpn_allowlist+=("fc32:6e9e:9095:bbfb:b7e1:059c:9f7b:ad48")
+# stebalien
+all_vpn_allowlist+=("fc6f:868d:1ca5:e639:2e60:e1d5:db99:c885")
