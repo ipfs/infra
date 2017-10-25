@@ -432,6 +432,26 @@ if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.org.dhparam.pem" "out/www.s
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/peerpad.net.crt" "out/peerpad.net.crt")" ]; then
+  echo "ipfs/pages peerpad.net ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/peerpad.net.key" "out/peerpad.net.key")" ]; then
+  echo "ipfs/pages peerpad.net ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/peerpad.net.trustchain.crt" "out/peerpad.net.trustchain.crt")" ]; then
+  echo "ipfs/pages peerpad.net ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/peerpad.net.dhparam.pem" "out/peerpad.net.dhparam.pem")" ]; then
+  echo "ipfs/pages peerpad.net ssl dhparam changed"
+  reload=1
+fi
+
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
@@ -516,6 +536,10 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/www.saft-project.org.key" "$cert_dest/www.saft-project.org.key"
   cp "out/www.saft-project.org.trustchain.crt" "$cert_dest/www.saft-project.org.trustchain.crt"
   cp "out/www.saft-project.org.dhparam.pem" "$cert_dest/www.saft-project.org.dhparam.pem"
+  cp "out/peerpad.net.crt" "$cert_dest/peerpad.net.crt"
+  cp "out/peerpad.net.key" "$cert_dest/peerpad.net.key"
+  cp "out/peerpad.net.trustchain.crt" "$cert_dest/peerpad.net.trustchain.crt"
+  cp "out/peerpad.net.dhparam.pem" "$cert_dest/peerpad.net.dhparam.pem"
 
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 
