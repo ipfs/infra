@@ -432,3 +432,26 @@ server {
 
     return 301 https://saftproject.com\$request_uri;
 }
+
+server {
+    server_name peerpad.net;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/peerpad.net.crt;
+    ssl_certificate_key /etc/nginx/certs/peerpad.net.key;
+    ssl_dhparam /etc/nginx/certs/peerpad.net.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/peerpad.net.trustchain.crt;
+
+    location / {
+        proxy_set_header Host peerpad.net;
+        # The gateway upstream is defined in the ipfs/gateway unit.
+        proxy_pass http://gateway;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}

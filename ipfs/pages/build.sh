@@ -104,3 +104,8 @@ printf %s\\n "$(lookup pages_wwwsaft_projectorg_ssl_cert)" > out/www.saft-projec
 printf %s\\n "$(lookup pages_wwwsaft_projectorg_ssl_key)" > out/www.saft-project.org.key
 printf %s\\n "$(lookup pages_wwwsaft_projectorg_ssl_trustchain)" > out/www.saft-project.org.trustchain.crt
 printf %s\\n "$(lookup pages_wwwsaft_projectorg_ssl_dhparam)" > out/www.saft-project.org.dhparam.pem
+
+printf %s\\n "$(lookup pages_peerpad_ssl_cert)" > out/peerpad.net.crt
+printf %s\\n "$(lookup pages_peerpad_ssl_key)" > out/peerpad.net.key
+printf %s\\n "$(lookup pages_peerpad_ssl_trustchain)" > out/peerpad.net.trustchain.crt
+printf %s\\n "$(lookup pages_peerpad_ssl_dhparam)" > out/peerpad.net.dhparam.pem
