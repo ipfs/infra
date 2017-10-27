@@ -25,6 +25,10 @@ all_ipfs_connmgr_period="1m"
 all_ipfs_connmgr_highwater="2000"
 all_ipfs_connmgr_lowwater="1500"
 
+# Disable connection management on one node,
+# to get a feel for the proportions of network size to number of pees.
+jupiter_ipfs_connmgr_type="none"
+
 # Identities of the nodes. The private keys are hidden away in the secrets unit.
 pluto_ipfs_peerid="QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM"
 neptune_ipfs_peerid="QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z"
