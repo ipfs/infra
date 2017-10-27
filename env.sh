@@ -83,9 +83,12 @@ pollux_ipv4_address="5.9.59.34"
 pollux_units=(${baseunits[@]} ${storageunits[@]})
 
 # hetzer-nuremberg
+# This one is used for storage but technically a gateway,
+# so that it's easier to run metrics tests against it
+# without being affected by varying load on the actual gateways.
 biham_ssh="root@biham.i.ipfs.team"
 biham_ipv4_address="188.40.114.11"
-biham_units=(${baseunits[@]} ${storageunits[@]})
+biham_units=(${baseunits[@]} ${gatewayunits[@]})
 
 # hetzner-nuremberg
 nihal_ssh="root@nihal.i.ipfs.team"

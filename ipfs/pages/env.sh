@@ -10,3 +10,6 @@ jupiter_pages_bootstrap_hostname="sfo-1"
 neptune_pages_bootstrap_hostname="sfo-2"
 scrappy_pages_bootstrap_hostname="wss1"
 chappy_pages_bootstrap_hostname="wss0"
+
+# Make a storage node a gateway, for metrics purposes.
+biham_pages_bootstrap_hostname="metrics-1"
