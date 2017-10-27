@@ -181,3 +181,13 @@ done)
     static_configs:
       - targets:
         - $(var prometheus_mailchimp_target)
+
+  - job_name: libp2pstats
+    metrics_path: $(var prometheus_libp2pstats_path)
+    basic_auth:
+      username: $(var prometheus_libp2pstats_user)
+      password: $(var prometheus_libp2pstats_password)
+    scheme: http
+    static_configs:
+      - targets:
+        - $(var prometheus_libp2pstats_target)
