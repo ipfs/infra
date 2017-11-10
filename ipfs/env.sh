@@ -11,6 +11,9 @@ auva_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
+# pages.ipfs.team
+pages_ipfs_ref=5146b34a150cd077963d81759636604fb7b80a33
+
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
 all_ipfs_swarm_tcp=4001
@@ -44,6 +47,7 @@ pollux_ipfs_peerid="QmRv1GNseNP1krEwHDjaQMeQVJy41879QcDwpJVhY8SWve"
 biham_ipfs_peerid="QmZY7MtK8ZbG1suwrxc7xEYZ2hQLf1dAWPRHhjxC8rjq8E"
 nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
 auva_ipfs_peerid="QmZSe5GZJb5jcKQZzQmdWaFtimTHafjvtxyMMTJy5nZ6hN"
+pages_ipfs_peerid="QmYrPTDMvDxXPArv6fSs3LrcLJwEkFPWB2SDo7Jqaz2HYm"
 
 # Repo settings (aka fs-repo)
 # Historical location, TODO: move to /mnt/data/ipfs
