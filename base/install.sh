@@ -3,7 +3,7 @@
 set -e
 
 # TODO add nodesource repo
-pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq mtr traceroute dnsutils psmisc)
+pkgs=(mosh tmux screen gdb vim tree htop iftop sysstat bridge-utils unzip jq mtr traceroute dnsutils psmisc socat)
 pkgs+=(git mercurial nodejs build-essential autoconf libtool bison flex devscripts)
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::=--force-confold install -qq -y "${pkgs[@]}"
 
