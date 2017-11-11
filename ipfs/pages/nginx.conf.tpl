@@ -29,8 +29,9 @@ server {
     ssl_dhparam /etc/nginx/certs/i.ipfs.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/i.ipfs.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host "";
@@ -52,8 +53,9 @@ server {
     ssl_dhparam /etc/nginx/certs/filecoin.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/filecoin.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host filecoin.io;
@@ -75,8 +77,9 @@ server {
     ssl_dhparam /etc/nginx/certs/orbit.chat.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/orbit.chat.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host orbit.chat;
@@ -102,8 +105,9 @@ server {
     ssl_dhparam /etc/nginx/certs/bootstrap.libp2p.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/bootstrap.libp2p.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host \$host:80;
@@ -129,8 +133,9 @@ server {
     ssl_dhparam /etc/nginx/certs/ipld.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/ipld.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host ipld.io;
@@ -152,8 +157,9 @@ server {
     ssl_dhparam /etc/nginx/certs/libp2p.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/libp2p.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host libp2p.io;
@@ -175,8 +181,9 @@ server {
     ssl_dhparam /etc/nginx/certs/multiformats.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/multiformats.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host multiformats.io;
@@ -198,8 +205,9 @@ server {
     ssl_dhparam /etc/nginx/certs/zcash.dag.ipfs.io.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/zcash.dag.ipfs.io.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host zcash.dag.ipfs.io;
@@ -221,8 +229,9 @@ server {
     ssl_dhparam /etc/nginx/certs/protocol.ai.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/protocol.ai.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host protocol.ai;
@@ -243,8 +252,9 @@ server {
     ssl_dhparam /etc/nginx/certs/wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/wikipedia-on-ipfs.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     return 301 https://ipfs.io/blog/24-uncensorable-wikipedia/;
 }
@@ -260,8 +270,9 @@ server {
     ssl_dhparam /etc/nginx/certs/en.wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/en.wikipedia-on-ipfs.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host en.wikipedia-on-ipfs.org;
@@ -283,8 +294,9 @@ server {
     ssl_dhparam /etc/nginx/certs/tr.wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/tr.wikipedia-on-ipfs.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host tr.wikipedia-on-ipfs.org;
@@ -306,8 +318,9 @@ server {
     ssl_dhparam /etc/nginx/certs/simple.wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/simple.wikipedia-on-ipfs.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host simple.wikipedia-on-ipfs.org;
@@ -329,8 +342,9 @@ server {
     ssl_dhparam /etc/nginx/certs/ar.wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/ar.wikipedia-on-ipfs.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host ar.wikipedia-on-ipfs.org;
@@ -352,8 +366,9 @@ server {
     ssl_dhparam /etc/nginx/certs/ku.wikipedia-on-ipfs.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/ku.wikipedia-on-ipfs.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host ku.wikipedia-on-ipfs.org;
@@ -375,8 +390,9 @@ server {
     ssl_dhparam /etc/nginx/certs/datatogether.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/datatogether.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host datatogether.org;
@@ -398,8 +414,9 @@ server {
     ssl_dhparam /etc/nginx/certs/saftproject.com.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/saftproject.com.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host saftproject.com;
@@ -421,8 +438,9 @@ server {
     ssl_dhparam /etc/nginx/certs/www.saftproject.com.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/www.saftproject.com.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     return 301 https://saftproject.com\$request_uri;
 }
@@ -438,8 +456,9 @@ server {
     ssl_dhparam /etc/nginx/certs/saft-project.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/saft-project.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     return 301 https://saftproject.com\$request_uri;
 }
@@ -455,8 +474,9 @@ server {
     ssl_dhparam /etc/nginx/certs/www.saft-project.org.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/www.saft-project.org.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     return 301 https://saftproject.com\$request_uri;
 }
@@ -472,8 +492,9 @@ server {
     ssl_dhparam /etc/nginx/certs/peerpad.net.dhparam.pem;
     ssl_trusted_certificate /etc/nginx/certs/peerpad.net.trustchain.crt;
 
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security "max-age=15768000; includeSubDomains; preload" always;
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
         proxy_set_header Host peerpad.net;
