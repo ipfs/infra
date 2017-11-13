@@ -4,7 +4,7 @@ all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref="8eb7956622ee1a340398d5e1a00ab5f7588cb23d"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
+biham_ipfs_ref=f1af17c411cf1e96c27cacdd8468f364174039d6 # exp/sync-concurrency (@whyrusleeping)
 pollux_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
 nihal_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
 auva_ipfs_ref=b5794c447476ea28f80dd48934393cd10cee9110
