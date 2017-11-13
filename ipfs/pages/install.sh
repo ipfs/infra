@@ -452,6 +452,26 @@ if [ ! -z "$(diff -Naur "$cert_dest/peerpad.net.dhparam.pem" "out/peerpad.net.dh
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/flipchart.peerpad.net.crt" "out/flipchart.peerpad.net.crt")" ]; then
+  echo "ipfs/pages flipchart.peerpad.net ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/flipchart.peerpad.net.key" "out/flipchart.peerpad.net.key")" ]; then
+  echo "ipfs/pages flipchart.peerpad.net ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/flipchart.peerpad.net.trustchain.crt" "out/flipchart.peerpad.net.trustchain.crt")" ]; then
+  echo "ipfs/pages flipchart.peerpad.net ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/flipchart.peerpad.net.dhparam.pem" "out/flipchart.peerpad.net.dhparam.pem")" ]; then
+  echo "ipfs/pages flipchart.peerpad.net ssl dhparam changed"
+  reload=1
+fi
+
 if [ "reload$reload" == "reload1" ]; then
   echo "ipfs/pages nginx reloading"
 
@@ -540,6 +560,10 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/peerpad.net.key" "$cert_dest/peerpad.net.key"
   cp "out/peerpad.net.trustchain.crt" "$cert_dest/peerpad.net.trustchain.crt"
   cp "out/peerpad.net.dhparam.pem" "$cert_dest/peerpad.net.dhparam.pem"
+  cp "out/flipchart.peerpad.net.crt" "$cert_dest/flipchart.peerpad.net.crt"
+  cp "out/flipchart.peerpad.net.key" "$cert_dest/flipchart.peerpad.net.key"
+  cp "out/flipchart.peerpad.net.trustchain.crt" "$cert_dest/flipchart.peerpad.net.trustchain.crt"
+  cp "out/flipchart.peerpad.net.dhparam.pem" "$cert_dest/flipchart.peerpad.net.dhparam.pem"
 
   out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
 

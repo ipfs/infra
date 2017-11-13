@@ -109,3 +109,8 @@ printf %s\\n "$(lookup pages_peerpad_ssl_cert)" > out/peerpad.net.crt
 printf %s\\n "$(lookup pages_peerpad_ssl_key)" > out/peerpad.net.key
 printf %s\\n "$(lookup pages_peerpad_ssl_trustchain)" > out/peerpad.net.trustchain.crt
 printf %s\\n "$(lookup pages_peerpad_ssl_dhparam)" > out/peerpad.net.dhparam.pem
+
+printf %s\\n "$(lookup pages_flipchart_ssl_cert)" > out/flipchart.peerpad.net.crt
+printf %s\\n "$(lookup pages_flipchart_ssl_key)" > out/flipchart.peerpad.net.key
+printf %s\\n "$(lookup pages_flipchart_ssl_trustchain)" > out/flipchart.peerpad.net.trustchain.crt
+printf %s\\n "$(lookup pages_flipchart_ssl_dhparam)" > out/flipchart.peerpad.net.dhparam.pem
