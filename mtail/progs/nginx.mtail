@@ -18,7 +18,8 @@ counter http_response_size_bytes_sum by vhost, method, code, content_type
 /(?P<request_seconds>\d+)\.(?P<request_milliseconds>\d+) / +
 /"(?P<http_referer>\S+)" / +
 /"(?P<http_user_agent>[[:print:]]+)" / +
-/"(?P<content_type>[^;]+)(;.*)?"/ +
+/"(?P<content_type>[^;]+)(;.*)?" / +
+/upstream="(?P<upstream>[[:print:]]*)"/ +
 /$/ {
   http_requests_total[$vhost][tolower($request_method)][$status][$content_type]++
   http_request_duration_milliseconds_sum[$vhost][tolower($request_method)][$status][$content_type] += $request_seconds * 1000 + $request_milliseconds
