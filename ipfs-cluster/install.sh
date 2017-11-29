@@ -21,7 +21,7 @@ if [ "ref$ref" != "ref$actual_ref" ]; then
   restart=1
 fi
 
-if [ -z "$(docker images -q ipfs-cluster:$ref)" ]; then
+if [ -z "$(docker images -q ipfs-cluster:${ref})" ]; then
   echo "docker image doesn't exist yet"
   rebuild=1
 fi
@@ -38,7 +38,7 @@ fi
 
 if [ "rebuild$rebuild" == "rebuild1" ]; then
   echo "ipfs-cluster rebuilding"
-  [ -d "$target/src/.git" ] || git clone -q $(lookup ipfs_cluster_git) "$target/src"
+  [ -d "$target/src/.git" ] || git clone -q "$(lookup ipfs_cluster_git)" "$target/src"
   git --git-dir="$target/src/.git" remote set-url origin $(lookup ipfs_cluster_git)
   git --git-dir="$target/src/.git" remote prune origin >/dev/null
   git --git-dir="$target/src/.git" prune
@@ -61,8 +61,8 @@ chown 1000:users "$data/service.json"
 
 if [ "restart$restart" == "restart1" ]; then
   echo "ipfs-cluster (re)starting"
-  docker stop "ipfs-cluster" 2>&1 >/dev/null || true
-  docker rm -f "ipfs-cluster" 2>&1 >/dev/null || true
+  docker stop "ipfs-cluster" >/dev/null 2>&1 || true
+  docker rm -f "ipfs-cluster" >/dev/null 2>&1 || true
   docker run $(cat out/ipfs-cluster.opts) >/dev/null
 fi
 
