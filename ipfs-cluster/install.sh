@@ -72,3 +72,17 @@ cp -a "out/ipfs-cluster_service.json" "$target/service.json"
 cp -a "out/ipfs-cluster.opts" "$target/docker.opts"
 rm -f "$target/Dockerfile"
 
+if [ -d /opt/nginx ]; then
+  reload=0
+  if [ ! -z "$(diff -Naur "/opt/nginx/conf.d/7-ipfs-cluster.conf" "out/7-ipfs-cluster.conf")" ]; then
+    echo "ipfs nginx config changed"
+    cp "out/7-ipfs-cluster.conf" "/opt/nginx/conf.d/7-ipfs-cluster.conf"
+    reload=1
+  fi
+
+  if [ "reload$reload" == "reload1" ]; then
+    echo "ipfs nginx reloading"
+    out=$(docker exec nginx sh -c '/etc/init.d/nginx configtest && /etc/init.d/nginx reload')
+    echo $out | grep -v failed >/dev/null && echo $out && exit 1
+  fi
+fi

@@ -4,6 +4,7 @@ set -e
 
 mkdir -p out/
 provsn_template "service.json.tpl" "out/ipfs-cluster_service.json"
+provsn_template "nginx.conf" "out/7-ipfs-cluster.conf"
 
 cat > out/ipfs-cluster.opts <<-EOF
 -d
