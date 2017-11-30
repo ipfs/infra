@@ -2,12 +2,10 @@ FROM golang:1.7.4
 MAINTAINER Lars Gierth <larsg@systemli.org>
 
 ENV GOPATH=/go \
-    REPO_PATH=github.com/whyrusleeping/pinbot
+    REPO_PATH=github.com/ipfs/pinbot-irc
 COPY . $GOPATH/src/$REPO_PATH
 
-RUN go get github.com/whyrusleeping/hellabot \
-    && go get github.com/whyrusleeping/ipfs-shell \
-    && cd $GOPATH/src/$REPO_PATH \
+RUN cd $GOPATH/src/$REPO_PATH \
     && go build -o /bin/pinbot $REPO_PATH
 
 VOLUME     [ "/pinbot" ]
