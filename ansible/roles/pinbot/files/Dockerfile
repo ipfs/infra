@@ -1,4 +1,4 @@
-FROM golang:1.7.4
+FROM golang:1.9.2
 MAINTAINER Lars Gierth <larsg@systemli.org>
 
 ENV GOPATH=/go \
