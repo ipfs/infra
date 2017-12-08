@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_cluster_git=git://github.com/ipfs/ipfs-cluster
-all_ipfs_cluster_ref="e824aea55eea120da7f8f3ba7da3ffe11a053287"
+all_ipfs_cluster_ref="2fa54ff9d736c4e38e03a1d51dbf47e450c60bb1"
 
 # Identities of the nodes. The private keys are hidden away in the secrets unit.
 pluto_ipfs_cluster_peerid="QmSiW1LpXRzbkuhjSABTJBJd9zb5vckVofbTFLjH5fmrM5"
