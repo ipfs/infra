@@ -10,6 +10,11 @@
     dest: /opt/pinbot/config/hosts
     mode: 0644
   register: pinbot_config
+- template:
+    src: clusterpeers.j2
+    dest: /opt/pinbot/config/clusterpeers
+    mode: 0644
+  register: pinbot_cluster_config
 
 - shell: "cat /opt/pinbot.ref | grep {{ pinbot_ref }}"
   ignore_errors: true
@@ -44,4 +49,4 @@
     name: pinbot
     image: "pinbot:{{ pinbot_ref }}"
     state: restarted
-  when: pinbot_config.changed
+  when: pinbot_config.changed or pinbot_cluster_config.changed
