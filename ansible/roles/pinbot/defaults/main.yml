@@ -1,5 +1,5 @@
 ---
 pinbot_git: https://github.com/ipfs/pinbot-irc.git
-pinbot_ref: 8ab3243587099014514d6067e74f4405ea34a1d5
+pinbot_ref: b218c9a2c05aec3ceb6b672ce6178502427f0a9a
 pinbot_channel: "#ipfs-pinbot"
 pinbot_nick: pinbot
