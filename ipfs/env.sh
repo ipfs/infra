@@ -5,9 +5,9 @@ all_ipfs_ref="4cd46781a72433e8286fc507d3b76d42e8eaad23"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=f1af17c411cf1e96c27cacdd8468f364174039d6 # exp/sync-concurrency (@whyrusleeping)
-pollux_ipfs_ref=5d23fd7c4584f802eae853f5b3c1b575cdc2eb04
-nihal_ipfs_ref=5d23fd7c4584f802eae853f5b3c1b575cdc2eb04
-auva_ipfs_ref=5d23fd7c4584f802eae853f5b3c1b575cdc2eb04
+pollux_ipfs_ref=4cd46781a72433e8286fc507d3b76d42e8eaad23
+nihal_ipfs_ref=4cd46781a72433e8286fc507d3b76d42e8eaad23
+auva_ipfs_ref=4cd46781a72433e8286fc507d3b76d42e8eaad23
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
