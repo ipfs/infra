@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="a81025f89185942c2e40168bec55dee581f0da25"
+all_ipfs_ref="4cd46781a72433e8286fc507d3b76d42e8eaad23"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=f1af17c411cf1e96c27cacdd8468f364174039d6 # exp/sync-concurrency (@whyrusleeping)
@@ -27,10 +27,6 @@ all_ipfs_connmgr_type="basic"
 all_ipfs_connmgr_period="1m"
 all_ipfs_connmgr_highwater="2000"
 all_ipfs_connmgr_lowwater="1500"
-
-# Disable connection management on one node,
-# to get a feel for the proportions of network size to number of pees.
-jupiter_ipfs_connmgr_type="none"
 
 # Identities of the nodes. The private keys are hidden away in the secrets unit.
 pluto_ipfs_peerid="QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM"
