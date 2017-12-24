@@ -74,7 +74,7 @@
   },
   "informer": {
     "disk": {
-      "metric_ttl": "120s",
+      "metric_ttl": "1200s",
       "metric_type": "freespace"
     },
     "numpin": {
