@@ -11,6 +11,7 @@ cat > out/ipfs.opts <<-EOF
 --name ipfs
 --restart always
 --net host
+--memory 24g
 --user ipfs
 --env IPFS_PATH=/data/ipfs
 --env IPFS_LOGGING=info
