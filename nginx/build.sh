@@ -19,5 +19,6 @@ cat > out/docker.opts <<-EOF
 -v /opt/nginx/certs:/etc/nginx/certs:ro
 -v /opt/nginx/logs:/var/log/nginx
 -v /opt/nginx/html:/usr/share/nginx/html:ro
+-v /opt/nginx/tmp:/tmp/nginx
 $(lookup nginx_image):$(lookup nginx_ref)
 EOF
