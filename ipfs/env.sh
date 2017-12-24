@@ -43,7 +43,6 @@ pollux_ipfs_peerid="QmRv1GNseNP1krEwHDjaQMeQVJy41879QcDwpJVhY8SWve"
 biham_ipfs_peerid="QmZY7MtK8ZbG1suwrxc7xEYZ2hQLf1dAWPRHhjxC8rjq8E"
 nihal_ipfs_peerid="QmepgFW7BHEtU4pZJdxaNiv75mKLLRQnPi1KaaXmQN4V1a"
 auva_ipfs_peerid="QmZSe5GZJb5jcKQZzQmdWaFtimTHafjvtxyMMTJy5nZ6hN"
-pages_ipfs_peerid="QmYrPTDMvDxXPArv6fSs3LrcLJwEkFPWB2SDo7Jqaz2HYm"
 
 # Repo settings (aka fs-repo)
 # Historical location, TODO: move to /mnt/data/ipfs
