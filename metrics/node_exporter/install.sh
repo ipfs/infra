@@ -55,7 +55,7 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   git remote set-url origin https://github.com/prometheus/node_exporter
   git remote prune origin >/dev/null
   git gc
-  git fetch -q --all
+  git fetch -q --all --tags
   git reset -q --hard "$ref"
   make build >/dev/null
   mv ./node_exporter /usr/bin/node_exporter
