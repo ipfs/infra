@@ -11,8 +11,9 @@ auva_ipfs_ref=4cd46781a72433e8286fc507d3b76d42e8eaad23
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
 
-# pages.ipfs.team
-pages_ipfs_ref=5146b34a150cd077963d81759636604fb7b80a33
+# dagreader experiment (@whyrusleeping)
+scrappy_ipfs_ref=87f77b445479785afca175a925a836c7f982e8e0
+chappy_ipfs_ref=87f77b445479785afca175a925a836c7f982e8e0
 
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
