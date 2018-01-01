@@ -95,6 +95,16 @@ printf %s\\n "$(lookup pages_wwwsaftprojectcom_ssl_key)" > out/www.saftproject.c
 printf %s\\n "$(lookup pages_wwwsaftprojectcom_ssl_trustchain)" > out/www.saftproject.com.trustchain.crt
 printf %s\\n "$(lookup pages_wwwsaftprojectcom_ssl_dhparam)" > out/www.saftproject.com.dhparam.pem
 
+printf %s\\n "$(lookup pages_saft_projectcom_ssl_cert)" > out/saft-project.com.crt
+printf %s\\n "$(lookup pages_saft_projectcom_ssl_key)" > out/saft-project.com.key
+printf %s\\n "$(lookup pages_saft_projectcom_ssl_trustchain)" > out/saft-project.com.trustchain.crt
+printf %s\\n "$(lookup pages_saft_projectcom_ssl_dhparam)" > out/saft-project.com.dhparam.pem
+
+printf %s\\n "$(lookup pages_wwwsaft_projectcom_ssl_cert)" > out/www.saft-project.com.crt
+printf %s\\n "$(lookup pages_wwwsaft_projectcom_ssl_key)" > out/www.saft-project.com.key
+printf %s\\n "$(lookup pages_wwwsaft_projectcom_ssl_trustchain)" > out/www.saft-project.com.trustchain.crt
+printf %s\\n "$(lookup pages_wwwsaft_projectcom_ssl_dhparam)" > out/www.saft-project.com.dhparam.pem
+
 printf %s\\n "$(lookup pages_saft_projectorg_ssl_cert)" > out/saft-project.org.crt
 printf %s\\n "$(lookup pages_saft_projectorg_ssl_key)" > out/saft-project.org.key
 printf %s\\n "$(lookup pages_saft_projectorg_ssl_trustchain)" > out/saft-project.org.trustchain.crt

@@ -392,6 +392,46 @@ if [ ! -z "$(diff -Naur "$cert_dest/www.saftproject.com.dhparam.pem" "out/www.sa
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.com.crt" "out/saft-project.com.crt")" ]; then
+  echo "ipfs/pages saft-project.com ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.com.key" "out/saft-project.com.key")" ]; then
+  echo "ipfs/pages saft-project.com ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.com.trustchain.crt" "out/saft-project.com.trustchain.crt")" ]; then
+  echo "ipfs/pages saft-project.com ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/saft-project.com.dhparam.pem" "out/saft-project.com.dhparam.pem")" ]; then
+  echo "ipfs/pages saft-project.com ssl dhparam changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.com.crt" "out/www.saft-project.com.crt")" ]; then
+  echo "ipfs/pages www.saft-project.com ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.com.key" "out/www.saft-project.com.key")" ]; then
+  echo "ipfs/pages www.saft-project.com ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.com.trustchain.crt" "out/www.saft-project.com.trustchain.crt")" ]; then
+  echo "ipfs/pages www.saft-project.com ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/www.saft-project.com.dhparam.pem" "out/www.saft-project.com.dhparam.pem")" ]; then
+  echo "ipfs/pages www.saft-project.com ssl dhparam changed"
+  reload=1
+fi
+
 if [ ! -z "$(diff -Naur "$cert_dest/saft-project.org.crt" "out/saft-project.org.crt")" ]; then
   echo "ipfs/pages saft-project.org ssl cert changed"
   reload=1
@@ -548,6 +588,14 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/www.saftproject.com.key" "$cert_dest/www.saftproject.com.key"
   cp "out/www.saftproject.com.trustchain.crt" "$cert_dest/www.saftproject.com.trustchain.crt"
   cp "out/www.saftproject.com.dhparam.pem" "$cert_dest/www.saftproject.com.dhparam.pem"
+  cp "out/saft-project.com.crt" "$cert_dest/saft-project.com.crt"
+  cp "out/saft-project.com.key" "$cert_dest/saft-project.com.key"
+  cp "out/saft-project.com.trustchain.crt" "$cert_dest/saft-project.com.trustchain.crt"
+  cp "out/saft-project.com.dhparam.pem" "$cert_dest/saft-project.com.dhparam.pem"
+  cp "out/www.saft-project.com.crt" "$cert_dest/www.saft-project.com.crt"
+  cp "out/www.saft-project.com.key" "$cert_dest/www.saft-project.com.key"
+  cp "out/www.saft-project.com.trustchain.crt" "$cert_dest/www.saft-project.com.trustchain.crt"
+  cp "out/www.saft-project.com.dhparam.pem" "$cert_dest/www.saft-project.com.dhparam.pem"
   cp "out/saft-project.org.crt" "$cert_dest/saft-project.org.crt"
   cp "out/saft-project.org.key" "$cert_dest/saft-project.org.key"
   cp "out/saft-project.org.trustchain.crt" "$cert_dest/saft-project.org.trustchain.crt"
