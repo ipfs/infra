@@ -7,5 +7,5 @@ After=network.target
 ProtectHome=read-only
 ProtectSystem=true
 SyslogIdentifier=node_exporter
-ExecStart=/usr/bin/node_exporter --web.listen-address="127.0.0.1:9100" -collectors.enabled=filesystem,netdev
+ExecStart=/usr/bin/node_exporter --web.listen-address="127.0.0.1:9100" --collector.filesystem --collector.netdev --collector.cpu --collector.diskstats --collector.mdadm --collector.loadavg --collector.time --collector.uname --collector.logind
 Restart=always
