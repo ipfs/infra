@@ -59,7 +59,10 @@ auva_ipfs_bloom_size=134217728
 
 # Sharding on add
 all_ipfs_enable_sharding=false
-auva_ipfs_enable_sharding=true
+
+# Config profiles
+all_ipfs_profile="server"
+nihal_ipfs_profile="server,badgerds"
 
 # Once an hour, the daemon checks whether repo size is above 90% of 60G,
 # and runs GC if it is.
