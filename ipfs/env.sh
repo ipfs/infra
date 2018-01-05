@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="4cd46781a72433e8286fc507d3b76d42e8eaad23"
+all_ipfs_ref="3af720696c0fd6d1c603a3fa4d75d54b2ecef7b2"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=f1af17c411cf1e96c27cacdd8468f364174039d6 # exp/sync-concurrency (@whyrusleeping)
@@ -10,10 +10,6 @@ nihal_ipfs_ref=4cd46781a72433e8286fc507d3b76d42e8eaad23
 auva_ipfs_ref=4cd46781a72433e8286fc507d3b76d42e8eaad23
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
-
-# dagreader experiment (@whyrusleeping)
-scrappy_ipfs_ref=87f77b445479785afca175a925a836c7f982e8e0
-chappy_ipfs_ref=87f77b445479785afca175a925a836c7f982e8e0
 
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
