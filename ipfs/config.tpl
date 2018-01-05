@@ -10,32 +10,7 @@
     "GCPeriod": "$(var ipfs_gc_period)",
     "StorageGCWatermark": $(var ipfs_gc_watermark),
     "StorageMax": "$(var ipfs_gc_capacity)",
-    "Spec": {
-      "mounts": [
-        {
-          "child": {
-            "path": "blocks",
-            "shardFunc": "/repo/flatfs/shard/v1/next-to-last/2",
-            "sync": true,
-            "type": "flatfs"
-          },
-          "mountpoint": "/blocks",
-          "prefix": "flatfs.datastore",
-          "type": "measure"
-        },
-        {
-          "child": {
-            "compression": "none",
-            "path": "datastore",
-            "type": "levelds"
-          },
-          "mountpoint": "/",
-          "prefix": "leveldb.datastore",
-          "type": "measure"
-        }
-      ],
-      "type": "mount"
-    }
+    "Spec": "XXX this will be overwritten by install.sh"
   },
   "Experimental": {
     "ShardingEnabled": $(var ipfs_enable_sharding)

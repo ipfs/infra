@@ -5,6 +5,7 @@ set -e
 target="/opt/ipfs"
 repo=$(lookup ipfs_repo)
 api_port=$(lookup ipfs_api)
+profile=$(lookup ipfs_profile)
 
 rebuild=0
 restart=0
@@ -54,11 +55,12 @@ fi
 if [ ! -f "$repo/config" ]; then
   mkdir -p "$repo"
   chown -R 1000:users "$repo"
-  docker run -i -u 1000 -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" -c 'ipfs init --bits 2048'
+  docker run -i -u 1000 -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" -c "ipfs init --bits 2048 --profile=$profile"
   restart=1
 fi
 
-cp "out/ipfs.config" "$repo/config"
+dsconf=$(cat "$repo/config" | jq -c .Datastore.Spec)
+cat "out/ipfs.config" | jq ".Datastore.Spec = $dsconf" > "$repo/config"
 
 if [ "restart$restart" == "restart1" ]; then
   echo "ipfs (re)starting"
