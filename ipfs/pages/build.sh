@@ -10,6 +10,11 @@ printf %s\\n "$(lookup pages_iipfs_ssl_key)" > out/i.ipfs.io.key
 printf %s\\n "$(lookup pages_iipfs_ssl_trustchain)" > out/i.ipfs.io.trustchain.crt
 printf %s\\n "$(lookup pages_iipfs_ssl_dhparam)" > out/i.ipfs.io.dhparam.pem
 
+printf %s\\n "$(lookup pages_betadocsipfs_ssl_cert)" > out/beta.docs.ipfs.io.crt
+printf %s\\n "$(lookup pages_betadocsipfs_ssl_key)" > out/beta.docs.ipfs.io.key
+printf %s\\n "$(lookup pages_betadocsipfs_ssl_trustchain)" > out/beta.docs.ipfs.io.trustchain.crt
+printf %s\\n "$(lookup pages_betadocsipfs_ssl_dhparam)" > out/beta.docs.ipfs.io.dhparam.pem
+
 printf %s\\n "$(lookup pages_filecoin_ssl_cert)" > out/filecoin.io.crt
 printf %s\\n "$(lookup pages_filecoin_ssl_key)" > out/filecoin.io.key
 printf %s\\n "$(lookup pages_filecoin_ssl_trustchain)" > out/filecoin.io.trustchain.crt
