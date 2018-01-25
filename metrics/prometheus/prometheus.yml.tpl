@@ -180,3 +180,13 @@ done)
     static_configs:
       - targets:
         - $(var prometheus_libp2pstats_target)
+
+
+  - job_name: 'jenkins'
+    scheme: https
+    metrics_path: '/prometheus'
+    honor_labels: false
+    static_configs:
+      - targets: ['ci.ipfs.team']
+        labels:
+          group: jenkins
