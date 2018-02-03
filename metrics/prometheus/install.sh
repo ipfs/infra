@@ -50,7 +50,8 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   git remote prune origin >/dev/null
   git gc
   git fetch -q --all
-  # git reset -q --hard "$ref"
+  git reset -q --hard "$ref"
+  git clean -qfdx
   docker pull quay.io/prometheus/busybox:latest
   docker pull quay.io/prometheus/busybox:glibc
   DOCKER_IMAGE_TAG="$ref" make build docker >/dev/null
