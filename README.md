@@ -63,6 +63,7 @@ Two environment variables can be used to alter Provsn's operation:
 ### Known issues
 
 - no verbose option, need to comment out dev-null-redirections in unit scripts
+- if container that's supposed to be restarted is in a restart loop, we don't notice it's kinda running, and try to start it, and that fails because the name is already in use
 
 ### Common tasks
 
