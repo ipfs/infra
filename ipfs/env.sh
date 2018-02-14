@@ -3,6 +3,8 @@
 all_ipfs_git=git://github.com/ipfs/go-ipfs
 all_ipfs_ref="3f2c774663881d6ab3e908f4bff6ad5eb20074ae"
 
+scrappy_ipfs_ref="2a5f344338712641989fbb8ce802dc45ec015ec8"
+
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=3f2c774663881d6ab3e908f4bff6ad5eb20074ae
 pollux_ipfs_ref=3f2c774663881d6ab3e908f4bff6ad5eb20074ae
