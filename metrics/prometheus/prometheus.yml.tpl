@@ -190,3 +190,21 @@ done)
       - targets: ['ci.ipfs.team']
         labels:
           group: jenkins
+
+  - job_name: 'dokku - docker'
+    scheme: http
+    metrics_path: '/metrics'
+    honor_labels: false
+    static_configs:
+      - targets: ['cloud.ipfs.team:9323']
+        labels:
+          group: dokku
+
+  - job_name: 'dokku - cadvisor'
+    scheme: http
+    metrics_path: '/metrics'
+    honor_labels: false
+    static_configs:
+      - targets: ['cloud.ipfs.team:9324']
+        labels:
+          group: dokku
