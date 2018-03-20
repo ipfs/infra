@@ -45,7 +45,6 @@ Depending on their role they also get provisioned with:
 - IPFS
 - SSL cert and key for ipfs.io
 - Grafana and Prometheus
-- Pinbot
 
 See the `hosts` file for the role associations.
 
@@ -112,7 +111,7 @@ Note that `./secrets.sh -e` rewrites all files, regardless of whether they actua
 (venv)$ ansible-playbook -l storage ipfs.yml
 ```
 
-### Update IPFS or cjdns (or pinbot)
+### Update IPFS or cjdns
 
 ```sh
 (venv)$ make ipfs_ref

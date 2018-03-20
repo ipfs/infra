@@ -1,6 +1,0 @@
----
-- hosts: util
-  vars:
-    pinbot_targets: "{{ groups.gateway }}"
-  roles:
-    - pinbot
