@@ -133,3 +133,7 @@ all_vpn_allowlist+=("fcbf:94cf:55d3:da57:a159:86cc:3b5d:70e9")
 all_vpn_allowlist+=("fc32:6e9e:9095:bbfb:b7e1:059c:9f7b:ad48")
 # stebalien
 all_vpn_allowlist+=("fc6f:868d:1ca5:e639:2e60:e1d5:db99:c885")
+# metrics0.fsn.dwebops.net
+all_vpn_allowlist+=("fca7:4bf1:74be:b136:44b3:ce52:39f:a165")
+# metrics1.fsn.dwebops.net
+all_vpn_allowlist+=("fc75:4c24:8a98:1ea8:bc0:8343:eea2:dd4")
