@@ -49,7 +49,7 @@ done
 $(
 for pwd in $(lookup cjdns_passwords); do
     printf '            {\n'
-    printf '                "peerName": "%s",\n' $(var 'cjdns_'$pwd'_peer_name')
+    printf '                "user": "%s",\n' $(var 'cjdns_'$pwd'_peer_name')
     printf '                "password": "%s"\n' $(var 'cjdns_'$pwd'_password')
     printf '            },\n'
 done
