@@ -4,7 +4,7 @@ all_prometheus_git="https://github.com/prometheus/prometheus.git"
 all_prometheus_ref="5211b96d4d1291c3dd1a569f711d3b301b635ecb"
 
 all_prometheus_opts=("-storage.local.memory-chunks=512288"
-                     "-storage.local.retention=43800h0m0s"
+                     "-storage.local.retention=8760h0m0s"
                      "-web.external-url=http://metrics.ipfs.team/prometheus")
 
 all_prometheus_scrape_interval="15s"
