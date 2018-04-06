@@ -15,5 +15,5 @@ all_prometheus_gateway_hosts=(scrappy chappy)
 all_prometheus_bootstrap_hosts=(pluto neptune uranus saturn jupiter venus earth mercury)
 all_prometheus_storage_hosts=(pollux biham nihal auva)
 all_prometheus_metrics_hosts=(banana)
-all_prometheus_probe_hosts=(banana deimos)
+all_prometheus_probe_hosts=(banana)
 all_prometheus_all_hosts=${provsn_hosts[@]}
