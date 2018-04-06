@@ -9,7 +9,7 @@ pollux_ipfs_ref=3f2c774663881d6ab3e908f4bff6ad5eb20074ae
 nihal_ipfs_ref=682b263f3a54ffa36409422d922e80adead87e0c
 auva_ipfs_ref=3f2c774663881d6ab3e908f4bff6ad5eb20074ae
 
-all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment"
+all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment --enable-namesys-pubsub"
 
 # Network ports. See config.tpl for how they are bound.
 # Also see build.sh for the Docker networking options used.
