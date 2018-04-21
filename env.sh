@@ -3,7 +3,7 @@
 # Names of the target hosts.
 # These are just names, nothing is being inferred from them.
 # Host-specific settings can be set like this: <host>_<setting>
-provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury scrappy chappy pollux biham nihal auva banana deimos)
+provsn_hosts=(pluto neptune uranus saturn jupiter venus earth mercury scrappy chappy pollux biham nihal auva banana)
 
 # Provsn appends these to every SSH invocation.
 all_ssh_options="-o ConnectTimeout=30 -o UserKnownHostsFile=$provsn_root/known_hosts -o StrictHostKeyChecking=yes"
@@ -104,11 +104,6 @@ auva_units=(${baseunits[@]} ${storageunits[@]})
 banana_ssh="root@banana.i.ipfs.team"
 banana_ipv4_address="78.46.136.129"
 banana_units=(${baseunits[@]} ${metricsunits[@]})
-
-# digitalocean-fra1
-deimos_ssh="root@deimos.i.ipfs.team"
-deimos_ipv4_address="46.101.230.158"
-deimos_units=(${baseunits[@]})
 
 # Cjdns IPv6 addresses allowed to access internal HTTP endpoints on each host.
 # These are e.g. the IPFS HTTP API on tcp/5001, or various metrics collectors.
