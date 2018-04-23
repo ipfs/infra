@@ -52,7 +52,7 @@ if [ "rebuild$rebuild" == "rebuild1" ]; then
   restart=1
 fi
 
-if [ ! -d "$repo/datastore" ]; then
+if [ ! -d "$repo/datastore" ] && [ ! -d "$repo/badgerds" ]; then
   mkdir -p "$repo"
   chown -R 1000:users "$repo"
   docker run -i -u 1000 -v "$repo:/data/ipfs" --entrypoint /bin/sh "ipfs:$ref" -c "ipfs init --bits 2048 --profile=$profile"
