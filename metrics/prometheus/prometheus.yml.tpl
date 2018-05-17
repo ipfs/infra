@@ -4,6 +4,9 @@ global:
   scrape_timeout:      $(var prometheus_scrape_timeout)
   evaluation_interval: $(var prometheus_evaluation_interval)
 
+remote_write:
+  - url: "$(lookup prometheus_remote_write_url)"
+
 scrape_configs:
 
   - job_name: 'gateway'
