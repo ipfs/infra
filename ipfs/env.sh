@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="287cbedf38fba8531019421bb21d2172423761ca"
+all_ipfs_ref="e7938a1834888198e8cd714fe793d715538f89f0"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
-biham_ipfs_ref=287cbedf38fba8531019421bb21d2172423761ca
-pollux_ipfs_ref=287cbedf38fba8531019421bb21d2172423761ca
-nihal_ipfs_ref=287cbedf38fba8531019421bb21d2172423761ca
-auva_ipfs_ref=287cbedf38fba8531019421bb21d2172423761ca
+biham_ipfs_ref=e7938a1834888198e8cd714fe793d715538f89f0
+pollux_ipfs_ref=e7938a1834888198e8cd714fe793d715538f89f0
+nihal_ipfs_ref=e7938a1834888198e8cd714fe793d715538f89f0
+auva_ipfs_ref=e7938a1834888198e8cd714fe793d715538f89f0
 
 all_ipfs_daemon_opts="--enable-gc --enable-pubsub-experiment --enable-namesys-pubsub"
 
