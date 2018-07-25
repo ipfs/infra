@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 all_ipfs_git=git://github.com/ipfs/go-ipfs
-all_ipfs_ref="e7938a1834888198e8cd714fe793d715538f89f0"
+all_ipfs_ref="f4205780dc1c3b1720c668b75c1db3d0d667192f"
 
 # storage hosts, coordinate ipfs deploys with storage users (e.g. @davidar, @substack)
 biham_ipfs_ref=e7938a1834888198e8cd714fe793d715538f89f0
