@@ -132,6 +132,26 @@ if [ ! -z "$(diff -Naur "$cert_dest/bootstrap.libp2p.io.dhparam.pem" "out/bootst
   reload=1
 fi
 
+if [ ! -z "$(diff -Naur "$cert_dest/preload.ipfs.io.crt" "out/preload.ipfs.io.crt")" ]; then
+  echo "ipfs/pages *.preload.ipfs.io ssl cert changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/preload.ipfs.io.key" "out/preload.ipfs.io.key")" ]; then
+  echo "ipfs/pages *.preload.ipfs.io ssl key changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/preload.ipfs.io.trustchain.crt" "out/preload.ipfs.io.trustchain.crt")" ]; then
+  echo "ipfs/pages *.preload.ipfs.io ssl trustchain changed"
+  reload=1
+fi
+
+if [ ! -z "$(diff -Naur "$cert_dest/preload.ipfs.io.dhparam.pem" "out/preload.ipfs.io.dhparam.pem")" ]; then
+  echo "ipfs/pages *.preload.ipfs.io ssl dhparam changed"
+  reload=1
+fi
+
 if [ ! -z "$(diff -Naur "$cert_dest/ipld.io.crt" "out/ipld.io.crt")" ]; then
   echo "ipfs/pages ipld.io ssl cert changed"
   reload=1
@@ -556,6 +576,10 @@ if [ "reload$reload" == "reload1" ]; then
   cp "out/bootstrap.libp2p.io.key" "$cert_dest/bootstrap.libp2p.io.key"
   cp "out/bootstrap.libp2p.io.trustchain.crt" "$cert_dest/bootstrap.libp2p.io.trustchain.crt"
   cp "out/bootstrap.libp2p.io.dhparam.pem" "$cert_dest/bootstrap.libp2p.io.dhparam.pem"
+  cp "out/preload.ipfs.io.crt" "$cert_dest/preload.ipfs.io.crt"
+  cp "out/preload.ipfs.io.key" "$cert_dest/preload.ipfs.io.key"
+  cp "out/preload.ipfs.io.trustchain.crt" "$cert_dest/preload.ipfs.io.trustchain.crt"
+  cp "out/preload.ipfs.io.dhparam.pem" "$cert_dest/preload.ipfs.io.dhparam.pem"
   cp "out/ipld.io.crt" "$cert_dest/ipld.io.crt"
   cp "out/ipld.io.key" "$cert_dest/ipld.io.key"
   cp "out/ipld.io.trustchain.crt" "$cert_dest/ipld.io.trustchain.crt"
