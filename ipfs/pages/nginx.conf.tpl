@@ -134,6 +134,52 @@ server {
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
 
     location / {
+        proxy_set_header Host $(var pages_bootstrap_hostname).bootstrap.libp2p.io:443;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$http_connection;
+        proxy_set_header Sec-WebSocket-Key \$http_sec_websocket_key;
+        proxy_set_header Sec-WebSocket-Extensions \$http_sec_websocket_extensions;
+        proxy_set_header Sec-WebSocket-Version \$http_sec_websocket_version;
+        proxy_pass http://ws_bootstrap;
+        proxy_pass_header Server;
+        proxy_read_timeout 60s;
+    }
+}
+
+server {
+    server_name *.preload.ipfs.io;
+    access_log /var/log/nginx/access.log mtail;
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate /etc/nginx/certs/preload.ipfs.io.crt;
+    ssl_certificate_key /etc/nginx/certs/preload.ipfs.io.key;
+    ssl_dhparam /etc/nginx/certs/preload.ipfs.io.dhparam.pem;
+    ssl_trusted_certificate /etc/nginx/certs/preload.ipfs.io.trustchain.crt;
+
+    # HSTS (ngx_http_headers_module is required)
+    # 31536000 seconds = 12 months, as advised by hstspreload.org
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+
+    location /ipfs {
+        proxy_set_header Host \$host:443;
+        proxy_set_header X-Ipfs-Gateway-Prefix "";
+        proxy_pass http://gateway;
+    }
+
+    location /ipns {
+        proxy_set_header Host \$host:443;
+        proxy_set_header X-Ipfs-Gateway-Prefix "";
+        proxy_pass http://gateway;
+    }
+
+    location /api {
+        proxy_set_header Host \$host:443;
+        proxy_set_header X-Ipfs-Gateway-Prefix "";
+        proxy_pass http://gateway;
+    }
+
+    location / {
         proxy_set_header Host \$host:80;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection \$http_connection;

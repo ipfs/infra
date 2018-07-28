@@ -30,6 +30,11 @@ printf %s\\n "$(lookup pages_bootstrap_ssl_key)" > out/bootstrap.libp2p.io.key
 printf %s\\n "$(lookup pages_bootstrap_ssl_trustchain)" > out/bootstrap.libp2p.io.trustchain.crt
 printf %s\\n "$(lookup pages_bootstrap_ssl_dhparam)" > out/bootstrap.libp2p.io.dhparam.pem
 
+printf %s\\n "$(lookup pages_preload_ssl_cert)" > out/preload.ipfs.io.crt
+printf %s\\n "$(lookup pages_preload_ssl_key)" > out/preload.ipfs.io.key
+printf %s\\n "$(lookup pages_preload_ssl_trustchain)" > out/preload.ipfs.io.trustchain.crt
+printf %s\\n "$(lookup pages_preload_ssl_dhparam)" > out/preload.ipfs.io.dhparam.pem
+
 printf %s\\n "$(lookup pages_ipld_ssl_cert)" > out/ipld.io.crt
 printf %s\\n "$(lookup pages_ipld_ssl_key)" > out/ipld.io.key
 printf %s\\n "$(lookup pages_ipld_ssl_trustchain)" > out/ipld.io.trustchain.crt
