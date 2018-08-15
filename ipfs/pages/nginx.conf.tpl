@@ -1,5 +1,5 @@
 server {
-    server_name *.i.ipfs.io beta.docs.ipfs.io filecoin.io orbit.chat ipld.io libp2p.io multiformats.io zcash.dag.ipfs.io wikipedia-on-ipfs.org en.wikipedia-on-ipfs.org tr.wikipedia-on-ipfs.org simple.wikipedia-on-ipfs.org ar.wikipedia-on-ipfs.org ku.wikipedia-on-ipfs.org datatogether.org saftproject.com www.saftproject.com saft-project.com www.saft-project.com saft-project.org www.saft-project.org peerpad.net flipchart.peerpad.net;
+    server_name beta.docs.ipfs.io filecoin.io orbit.chat ipld.io libp2p.io multiformats.io zcash.dag.ipfs.io wikipedia-on-ipfs.org en.wikipedia-on-ipfs.org tr.wikipedia-on-ipfs.org simple.wikipedia-on-ipfs.org ar.wikipedia-on-ipfs.org ku.wikipedia-on-ipfs.org datatogether.org saftproject.com www.saftproject.com saft-project.com www.saft-project.com saft-project.org www.saft-project.org peerpad.net flipchart.peerpad.net;
     access_log /var/log/nginx/access.log mtail;
 
     listen 80;
@@ -16,30 +16,6 @@ server {
     listen [::]:80;
 
     return 301 https://protocol.ai\$request_uri;
-}
-
-server {
-    server_name *.i.ipfs.io;
-    access_log /var/log/nginx/access.log mtail;
-
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    ssl_certificate /etc/nginx/certs/i.ipfs.io.crt;
-    ssl_certificate_key /etc/nginx/certs/i.ipfs.io.key;
-    ssl_dhparam /etc/nginx/certs/i.ipfs.io.dhparam.pem;
-    ssl_trusted_certificate /etc/nginx/certs/i.ipfs.io.trustchain.crt;
-
-    # HSTS (ngx_http_headers_module is required)
-    # 31536000 seconds = 12 months, as advised by hstspreload.org
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
-    location / {
-        proxy_set_header Host "";
-        # The gateway upstream is defined in the ipfs/gateway unit.
-        proxy_pass http://gateway;
-        proxy_pass_header Server;
-        proxy_read_timeout 60s;
-    }
 }
 
 server {
@@ -109,84 +85,6 @@ server {
         proxy_set_header Host orbit.chat;
         # The gateway upstream is defined in the ipfs/gateway unit.
         proxy_pass http://gateway;
-        proxy_pass_header Server;
-        proxy_read_timeout 60s;
-    }
-}
-
-upstream ws_bootstrap {
-    server 127.0.0.1:8081;
-}
-
-server {
-    server_name $(var pages_bootstrap_hostname).bootstrap.libp2p.io;
-    access_log /var/log/nginx/access.log mtail;
-
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    ssl_certificate /etc/nginx/certs/bootstrap.libp2p.io.crt;
-    ssl_certificate_key /etc/nginx/certs/bootstrap.libp2p.io.key;
-    ssl_dhparam /etc/nginx/certs/bootstrap.libp2p.io.dhparam.pem;
-    ssl_trusted_certificate /etc/nginx/certs/bootstrap.libp2p.io.trustchain.crt;
-
-    # HSTS (ngx_http_headers_module is required)
-    # 31536000 seconds = 12 months, as advised by hstspreload.org
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
-    location / {
-        proxy_set_header Host $(var pages_bootstrap_hostname).bootstrap.libp2p.io:443;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection \$http_connection;
-        proxy_set_header Sec-WebSocket-Key \$http_sec_websocket_key;
-        proxy_set_header Sec-WebSocket-Extensions \$http_sec_websocket_extensions;
-        proxy_set_header Sec-WebSocket-Version \$http_sec_websocket_version;
-        proxy_pass http://ws_bootstrap;
-        proxy_pass_header Server;
-        proxy_read_timeout 60s;
-    }
-}
-
-server {
-    server_name *.preload.ipfs.io;
-    access_log /var/log/nginx/access.log mtail;
-
-    listen 443 ssl;
-    listen [::]:443 ssl;
-    ssl_certificate /etc/nginx/certs/preload.ipfs.io.crt;
-    ssl_certificate_key /etc/nginx/certs/preload.ipfs.io.key;
-    ssl_dhparam /etc/nginx/certs/preload.ipfs.io.dhparam.pem;
-    ssl_trusted_certificate /etc/nginx/certs/preload.ipfs.io.trustchain.crt;
-
-    # HSTS (ngx_http_headers_module is required)
-    # 31536000 seconds = 12 months, as advised by hstspreload.org
-    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-
-    location /ipfs {
-        proxy_set_header Host \$host:443;
-        proxy_set_header X-Ipfs-Gateway-Prefix "";
-        proxy_pass http://gateway;
-    }
-
-    location /ipns {
-        proxy_set_header Host \$host:443;
-        proxy_set_header X-Ipfs-Gateway-Prefix "";
-        proxy_pass http://gateway;
-    }
-
-    location /api {
-        proxy_set_header Host \$host:443;
-        proxy_set_header X-Ipfs-Gateway-Prefix "";
-        proxy_pass http://gateway;
-    }
-
-    location / {
-        proxy_set_header Host \$host:80;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection \$http_connection;
-        proxy_set_header Sec-WebSocket-Key \$http_sec_websocket_key;
-        proxy_set_header Sec-WebSocket-Extensions \$http_sec_websocket_extensions;
-        proxy_set_header Sec-WebSocket-Version \$http_sec_websocket_version;
-        proxy_pass http://ws_bootstrap;
         proxy_pass_header Server;
         proxy_read_timeout 60s;
     }
