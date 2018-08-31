@@ -96,6 +96,16 @@ printf "\nAccess-Control-Expose-Headers[X-Stream-Output]: "
 (grep -F 'Access-Control-Expose-Headers: ' | grep -qF 'X-Stream-Output') <<< $emptyDirHeaders
 report
 
+printf "\nCache-Control[immutable] for /ipfs/ path: "
+grep -qiE 'Cache-Control:.*immutable' <<< $pngHeaders
+report
+
+printf "\nCache-Control[!immutable] for /ipns/ path: "
+ipnsUrl="https://$fqdn/ipns/ipfs.io/"
+ipnsHeaders=$(curl $defaultOpts $printHeaders $ignoreBody "$ipnsUrl")
+grep -vqiE 'Cache-Control:.*immutable' <<< $ipnsHeaders
+report
+
 printf "\n\n--> Testing /api/v0/ ..\n"
 
 # regression test for https://github.com/ipfs-shipyard/ipfs-share-files/issues/17#issuecomment-416766663
@@ -114,4 +124,4 @@ printf "\nremote CORS fetch: "
 curl $defaultOpts $ipfsLs  -H 'Origin: https://wikipedia.org/'  -H 'Referer: https://wikipedia.org/'   | grep -qF $ipfsLsExpected
 report
 
-printf "\n\n==> If you can see this then all went well and $fqdn passed the smoke test :-)\n"
+printf "\n\n==> If you can see this then all went well and %s passed the smoke test :-)\n" "$fqdn"
