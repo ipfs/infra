@@ -1,6 +1,6 @@
-# infrastructure
+# IPFS Infrastructure
 
-[![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](http://ipn.io)
+[![](https://img.shields.io/badge/made%20by-Protocol%20Labs-blue.svg?style=flat-square)](http://protocol.ai)
 [![](https://img.shields.io/badge/project-IPFS-blue.svg?style=flat-square)](http://ipfs.io/)
 [![](https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat-square)](http://webchat.freenode.net/?channels=%23ipfs)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
@@ -13,7 +13,12 @@
 - Known issues
 - Common tasks
 
-### Introduction
+## Progress and Tracking
+
+
+[![Throughput Graph](https://graphs.waffle.io/ipfs/infra/throughput.svg)](https://waffle.io/ipfs/infra/metrics/throughput)
+
+## Introduction
 
 This repository contains the technical infrastructure of the IPFS community.
 
@@ -29,7 +34,7 @@ Infrastructure that isn't contained here:
 - DNS settings for ipfs.io, ipld.io, multiformats.io, libp2p.io, orbit.chat, ipfs.team, protocol.ai
 - TeamCity CI: http://ci.ipfs.team:8111
 
-### Getting started
+## Getting started
 
 We use a tool called Provsn to maintain the setup of hosts and services.
 The fundamental principle of Provsn is that hosts are in a certain state,
@@ -58,7 +63,7 @@ Two environment variables can be used to alter Provsn's operation:
 - `PROVSN_TRACE` -- if set, this enables Bash tracing (`set -x`) for extensive debugging information.
   Note that this *will contain sensitive information and secrets*.
 
-### Usage
+## Usage
 
 ### Known issues
 
