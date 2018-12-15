@@ -5,7 +5,9 @@
 <!--- If you're requesting support, tell us what we can do for you -->
 <!--- If you're reporting a problem, tell us the situation so we can act -->
 
-### Context
+<!--- NOTE: If this is urgent, apply the labels `firefighting` and `P0 - Critical` -->
+
+## Context
 
 <!--- List any requirements or limits that need to be satisfied -->
 
