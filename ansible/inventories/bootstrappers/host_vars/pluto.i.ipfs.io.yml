@@ -1,0 +1,3 @@
+---
+color: blue
+#ipfs_private_key:  '{{ vault_pluto_ifps_private_key }}'

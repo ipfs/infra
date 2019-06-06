@@ -1,0 +1,6 @@
+---
+- hosts: bootstrappers
+  sudo: false
+  roles:
+    - role: ssh-keys
+#    - role: bootstrapper
