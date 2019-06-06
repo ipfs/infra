@@ -2,3 +2,4 @@
 ansible_connection: ssh
 ansible_ssh_user: root
 example: "Your variable is defined"
+go_ipfs_version: "v0.4.21"

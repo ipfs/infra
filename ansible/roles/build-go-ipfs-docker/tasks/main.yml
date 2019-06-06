@@ -1,0 +1,24 @@
+---
+- name: fetch GIT repo
+  delegate_to: localhost
+  git:
+    repo: "git@github.com:ipfs/go-ipfs.git"
+    force: 'yes'
+    update: 'yes'
+    dest: "/tmp/go-ipfs"
+    accept_hostkey: 'yes'
+    version: '{{ go_ipfs_version }}'
+    depth: 1
+  register: code_update
+
+- name: Build image and with build args
+  delegate_to: localhost
+  docker_image:
+    name: "go-ipfs-ansible:{{ go_ipfs_version }}"
+    build:
+      path: /tmp/go-ipfs
+      pull: yes
+      # args:
+      #   log_volume: /var/log/myapp
+      #   listen_port: 8080
+    source: build
