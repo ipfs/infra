@@ -11,14 +11,41 @@
     depth: 1
   register: code_update
 
-- name: Build image and with build args
+- name: Build base image
   delegate_to: localhost
   docker_image:
     name: "go-ipfs-ansible:{{ go_ipfs_version }}"
     build:
       path: /tmp/go-ipfs
       pull: yes
-      # args:
-      #   log_volume: /var/log/myapp
-      #   listen_port: 8080
     source: build
+
+- name: Build final image with build args
+  delegate_to: localhost
+  docker_image:
+    name: "go-ipfs:{{ go_ipfs_version }}"
+    build:
+      path: "{{ role_path }}/files/dockerfiles/"
+      pull: no
+      args:
+        GO_IPFS_VERSION: "{{ go_ipfs_version }}"
+    source: build
+
+- name: Archive image
+  delegate_to: localhost
+  docker_image:
+    name: "go-ipfs"
+    tag: "{{ go_ipfs_version }}"
+    archive_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+    source: local
+
+- name: copy docker image to server
+  become: no
+  copy: src="/tmp/go-ipfs-{{ go_ipfs_version }}.tar" dest="/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+
+- name: Load image from archive
+  docker_image:
+    name: "go-ipfs"
+    tag: "{{ go_ipfs_version }}"
+    load_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+    source: load
