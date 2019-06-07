@@ -15,7 +15,7 @@ all_ssh_options="-o ConnectTimeout=30 -o UserKnownHostsFile=$provsn_root/known_h
 #   gateway_units=(ipfs ipfs/gateway ssl)
 # We can then omit the repeated <host>_units definitions.
 baseunits=(secrets base base/golang cjdns docker nginx)
-baseunits+=(mtail metrics/node_exporter metrics/blackbox_exporter)
+baseunits+=(etrics/node_exporter metrics/blackbox_exporter)
 gatewayunits=(ipfs ipfs/gateway ipfs/pages ssl)
 storageunits=(ipfs)
 bootstrapunits=(ipfs)
