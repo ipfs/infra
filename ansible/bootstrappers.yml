@@ -3,4 +3,5 @@
   become: false
   roles:
     - role: ssh-keys
+    - role: common
     - role: build-go-ipfs-docker
