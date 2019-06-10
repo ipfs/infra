@@ -1,0 +1,3 @@
+---
+ipfs_private_key: "{{ vault_neptune_ipfs_private_key }}"
+ipfs_peer_id: "QmSoLnSGccFuZQJzRadHn95W2CrSFmZuTdDWP8HXaHca9z"

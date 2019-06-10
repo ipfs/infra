@@ -49,3 +49,15 @@
     tag: "{{ go_ipfs_version }}"
     load_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
     source: load
+
+
+- name: Start go-ipfs container
+  docker_container:
+    name: "go-ipfs"
+    image: "go-ipfs:{{ go_ipfs_version }}"
+    network_mode: host
+    state: started
+    command: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
+    env: "{{ go_ipfs_env }}"
+    comparisons:
+      env: strict

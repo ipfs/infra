@@ -1,0 +1,14 @@
+---
+ansible_connection: ssh
+ansible_ssh_user: root
+example: "Your variable is defined"
+go_ipfs_version: "v0.4.21"
+
+go_ipfs_env:
+    IPFS_CONFIG_Identity_PrivKey: "{{ ipfs_private_key }}"
+    IPFS_CONFIG_Identity_PeerID: "{{ ipfs_peer_id }}"
+    IPFS_CONFIG_Swarm_ConnMgr_Type: "basic"
+    IPFS_CONFIG_Reprovider_Interval: "\"0\"" #needs to be a quoted string
+    IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
+    IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "49s"
+    IPFS_LOGGING: info
