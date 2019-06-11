@@ -4,6 +4,6 @@
   roles:
     - role: ssh-keys
     - role: common
-    - role: build-go-ipfs-docker
+    - role: go-ipfs-deploy-docker
   vars_files:
     - vault.yml
