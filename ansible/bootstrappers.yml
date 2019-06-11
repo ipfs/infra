@@ -3,7 +3,9 @@
   become: false
   roles:
     - role: ssh-keys
-    - role: common
+    - { role: geerlingguy.docker,
+          docker_install_compose: false }
+    - role: python-dependencies
     - role: go-ipfs-deploy-docker
   vars_files:
     - vault.yml
