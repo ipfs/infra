@@ -1,43 +1,9 @@
 ---
-- name: fetch GIT repo
-  delegate_to: localhost
-  git:
-    repo: "git@github.com:ipfs/go-ipfs.git"
-    force: 'yes'
-    update: 'yes'
-    dest: "/tmp/go-ipfs"
-    accept_hostkey: 'yes'
-    version: '{{ go_ipfs_version }}'
-    depth: 1
-  register: code_update
-
-- name: Build base image
-  delegate_to: localhost
-  docker_image:
-    name: "go-ipfs-ansible:{{ go_ipfs_version }}"
-    build:
-      path: /tmp/go-ipfs
-      pull: yes
-    source: build
-
-- name: Build final image with build args
-  delegate_to: localhost
-  docker_image:
-    name: "go-ipfs:{{ go_ipfs_version }}"
-    build:
-      path: "{{ role_path }}/files/dockerfiles/"
-      pull: no
-      args:
-        GO_IPFS_VERSION: "{{ go_ipfs_version }}"
-    source: build
-
-- name: Archive image
-  delegate_to: localhost
-  docker_image:
-    name: "go-ipfs"
-    tag: "{{ go_ipfs_version }}"
-    archive_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
-    source: local
+- name: build go-ipfs Docker image
+  include_tasks:
+    file: build.yml
+    apply:
+      delegate_to: localhost
 
 - name: copy docker image to server
   become: no
@@ -57,7 +23,7 @@
     image: "go-ipfs:{{ go_ipfs_version }}"
     network_mode: host
     state: started
-    command: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
+    command: "{{ go_ipfs_cmd }}"
     env: "{{ go_ipfs_env }}"
     comparisons:
       env: strict
