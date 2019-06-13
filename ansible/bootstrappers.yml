@@ -2,7 +2,8 @@
 - hosts: bootstrappers
   become: false
   roles:
-    - role: ssh-keys
+    - { role: ssh-keys,
+          ssh_user: ubuntu }
     - { role: geerlingguy.docker,
           docker_install_compose: false }
     - role: python-dependencies

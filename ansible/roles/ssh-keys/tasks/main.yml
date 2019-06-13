@@ -3,3 +3,13 @@
   debug:
     var: hostvars[inventory_hostname]
     verbosity: 4
+
+- name: Set up multiple authorized keys
+  authorized_key:
+    user: "{{ ssh_user }}"
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - public_keys/gmasgras
+    - public_keys/michael_burns
+    - public_keys/sanjuan
