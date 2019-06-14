@@ -1,0 +1,3 @@
+nginx_conf_path: "/opt/ansible/nginx"
+nginx_confd_location: "{{ nginx_conf_path }}/conf.d/"
+nginx_certs_location: "{{ nginx_conf_path }}/certs/"

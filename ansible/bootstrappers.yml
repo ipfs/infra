@@ -4,6 +4,7 @@
   roles:
     - { role: ssh-keys,
           ssh_user: ubuntu }
+    - nginx_conf_bootstrappers
     - { role: geerlingguy.docker,
           docker_install_compose: false }
     - role: python-dependencies
