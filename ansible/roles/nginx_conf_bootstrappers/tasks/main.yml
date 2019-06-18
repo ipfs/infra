@@ -24,6 +24,19 @@
   # notify:
   #   - "Restart_Nginx"
 
+- name: "copy *.preload.ipfs.io SSL certs"
+  no_log: true
+  copy:
+    dest: "{{ nginx_certs_location }}/{{ item.location }}"
+    content: "{{ item.content }}"
+  with_items:
+    - { location: "preload.ipfs.io.crt", content: "{{ vault_star_preload_ipfs_io_cert }}"}
+    - { location: "preload.ipfs.io.key", content: "{{ vault_star_preload_ipfs_io_key }}"}
+    - { location: "preload.ipfs.io.dhparam.pem", content: "{{ vault_star_preload_ipfs_io_dhparam }}"}
+    - { location: "preload.ipfs.io.trustchain.crt", content: "{{ vault_star_preload_ipfs_io_trustchain }}"}
+  # notify:
+  #   - "Restart_Nginx"
+
 - name: sync nginx configs
   become: yes
   copy: src="{{ role_path }}/files/" dest="{{ nginx_conf_path }}/"
