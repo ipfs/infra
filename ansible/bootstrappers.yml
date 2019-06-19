@@ -1,10 +1,11 @@
 ---
 - hosts: bootstrappers
-  become: false
+  become: true
+  remote_user: "{{ deploy_user }}"
   roles:
     - { role: ssh-keys,
-          ssh_user: ubuntu }
-    - nginx_conf_bootstrappers
+          ssh_user: "{{ deploy_user }}" }
+    - { role: nginx_conf_bootstrappers }
     - { role: geerlingguy.docker,
           docker_install_compose: false }
     - role: python-dependencies

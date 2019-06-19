@@ -1,6 +1,7 @@
 ---
 ansible_connection: ssh
-ansible_ssh_user: root
+deploy_user: ubuntu
+
 go_ipfs_version: "v0.4.21"
 
 go_ipfs_env:
