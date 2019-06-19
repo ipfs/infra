@@ -10,6 +10,10 @@ go_ipfs_env:
     IPFS_CONFIG_Reprovider_Interval: "\"0\"" #needs to be a quoted string
     IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
     IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "49s"
+    IPFS_CONFIG_Addresses_Swarm: |
+      [/ip4/0.0.0.0/tcp/4001,/ip6/::/tcp/4001,/ip4/127.0.0.1/tcp/8081/ws]
     IPFS_LOGGING: info
 
 go_ipfs_cmd: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
+
+#go_ipfs_doker_options:
