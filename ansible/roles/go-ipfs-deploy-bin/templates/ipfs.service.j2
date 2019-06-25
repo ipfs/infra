@@ -1,0 +1,19 @@
+[Unit]
+Description=IPFS daemon
+After=network.target
+
+[Service]
+User=ipfs
+Group=ipfs
+{% for env_config in go_ipfs_systemd_env %}
+Environment="{{ env_config }}"
+{% endfor %}
+ExecStart=/usr/local/bin/ipfs daemon --enable-gc --enable-namesys-pubsub --migrate=true
+Restart=on-failure
+LimitNOFILE=infinity
+StandardOutput=syslog+console
+StandardError=syslog+console
+SyslogIdentifier=ipfs
+
+[Install]
+WantedBy=multi-user.target

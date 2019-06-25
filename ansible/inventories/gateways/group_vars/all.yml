@@ -3,7 +3,7 @@ ansible_connection: ssh
 ansible_ssh_user: root
 deploy_user: root
 
-go_ipfs_version: "v0.4.21"
+go_ipfs_version: "v0.4.22"
 
 go_ipfs_env:
     IPFS_CONFIG_Gateway_Writable: "false"
@@ -14,3 +14,11 @@ go_ipfs_env:
     #IPFS_LOGGING: info
 
 go_ipfs_cmd: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
+
+go_ipfs_systemd_env:
+  - IPFS_PATH=/home/ipfs/.ipfs
+  - IPFS_LOGGING=INFO
+  - IPFS_LOGGING_FMT=nocolor
+  - LIBP2P_SWARM_FD_LIMIT=5000
+
+go_ipfs_debug_log: /var/log/ipfs

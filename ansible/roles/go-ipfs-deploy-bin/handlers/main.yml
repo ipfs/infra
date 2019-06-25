@@ -1,0 +1,11 @@
+---
+- name: "Restart_IPFS"
+  systemd:
+    name: ipfs
+    state: restarted
+    daemon_reload: yes
+
+- name: "Restart_RSYSLOG"
+  systemd:
+    name: rsyslog
+    state: restarted

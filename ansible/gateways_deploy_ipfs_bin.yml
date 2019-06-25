@@ -1,0 +1,6 @@
+---
+- hosts: gateways
+  become: false
+  serial: 2
+  roles:
+    - { role: go-ipfs-deploy-bin }
