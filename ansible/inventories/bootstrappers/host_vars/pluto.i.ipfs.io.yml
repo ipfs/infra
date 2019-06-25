@@ -1,3 +1,5 @@
 ---
-color: blue
-#ipfs_private_key:  '{{ vault_pluto_ifps_private_key }}'
+ipfs_private_key: "{{ vault_pluto_ipfs_private_key }}"
+ipfs_peer_id: "QmSoLPppuBtQSGwKDZT2M73ULpjvfd3aZ6ha4oFGL1KrGM"
+
+libp2p_fqdn: sfo-3.bootstrap.libp2p.io
