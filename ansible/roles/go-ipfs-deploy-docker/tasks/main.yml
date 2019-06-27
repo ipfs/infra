@@ -6,7 +6,6 @@
       delegate_to: localhost
 
 - name: copy docker image to server
-  become: no
   copy: src="/tmp/go-ipfs-{{ go_ipfs_version }}.tar" dest="/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
 
 - name: Load image from archive
@@ -20,10 +19,18 @@
 - name: Start go-ipfs container
   docker_container:
     name: "go-ipfs"
-    image: "go-ipfs:{{ go_ipfs_version }}"
     network_mode: host
     state: started
+    restart_policy : always
+    image: "go-ipfs:{{ go_ipfs_version }}"
     command: "{{ go_ipfs_cmd }}"
+    user: ipfs
     env: "{{ go_ipfs_env }}"
+    log_driver: json-file
+    log_options:
+      max-size: 100m
+      max-file: 2
     comparisons:
       env: strict
+    volumes:
+      - /ipfs/ipfs_master/repo:/data/ipfs
