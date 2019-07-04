@@ -3,18 +3,34 @@ ansible_connection: ssh
 deploy_user: ubuntu
 
 go_ipfs_version: "ad030d"
+go_ipfs_dir: "/ipfs/ipfs_docker"
+go_ipfs_repo: "{{ go_ipfs_dir }}/repo"
 
 go_ipfs_env:
-    IPFS_CONFIG_Identity_PrivKey: "{{ ipfs_private_key }}"
-    IPFS_CONFIG_Identity_PeerID: "{{ ipfs_peer_id }}"
-    # IPFS_CONFIG_Swarm_ConnMgr_Type: "basic"
-    # IPFS_CONFIG_Reprovider_Interval: "\"0\"" #needs to be a quoted string
-    # IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
-    # IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "49s"
-    IPFS_CONFIG_Addresses_Swarm: |
-      [/ip4/0.0.0.0/tcp/4001,/ip6/::/tcp/4001,/ip4/127.0.0.1/tcp/8081/ws]
-    IPFS_LOGGING: INFO
-    IPFS_PATH: /data/ipfs
+  # IPFS_CONFIG_Swarm_ConnMgr_Type: "basic"
+  # IPFS_CONFIG_Reprovider_Interval: "\"0\"" #needs to be a quoted string
+  # IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
+  # IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "49s"
+  IPFS_CONFIG_Identity_PrivKey: "{{ ipfs_private_key }}"
+  IPFS_CONFIG_Identity_PeerID: "{{ ipfs_peer_id }}"
+  IPFS_CONFIG_Addresses_Swarm: |
+    [/ip4/0.0.0.0/tcp/4001,/ip6/::/tcp/4001,/ip4/127.0.0.1/tcp/8081/ws]
+  IPFS_CONFIG_Datastore_BloomFilterSize: "524288"
+  IPFS_CONFIG_Datastore_StorageGCWatermark: "90"
+  IPFS_CONFIG_Datastore_StorageMax: "60G"
+  IPFS_CONFIG_Discovery_MDNS_Enabled: "false"
+  IPFS_CONFIG_Ipns_ResolveCacheSize: "0"
+  IPFS_CONFIG_Reprovider_Interval: ""
+  IPFS_CONFIG_Reprovider_Strategy: ""
+  IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "1m"
+  IPFS_CONFIG_Swarm_ConnMgr_LowWater: "1500"
+  IPFS_CONFIG_Swarm_ConnMgr_Highwater: "2000"
+  IPFS_CONFIG_Swarm_DisableNatPortMap: "true"
+  IPFS_CONFIG_Swarm_EnableRelayHop: "true"
+  IPFS_CONFIG_Swarm_EnableAutoNATService: "true"
+  IPFS_CONFIG_Swarm_EnableAutoRelay: "true"
+  IPFS_LOGGING: INFO
+  IPFS_PATH: /data/ipfs
 
 go_ipfs_cmd: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
 

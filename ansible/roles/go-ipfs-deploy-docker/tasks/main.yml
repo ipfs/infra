@@ -15,6 +15,13 @@
     load_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
     source: load
 
+- name: Creates ipfs repo dir
+  file:
+    path: "{{ go_ipfs_repo }}"
+    state: directory
+    owner: ubuntu
+    group: users
+    mode: '0755'
 
 - name: Start go-ipfs container
   docker_container:
@@ -33,4 +40,4 @@
     comparisons:
       env: strict
     volumes:
-      - /ipfs/ipfs_master/repo:/data/ipfs
+      - "{{ go_ipfs_repo }}:/data/ipfs"

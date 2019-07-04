@@ -33,6 +33,7 @@
       args:
         GO_IPFS_VERSION: "{{ go_ipfs_version }}"
     source: build
+  register: docker_ipfs
 
 - name: Archive image
   run_once: true
@@ -42,3 +43,5 @@
     tag: "{{ go_ipfs_version }}"
     archive_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
     source: local
+  when:
+    docker_ipfs.changed
