@@ -2,10 +2,11 @@
 - hosts: gateways
   become: false
   roles:
-    - role: ssh-keys
+    - { role: ssh-keys,
+          ssh_user: "{{ deploy_user }}" }
+    - { role: nginx_conf_gateways }
     - role: python-dependencies
     - { role: geerlingguy.docker,
-          docker_install_compose: false }
-  #- role: go-ipfs-deploy-docker
-  # vars_files:
-  #   - vault.yml
+         docker_install_compose: false }
+  vars_files:
+    - vault.yml
