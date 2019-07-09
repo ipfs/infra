@@ -5,11 +5,10 @@
   git:
     repo: "git@github.com:ipfs/go-ipfs.git"
     force: yes
-    update: no
+    update: yes
     dest: "/tmp/go-ipfs"
     accept_hostkey: 'yes'
     version: '{{ go_ipfs_version }}'
-    depth: 1
   register: code_update
 
 - name: Build base image

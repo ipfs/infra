@@ -19,7 +19,7 @@
   file:
     path: "{{ go_ipfs_repo }}"
     state: directory
-    owner: ubuntu
+    owner: "{{ deploy_user }}"
     group: users
     mode: '0755'
 
