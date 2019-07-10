@@ -1,0 +1,23 @@
+
+---
+- name: fetch GIT repo
+  become: no
+  run_once: true
+  git:
+    repo: "git@github.com:ipfs/go-ipfs.git"
+    force: yes
+    update: yes
+    dest: "/tmp/go-ipfs"
+    accept_hostkey: 'yes'
+    version: '{{ go_ipfs_version }}'
+  changed_when: false
+
+- name: Build base image
+  become: no
+  run_once: true
+  docker_image:
+    name: "go-ipfs-ansible:{{ go_ipfs_version }}"
+    build:
+      path: /tmp/go-ipfs
+      pull: yes
+    source: build

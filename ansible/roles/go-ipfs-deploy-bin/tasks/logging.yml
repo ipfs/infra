@@ -1,0 +1,36 @@
+---
+# logrotate won't run parent directory has insecure permissions (It's world writable or writable by group which is not "root")
+- name: set correct /var/log permissions for logrotate
+  file:
+    path: /var/log
+    owner: root
+    group: root
+    state: directory
+    mode: '0775'
+
+- name: ensure ipfs log file exists
+  copy:
+    content: ""
+    dest: /var/log/ipfs
+    force: no
+
+- name: set permissions for ipfs log file
+  file:
+    path: /var/log/ipfs
+    state: file
+    owner: syslog
+    group: root
+    mode: '0664'
+
+- name: copy ipfs rsyslogd config
+  copy: src="ipfs.rsyslog.conf" dest="/etc/rsyslog.conf" force=yes
+  notify:
+    - "Restart_RSYSLOG"
+
+- name: copy ipfs rsyslogd config
+  copy: src="ipfs.rsyslogd" dest="/etc/rsyslog.d/42-ipfs.conf" force=yes
+  notify:
+    - "Restart_RSYSLOG"
+
+- name: copy ipfs logrotate config
+  template: src="ipfs.logrotate.j2" dest="/etc/logrotate.d/ipfs" force=yes

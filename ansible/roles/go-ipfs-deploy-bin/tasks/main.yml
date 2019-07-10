@@ -1,41 +1,28 @@
 ---
-#- name: copy go-ipfs binary
-#  copy:
-#    src: /tmp/ipfs
-#    dest: /usr/local/bin/ipfs
-#  notify:
-#    - "Restart_IPFS"
-
-# logrotate won't run parent directory has insecure permissions (It's world writable or writable by group which is not "root")
-- name: set correct /var/log permissions for logrotate
-  file:
-    path: /var/log
-    owner: root
-    group: root
-    state: directory
-    mode: '0775'
-
-- name: set permissions for ipfs log file
-  file:
-    path: /var/log/ipfs
-    owner: syslog
-    group: syslog
-    mode: '0664'
-
-- name: copy ipfs rsyslogd config
-  copy: src="ipfs.rsyslog.conf" dest="/etc/rsyslog.conf" force=yes
-  notify:
-    - "Restart_RSYSLOG"
-
-- name: copy ipfs rsyslogd config
-  copy: src="ipfs.rsyslogd" dest="/etc/rsyslog.d/42-ipfs.conf" force=yes
-  notify:
-    - "Restart_RSYSLOG"
-
-- name: copy ipfs logrotate config
-  template: src="ipfs.logrotate.j2" dest="/etc/logrotate.d/ipfs" force=yes
+- include: logging.yml
 
 - name: copy ipfs service unit definition
   template: src="ipfs.service.j2" dest="/etc/systemd/system/ipfs.service" force=yes
+  notify:
+    - "Restart_IPFS"
+
+
+- name: build go-ipfs Docker image
+  include_tasks:
+    file: build.yml
+    apply:
+      delegate_to: localhost
+
+- name: copy linux binary from Docker container
+  shell: "/usr/local/bin/docker run -v /tmp/:/opt/mount --rm --entrypoint cp go-ipfs-ansible:{{ go_ipfs_version }} /usr/local/bin/ipfs /opt/mount/ipfs.{{ go_ipfs_version }}"
+  args:
+    creates: "/tmp/ipfs.{{ go_ipfs_version }}"
+  delegate_to: localhost
+
+- name: copy go-ipfs binary
+  copy:
+    src: "/tmp/ipfs.{{ go_ipfs_version }}"
+    dest: /usr/local/bin/ipfs
+    force: yes
   notify:
     - "Restart_IPFS"
