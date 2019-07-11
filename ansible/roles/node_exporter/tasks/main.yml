@@ -1,0 +1,14 @@
+---
+- name: Start node_exporter container
+  docker_container:
+    name: "node_exporter"
+    image: "prom/node-exporter:{{ version }}"
+    #network_mode: host
+    state: started
+    published_ports:
+      - 127.0.0.1:9100:9100
+    restart_policy : always
+    log_driver: json-file
+    log_options:
+      max-size: 100m
+      max-file: 2
