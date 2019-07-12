@@ -12,3 +12,5 @@
     log_options:
       max-size: 100m
       max-file: 2
+
+- include: nginx.yml
