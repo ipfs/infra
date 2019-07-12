@@ -5,6 +5,7 @@
     state: directory
   with_items:
    - "{{ nginx_conf_path }}"
+   - "{{ nginx_conf_path }}/sites-enabled"
    - "{{ nginx_confd_location }}"
    - "{{ nginx_certs_location }}"
    - "{{ nginx_logs_location }}"
@@ -29,7 +30,7 @@
   notify:
     - "Restart_Nginx"
 
-- name: copy nginx websocket config
-  template: src="1-libp2p-websocket.conf.j2" dest="{{ nginx_confd_location }}/1-libp2p-websocket.conf.conf" force=yes
+- name: copy nginx server config
+  template: src="1-libp2p.conf.j2" dest="{{ nginx_confd_location }}/1-libp2p.conf" force=yes
   notify:
     - "Restart_Nginx"
