@@ -1,0 +1,10 @@
+---
+- hosts: preloaders
+  become: no
+  remote_user: "{{ deploy_user }}"
+  roles:
+    - { role: ssh-keys,
+          ssh_user: "{{ deploy_user }}" }
+    - { role: go-ipfs-deploy-bin }
+  vars_files:
+    - vault.yml
