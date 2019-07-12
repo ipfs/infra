@@ -4,6 +4,7 @@ deploy_user: ubuntu
 ansible_python_interpreter: "/usr/bin/python3"
 
 go_ipfs_version: "v0.4.22-rc1"
+#go_ipfs_version: "ad030d"
 
 go_ipfs_dir: "/ipfs/ipfs_docker"
 go_ipfs_repo: "{{ go_ipfs_dir }}/repo"
@@ -31,9 +32,9 @@ go_ipfs_env:
   IPFS_CONFIG_Swarm_ConnMgr_LowWater: "1500"
   IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
   IPFS_CONFIG_Swarm_DisableNatPortMap: "true"
-  IPFS_CONFIG_Swarm_EnableRelayHop: "true"
+  IPFS_CONFIG_Swarm_EnableRelayHop: "false"
   IPFS_CONFIG_Swarm_EnableAutoNATService: "true"
-  IPFS_CONFIG_Swarm_EnableAutoRelay: "true"
+  IPFS_CONFIG_Swarm_EnableAutoRelay: "false"
   IPFS_LOGGING: ERROR
   IPFS_PATH: /data/ipfs
 
