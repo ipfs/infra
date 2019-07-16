@@ -1,0 +1,11 @@
+---
+- name: "copy web_log config"
+  copy:
+    force: yes
+    src: "web_log.conf"
+    dest: "/opt/netdata/etc/netdata/python.d/web_log.conf"
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+    - "Restart_Netdata"

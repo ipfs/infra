@@ -8,5 +8,6 @@
     - role: python-dependencies
     - { role: geerlingguy.docker,
          docker_install_compose: false }
+    - { role: netdata_conf_gateways }
   vars_files:
     - vault.yml
