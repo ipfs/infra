@@ -12,7 +12,7 @@
   with_file:
     - public_keys/gmasgras
     - public_keys/kubuxu
-    - public_keys/michael_burns
+    - public_keys/mburns
     - public_keys/protocol
     - public_keys/sanjuan
     - public_keys/stongo
