@@ -10,4 +10,4 @@
          docker_install_compose: false }
     - { role: netdata_conf_gateways }
   vars_files:
-    - vault.yml
+    - ../secrets_secure/vault.yml

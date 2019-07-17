@@ -13,4 +13,4 @@
           version: "v0.18.1" }
     - role: go-ipfs-deploy-docker
   vars_files:
-    - vault.yml
+    - ../secrets_secure/vault.yml

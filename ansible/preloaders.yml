@@ -7,4 +7,4 @@
           ssh_user: "{{ deploy_user }}" }
     - { role: go-ipfs-deploy-bin }
   vars_files:
-    - vault.yml
+    - ../secrets_secure/vault.yml
