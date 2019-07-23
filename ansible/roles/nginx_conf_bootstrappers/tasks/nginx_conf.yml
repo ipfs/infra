@@ -26,11 +26,16 @@
 
 - name: sync nginx configs
   become: yes
-  copy: src="{{ role_path }}/files/" dest="{{ nginx_conf_path }}/"
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ nginx_conf_path }}/"
   notify:
     - "Restart_Nginx"
 
 - name: copy nginx server config
-  template: src="1-libp2p.conf.j2" dest="{{ nginx_confd_location }}/1-libp2p.conf" force=yes
+  template:
+    src: "1-libp2p.conf.j2"
+    dest: "{{ nginx_confd_location }}/1-libp2p.conf"
+    force: yes
   notify:
     - "Restart_Nginx"

@@ -1,24 +1,18 @@
 ---
 ansible_connection: ssh
 ansible_ssh_user: root
+ansible_python_interpreter: "/usr/bin/python3"
 deploy_user: root
 
-go_ipfs_version: "v0.4.22"
+go_ipfs_version: "v0.4.22-rc1"
 
-go_ipfs_env:
-    IPFS_CONFIG_Gateway_Writable: "false"
-    IPFS_CONFIG_Swarm_ConnMgr_Type: "basic"
-    IPFS_CONFIG_Reprovider_Interval: "\"0\"" #needs to be a quoted string
-    IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
-    IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "49s"
-    #IPFS_LOGGING: info
-
-go_ipfs_cmd: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
+go_ipfs_cmd: "daemon --enable-gc --enable-namesys-pubsub --migrate=true"
 
 go_ipfs_systemd_env:
   - IPFS_PATH=/home/ipfs/.ipfs
-  - IPFS_LOGGING=INFO
+  - IPFS_LOGGING=ERROR
   - IPFS_LOGGING_FMT=nocolor
+  - ÌPFS_FD_MAX=10000
   - LIBP2P_SWARM_FD_LIMIT=5000
 
 go_ipfs_debug_log: /var/log/ipfs

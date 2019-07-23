@@ -1,6 +1,9 @@
 ---
 - name: install pip3
-  apt: name=python3-pip update_cache=yes force_apt_get=yes
+  apt:
+    name: python3-pip
+    update_cache: yes
+    force_apt_get: yes
 
 - name: install python Docker dependency
   pip:

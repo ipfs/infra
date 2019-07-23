@@ -5,8 +5,20 @@
     apply:
       delegate_to: localhost
 
+- name: Archive image
+  delegate_to: localhost
+  run_once: true
+  become: no
+  docker_image:
+    name: "go-ipfs"
+    tag: "{{ go_ipfs_version }}"
+    archive_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+    source: local
+
 - name: copy docker image to server
-  copy: src="/tmp/go-ipfs-{{ go_ipfs_version }}.tar" dest="/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+  copy:
+    src: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+    dest: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
 
 - name: Load image from archive
   docker_image:
@@ -21,7 +33,7 @@
     state: directory
     owner: "{{ deploy_user }}"
     group: users
-    mode: '0755'
+    mode: '0775'
 
 - name: Start go-ipfs container
   docker_container:

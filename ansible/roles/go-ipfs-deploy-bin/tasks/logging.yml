@@ -8,29 +8,34 @@
     state: directory
     mode: '0775'
 
-- name: ensure ipfs log file exists
-  copy:
-    content: ""
-    dest: /var/log/ipfs
-    force: no
-
 - name: set permissions for ipfs log file
   file:
     path: /var/log/ipfs
-    state: file
+    state: touch
     owner: syslog
     group: root
     mode: '0664'
+    modification_time: preserve
+    access_time: preserve
 
 - name: copy ipfs rsyslogd config
-  copy: src="ipfs.rsyslog.conf" dest="/etc/rsyslog.conf" force=yes
+  copy:
+    src: "etc/rsyslog.conf"
+    dest: "/etc/rsyslog.conf"
+    force: yes
   notify:
     - "Restart_RSYSLOG"
 
 - name: copy ipfs rsyslogd config
-  copy: src="ipfs.rsyslogd" dest="/etc/rsyslog.d/42-ipfs.conf" force=yes
+  copy:
+    src: "etc/rsyslog.d/42-ipfs.conf"
+    dest: "/etc/rsyslog.d/42-ipfs.conf"
+    force: yes
   notify:
     - "Restart_RSYSLOG"
 
 - name: copy ipfs logrotate config
-  template: src="ipfs.logrotate.j2" dest="/etc/logrotate.d/ipfs" force=yes
+  template:
+    src: "etc/logrotate.d/ipfs.j2"
+    dest: "/etc/logrotate.d/ipfs"
+    force: yes

@@ -7,7 +7,6 @@
     force: yes
     update: yes
     dest: "/tmp/go-ipfs"
-    accept_hostkey: 'yes'
     version: '{{ go_ipfs_version }}'
   register: code_update
 
@@ -33,14 +32,3 @@
         GO_IPFS_VERSION: "{{ go_ipfs_version }}"
     source: build
   register: docker_ipfs
-
-- name: Archive image
-  run_once: true
-  become: no
-  docker_image:
-    name: "go-ipfs"
-    tag: "{{ go_ipfs_version }}"
-    archive_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
-    source: local
-  when:
-    docker_ipfs.changed

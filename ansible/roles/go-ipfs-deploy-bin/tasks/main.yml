@@ -2,7 +2,10 @@
 - include: logging.yml
 
 - name: copy ipfs service unit definition
-  template: src="ipfs.service.j2" dest="/etc/systemd/system/ipfs.service" force=yes
+  template:
+    src: "etc/systemd/system/ipfs.service.j2"
+    dest: "/etc/systemd/system/ipfs.service"
+    force: yes
   notify:
     - "Restart_IPFS"
 

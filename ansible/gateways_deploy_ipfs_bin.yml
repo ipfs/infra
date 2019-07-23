@@ -3,4 +3,4 @@
   become: false
   serial: 2
   roles:
-    - { role: go-ipfs-deploy-bin }
+    - role: go-ipfs-deploy-bin

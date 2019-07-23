@@ -3,5 +3,5 @@
   become: false
   remote_user: root
   roles:
-    - { role: ssh-keys,
-          ssh_user: "{{ deploy_user }}"}
+    - role: ssh-keys
+      ssh_user: "{{ deploy_user }}"
