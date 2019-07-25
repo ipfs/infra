@@ -6,7 +6,16 @@ envToConfig() {
   configFile="$IPFS_PATH/config"
   configFileTmp="$(mktemp)"
 
-  env |
+  # remove newlines from ENV values
+  awk 'END { for (name in ENVIRON) {
+             if ( name ~ /^IPFS_CONFIG*/) {
+               val=ENVIRON[name]
+               gsub("\n", "",val)
+               print name"="val;
+             }
+           }
+         }' < /dev/null |
+
     while IFS='=' read -r name value
     do
       case "$name" in
@@ -15,17 +24,19 @@ envToConfig() {
           jsonName=${parsedName//_/.}
           case "$value" in
             [*)
-               # encode as json array
-               arr=$(echo "$value" |tr -d '[]' | tr ', ' '\n')
-               jsonValue=$(jq -nr --arg value "$arr" '$value|split("\n")')
+               # sanitize string containing list for jq consumption by removing spaces, brackets
+               arr=$(echo "$value" |tr -d '[] ')
+               # transform comma delimited string into json array
+               jsonValue=$(jq -nr --arg value "$arr" '$value|split(",")')
                ;;
              *)
-               # ensure value is json-quoted if needed
+               # ensure value is valid json
                jsonValue=$(jq -nr --argjson value "${value}" '$value|tojson'  2>/dev/null || jq -nr --arg value "${value}" '$value|tojson' 2>/dev/null)
                ;;
           esac
 
           jqStr="$(printf '%s = %s' "$jsonName" "$jsonValue")"
+          # replace value in config file
           jq --arg jqStr "$jqStr" ".| $jqStr" < "$configFile" > "$configFileTmp" && mv "$configFileTmp" "$configFile"
           ;;
       esac

@@ -6,7 +6,7 @@
     repo: "git@github.com:ipfs/go-ipfs.git"
     force: yes
     update: yes
-    dest: "/tmp/go-ipfs"
+    dest: "/tmp/go-ipfs/{{ go_ipfs_version }}"
     version: '{{ go_ipfs_version }}'
   register: code_update
 
@@ -16,7 +16,7 @@
   docker_image:
     name: "go-ipfs-ansible:{{ go_ipfs_version }}"
     build:
-      path: /tmp/go-ipfs
+      path: "/tmp/go-ipfs/{{ go_ipfs_version }}"
       pull: yes
     source: build
 

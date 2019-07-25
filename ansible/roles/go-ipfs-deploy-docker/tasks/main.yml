@@ -14,11 +14,13 @@
     tag: "{{ go_ipfs_version }}"
     archive_path: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
     source: local
+  when: docker_ipfs.changed
 
 - name: copy docker image to server
   copy:
     src: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
     dest: "/tmp/go-ipfs-{{ go_ipfs_version }}.tar"
+    force: yes
 
 - name: Load image from archive
   docker_image:
