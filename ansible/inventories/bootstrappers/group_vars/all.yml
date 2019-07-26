@@ -1,0 +1,78 @@
+---
+ansible_connection: ssh
+deploy_user: ubuntu
+ansible_python_interpreter: "/usr/bin/python3"
+
+go_ipfs_version: "8d9728"
+#go_ipfs_version: "ad030d"
+
+go_ipfs_dir: "/ipfs/ipfs_docker"
+go_ipfs_repo: "{{ go_ipfs_dir }}/repo"
+
+go_ipfs_env:
+  # IPFS_CONFIG_Swarm_ConnMgr_Type: "basic"
+  # IPFS_CONFIG_Reprovider_Interval: "\"0\"" #needs to be a quoted string
+  # IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
+  # IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "49s"
+  IPFS_CONFIG_Identity_PrivKey: "{{ ipfs_private_key }}"
+  IPFS_CONFIG_Identity_PeerID: "{{ ipfs_peer_id }}"
+  #IPFS_CONFIG_Addresses_API: "/ip4/0.0.0.0/tcp/5001"
+  IPFS_CONFIG_Addresses_Swarm: |
+    [
+      /ip4/0.0.0.0/tcp/4001,
+      /ip6/::/tcp/4001,
+      /ip4/127.0.0.1/tcp/8081/ws
+    ]
+  IPFS_CONFIG_Swarm_AddrFilters: |
+    [
+      /ip6/fc98:424c:b433:d7e2:7ee3:9541:73ff:2cdb/ipcidr/128,
+      /ip6/fce3:c53b:c3c5:2f54:8bb0:b6d9:898e:f140/ipcidr/128,
+      /ip6/fcfe:eab4:e49c:940f:8b29:35a4:8ea8:b01a/ipcidr/128,
+      /ip6/fc4e:5427:3cd0:cc4c:4770:25bb:a682:d06c/ipcidr/128,
+      /ip6/fc3d:9a4e:3c96:2fd2:1afa:18fe:8dd2:b602/ipcidr/128,
+      /ip6/fcd8:a4e5:3af7:557e:72e5:f9d1:a599:e329/ipcidr/128,
+      /ip6/fc29:9fda:3b73:c1d2:9302:31e3:964c:144c/ipcidr/128,
+      /ip6/fcdf:a296:afe3:7118:4135:cc0b:ff92:4585/ipcidr/128,
+      /ip6/fc15:e5a1:3c3:4262:d27a:9435:10ff:2e7a/ipcidr/128,
+      /ip6/fc8f:dcbf:74b9:b3b9:5305:7816:89ac:53f3/ipcidr/128,
+      /ip6/fce5:18b5:e3c6:ad87:465d:c4f7:ac7f:6aad/ipcidr/128,
+      /ip6/fc17:1cec:c39d:dbc2:9e3c:25ef:62de:9ade/ipcidr/128,
+      /ip6/fc8e:8f5c:fb22:15ca:3159:db43:68c7:09da/ipcidr/128,
+      /ip6/fcff:8b53:1616:7ba7:335b:d1c2:12de:8b4c/ipcidr/128,
+      /ip6/fc0e:8abd:c19c:9bbb:9b96:b293:b823:f00a/ipcidr/128,
+      /ip4/10.0.0.0/ipcidr/8,
+      /ip4/100.64.0.0/ipcidr/10,
+      /ip4/169.254.0.0/ipcidr/16,
+      /ip4/172.16.0.0/ipcidr/12,
+      /ip4/192.0.0.0/ipcidr/24,
+      /ip4/192.0.0.0/ipcidr/29,
+      /ip4/192.0.0.8/ipcidr/32,
+      /ip4/192.0.0.170/ipcidr/32,
+      /ip4/192.0.0.171/ipcidr/32,
+      /ip4/192.0.2.0/ipcidr/24,
+      /ip4/192.168.0.0/ipcidr/16,
+      /ip4/198.18.0.0/ipcidr/15,
+      /ip4/198.51.100.0/ipcidr/24,
+      /ip4/203.0.113.0/ipcidr/24,
+      /ip4/240.0.0.0/ipcidr/4
+    ]
+  IPFS_CONFIG_Datastore_BloomFilterSize: "524288"
+  IPFS_CONFIG_Datastore_StorageGCWatermark: "90"
+  IPFS_CONFIG_Datastore_StorageMax: "60G"
+  IPFS_CONFIG_Discovery_MDNS_Enabled: "false"
+  IPFS_CONFIG_Ipns_ResolveCacheSize: "0"
+  IPFS_CONFIG_Reprovider_Interval: ""
+  IPFS_CONFIG_Reprovider_Strategy: ""
+  IPFS_CONFIG_Swarm_ConnMgr_GracePeriod: "1m"
+  IPFS_CONFIG_Swarm_ConnMgr_LowWater: "1500"
+  IPFS_CONFIG_Swarm_ConnMgr_HighWater: "2000"
+  IPFS_CONFIG_Swarm_DisableNatPortMap: "true"
+  IPFS_CONFIG_Swarm_EnableRelayHop: "false"
+  IPFS_CONFIG_Swarm_EnableAutoNATService: "true"
+  IPFS_CONFIG_Swarm_EnableAutoRelay: "false"
+  IPFS_LOGGING: ERROR
+  IPFS_PATH: /data/ipfs
+
+go_ipfs_cmd: "daemon --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub --migrate=true"
+
+#go_ipfs_doker_options:

@@ -1,0 +1,6 @@
+---
+- name: include vars
+  include_vars: "vars.yml"
+
+- include: nginx_conf.yml
+- include: nginx_docker.yml

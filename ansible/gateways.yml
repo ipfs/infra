@@ -1,0 +1,13 @@
+---
+- hosts: gateways
+  become: false
+  roles:
+    - role: ssh-keys
+      ssh_user: "{{ deploy_user }}"
+    - role: nginx_conf_gateways
+    - role: python-dependencies
+    - role: geerlingguy.docker
+      docker_install_compose: false
+    - role: netdata_conf_gateways
+  vars_files:
+    - ../secrets_secure/vault.yml

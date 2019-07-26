@@ -1,0 +1,41 @@
+---
+- name: Creates nginx dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+   - "{{ nginx_conf_path }}"
+   - "{{ nginx_conf_path }}/sites-enabled"
+   - "{{ nginx_confd_location }}"
+   - "{{ nginx_certs_location }}"
+   - "{{ nginx_logs_location }}"
+
+- name: "copy SSL certs"
+  no_log: true
+  copy:
+    force: yes
+    dest: "{{ nginx_certs_location }}/{{ item.location }}"
+    content: "{{ item.content }}"
+  with_items:
+    - { location: "bootstrap.libp2p.io.crt", content: "{{ vault_star_bootstrap_libp2p_io_cert }}"}
+    - { location: "bootstrap.libp2p.io.key", content: "{{ vault_star_bootstrap_libp2p_io_key }}"}
+    - { location: "bootstrap.libp2p.io.dhparam.pem", content: "{{ vault_star_bootstrap_libp2p_io_dhparam }}"}
+    - { location: "bootstrap.libp2p.io.trustchain.crt", content: "{{ vault_star_bootstrap_libp2p_io_trustchain }}"}
+  notify:
+    - "Restart_Nginx"
+
+- name: sync nginx configs
+  become: yes
+  copy:
+    src: "{{ role_path }}/files/"
+    dest: "{{ nginx_conf_path }}/"
+  notify:
+    - "Restart_Nginx"
+
+- name: copy nginx server config
+  template:
+    src: "1-libp2p.conf.j2"
+    dest: "{{ nginx_confd_location }}/1-libp2p.conf"
+    force: yes
+  notify:
+    - "Restart_Nginx"

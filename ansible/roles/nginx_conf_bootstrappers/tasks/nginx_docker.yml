@@ -1,0 +1,22 @@
+---
+- name: Start nginx container
+  docker_container:
+    name: "nginx-ansible"
+    #name: "nginx"
+    image: "nginx:{{ nginx_docker_version }}"
+    network_mode: host
+    state: started
+    restart_policy : always
+    log_driver: json-file
+    log_options:
+      max-size: 100m
+      max-file: 2
+    volumes:
+      - "{{ nginx_conf_path }}/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "{{ nginx_conf_path }}/passwd:/etc/nginx/passwd:ro"
+      - "{{ nginx_conf_path }}/sites-enabled:/etc/nginx/sites-enabled:ro"
+      - "{{ nginx_confd_location }}:/etc/nginx/conf.d:ro"
+      - "{{ nginx_certs_location }}:/etc/nginx/certs:ro"
+      - "{{ nginx_logs_location }}:/var/log/nginx"
+      - "{{ nginx_html_location }}:/usr/share/nginx/html:ro"
+      - "{{ nginx_tmp_location }}:/tmp/nginx"

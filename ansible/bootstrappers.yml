@@ -1,0 +1,16 @@
+---
+- hosts: bootstrappers
+  become: yes
+  remote_user: "{{ deploy_user }}"
+  roles:
+    - role: ssh-keys
+      ssh_user: "{{ deploy_user }}"
+    - role: geerlingguy.docker
+      docker_install_compose: false
+    - role: python-dependencies
+    - role: nginx_conf_bootstrappers
+    - role: node_exporter
+      version: "v0.18.1"
+    - role: go-ipfs-deploy-docker
+  vars_files:
+    - ../secrets_secure/vault.yml
