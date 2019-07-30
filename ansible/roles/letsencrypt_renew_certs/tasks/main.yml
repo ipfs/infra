@@ -1,0 +1,90 @@
+---
+# Create a temp file from privkey
+- name: Create tempfile for cert
+  delegate_to: localhost
+  run_once: true
+  tempfile:
+    state:  file
+    suffix: config
+  register: temp_cert
+
+- name: Fetch existing certificate from gateway
+  run_once: true
+  fetch:
+    src: "/etc/nginx/gateway.crt"
+    dest: "{{ temp_cert.path }}"
+    flat: yes
+
+- name: renew cert if needed
+  delegate_to: localhost
+  run_once: true
+  block:
+    # Create a temp file from privkey
+    - name: Create tempfile for privkey
+      tempfile:
+        state:  file
+        suffix: config
+      register: temp_privkey
+
+    # Render CSR into tempfile
+    - name: Populate privkey file
+      copy:
+        content: "{{ letsencrypt_private_key_pem }}"
+        dest: "{{ temp_privkey.path }}"
+
+    # Create a temp file for CSR
+    - name: Create tempfile for CSR
+      tempfile:
+        state:  file
+        suffix: config
+      register: temp_csr
+
+    - name: Generate CSR
+      openssl_csr:
+        path: "{{ temp_csr.path }}"
+        privatekey_path: "{{ temp_privkey.path }}"
+        subject_alt_name: "{{ item.value | map('regex_replace', '^', 'DNS:') | list }}"
+      with_dict:
+        dns_server:
+        - "ipfs.io"
+        - "*.ipfs.io"
+        - "*.i.ipfs.io"
+        - "dev.js.ipfs.io"
+        - "dev.share.ipfs.io"
+        - "zcash.dag.ipfs.io"
+        - "*.ipfs.dweb.link"
+        - "*.ipns.dweb.link"
+
+    - name: Create a challenge using a account key file.
+      acme_certificate:
+        modify_account: no
+        account_key_content: "{{ letsencrypt_account_key_pem }}"
+        account_email: infra-accounts@protocol.ai
+        csr: "{{ temp_csr.path }}"
+        cert: "{{ temp_cert.path }}"
+        challenge: dns-01
+        acme_version: 2
+        acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        remaining_days: 10
+      register: acme_challenge
+
+    - name: Display Challenge
+      debug:
+        var: acme_challenge
+        verbosity: 3
+
+    #- name: Let the challenge be validated and retrieve the cert and intermediate certificate
+    #  acme_certificate:
+    #    account_key_content: "{{ letsencrypt_account_key_pem }}"
+    #    account_email: account_email: infra-accounts@protocol.ai
+    #    csr: "{{ temp_csr.path }}"
+    #    cert: "{{ temp_cert.path }}"
+    #    fullchain: /etc/httpd/ssl/sample.com-fullchain.crt
+    #    # for ssl_trusted_certificate in nginx
+    #    chain: /etc/httpd/ssl/sample.com-intermediate.crt
+    #    challenge: dns-01
+    #    acme_version: 2
+    #    acme_directory: https://acme-v02.api.letsencrypt.org/directory
+    #    remaining_days: 10
+    #    data: "{{ acme_challenge }}"
+    #  when: acme_challenge is changed
