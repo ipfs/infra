@@ -1,6 +1,3 @@
 [submodule "secrets_secure"]
 	path = secrets_secure
 	url = git@github.com:protocol/infrastructure-secrets.git
-[submodule "ansible/roles/geerlingguy.docker"]
-	path = ansible/roles/geerlingguy.docker
-	url = git@github.com:geerlingguy/ansible-role-docker.git

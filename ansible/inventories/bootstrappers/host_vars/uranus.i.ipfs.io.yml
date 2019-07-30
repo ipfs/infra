@@ -1,5 +1,0 @@
----
-ipfs_private_key: "{{ vault_uranus_ipfs_private_key }}"
-ipfs_peer_id: "QmSoLueR4xBeUbY9WZ9xGUUxunbKWcrNFTDAadQJmocnWm"
-
-libp2p_fqdn: nyc-1.bootstrap.libp2p.io

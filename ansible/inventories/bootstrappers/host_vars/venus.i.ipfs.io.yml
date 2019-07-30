@@ -1,5 +1,0 @@
----
-ipfs_private_key: "{{ vault_venus_ipfs_private_key }}"
-ipfs_peer_id: "QmSoLV4Bbm51jM9C4gDYZQ9Cy3U6aXMJDAbzgu2fzaDs64"
-
-libp2p_fqdn: nyc-2.bootstrap.libp2p.io

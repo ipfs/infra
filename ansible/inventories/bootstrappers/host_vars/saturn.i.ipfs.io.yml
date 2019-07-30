@@ -1,7 +1,0 @@
----
-ipfs_private_key: "{{ vault_saturn_ipfs_private_key }}"
-ipfs_peer_id: "QmSoLSafTMBsPKadTEgaXctDQVcqN88CNLHXMkTNwMKPnu"
-
-libp2p_fqdn: sgp-1.bootstrap.libp2p.io
-ansible_ssh_user: root
-deploy_user: root

@@ -1,8 +1,0 @@
-nginx_conf_path: "/opt/ansible/nginx"
-nginx_confd_location: "{{ nginx_conf_path }}/conf.d"
-nginx_certs_location: "{{ nginx_conf_path }}/certs"
-nginx_logs_location: "{{ nginx_conf_path }}/logs"
-nginx_html_location: "{{ nginx_conf_path }}/html"
-nginx_tmp_location: "{{ nginx_conf_path }}/tmp"
-
-nginx_docker_version: 1.12.2

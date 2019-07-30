@@ -1,5 +1,0 @@
----
-- name: "Restart_Nginx"
-  docker_container:
-    name: "nginx-ansible"
-    restart: yes

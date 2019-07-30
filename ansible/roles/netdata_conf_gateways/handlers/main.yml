@@ -1,5 +1,0 @@
----
-- name: "Restart_Netdata"
-  systemd:
-    state: restarted
-    name: netdata
