@@ -1,32 +1,20 @@
-# gateway_domains:
-#   - "ipfs.io":
-#     - "ipfs.io"
-#     - "*.ipfs.io"
-#   - "i.ipfs.io"
-#     - "*.i.ipfs.io"
-
-dns_alt_names:
+---
+# lookup domain for acme-challenge record
+# needed because some alt-names are ALIASes (dev.js.ipfs.io is an ALIAS under js.ipfs.io)
+gateway_dns_alt_names:
   - dnsimple_domain: "ipfs.io"
-    le_challenge_domain: "ipfs.io"
     alt_name: "ipfs.io"
   - dnsimple_domain: "ipfs.io"
-    le_challenge_domain: "ipfs.io"
     alt_name: "*.ipfs.io"
   - dnsimple_domain: "i.ipfs.io"
-    le_challenge_domain: "i.ipfs.io"
     alt_name: "*.i.ipfs.io"
   - dnsimple_domain: "js.ipfs.io"
-    le_challenge_domain: "dev.js.ipfs.io"
     alt_name: "dev.js.ipfs.io"
   - dnsimple_domain: "share.ipfs.io"
-    le_challenge_domain: "dev.share.ipfs.io"
     alt_name: "dev.share.ipfs.io"
   - dnsimple_domain: "dag.ipfs.io"
-    le_challenge_domain: "zcash.dag.ipfs.io"
     alt_name: "zcash.dag.ipfs.io"
   - dnsimple_domain: "ipfs.dweb.link"
-    le_challenge_domain: "ipfs.dweb.link"
     alt_name: "*.ipfs.dweb.link"
   - dnsimple_domain: "ipns.dweb.link"
-    le_challenge_domain: "ipns.dweb.link"
     alt_name: "*.ipns.dweb.link"

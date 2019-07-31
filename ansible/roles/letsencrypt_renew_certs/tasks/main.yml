@@ -1,20 +1,21 @@
 ---
-- name: include role vars
-  include_vars: "all.yml"
+- name: include dns vars
+  include_vars: "dns.yml"
 
 # Create a temp file from privkey
 - name: Create tempfile for cert
   delegate_to: localhost
   run_once: true
   tempfile:
+    prefix: "crt."
     state:  file
-    suffix: config
   register: temp_cert
 
 - name: Fetch existing certificate from gateway
   run_once: true
   fetch:
-    src: "/etc/nginx/gateway.crt"
+    # src: "/etc/nginx/gateway.crt"
+    src: "/etc/nginx/tmp/gateway.crt"
     dest: "{{ temp_cert.path }}"
     flat: yes
 
@@ -25,8 +26,8 @@
     # Create a temp file from privkey
     - name: Create tempfile for privkey
       tempfile:
+        prefix: "key."
         state:  file
-        suffix: config
       register: temp_privkey
 
     # Render CSR into tempfile
@@ -38,8 +39,8 @@
     # Create a temp file for CSR
     - name: Create tempfile for CSR
       tempfile:
+        prefix: "csr."
         state:  file
-        suffix: config
       register: temp_csr
 
     - name: Generate CSR
@@ -48,18 +49,21 @@
         privatekey_path: "{{ temp_privkey.path }}"
         subject_alt_name: "{{ item.value | map('regex_replace', '^', 'DNS:') | list }}"
       with_dict:
-        dns: "{{ dns_alt_names | map(attribute='alt_name') | list }}"
+        dns: "{{ gateway_dns_alt_names | map(attribute='alt_name') | list }}"
 
     - name: Create a challenge using a account key file.
       acme_certificate:
-        modify_account: no
+        #modify_account: no
+        modify_account: yes
+        terms_agreed : yes
         account_key_content: "{{ letsencrypt_account_key_pem }}"
         account_email: infra-accounts@protocol.ai
         csr: "{{ temp_csr.path }}"
         cert: "{{ temp_cert.path }}"
         challenge: dns-01
         acme_version: 2
-        acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        # acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
         remaining_days: 10
       register: acme_challenge
 
@@ -67,25 +71,21 @@
       debug:
         var: acme_challenge
         verbosity: 3
-
-    # - name: Display Challenges in loop
-    #   debug:
-    #     msg: "{{ item.key | regex_replace('^_acme-challenge\\.', '') }} \n {{ item.value | regex_replace('^(.*)$', '\"\\1\"') }}"
-    #     verbosity: 3
-    #   with_dict: "{{ acme_challenge.challenge_data_dns }}"
-
+      when: acme_challenge is changed
 
     - name: Populate dns facts
       set_fact:
         # lookup domain for acme-challenge record
         # needed because some 'domains' are ALIASes (dev.js.ipfs.io is an ALIAS under js.ipfs.io)
-        dns_records: "{{ dns_records|default([]) + [ {'le_record': item.key, 'val': item.value, 'domain': dns_alt_names | selectattr('le_challenge_domain', 'match', item.key | regex_replace('^_acme-challenge\\.', '') ) | map(attribute='dnsimple_domain') | list | first} ] }}"
-      with_dict: "{{ acme_challenge.challenge_data_dns }}"
+        dns_records: "{{ dns_records|default([]) + [ {'le_record': item.value['dns-01']['record'], 'val': item.value['dns-01']['resource_value'], 'domain': gateway_dns_alt_names | selectattr('alt_name', 'equalto', item.key) | map(attribute='dnsimple_domain') | first} ]  }}"
+      with_dict: "{{ acme_challenge.challenge_data }}"
+      when: acme_challenge is changed
 
     - name: Display dns facts
       debug:
         var: dns_records
         verbosity: 3
+      when: acme_challenge is changed
 
     - name: Create TXT records from LE
       dnsimple:
@@ -95,25 +95,80 @@
         # remove domain name from record
         record: "{{ item.le_record | regex_replace('^(.*)\\.' + item.domain + '$', '\\1') }}"
         type: "TXT"
-        # quote record value
-        value: "{{ item.val | regex_replace('^(.*)$', '\"\\1\"') }}"
+        value: |-
+          {{ item.val|safe }}
+        #value: "{{ item.val | regex_replace('^(.*)$', '\"\\1\"') }}"
+        ttl: "60"
         state: "present"
       with_items:
         - "{{ dns_records }}"
       when: acme_challenge is changed
 
-    #- name: Let the challenge be validated and retrieve the cert and intermediate certificate
-    #  acme_certificate:
-    #    account_key_content: "{{ letsencrypt_account_key_pem }}"
-    #    account_email: account_email: infra-accounts@protocol.ai
-    #    csr: "{{ temp_csr.path }}"
-    #    cert: "{{ temp_cert.path }}"
-    #    fullchain: /etc/httpd/ssl/sample.com-fullchain.crt
-    #    # for ssl_trusted_certificate in nginx
-    #    chain: /etc/httpd/ssl/sample.com-intermediate.crt
-    #    challenge: dns-01
-    #    acme_version: 2
-    #    acme_directory: https://acme-v02.api.letsencrypt.org/directory
-    #    remaining_days: 10
-    #    data: "{{ acme_challenge }}"
-    #  when: acme_challenge is changed
+    # Create a temp file for intermediate chain
+    - name: Create tempfile for intermediate chain
+      tempfile:
+        prefix: "intermediate."
+        state:  file
+      register: temp_chain
+      when: acme_challenge is changed
+
+    # Create a temp file for full chain
+    - name: Create tempfile for full chain
+      tempfile:
+        prefix: "fullchain."
+        state:  file
+      register: temp_fullchain
+      when: acme_challenge is changed
+
+    - name: Let the challenge be validated and retrieve the cert and intermediate certificate
+      acme_certificate:
+        # modify_account: no
+        modify_account: yes
+        terms_agreed : yes
+        account_key_content: "{{ letsencrypt_account_key_pem }}"
+        account_email: infra-accounts@protocol.ai
+        csr: "{{ temp_csr.path }}"
+        cert: "{{ temp_cert.path }}"
+        fullchain: "{{ temp_fullchain.path }}"
+        # for ssl_trusted_certificate in nginx
+        chain: "{{ temp_chain.path }}"
+        challenge: dns-01
+        acme_version: 2
+        # acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+        remaining_days: 10
+        data: "{{ acme_challenge }}"
+      when: acme_challenge is changed
+      register: acme_challenge_validated
+  always:
+    - name: Delete ACME TXT records from LE
+      dnsimple:
+        account_api_token: "{{ dnsimple_oauth_token }}"
+        account_email: infra-accounts@protocol.ai
+        domain: "{{ item.domain }}"
+        # remove domain name from record
+        record: "{{ item.le_record | regex_replace('^(.*)\\.' + item.domain + '$', '\\1') }}"
+        type: "TXT"
+        value: |-
+          {{ item.val|safe }}
+        ttl: "60"
+        state: "absent"
+      with_items:
+        - "{{ dns_records }}"
+      when: acme_challenge is changed
+
+- name: "copy new cert & trustchain"
+  # no_log: true
+  copy:
+    force: yes
+    src: "{{ item.src }}"
+    dest: "/etc/nginx/tmp/{{ item.location }}"
+    mode: 0640
+    owner: root
+    group: www-data
+  with_items:
+    - { location: "gateway.crt", src: "{{ temp_cert.path }}"}
+    - { location: "trustchain.pem", src: "{{ temp_chain.path }}"}
+  when: acme_challenge_validated is changed
+  # notify:
+  #   - "Restart_Nginx"
