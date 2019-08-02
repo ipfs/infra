@@ -5,5 +5,13 @@
 # renew gateway cert
 - include: renew.yml
     dns_alt_names="{{ gateway_dns_alt_names }}"
-    cert_path="/etc/nginx/tmp/gateway.crt"
-    trustchain_path="/etc/nginx/tmp/trustchain.pem"
+    private_key="{{ letsencrypt_gateway_private_key }}"
+    cert_path="/etc/nginx/gateway.crt"
+    trustchain_path="/etc/nginx/trustchain.pem"
+
+# renew websites cert
+- include: renew.yml
+    dns_alt_names="{{ websites_dns_alt_names }}"
+    private_key="{{ letsencrypt_websites_private_key }}"
+    cert_path="/etc/nginx/websites.crt"
+    trustchain_path="/etc/nginx/trustchain.pem"

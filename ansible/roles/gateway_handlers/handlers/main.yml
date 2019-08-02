@@ -1,5 +1,5 @@
 ---
-- name: "Restart_Nginx"
+- name: "Reload_Nginx"
   systemd:
-    state: restarted
+    state: reloaded
     name: nginx

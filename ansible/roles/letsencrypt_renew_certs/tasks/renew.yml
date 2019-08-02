@@ -5,14 +5,14 @@
   tempfile:
     prefix: "crt."
     state:  file
-  register: temp_cert
+  register: temp_full_cert
   changed_when: False
 
 - name: Fetch existing certificate from a gateway
   run_once: true
   fetch:
     src: "{{ cert_path }}"
-    dest: "{{ temp_cert.path }}"
+    dest: "{{ temp_full_cert.path }}"
     flat: yes
   changed_when: False
 
@@ -40,7 +40,6 @@
   delegate_to: localhost
   run_once: true
   block:
-    # Create a temp file from privkey
     - name: Create tempfile for privkey
       tempfile:
         prefix: "key."
@@ -48,14 +47,12 @@
       register: temp_privkey
       changed_when: False
 
-    # Render CSR into tempfile
-    - name: Populate privkey file
+    - name: Populate privkey file from Vault
       copy:
-        content: "{{ letsencrypt_private_key_pem }}"
+        content: "{{ private_key }}"
         dest: "{{ temp_privkey.path }}"
       changed_when: False
 
-    # Create a temp file for CSR
     - name: Create tempfile for CSR
       tempfile:
         prefix: "csr."
@@ -63,6 +60,7 @@
       register: temp_csr
       changed_when: False
 
+    # Populate above temp file with CSR
     - name: Generate CSR
       openssl_csr:
         path: "{{ temp_csr.path }}"
@@ -74,24 +72,22 @@
 
     - name: Create a challenge using a account key file.
       acme_certificate:
-        #modify_account: no
-        modify_account: yes
-        terms_agreed : yes
+        modify_account: no
         account_key_content: "{{ letsencrypt_account_key_pem }}"
         account_email: infra-accounts@protocol.ai
         csr: "{{ temp_csr.path }}"
-        cert: "{{ temp_cert.path }}"
+        cert: "{{ temp_full_cert.path }}"
         challenge: dns-01
         acme_version: 2
-        # acme_directory: https://acme-v02.api.letsencrypt.org/directory
-        acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+        acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        # acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
         remaining_days: 10
       register: acme_challenge
 
     - name: Display Challenge
       debug:
         var: acme_challenge
-        verbosity: 3
+        verbosity: 2
       when: acme_challenge is changed
 
     - name: Populate dns facts
@@ -125,32 +121,19 @@
         - "{{ dns_records }}"
       when: acme_challenge is changed
 
-    # Create a temp file for full chain
-    - name: Create tempfile for full chain
-      delegate_to: localhost
-      run_once: true
-      tempfile:
-        prefix: "fullchain."
-        state:  file
-      register: temp_fullchain
-      when: acme_challenge is changed
-
     - name: Let the challenge be validated and retrieve the cert and intermediate certificate
       acme_certificate:
-        # modify_account: no
-        modify_account: yes
-        terms_agreed : yes
+        modify_account: no
         account_key_content: "{{ letsencrypt_account_key_pem }}"
         account_email: infra-accounts@protocol.ai
         csr: "{{ temp_csr.path }}"
-        cert: "{{ temp_cert.path }}"
-        fullchain: "{{ temp_fullchain.path }}"
+        fullchain: "{{ temp_full_cert.path }}"
         # for ssl_trusted_certificate in nginx
         chain: "{{ temp_chain.path }}"
         challenge: dns-01
         acme_version: 2
-        # acme_directory: https://acme-v02.api.letsencrypt.org/directory
-        acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
+        acme_directory: https://acme-v02.api.letsencrypt.org/directory
+        # acme_directory: https://acme-staging-v02.api.letsencrypt.org/directory
         remaining_days: 10
         data: "{{ acme_challenge }}"
       when: acme_challenge is changed
@@ -170,7 +153,6 @@
         state: "absent"
       with_items:
         - "{{ dns_records }}"
-      when: acme_challenge is changed
 
 - name: "copy new cert & trustchain"
   # no_log: true
@@ -182,7 +164,7 @@
     owner: root
     group: www-data
   with_items:
-    - { path: "{{ cert_path }}", src: "{{ temp_cert.path }}"}
+    - { path: "{{ cert_path }}", src: "{{ temp_full_cert.path }}"}
     - { path: "{{ trustchain_path }}", src: "{{ temp_chain.path }}"}
-  # notify:
-  #   - "Restart_Nginx"
+  notify:
+    - "Reload_Nginx"
